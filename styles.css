@@ -48,11 +48,11 @@ img { max-width: 100%; display: block; }
 .logo-wrap {
   display: flex;
   justify-content: center;
-  padding: 16px 18px 8px;
+  padding: 8px 18px 4px;
 }
 
 .site-logo {
-  width: min(330px, 76vw);
+  width: min(231px, 60vw);
   height: auto;
 }
 
@@ -62,8 +62,8 @@ img { max-width: 100%; display: block; }
   align-items: center;
   flex-wrap: wrap;
   gap: 0;
-  min-height: 50px;
-  padding: 0 18px 13px;
+  min-height: 42px;
+  padding: 0 18px 7px;
 }
 
 .site-nav a {
@@ -83,7 +83,7 @@ img { max-width: 100%; display: block; }
   display: none;
   position: absolute;
   right: 18px;
-  bottom: 12px;
+  bottom: 8px;
   border: 1px solid #c6ccd6;
   background: #fff;
   color: var(--blue);
