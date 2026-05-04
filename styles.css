@@ -170,6 +170,13 @@ h1, h2, h3, p { margin-top: 0; }
 
 .pill:hover { transform: translateY(-1px); background: rgba(245,247,252,.9); }
 
+.inline-link {
+  color: #fff;
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 .hero-photo { background: #fff; }
 .hero-panel {
   position: relative;
