@@ -1084,3 +1084,22 @@ blockquote cite { display: block; margin-top: 18px; color: var(--navy); font-sty
 .case-gallery figure {
   align-self: start;
 }
+
+.seo-service-area {
+  border-top: 1px solid rgba(6, 26, 53, .1);
+  border-bottom: 1px solid rgba(6, 26, 53, .1);
+}
+.seo-service-area h2 {
+  color: var(--navy);
+  font-family: "Barlow Condensed", Impact, sans-serif;
+  font-size: clamp(2.3rem, 4.8vw, 4.8rem);
+  line-height: .95;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.seo-service-area p:last-child {
+  max-width: 960px;
+  margin-inline: auto;
+  color: #34465e;
+  font-weight: 700;
+}
