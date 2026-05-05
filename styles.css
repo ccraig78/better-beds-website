@@ -244,6 +244,10 @@ h1, h2, h3, p { margin-top: 0; }
   -webkit-mask-image: url("assets/icons/paint-gun.png");
   mask-image: url("assets/icons/paint-gun.png");
 }
+.repair-tools-icon {
+  -webkit-mask-image: url("assets/icons/repair-tools.png");
+  mask-image: url("assets/icons/repair-tools.png");
+}
 .truck-icon {
   width: 62px;
   -webkit-mask-image: url("assets/icons/truck.svg");
