@@ -130,34 +130,21 @@ h1, h2, h3, p { margin-top: 0; }
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, rgba(6,26,53,.8) 0%, rgba(6,26,53,.58) 36%, rgba(6,26,53,.18) 62%, rgba(6,26,53,.5) 100%),
-    var(--hero-image) center right / cover no-repeat;
+    linear-gradient(90deg, rgba(6,26,53,.2), rgba(6,26,53,.08)),
+    var(--hero-image) center / contain no-repeat;
   opacity: 0;
   filter: saturate(.9) contrast(1.04);
   transition: opacity 1.25s ease-in-out;
 }
 .hero-bg.active { opacity: 1; }
-.hero-angle {
-  position: absolute;
-  inset: 0 auto 0 0;
-  width: min(67vw, 1120px);
-  background: linear-gradient(104deg, var(--navy) 0%, var(--navy) 69%, transparent 69.25%);
-  z-index: -2;
-}
-.hero-angle::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 21%;
-  width: 3px;
-  height: 100%;
-  background: rgba(255,255,255,.72);
-  transform: skewX(-14deg);
-  transform-origin: top;
-}
+.hero-angle { display: none; }
 .hero-content {
-  max-width: 720px;
-  padding: clamp(82px, 9vw, 136px) clamp(24px, 4vw, 66px);
+  max-width: 640px;
+  margin: clamp(58px, 7vw, 92px) clamp(22px, 4vw, 66px);
+  padding: clamp(28px, 4vw, 44px);
+  background: rgba(6, 26, 53, .3);
+  border: 1px solid rgba(255,255,255,.28);
+  box-shadow: 0 24px 70px rgba(0,0,0,.28);
   color: #fff;
 }
 .eyebrow,
@@ -547,12 +534,10 @@ blockquote cite { display: block; margin-top: 18px; color: var(--navy); font-sty
   .site-nav a::after { display: none; }
   .hero-bg {
     background:
-      linear-gradient(90deg, rgba(6,26,53,.8) 0%, rgba(6,26,53,.58) 36%, rgba(6,26,53,.18) 62%, rgba(6,26,53,.5) 100%),
+      linear-gradient(90deg, rgba(6,26,53,.2), rgba(6,26,53,.08)),
       var(--hero-image) center / cover no-repeat;
   }
-  .hero-angle { width: 100%; background: linear-gradient(90deg, rgba(6,26,53,.94), rgba(6,26,53,.72)); }
-  .hero-angle::after { display: none; }
-  .hero-content { max-width: 720px; }
+  .hero-content { max-width: 620px; }
   .feature-strip,
   .process-grid,
   .gallery-grid,
@@ -594,11 +579,13 @@ blockquote cite { display: block; margin-top: 18px; color: var(--navy); font-sty
   }
   .hero-bg {
     background:
-      linear-gradient(180deg, rgba(6,26,53,.86), rgba(6,26,53,.74)),
-      var(--hero-image) 58% center / cover no-repeat;
+      linear-gradient(180deg, rgba(6,26,53,.22), rgba(6,26,53,.12)),
+      var(--hero-image) center / cover no-repeat;
   }
   .hero-content {
-    padding: 50px 18px 58px;
+    margin: 42px 16px;
+    padding: 24px 18px 28px;
+    background: rgba(6, 26, 53, .36);
   }
   .eyebrow,
   .mini-title,
