@@ -30,3 +30,20 @@ if (heroSlides.length > 1 && !window.matchMedia('(prefers-reduced-motion: reduce
     heroSlides[currentHeroSlide].classList.add('active');
   }, 4500);
 }
+
+const businessCard = document.querySelector('.business-card-3d');
+if (businessCard) {
+  const flipBusinessCard = (event) => {
+    if (event.target instanceof HTMLAnchorElement) return;
+    businessCard.classList.add('is-locked');
+    businessCard.classList.toggle('is-flipped');
+  };
+
+  businessCard.addEventListener('click', flipBusinessCard);
+  businessCard.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      flipBusinessCard(event);
+    }
+  });
+}

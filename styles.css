@@ -1231,3 +1231,180 @@ blockquote cite { display: block; margin-top: 18px; color: var(--navy); font-sty
     line-height: 1.35;
   }
 }
+
+/* 3D business card on contact page */
+.business-card-wrap {
+  max-width: 980px;
+  margin: 0 auto;
+  text-align: center;
+  perspective: 1400px;
+}
+.business-card-wrap > .mini-title {
+  margin-bottom: 14px;
+  color: var(--navy);
+}
+.business-card-3d.contact-card {
+  display: block;
+  width: min(100%, 880px);
+  aspect-ratio: 1.82 / 1;
+  margin: 0 auto;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  cursor: pointer;
+  overflow: visible;
+  transform-style: preserve-3d;
+}
+.business-card-3d.contact-card::before {
+  display: none;
+}
+.contact-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  animation: businessCardTurn 9s ease-in-out infinite;
+  transition: transform .8s cubic-bezier(.2, .75, .2, 1);
+}
+.business-card-3d.is-flipped .contact-card-inner {
+  transform: rotateY(180deg);
+}
+.business-card-3d.is-locked .contact-card-inner {
+  animation: none;
+}
+.contact-card-face {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: clamp(22px, 4vw, 46px);
+  border: 3px solid var(--navy);
+  border-radius: 26px;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.96), rgba(244,247,251,.98));
+  box-shadow:
+    0 26px 70px rgba(6, 26, 53, .22),
+    0 2px 0 rgba(255,255,255,.9) inset;
+  backface-visibility: hidden;
+  overflow: hidden;
+}
+.contact-card-face::before {
+  content: "";
+  position: absolute;
+  inset: 18px;
+  border: 1px solid rgba(6, 26, 53, .18);
+  border-radius: 18px;
+  pointer-events: none;
+}
+.contact-card-front {
+  background:
+    radial-gradient(circle at 85% 18%, rgba(255,255,255,.12), transparent 26%),
+    linear-gradient(135deg, #061a35, #0e315f 68%, #061a35);
+  color: #fff;
+}
+.contact-card-front img {
+  width: min(72%, 520px);
+  height: auto;
+  filter: drop-shadow(0 12px 18px rgba(0,0,0,.24));
+}
+.contact-card-front span {
+  position: absolute;
+  bottom: clamp(28px, 4vw, 44px);
+  color: rgba(255,255,255,.82);
+  font-family: "Barlow Condensed", Impact, sans-serif;
+  font-size: clamp(1rem, 2.1vw, 1.55rem);
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.contact-card-back {
+  grid-template-columns: 1fr;
+  align-content: center;
+  justify-items: center;
+  transform: rotateY(180deg);
+  text-align: center;
+}
+.contact-card-back h2 {
+  margin: 4px 0 10px;
+  color: var(--navy);
+  font-family: "Barlow Condensed", Impact, sans-serif;
+  font-size: clamp(3.8rem, 7.6vw, 6.8rem);
+  line-height: .84;
+  letter-spacing: .045em;
+  text-transform: uppercase;
+}
+.contact-card-back .mini-title {
+  color: var(--navy);
+}
+.contact-card-back .contact-card-role {
+  margin-bottom: 22px;
+}
+@keyframes businessCardTurn {
+  0%, 34% { transform: rotateY(0deg) rotateX(0deg); }
+  50%, 84% { transform: rotateY(180deg) rotateX(0deg); }
+  100% { transform: rotateY(360deg) rotateX(0deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .contact-card-inner {
+    animation: none;
+  }
+}
+@media (max-width: 640px) {
+  .business-card-3d.contact-card {
+    aspect-ratio: .62 / 1;
+  }
+  .contact-card-face {
+    padding: 26px 18px;
+    border-radius: 22px;
+  }
+  .contact-card-front img {
+    width: 88%;
+  }
+  .contact-card-front span {
+    max-width: 220px;
+    line-height: 1.15;
+  }
+  .contact-card-back h2 {
+    font-size: clamp(2.45rem, 13vw, 3.65rem);
+  }
+  .contact-card-back .contact-card-role {
+    font-size: .9rem;
+    line-height: 1.35;
+  }
+}
+
+@media (max-width: 640px) {
+  .business-card-3d.contact-card {
+    aspect-ratio: 1.82 / 1;
+  }
+  .contact-card-front img {
+    width: 70%;
+  }
+  .contact-card-front span {
+    bottom: 20px;
+    max-width: none;
+    font-size: .82rem;
+  }
+  .contact-card-back h2 {
+    font-size: clamp(1.8rem, 9.2vw, 2.45rem);
+    margin-bottom: 6px;
+  }
+  .contact-card-back .contact-card-role {
+    margin-bottom: 10px;
+    font-size: .72rem;
+  }
+  .contact-card-back .mini-title {
+    font-size: .68rem;
+    margin-bottom: 2px;
+  }
+  .contact-card-back .contact-card-links {
+    gap: 6px;
+  }
+  .contact-card-back .contact-card-links a {
+    min-height: 34px;
+    padding: 7px 10px;
+    font-size: .72rem;
+  }
+}
