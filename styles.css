@@ -1506,3 +1506,14 @@ blockquote cite { display: block; margin-top: 18px; color: var(--navy); font-sty
     line-height: 1.45;
   }
 }
+
+/* JS drives the contact card rotation for consistent desktop/mobile behavior. */
+.contact-card-inner {
+  animation: none !important;
+  will-change: transform;
+}
+.business-card-3d.is-flipped .contact-card-inner,
+.business-card-3d.is-locked:not(.is-flipped) .contact-card-inner,
+.business-card-3d.is-locked .contact-card-inner {
+  animation: none !important;
+}

@@ -32,26 +32,51 @@ if (heroSlides.length > 1 && !window.matchMedia('(prefers-reduced-motion: reduce
 }
 
 const businessCard = document.querySelector('.business-card-3d');
+const businessCardInner = document.querySelector('.contact-card-inner');
 const businessCardFlip = document.querySelector('.contact-card-flip');
-if (businessCard) {
-  const flipBusinessCard = () => {
-    businessCard.classList.add('is-locked');
-    businessCard.classList.toggle('is-flipped');
+if (businessCard && businessCardInner) {
+  let angle = 0;
+  let lastTime = performance.now();
+  let isPaused = false;
+
+  const renderBusinessCard = (time) => {
+    const delta = time - lastTime;
+    lastTime = time;
+
+    if (!isPaused) {
+      angle = (angle + delta * 0.018) % 360;
+      businessCardInner.style.transform = `rotateY(${angle}deg)`;
+    }
+
+    window.requestAnimationFrame(renderBusinessCard);
+  };
+
+  const toggleBusinessCardPause = () => {
+    isPaused = !isPaused;
+    businessCard.classList.toggle('is-locked', isPaused);
+    if (businessCardFlip) {
+      businessCardFlip.textContent = isPaused ? 'Spin card' : 'Pause card';
+      businessCardFlip.setAttribute('aria-pressed', String(isPaused));
+    }
   };
 
   businessCard.addEventListener('click', (event) => {
     if (event.target instanceof HTMLAnchorElement || event.target.closest('a')) return;
-    flipBusinessCard();
+    toggleBusinessCardPause();
   });
 
   businessCard.addEventListener('keydown', (event) => {
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault();
-      flipBusinessCard();
+      toggleBusinessCardPause();
     }
   });
 
   if (businessCardFlip) {
-    businessCardFlip.addEventListener('click', flipBusinessCard);
+    businessCardFlip.textContent = 'Pause card';
+    businessCardFlip.setAttribute('aria-pressed', 'false');
+    businessCardFlip.addEventListener('click', toggleBusinessCardPause);
   }
+
+  window.requestAnimationFrame(renderBusinessCard);
 }
