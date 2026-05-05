@@ -1057,3 +1057,30 @@ blockquote cite { display: block; margin-top: 18px; color: var(--navy); font-sty
 .case-gallery figcaption {
   display: none;
 }
+
+#case-3 .case-gallery {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+#case-3 .case-gallery img {
+  height: 190px;
+}
+@media (max-width: 1180px) {
+  #case-3 .case-gallery {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (max-width: 520px) {
+  #case-3 .case-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  #case-3 .case-gallery img {
+    height: 145px;
+  }
+}
+
+.case-gallery {
+  align-items: start;
+}
+.case-gallery figure {
+  align-self: start;
+}
