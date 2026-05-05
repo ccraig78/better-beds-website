@@ -139,7 +139,7 @@ h1, h2, h3, p { margin-top: 0; }
 .hero-bg.active { opacity: 1; }
 .hero-angle { display: none; }
 .hero-content {
-  max-width: 640px;
+  max-width: 790px;
   margin: clamp(58px, 7vw, 92px) clamp(22px, 4vw, 66px);
   padding: clamp(28px, 4vw, 44px);
   background: rgba(6, 26, 53, .3);
@@ -160,7 +160,7 @@ h1, h2, h3, p { margin-top: 0; }
 .hero h1 {
   margin: 12px 0 24px;
   font-family: "Barlow Condensed", Impact, sans-serif;
-  font-size: clamp(3.8rem, 7vw, 7rem);
+  font-size: clamp(3.8rem, 6.3vw, 6.7rem);
   font-weight: 900;
   line-height: .88;
   letter-spacing: .018em;
@@ -537,7 +537,7 @@ blockquote cite { display: block; margin-top: 18px; color: var(--navy); font-sty
       linear-gradient(90deg, rgba(6,26,53,.2), rgba(6,26,53,.08)),
       var(--hero-image) center / cover no-repeat;
   }
-  .hero-content { max-width: 620px; }
+  .hero-content { max-width: 700px; }
   .feature-strip,
   .process-grid,
   .gallery-grid,
