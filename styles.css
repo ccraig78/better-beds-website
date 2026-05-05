@@ -132,19 +132,19 @@ h1, h2, h3, p { margin-top: 0; }
 .hero-angle {
   position: absolute;
   inset: 0 auto 0 0;
-  width: min(58vw, 760px);
-  background: linear-gradient(116deg, var(--navy) 0%, var(--navy) 72%, transparent 72.3%);
+  width: min(67vw, 1120px);
+  background: linear-gradient(104deg, var(--navy) 0%, var(--navy) 69%, transparent 69.25%);
   z-index: -2;
 }
 .hero-angle::after {
   content: "";
   position: absolute;
   top: 0;
-  right: 9.5%;
+  right: 21%;
   width: 3px;
   height: 100%;
   background: rgba(255,255,255,.72);
-  transform: skewX(-28deg);
+  transform: skewX(-14deg);
   transform-origin: top;
 }
 .hero-content {
