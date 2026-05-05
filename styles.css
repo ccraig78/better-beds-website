@@ -1048,3 +1048,12 @@ blockquote cite { display: block; margin-top: 18px; color: var(--navy); font-sty
     line-height: 1.45;
   }
 }
+
+.light-section .mini-title,
+.before-after-intro .mini-title,
+.case-copy .mini-title {
+  color: var(--navy);
+}
+.case-gallery figcaption {
+  display: none;
+}
