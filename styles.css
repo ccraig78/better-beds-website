@@ -708,14 +708,14 @@ blockquote cite { display: block; margin-top: 18px; color: var(--navy); font-sty
 }
 .brand-showcase figure {
   margin: 0;
-  padding: clamp(10px, 1.5vw, 18px);
-  background: #fff;
-  border: 1px solid rgba(6, 26, 53, .12);
-  box-shadow: 0 22px 60px rgba(6, 26, 53, .14);
+  padding: 0;
+  background: radial-gradient(circle at 50% 62%, rgba(6, 26, 53, .12), rgba(6, 26, 53, 0) 58%);
 }
 .brand-showcase img {
+  display: block;
   width: 100%;
   height: auto;
+  filter: drop-shadow(0 24px 38px rgba(6, 26, 53, .18));
 }
 
 @media (max-width: 860px) {
