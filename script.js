@@ -32,18 +32,26 @@ if (heroSlides.length > 1 && !window.matchMedia('(prefers-reduced-motion: reduce
 }
 
 const businessCard = document.querySelector('.business-card-3d');
+const businessCardFlip = document.querySelector('.contact-card-flip');
 if (businessCard) {
-  const flipBusinessCard = (event) => {
-    if (event.target instanceof HTMLAnchorElement) return;
+  const flipBusinessCard = () => {
     businessCard.classList.add('is-locked');
     businessCard.classList.toggle('is-flipped');
   };
 
-  businessCard.addEventListener('click', flipBusinessCard);
+  businessCard.addEventListener('click', (event) => {
+    if (event.target instanceof HTMLAnchorElement || event.target.closest('a')) return;
+    flipBusinessCard();
+  });
+
   businessCard.addEventListener('keydown', (event) => {
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault();
-      flipBusinessCard(event);
+      flipBusinessCard();
     }
   });
+
+  if (businessCardFlip) {
+    businessCardFlip.addEventListener('click', flipBusinessCard);
+  }
 }

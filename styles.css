@@ -1408,3 +1408,32 @@ blockquote cite { display: block; margin-top: 18px; color: var(--navy); font-sty
     font-size: .72rem;
   }
 }
+
+.contact-card-flip {
+  margin: 0 0 16px;
+  border: 2px solid var(--navy);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--navy);
+  padding: 9px 16px;
+  font-family: "Barlow Condensed", Impact, sans-serif;
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 10px 24px rgba(6, 26, 53, .12);
+}
+.contact-card-flip:hover,
+.contact-card-flip:focus {
+  background: var(--navy);
+  color: #fff;
+}
+.business-card-3d.is-flipped .contact-card-inner {
+  animation: none !important;
+  transform: rotateY(180deg) !important;
+}
+.business-card-3d.is-locked:not(.is-flipped) .contact-card-inner {
+  animation: none !important;
+  transform: rotateY(0deg) !important;
+}
