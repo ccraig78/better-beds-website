@@ -248,15 +248,15 @@ h1, h2, h3, p { margin-top: 0; }
   -webkit-mask-image: url("assets/icons/repair-tools.png");
   mask-image: url("assets/icons/repair-tools.png");
 }
+.handshake-icon {
+  -webkit-mask-image: url("assets/icons/handshake.png");
+  mask-image: url("assets/icons/handshake.png");
+}
 .truck-icon {
   width: 81px;
   height: 68px;
   -webkit-mask-image: url("assets/icons/truck.svg");
   mask-image: url("assets/icons/truck.svg");
-}
-.process-icon .truck-icon {
-  width: 88px;
-  height: 72px;
 }
 .feature-strip h2 {
   color: var(--navy);
@@ -348,6 +348,14 @@ h1, h2, h3, p { margin-top: 0; }
   height: 54px;
 }
 .process-icon .icon-svg { stroke-width: 4; }
+.process-icon .handshake-icon {
+  width: 70px;
+  height: 64px;
+}
+.process-icon .truck-icon {
+  width: 132px;
+  height: 108px;
+}
 .process-grid h3 {
   color: #fff;
   font-family: "Barlow Condensed", Impact, sans-serif;
