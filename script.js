@@ -35,48 +35,108 @@ const businessCard = document.querySelector('.business-card-3d');
 const businessCardInner = document.querySelector('.contact-card-inner');
 const businessCardFlip = document.querySelector('.contact-card-flip');
 if (businessCard && businessCardInner) {
-  let angle = 0;
+  let rotationY = 0;
+  let rotationX = 0;
   let lastTime = performance.now();
-  let isPaused = false;
+  let isAutoRotating = true;
+  let isDragging = false;
+  let didDrag = false;
+  let dragStartX = 0;
+  let dragStartY = 0;
+  let startRotationY = 0;
+  let startRotationX = 0;
+
+  const setBusinessCardTransform = () => {
+    businessCardInner.style.transform = `rotateX(${rotationX}deg) rotateY(${rotationY}deg)`;
+  };
+
+  const setAutoRotate = (enabled) => {
+    isAutoRotating = enabled;
+    businessCard.classList.toggle('is-locked', !enabled);
+    if (businessCardFlip) {
+      businessCardFlip.textContent = enabled ? 'Pause card' : 'Spin card';
+      businessCardFlip.setAttribute('aria-pressed', String(!enabled));
+    }
+  };
 
   const renderBusinessCard = (time) => {
     const delta = time - lastTime;
     lastTime = time;
 
-    if (!isPaused) {
-      angle = (angle + delta * 0.018) % 360;
-      businessCardInner.style.transform = `rotateY(${angle}deg)`;
+    if (isAutoRotating && !isDragging) {
+      rotationY = (rotationY + delta * 0.018) % 360;
+      rotationX = Math.sin(time / 1600) * 2.5;
+      setBusinessCardTransform();
     }
 
     window.requestAnimationFrame(renderBusinessCard);
   };
 
-  const toggleBusinessCardPause = () => {
-    isPaused = !isPaused;
-    businessCard.classList.toggle('is-locked', isPaused);
-    if (businessCardFlip) {
-      businessCardFlip.textContent = isPaused ? 'Spin card' : 'Pause card';
-      businessCardFlip.setAttribute('aria-pressed', String(isPaused));
+  const stopAutoForManualControl = () => {
+    setAutoRotate(false);
+  };
+
+  businessCard.addEventListener('pointerdown', (event) => {
+    if (event.target instanceof HTMLAnchorElement || event.target.closest('a')) return;
+    stopAutoForManualControl();
+    isDragging = true;
+    didDrag = false;
+    dragStartX = event.clientX;
+    dragStartY = event.clientY;
+    startRotationY = rotationY;
+    startRotationX = rotationX;
+    businessCard.classList.add('is-dragging');
+    businessCard.setPointerCapture(event.pointerId);
+  });
+
+  businessCard.addEventListener('pointermove', (event) => {
+    if (!isDragging) return;
+    const deltaX = event.clientX - dragStartX;
+    const deltaY = event.clientY - dragStartY;
+    if (Math.abs(deltaX) + Math.abs(deltaY) > 4) didDrag = true;
+    rotationY = startRotationY + deltaX * 0.45;
+    rotationX = Math.max(-18, Math.min(18, startRotationX - deltaY * 0.18));
+    setBusinessCardTransform();
+  });
+
+  const endDrag = (event) => {
+    if (!isDragging) return;
+    isDragging = false;
+    businessCard.classList.remove('is-dragging');
+    if (businessCard.hasPointerCapture(event.pointerId)) {
+      businessCard.releasePointerCapture(event.pointerId);
     }
   };
 
+  businessCard.addEventListener('pointerup', endDrag);
+  businessCard.addEventListener('pointercancel', endDrag);
+
   businessCard.addEventListener('click', (event) => {
     if (event.target instanceof HTMLAnchorElement || event.target.closest('a')) return;
-    toggleBusinessCardPause();
+    if (didDrag) return;
+    stopAutoForManualControl();
   });
 
   businessCard.addEventListener('keydown', (event) => {
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault();
-      toggleBusinessCardPause();
+      stopAutoForManualControl();
+      rotationY += 180;
+      rotationX = 0;
+      setBusinessCardTransform();
     }
   });
 
   if (businessCardFlip) {
     businessCardFlip.textContent = 'Pause card';
     businessCardFlip.setAttribute('aria-pressed', 'false');
-    businessCardFlip.addEventListener('click', toggleBusinessCardPause);
+    businessCardFlip.addEventListener('click', () => {
+      setAutoRotate(!isAutoRotating);
+      if (isAutoRotating) rotationX = 0;
+      setBusinessCardTransform();
+    });
   }
 
+  setBusinessCardTransform();
   window.requestAnimationFrame(renderBusinessCard);
 }

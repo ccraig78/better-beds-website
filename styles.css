@@ -1517,3 +1517,14 @@ blockquote cite { display: block; margin-top: 18px; color: var(--navy); font-sty
 .business-card-3d.is-locked .contact-card-inner {
   animation: none !important;
 }
+
+.business-card-3d {
+  touch-action: none;
+  user-select: none;
+}
+.business-card-3d.is-dragging {
+  cursor: grabbing;
+}
+.business-card-3d.is-dragging .contact-card-inner {
+  transition: none;
+}
