@@ -558,11 +558,122 @@ blockquote cite { display: block; margin-top: 18px; color: var(--navy); font-sty
 }
 
 @media (max-width: 520px) {
-  .site-header { padding: 14px 16px; }
-  .brand { min-width: 0; }
-  .brand img { width: 178px; }
-  .brand span { padding-left: 46px; font-size: 13px; }
-  .hero h1 { font-size: clamp(3.4rem, 17vw, 5rem); }
+  body { overflow-x: hidden; }
+  .site-header {
+    position: static;
+    padding: 12px 14px 14px;
+  }
+  .brand {
+    min-width: 0;
+    justify-items: start;
+  }
+  .brand img { width: 174px; }
+  .brand span { padding-left: 44px; font-size: 12px; }
+  .nav-toggle {
+    align-self: start;
+    margin-top: 4px;
+  }
+  .call-box {
+    min-height: 52px;
+    font-size: 14px;
+  }
+  .hero {
+    min-height: 565px;
+  }
+  .hero-bg {
+    background:
+      linear-gradient(180deg, rgba(6,26,53,.86), rgba(6,26,53,.74)),
+      url("assets/images/hero-truck-beds.jpg") 58% center / cover no-repeat;
+  }
+  .hero-content {
+    padding: 50px 18px 58px;
+  }
+  .eyebrow,
+  .mini-title,
+  .section-kicker {
+    font-size: 14px;
+    letter-spacing: .14em;
+  }
+  .hero h1 {
+    font-size: clamp(3.55rem, 16vw, 4.8rem);
+    line-height: .88;
+  }
+  .hero-lede {
+    font-size: .98rem;
+  }
+  .button-row {
+    gap: 10px;
+  }
   .button-row .btn { width: 100%; }
-  .process-grid article { min-height: 0; }
+  .feature-strip article {
+    min-height: 0;
+    padding: 30px 22px;
+  }
+  .icon,
+  .process-icon {
+    min-height: 42px;
+  }
+  .icon-svg,
+  .icon-mask {
+    width: 46px;
+    height: 46px;
+  }
+  .truck-icon {
+    width: 76px;
+    height: 62px;
+  }
+  .section-pad {
+    padding: 48px 16px;
+  }
+  .section-kicker span {
+    width: 42px;
+  }
+  .process-section h2,
+  .gallery h2,
+  .faq h2,
+  .cta-band h2 {
+    font-size: clamp(2.15rem, 11vw, 3.4rem);
+    margin-bottom: 32px;
+  }
+  .process-section h2 {
+    max-width: 330px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 2.35rem;
+    letter-spacing: .025em;
+  }
+  .process-grid {
+    gap: 42px;
+  }
+  .process-grid article {
+    min-height: 0;
+    padding: 46px 18px 24px;
+  }
+  .process-icon .icon-svg,
+  .process-icon .icon-mask {
+    width: 48px;
+    height: 48px;
+  }
+  .process-icon .handshake-icon {
+    width: 66px;
+    height: 58px;
+  }
+  .process-icon .truck-icon {
+    width: 128px;
+    height: 104px;
+    margin: -16px 0 -10px;
+  }
+  .why-copy {
+    padding: 42px 22px;
+  }
+  .why-copy h2 {
+    font-size: clamp(2.7rem, 14vw, 4.4rem);
+  }
+  .gallery-grid img {
+    height: 235px;
+  }
+  .cta-band .btn {
+    width: 100%;
+  }
 }
+
