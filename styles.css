@@ -1437,3 +1437,72 @@ blockquote cite { display: block; margin-top: 18px; color: var(--navy); font-sty
   animation: none !important;
   transform: rotateY(0deg) !important;
 }
+
+.how-to-section {
+  border-top: 1px solid rgba(6, 26, 53, .1);
+}
+.how-to-section h2 {
+  color: var(--navy);
+  font-family: "Barlow Condensed", Impact, sans-serif;
+  font-size: clamp(2.35rem, 4.8vw, 4.8rem);
+  line-height: .95;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.how-to-card {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: clamp(10px, 1.8vw, 18px);
+  border-radius: 22px;
+  background: #fff;
+  border: 1px solid rgba(6, 26, 53, .14);
+  box-shadow: 0 22px 58px rgba(6, 26, 53, .14);
+}
+.how-to-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
+}
+.how-to-card figcaption {
+  padding: 14px 8px 2px;
+  color: #34465e;
+  font-weight: 800;
+  text-align: center;
+}
+@media (max-width: 520px) {
+  .how-to-section h2 {
+    font-size: clamp(2rem, 9.8vw, 2.8rem);
+  }
+  .how-to-card {
+    border-radius: 16px;
+    padding: 8px;
+  }
+  .how-to-card img {
+    border-radius: 10px;
+  }
+  .how-to-card figcaption {
+    font-size: .9rem;
+  }
+}
+
+@media (max-width: 520px) {
+  .faq .page-hero h1,
+  .faq .section-heading h2,
+  #faq .section-heading h2,
+  .how-to-section .section-heading h2 {
+    font-size: clamp(1.8rem, 8.6vw, 2.45rem);
+    line-height: .98;
+    letter-spacing: .025em;
+    max-width: 100%;
+  }
+  .faq .section-heading,
+  #faq .section-heading,
+  .how-to-section .section-heading {
+    width: min(100%, calc(100vw - 32px));
+    overflow: hidden;
+  }
+  .how-to-section .section-heading p:last-child {
+    font-size: .88rem;
+    line-height: 1.45;
+  }
+}
