@@ -1631,3 +1631,50 @@ blockquote cite { display: block; margin-top: 18px; color: var(--navy); font-sty
     width: 100%;
   }
 }
+
+/* Contact form hardening: keep labels and fields aligned even after cached/live reloads. */
+.quote-form,
+.quote-form * {
+  box-sizing: border-box;
+}
+.quote-form {
+  display: block;
+  width: min(100% - 32px, 1020px);
+}
+.quote-form .form-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(260px, 1fr));
+  gap: 18px 22px;
+}
+.quote-form label {
+  display: flex !important;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+  min-width: 0;
+  text-align: left;
+}
+.quote-form input,
+.quote-form textarea {
+  display: block;
+  min-height: 52px;
+}
+.quote-form textarea {
+  min-height: 150px;
+}
+.quote-form ::placeholder {
+  color: #7a8493;
+  opacity: 1;
+}
+.quote-form > .btn {
+  margin-top: 4px;
+}
+@media (max-width: 720px) {
+  .quote-form {
+    width: min(100% - 24px, 1020px);
+  }
+  .quote-form .form-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}
