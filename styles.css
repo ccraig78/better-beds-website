@@ -47,8 +47,10 @@ h1, h2, h3, p { margin-top: 0; }
 }
 .brand img { width: 238px; height: auto; }
 .brand span {
-  padding-left: 66px;
+  padding-left: 0;
+  width: 238px;
   color: rgba(6, 26, 53, .82);
+  text-align: center;
   font-family: "Barlow Condensed", Impact, sans-serif;
   font-size: 18px;
   font-weight: 700;
@@ -520,7 +522,7 @@ blockquote cite { display: block; margin-top: 18px; color: var(--navy); font-sty
 @media (max-width: 860px) {
   .site-header { grid-template-columns: 1fr auto; min-height: auto; gap: 14px; }
   .brand img { width: 205px; }
-  .brand span { padding-left: 55px; font-size: 15px; }
+  .brand span { width: 205px; padding-left: 0; font-size: 15px; text-align: center; }
   .nav-toggle { display: block; }
   .call-box { grid-column: 1 / -1; justify-self: stretch; min-width: 0; padding: 13px 16px; }
   .site-nav {
@@ -566,7 +568,7 @@ blockquote cite { display: block; margin-top: 18px; color: var(--navy); font-sty
     justify-items: start;
   }
   .brand img { width: 174px; }
-  .brand span { padding-left: 44px; font-size: 12px; }
+  .brand span { width: 174px; padding-left: 0; font-size: 12px; text-align: center; }
   .nav-toggle {
     align-self: start;
     margin-top: 4px;
