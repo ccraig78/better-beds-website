@@ -35,9 +35,9 @@ h1, h2, h3, p { margin-top: 0; }
   gap: 28px;
   min-height: 122px;
   padding: 17px clamp(18px, 4vw, 58px);
-  background: var(--navy);
-  color: #fff;
-  border-bottom: 1px solid rgba(255,255,255,.1);
+  background: linear-gradient(180deg, #f4f5f7, #d9dde4);
+  color: var(--navy);
+  border-bottom: 1px solid rgba(6, 26, 53, .18);
 }
 
 .brand {
@@ -48,7 +48,7 @@ h1, h2, h3, p { margin-top: 0; }
 .brand img { width: 238px; height: auto; }
 .brand span {
   padding-left: 66px;
-  color: rgba(255,255,255,.82);
+  color: rgba(6, 26, 53, .82);
   font-family: "Barlow Condensed", Impact, sans-serif;
   font-size: 18px;
   font-weight: 700;
@@ -65,7 +65,7 @@ h1, h2, h3, p { margin-top: 0; }
 }
 .site-nav a {
   position: relative;
-  color: rgba(255,255,255,.9);
+  color: var(--navy);
   font-family: "Barlow Condensed", Impact, sans-serif;
   font-size: 16px;
   font-weight: 800;
@@ -79,7 +79,7 @@ h1, h2, h3, p { margin-top: 0; }
   right: 0;
   bottom: -11px;
   height: 3px;
-  background: #fff;
+  background: var(--navy);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform .18s ease;
@@ -94,10 +94,10 @@ h1, h2, h3, p { margin-top: 0; }
   gap: 12px;
   min-width: 214px;
   padding: 18px 22px;
-  background: #e7e8ec;
-  color: var(--navy);
-  border: 2px solid #bfc4cf;
-  box-shadow: 0 10px 24px rgba(0,0,0,.24);
+  background: var(--navy);
+  color: var(--steel);
+  border: 2px solid rgba(6, 26, 53, .35);
+  box-shadow: 0 10px 24px rgba(6, 26, 53, .22);
   font-weight: 900;
   letter-spacing: .04em;
 }
@@ -106,9 +106,9 @@ h1, h2, h3, p { margin-top: 0; }
 .nav-toggle {
   display: none;
   justify-self: end;
-  border: 1px solid rgba(255,255,255,.35);
-  background: transparent;
-  color: #fff;
+  border: 1px solid rgba(6, 26, 53, .35);
+  background: rgba(255,255,255,.45);
+  color: var(--navy);
   font-size: 30px;
   padding: 4px 11px;
 }
@@ -527,10 +527,10 @@ blockquote cite { display: block; margin-top: 18px; color: var(--navy); font-sty
     grid-column: 1 / -1;
     width: 100%;
     padding: 12px 0 0;
-    border-top: 1px solid rgba(255,255,255,.13);
+    border-top: 1px solid rgba(6, 26, 53, .16);
   }
   .site-nav.open { display: grid; justify-content: stretch; gap: 0; }
-  .site-nav a { padding: 11px 0; border-bottom: 1px solid rgba(255,255,255,.1); }
+  .site-nav a { padding: 11px 0; border-bottom: 1px solid rgba(6, 26, 53, .12); }
   .site-nav a::after { display: none; }
   .hero-bg {
     background:
@@ -2101,4 +2101,16 @@ body.modal-open {
 }
 .quote-page-form .quote-form {
   border-top: 7px solid var(--navy);
+}
+
+
+/* Silver sticky header for better logo/web-address legibility. */
+.site-header .site-nav a:hover,
+.site-header .site-nav a:focus {
+  color: var(--navy-3);
+}
+.site-header .call-box:hover,
+.site-header .call-box:focus {
+  background: var(--navy-3);
+  color: #fff;
 }
