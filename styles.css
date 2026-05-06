@@ -1965,3 +1965,111 @@ body.modal-open {
 .dark-section .section-heading p:last-child {
   color: rgba(255,255,255,.84);
 }
+
+.service-menu {
+  border-top: 1px solid rgba(6, 26, 53, .1);
+}
+.service-card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+  max-width: 1180px;
+  margin: 0 auto;
+}
+.service-card-grid article {
+  padding: clamp(22px, 3vw, 30px);
+  border-radius: 22px;
+  background: #fff;
+  border: 1px solid rgba(6, 26, 53, .14);
+  box-shadow: 0 18px 48px rgba(6, 26, 53, .12);
+}
+.service-card-grid .service-card-highlight {
+  background: linear-gradient(135deg, #061a35, #0e315f);
+  color: #fff;
+  border-color: rgba(255,255,255,.18);
+}
+.service-card-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+.service-card-top h3 {
+  margin: 0;
+  color: var(--navy);
+  font-family: "Barlow Condensed", Impact, sans-serif;
+  font-size: clamp(1.7rem, 2.8vw, 2.45rem);
+  line-height: .96;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.service-card-top span {
+  flex: 0 0 auto;
+  max-width: 165px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(6, 26, 53, .09);
+  color: var(--navy);
+  font-size: .78rem;
+  font-weight: 900;
+  line-height: 1.15;
+  text-align: center;
+  text-transform: uppercase;
+}
+.service-card-grid article p {
+  color: #405169;
+  font-weight: 700;
+}
+.service-card-grid article ul {
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.service-card-grid article li {
+  position: relative;
+  margin: 9px 0;
+  padding-left: 25px;
+  color: #1d2f48;
+  font-weight: 800;
+}
+.service-card-grid article li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--navy-3);
+  font-weight: 900;
+}
+.service-card-highlight .service-card-top h3,
+.service-card-highlight .service-card-top span,
+.service-card-highlight p,
+.service-card-highlight li {
+  color: #fff !important;
+}
+.service-card-highlight .service-card-top span {
+  background: rgba(255,255,255,.16);
+}
+.service-card-highlight li::before {
+  color: #fff;
+}
+.service-price-note {
+  max-width: 920px;
+  margin: 28px auto 0;
+  color: #46566c;
+  font-weight: 800;
+  text-align: center;
+}
+@media (max-width: 820px) {
+  .service-card-grid {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 560px) {
+  .service-card-top {
+    display: block;
+  }
+  .service-card-top span {
+    display: inline-block;
+    margin-top: 10px;
+  }
+}
