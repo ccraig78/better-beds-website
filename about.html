@@ -25,7 +25,35 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css?v=20260505-about2" />
+    <link rel="stylesheet" href="styles.css?v=20260505-about3" />
+    <style>
+      /* Critical About-page mobile/readability fixes. Keep here so cached CSS cannot make the dark panel unreadable. */
+      .about-specialty.dark-section .section-heading h2,
+      .about-specialty.dark-section .section-heading p,
+      .about-specialty.dark-section .mini-title {
+        color: #fff !important;
+      }
+      .about-specialty.dark-section .section-heading p:last-child {
+        color: #d8dee8 !important;
+      }
+      .about-story .about-stats article {
+        background: #061a35 !important;
+        color: #fff !important;
+        border-radius: 20px !important;
+        padding: 24px !important;
+        margin: 0 0 16px !important;
+        box-shadow: 0 18px 46px rgba(6, 26, 53, .16) !important;
+      }
+      .about-story .about-stats strong,
+      .about-story .about-stats span {
+        display: block !important;
+        color: #fff !important;
+      }
+      .about-story .about-stats span {
+        color: #d8dee8 !important;
+      }
+    </style>
+
   </head>
   <body>
     <header class="site-header" id="top">
@@ -168,6 +196,6 @@
       <p><a href="mailto:clint@betterbeds.pro">clint@betterbeds.pro</a></p>
     </footer>
 
-    <script src="script.js?v=20260505-about2"></script>
+    <script src="script.js?v=20260505-about3"></script>
   </body>
 </html>
