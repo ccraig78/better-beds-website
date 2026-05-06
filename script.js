@@ -54,7 +54,7 @@ if (businessCard && businessCardInner) {
     isAutoRotating = enabled;
     businessCard.classList.toggle('is-locked', !enabled);
     if (businessCardFlip) {
-      businessCardFlip.textContent = enabled ? 'Pause card' : 'Spin card';
+      businessCardFlip.textContent = enabled ? 'Pause spin' : 'Resume spin';
       businessCardFlip.setAttribute('aria-pressed', String(!enabled));
     }
   };
@@ -128,7 +128,7 @@ if (businessCard && businessCardInner) {
   });
 
   if (businessCardFlip) {
-    businessCardFlip.textContent = 'Pause card';
+    businessCardFlip.textContent = 'Pause spin';
     businessCardFlip.setAttribute('aria-pressed', 'false');
     businessCardFlip.addEventListener('click', () => {
       setAutoRotate(!isAutoRotating);

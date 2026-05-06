@@ -1268,9 +1268,6 @@ blockquote cite { display: block; margin-top: 18px; color: var(--navy); font-sty
   animation: businessCardTurn 9s ease-in-out infinite;
   transition: transform .8s cubic-bezier(.2, .75, .2, 1);
 }
-.business-card-3d.is-flipped .contact-card-inner {
-  transform: rotateY(180deg);
-}
 .business-card-3d.is-locked .contact-card-inner {
   animation: none;
 }
@@ -1429,14 +1426,6 @@ blockquote cite { display: block; margin-top: 18px; color: var(--navy); font-sty
   background: var(--navy);
   color: #fff;
 }
-.business-card-3d.is-flipped .contact-card-inner {
-  animation: none !important;
-  transform: rotateY(180deg) !important;
-}
-.business-card-3d.is-locked:not(.is-flipped) .contact-card-inner {
-  animation: none !important;
-  transform: rotateY(0deg) !important;
-}
 
 .how-to-section {
   border-top: 1px solid rgba(6, 26, 53, .1);
@@ -1512,11 +1501,6 @@ blockquote cite { display: block; margin-top: 18px; color: var(--navy); font-sty
   animation: none !important;
   will-change: transform;
 }
-.business-card-3d.is-flipped .contact-card-inner,
-.business-card-3d.is-locked:not(.is-flipped) .contact-card-inner,
-.business-card-3d.is-locked .contact-card-inner {
-  animation: none !important;
-}
 
 .business-card-3d {
   touch-action: none;
@@ -1527,4 +1511,33 @@ blockquote cite { display: block; margin-top: 18px; color: var(--navy); font-sty
 }
 .business-card-3d.is-dragging .contact-card-inner {
   transition: none;
+}
+
+.contact-quick-links {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 18px;
+}
+.contact-quick-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 12px 18px;
+  border-radius: 999px;
+  background: var(--navy);
+  color: #fff;
+  font-weight: 900;
+  box-shadow: 0 12px 28px rgba(6, 26, 53, .16);
+}
+.contact-quick-links a:hover,
+.contact-quick-links a:focus {
+  background: var(--navy-3);
+}
+@media (max-width: 520px) {
+  .contact-quick-links a {
+    width: 100%;
+  }
 }
