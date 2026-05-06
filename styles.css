@@ -2297,3 +2297,63 @@ body.modal-open {
     letter-spacing: .025em;
   }
 }
+
+/* Social and financing links */
+.payments-banner a {
+  color: var(--navy);
+  font-weight: 900;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 10px 16px;
+}
+
+.footer-links a {
+  color: #fff;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.footer-links a:hover,
+.footer-links a:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+@media (max-width: 640px) {
+  .footer-links {
+    justify-content: center;
+  }
+}
+
+.finance-apply-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 14px;
+  min-height: 46px;
+  padding: 12px 20px;
+  border-radius: 999px;
+  background: var(--navy);
+  color: #fff !important;
+  font-family: "Barlow Condensed", Impact, sans-serif;
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: .055em;
+  text-decoration: none !important;
+  text-transform: uppercase;
+  box-shadow: 0 12px 24px rgba(6, 26, 53, .18);
+}
+
+.finance-apply-link:hover,
+.finance-apply-link:focus-visible {
+  background: #12396b;
+  transform: translateY(-1px);
+}
