@@ -25,30 +25,182 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css?v=20260506-services-blue1" />
+    <link rel="stylesheet" href="styles.css?v=20260506-local-schema1" />
 
     <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "LocalBusiness",
-        "name": "Better Beds",
-        "url": "https://betterbeds.pro/",
-        "image": "https://betterbeds.pro/assets/images/logo.png",
-        "telephone": "+1-214-524-8401",
-        "email": "clint@betterbeds.pro",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "3123 Cartwright Street",
-          "addressLocality": "Dallas",
-          "addressRegion": "TX",
-          "postalCode": "75212",
-          "addressCountry": "US"
-        },
-        "areaServed": ["Dallas", "Fort Worth", "Denton", "Arlington", "Grand Prairie", "Irving", "Plano", "Lewisville", "North Texas", "DFW"],
-        "description": "Better Beds provides rust-free OEM and used factory original truck bed replacement, truck bed repair, paint matching, insurance repair support, and pickup bed installation for Chevy Silverado, GMC Sierra, Ford F-250, and Ford F-350 trucks in Dallas-Fort Worth.",
-        "openingHours": "Mo-Sa 09:00-18:00",
-        "priceRange": "$$"
-      }
+{
+      "@context": "https://schema.org",
+      "@type": "AutoPartsStore",
+      "@id": "https://betterbeds.pro/#business",
+      "name": "Better Beds",
+      "alternateName": [
+            "Better Beds - Rust-Free OEM Truck Beds",
+            "Better Beds Dallas"
+      ],
+      "url": "https://betterbeds.pro/",
+      "logo": "https://betterbeds.pro/assets/images/logo.png",
+      "image": [
+            "https://betterbeds.pro/assets/images/logo.png",
+            "https://betterbeds.pro/assets/images/hero-truck-beds.jpg",
+            "https://betterbeds.pro/assets/images/payments-accepted.jpg"
+      ],
+      "telephone": "+1-214-524-8401",
+      "email": "clint@betterbeds.pro",
+      "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "3123 Cartwright Street",
+            "addressLocality": "Dallas",
+            "addressRegion": "TX",
+            "postalCode": "75212",
+            "addressCountry": "US"
+      },
+      "areaServed": [
+            {
+                  "@type": "City",
+                  "name": "Dallas"
+            },
+            {
+                  "@type": "City",
+                  "name": "Fort Worth"
+            },
+            {
+                  "@type": "City",
+                  "name": "Denton"
+            },
+            {
+                  "@type": "City",
+                  "name": "Arlington"
+            },
+            {
+                  "@type": "City",
+                  "name": "Grand Prairie"
+            },
+            {
+                  "@type": "City",
+                  "name": "Irving"
+            },
+            {
+                  "@type": "City",
+                  "name": "Plano"
+            },
+            {
+                  "@type": "City",
+                  "name": "Lewisville"
+            },
+            {
+                  "@type": "AdministrativeArea",
+                  "name": "North Texas"
+            },
+            {
+                  "@type": "AdministrativeArea",
+                  "name": "Dallas-Fort Worth"
+            }
+      ],
+      "description": "Better Beds provides rust-free OEM and used factory original truck bed replacement, truck bed repair, paint matching, insurance repair support, and pickup bed installation for Chevy Silverado, GMC Sierra, Ford F-250, and Ford F-350 trucks in Dallas-Fort Worth.",
+      "openingHoursSpecification": [
+            {
+                  "@type": "OpeningHoursSpecification",
+                  "dayOfWeek": [
+                        "Monday",
+                        "Tuesday",
+                        "Wednesday",
+                        "Thursday",
+                        "Friday",
+                        "Saturday"
+                  ],
+                  "opens": "09:00",
+                  "closes": "18:00"
+            }
+      ],
+      "priceRange": "$$",
+      "paymentAccepted": [
+            "Cash",
+            "Credit Card",
+            "Debit Card",
+            "Zelle",
+            "PayPal",
+            "Venmo",
+            "Financing"
+      ],
+      "currenciesAccepted": "USD",
+      "sameAs": [
+            "https://www.facebook.com/61580202118726/",
+            "https://www.yelp.com/biz/better-beds-dallas",
+            "https://www.mapquest.com/us/texas/better-beds-797427699",
+            "https://local.yahoo.com/info-240489663-better-beds-dallas/"
+      ],
+      "makesOffer": [
+            {
+                  "@type": "Offer",
+                  "itemOffered": {
+                        "@type": "Service",
+                        "name": "Truck bed replacement"
+                  }
+            },
+            {
+                  "@type": "Offer",
+                  "itemOffered": {
+                        "@type": "Service",
+                        "name": "Truck bed repair"
+                  }
+            },
+            {
+                  "@type": "Offer",
+                  "itemOffered": {
+                        "@type": "Service",
+                        "name": "Pickup bed installation"
+                  }
+            },
+            {
+                  "@type": "Offer",
+                  "itemOffered": {
+                        "@type": "Service",
+                        "name": "Rust-free OEM truck bed sales"
+                  }
+            },
+            {
+                  "@type": "Offer",
+                  "itemOffered": {
+                        "@type": "Service",
+                        "name": "Used factory original truck bed repair"
+                  }
+            },
+            {
+                  "@type": "Offer",
+                  "itemOffered": {
+                        "@type": "Service",
+                        "name": "Automotive painting and paint matching"
+                  }
+            },
+            {
+                  "@type": "Offer",
+                  "itemOffered": {
+                        "@type": "Service",
+                        "name": "Spray-in bedliners"
+                  }
+            },
+            {
+                  "@type": "Offer",
+                  "itemOffered": {
+                        "@type": "Service",
+                        "name": "Insurance repair work"
+                  }
+            }
+      ],
+      "knowsAbout": [
+            "rust-free OEM truck beds",
+            "used factory original truck bed",
+            "used factory truck bed",
+            "truck bed replacement",
+            "truck bed repair",
+            "pickup bed installation",
+            "Chevy Silverado beds",
+            "GMC Sierra beds",
+            "Ford Super Duty beds",
+            "paint-matched truck beds",
+            "truck repairs that accept insurance"
+      ]
+}
     </script>
   </head>
   <body>
@@ -177,6 +329,6 @@
       <p><a href="mailto:clint@betterbeds.pro">clint@betterbeds.pro</a></p>
     </footer>
 
-    <script src="script.js?v=20260506-services-blue1"></script>
+    <script src="script.js?v=20260506-local-schema1"></script>
   </body>
 </html>
