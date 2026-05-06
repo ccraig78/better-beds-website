@@ -2196,3 +2196,104 @@ body.modal-open {
   opacity: 1 !important;
   text-shadow: 0 1px 2px rgba(0,0,0,.35);
 }
+
+/* Mobile polish pass: keep Better Beds navy/silver/white, improve hero readability and tap targets. */
+@media (max-width: 520px) {
+  .hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    background:
+      linear-gradient(180deg, rgba(6, 26, 53, .50), rgba(6, 26, 53, .28) 42%, rgba(6, 26, 53, .64)),
+      radial-gradient(circle at 50% 24%, rgba(255,255,255,.12), rgba(255,255,255,0) 48%);
+    pointer-events: none;
+  }
+  .hero-content {
+    margin: 36px 14px 42px;
+    padding: 24px 18px 26px;
+    background: rgba(6, 26, 53, .58);
+    border-color: rgba(255,255,255,.38);
+    box-shadow: 0 22px 54px rgba(0,0,0,.34);
+  }
+  .hero h1 {
+    margin-bottom: 18px;
+    font-size: clamp(2.55rem, 10.7vw, 3.35rem);
+    line-height: .92;
+    letter-spacing: .012em;
+  }
+  .hero h1 span {
+    color: rgba(255,255,255,.82);
+  }
+  .hero-lede {
+    max-width: 100%;
+    color: rgba(255,255,255,.96);
+    font-size: 1rem;
+    line-height: 1.52;
+    text-shadow: 0 1px 2px rgba(0,0,0,.25);
+  }
+  .button-row {
+    margin-top: 24px;
+  }
+  .button-row .btn,
+  .cta-band .btn,
+  .quote-form .btn,
+  .sms-quote-card .btn {
+    min-height: 56px;
+    padding: 15px 18px;
+  }
+  .hero .btn.primary {
+    background: #fff;
+    color: var(--navy);
+    border-color: #fff;
+    box-shadow: 0 14px 28px rgba(0,0,0,.18);
+  }
+  .hero .btn.ghost {
+    background: rgba(6, 26, 53, .58);
+    border-color: rgba(255,255,255,.88);
+  }
+  .call-box {
+    min-height: 56px;
+    border-width: 2px;
+    box-shadow: 0 10px 20px rgba(6, 26, 53, .16);
+  }
+  .feature-strip article,
+  .service-card-grid article {
+    box-shadow: 0 16px 36px rgba(6, 26, 53, .16);
+  }
+}
+
+/* Guard against mobile side-scroll from oversized headings/cards. */
+@media (max-width: 520px) {
+  html,
+  body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+  main,
+  section,
+  header,
+  footer,
+  .section-heading,
+  .hero-content,
+  .page-hero,
+  .service-card-grid,
+  .service-card-grid article,
+  .feature-strip,
+  .cta-band {
+    max-width: 100%;
+  }
+  h1,
+  h2,
+  h3,
+  p,
+  li,
+  .service-card-top span {
+    overflow-wrap: break-word;
+  }
+  .page-hero h1,
+  .service-menu .section-heading h2 {
+    letter-spacing: .025em;
+  }
+}
