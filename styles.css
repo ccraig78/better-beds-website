@@ -1678,3 +1678,21 @@ blockquote cite { display: block; margin-top: 18px; color: var(--navy); font-sty
     gap: 0;
   }
 }
+
+.field-help {
+  margin-top: -2px;
+  color: #5d6674;
+  font-size: .9rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+.field-help a {
+  color: var(--navy);
+  font-weight: 900;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.field-help a:hover,
+.field-help a:focus {
+  color: var(--navy-3);
+}
