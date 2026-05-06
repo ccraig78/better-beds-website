@@ -2115,3 +2115,58 @@ body.modal-open {
   background: var(--navy-3);
   color: #fff;
 }
+
+
+.sms-quote-card {
+  max-width: 760px;
+  margin: 22px auto 0;
+  padding: clamp(20px, 3vw, 30px);
+  border-radius: 22px;
+  background: linear-gradient(135deg, #061a35, #123f73);
+  color: #fff;
+  box-shadow: 0 22px 58px rgba(6, 26, 53, .18);
+  text-align: center;
+}
+.sms-quote-card .mini-title,
+.sms-quote-card h2,
+.sms-quote-card p {
+  color: #fff;
+}
+.sms-quote-card h2 {
+  margin-bottom: 10px;
+  font-family: "Barlow Condensed", Impact, sans-serif;
+  font-size: clamp(2rem, 4.8vw, 4rem);
+  line-height: .95;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.sms-quote-card p:not(.mini-title) {
+  max-width: 620px;
+  margin-left: auto;
+  margin-right: auto;
+  color: rgba(255,255,255,.84);
+  font-weight: 800;
+}
+.sms-quote-card .sms-quote-button {
+  margin-top: 10px;
+  background: #fff;
+  color: var(--navy);
+}
+.sms-quote-card .sms-quote-button:hover,
+.sms-quote-card .sms-quote-button:focus {
+  background: var(--steel);
+}
+.sms-quote-section {
+  padding-bottom: 0;
+}
+.sms-quote-card-wide {
+  margin-top: 0;
+}
+@media (max-width: 560px) {
+  .sms-quote-card {
+    border-radius: 18px;
+  }
+  .sms-quote-card .btn {
+    width: 100%;
+  }
+}
