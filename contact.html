@@ -89,6 +89,54 @@
         </div>
       </section>
 
+      <section class="contact-form-section section-pad light-section" aria-label="Better Beds quote request form">
+        <div class="section-heading">
+          <p class="mini-title">Quote Request</p>
+          <h2>Send us your truck details.</h2>
+          <p>Calls are fastest, but this form works too. Photos, bed length, paint code, and damage details help us quote faster.</p>
+        </div>
+        <form class="quote-form" action="https://formsubmit.co/info@betterbeds.pro" method="POST">
+          <input type="hidden" name="_subject" value="New Better Beds quote request" />
+          <input type="hidden" name="_template" value="table" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_next" value="https://betterbeds.pro/thanks.html" />
+          <input type="text" name="_honey" tabindex="-1" autocomplete="off" class="form-honey" aria-hidden="true" />
+
+          <div class="form-grid">
+            <label>
+              Your name
+              <input type="text" name="name" autocomplete="name" required />
+            </label>
+            <label>
+              Phone number
+              <input type="tel" name="phone" autocomplete="tel" required />
+            </label>
+            <label>
+              Email address
+              <input type="email" name="email" autocomplete="email" />
+            </label>
+            <label>
+              Truck year / make / model
+              <input type="text" name="truck" placeholder="Example: 2019 Chevy Silverado 1500" />
+            </label>
+            <label>
+              Bed length / style
+              <input type="text" name="bed_length" placeholder="Short bed, standard bed, long bed, not sure" />
+            </label>
+            <label>
+              Paint code / color
+              <input type="text" name="paint_code" placeholder="Paint code or color, if known" />
+            </label>
+          </div>
+          <label>
+            What do you need help with?
+            <textarea name="message" rows="6" placeholder="Tell us if you need a replacement bed, repair, paint match, installation, or help finding the right bed." required></textarea>
+          </label>
+          <button class="btn primary" type="submit">Send Quote Request <span>›</span></button>
+          <p class="form-note">Please do not include payment information in this form. We’ll follow up by phone or email.</p>
+        </form>
+      </section>
+
       <section class="payments-banner" aria-label="Payment methods accepted">
         <img src="assets/images/payments-accepted.jpg" alt="Payments accepted: cash, debit, credit, Zelle, PayPal, Venmo, and American First Finance" />
         <p>We accept cash, debit, credit, Zelle, PayPal, Venmo, and American First Finance.</p>

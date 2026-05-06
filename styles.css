@@ -1541,3 +1541,93 @@ blockquote cite { display: block; margin-top: 18px; color: var(--navy); font-sty
     width: 100%;
   }
 }
+
+.contact-form-section {
+  border-top: 1px solid rgba(6, 26, 53, .1);
+  border-bottom: 1px solid rgba(6, 26, 53, .1);
+}
+.contact-form-section h2 {
+  color: var(--navy);
+  font-family: "Barlow Condensed", Impact, sans-serif;
+  font-size: clamp(2.4rem, 5vw, 5rem);
+  line-height: .95;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.quote-form {
+  max-width: 1020px;
+  margin: 0 auto;
+  padding: clamp(22px, 4vw, 42px);
+  border-radius: 24px;
+  background: #fff;
+  border: 1px solid rgba(6, 26, 53, .15);
+  box-shadow: 0 24px 65px rgba(6, 26, 53, .14);
+}
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+.quote-form label {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 18px;
+  color: var(--navy);
+  font-weight: 900;
+}
+.quote-form input,
+.quote-form textarea {
+  width: 100%;
+  border: 2px solid rgba(6, 26, 53, .16);
+  border-radius: 14px;
+  padding: 14px 15px;
+  color: var(--ink);
+  background: #f7f9fc;
+  font: inherit;
+  font-weight: 600;
+}
+.quote-form input:focus,
+.quote-form textarea:focus {
+  outline: none;
+  border-color: var(--navy);
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(16, 47, 90, .12);
+}
+.quote-form textarea {
+  resize: vertical;
+}
+.quote-form button {
+  border: 0;
+  cursor: pointer;
+}
+.form-note {
+  margin: 14px 0 0;
+  color: #5d6674;
+  font-size: .92rem;
+  font-weight: 700;
+}
+.form-honey {
+  position: absolute !important;
+  left: -9999px !important;
+  width: 1px !important;
+  height: 1px !important;
+  opacity: 0 !important;
+}
+@media (max-width: 720px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}
+@media (max-width: 520px) {
+  .contact-form-section h2 {
+    font-size: clamp(2rem, 9vw, 2.7rem);
+  }
+  .quote-form {
+    padding: 20px 14px;
+    border-radius: 18px;
+  }
+  .quote-form .btn {
+    width: 100%;
+  }
+}
