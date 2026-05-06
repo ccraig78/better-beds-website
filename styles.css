@@ -2671,3 +2671,80 @@ body.modal-open {
     height: 42px;
   }
 }
+
+/* About accordion color refinement: blue collapsed, white expanded. */
+.about-page .about-card-grid .collapsible-panel.is-collapsed,
+.about-page .about-services-list .collapsible-panel.is-collapsed {
+  border-color: rgba(255,255,255,.24);
+  background: linear-gradient(180deg, #12396b, var(--navy));
+  box-shadow: 0 14px 32px rgba(6, 26, 53, .18);
+}
+
+.about-page .about-card-grid .collapsible-panel.is-collapsed .collapsible-panel-header h3,
+.about-page .about-services-list .collapsible-panel.is-collapsed .collapsible-panel-header h3 {
+  color: var(--steel);
+}
+
+.about-page .about-card-grid .collapsible-panel.is-collapsed .collapsible-panel-toggle,
+.about-page .about-services-list .collapsible-panel.is-collapsed .collapsible-panel-toggle {
+  border-color: rgba(255,255,255,.72);
+  background: var(--steel);
+  color: var(--navy);
+}
+
+.about-page .about-card-grid .collapsible-panel.is-open,
+.about-page .about-services-list .collapsible-panel.is-open {
+  border-color: rgba(6, 26, 53, .2);
+  background: #fff;
+}
+
+.about-page .about-card-grid .collapsible-panel.is-open .collapsible-panel-header h3,
+.about-page .about-services-list .collapsible-panel.is-open .collapsible-panel-header h3 {
+  color: var(--navy);
+}
+
+.about-page .about-card-grid .collapsible-panel.is-open .collapsible-panel-toggle,
+.about-page .about-services-list .collapsible-panel.is-open .collapsible-panel-toggle {
+  background: var(--navy);
+  color: #fff;
+}
+
+/* Extra specificity for the dark About section so collapsed items stay blue there too. */
+.about-page .about-specialty.dark-section .about-card-grid .collapsible-panel.is-collapsed {
+  border-color: rgba(255,255,255,.24);
+  background: linear-gradient(180deg, #12396b, var(--navy));
+}
+
+.about-page .about-specialty.dark-section .about-card-grid .collapsible-panel.is-collapsed .collapsible-panel-header h3 {
+  color: var(--steel);
+}
+
+.about-page .about-specialty.dark-section .about-card-grid .collapsible-panel.is-open {
+  border-color: rgba(6, 26, 53, .2);
+  background: #fff;
+}
+
+.about-page .about-specialty.dark-section .about-card-grid .collapsible-panel.is-open .collapsible-panel-header h3 {
+  color: var(--navy);
+}
+
+/* Force final About accordion collapsed colors over older About-card rules. */
+.about-page .about-card-grid > .collapsible-panel.is-collapsed,
+.about-page .about-services-list > .collapsible-panel.is-collapsed {
+  background: linear-gradient(180deg, #12396b, var(--navy)) !important;
+}
+
+.about-page .about-card-grid > .collapsible-panel.is-collapsed .collapsible-panel-header h3,
+.about-page .about-services-list > .collapsible-panel.is-collapsed .collapsible-panel-header h3 {
+  color: var(--steel) !important;
+}
+
+.about-page .about-card-grid > .collapsible-panel.is-open,
+.about-page .about-services-list > .collapsible-panel.is-open {
+  background: #fff !important;
+}
+
+.about-page .about-card-grid > .collapsible-panel.is-open .collapsible-panel-header h3,
+.about-page .about-services-list > .collapsible-panel.is-open .collapsible-panel-header h3 {
+  color: var(--navy) !important;
+}
