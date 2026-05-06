@@ -1696,3 +1696,104 @@ blockquote cite { display: block; margin-top: 18px; color: var(--navy); font-sty
 .field-help a:focus {
   color: var(--navy-3);
 }
+
+.field-help-button {
+  border: 0;
+  background: transparent;
+  color: var(--navy);
+  padding: 0;
+  font: inherit;
+  font-weight: 900;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.field-help-button:hover,
+.field-help-button:focus {
+  color: var(--navy-3);
+}
+.help-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 22px;
+}
+.help-modal.is-open {
+  display: flex;
+}
+.help-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(4, 18, 36, .72);
+  backdrop-filter: blur(4px);
+}
+.help-modal-dialog {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 980px);
+  max-height: min(88vh, 920px);
+  overflow: auto;
+  padding: clamp(20px, 3vw, 34px);
+  border-radius: 24px;
+  background: #fff;
+  border: 3px solid var(--navy);
+  box-shadow: 0 34px 90px rgba(0,0,0,.38);
+}
+.help-modal-dialog .mini-title {
+  color: var(--navy);
+}
+.help-modal-dialog h2 {
+  margin-bottom: 12px;
+  color: var(--navy);
+  font-family: "Barlow Condensed", Impact, sans-serif;
+  font-size: clamp(2.1rem, 5vw, 4.4rem);
+  line-height: .95;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.help-modal-dialog p:not(.mini-title) {
+  color: #34465e;
+  font-weight: 800;
+}
+.help-modal-dialog img {
+  width: 100%;
+  height: auto;
+  margin-top: 18px;
+  border-radius: 16px;
+  border: 1px solid rgba(6, 26, 53, .14);
+}
+.help-modal-close {
+  position: sticky;
+  top: 0;
+  float: right;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  margin: -8px -8px 8px 12px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--navy);
+  color: #fff;
+  font-size: 32px;
+  line-height: 1;
+  cursor: pointer;
+}
+body.modal-open {
+  overflow: hidden;
+}
+@media (max-width: 520px) {
+  .help-modal {
+    padding: 12px;
+  }
+  .help-modal-dialog {
+    max-height: 90vh;
+    border-radius: 18px;
+  }
+  .help-modal-dialog h2 {
+    font-size: clamp(1.8rem, 8.8vw, 2.45rem);
+  }
+}

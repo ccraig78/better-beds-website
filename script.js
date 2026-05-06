@@ -140,3 +140,40 @@ if (businessCard && businessCardInner) {
   setBusinessCardTransform();
   window.requestAnimationFrame(renderBusinessCard);
 }
+
+const modalOpeners = document.querySelectorAll('[data-modal-open]');
+const modalClosers = document.querySelectorAll('[data-modal-close]');
+let activeModal = null;
+let lastModalTrigger = null;
+
+const openHelpModal = (modalId, trigger) => {
+  const modal = document.getElementById(modalId);
+  if (!modal) return;
+  lastModalTrigger = trigger;
+  activeModal = modal;
+  modal.classList.add('is-open');
+  modal.setAttribute('aria-hidden', 'false');
+  document.body.classList.add('modal-open');
+  const closeButton = modal.querySelector('.help-modal-close');
+  if (closeButton) closeButton.focus();
+};
+
+const closeHelpModal = () => {
+  if (!activeModal) return;
+  activeModal.classList.remove('is-open');
+  activeModal.setAttribute('aria-hidden', 'true');
+  document.body.classList.remove('modal-open');
+  if (lastModalTrigger) lastModalTrigger.focus();
+  activeModal = null;
+  lastModalTrigger = null;
+};
+
+modalOpeners.forEach((button) => {
+  button.addEventListener('click', () => openHelpModal(button.dataset.modalOpen, button));
+});
+modalClosers.forEach((closer) => {
+  closer.addEventListener('click', closeHelpModal);
+});
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape') closeHelpModal();
+});

@@ -25,7 +25,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css?v=20260505-forms2" />
+    <link rel="stylesheet" href="styles.css?v=20260505-modal1" />
   </head>
   <body>
     <header class="site-header" id="top">
@@ -123,7 +123,7 @@
             <label>
               Bed length / style
               <input type="text" name="bed_length" placeholder="Short bed, standard bed, long bed, or not sure" />
-              <span class="field-help">Not sure? <a href="faq.html#measure-truck-bed" target="_blank" rel="noopener">See how to measure your truck bed.</a></span>
+              <span class="field-help">Not sure? <button type="button" class="field-help-button" data-modal-open="measure-bed-modal">See how to measure your truck bed.</button></span>
             </label>
             <label>
               Paint code / color
@@ -154,6 +154,18 @@
         <a class="phone-link" href="tel:2145248401">☎ 214-524-8401</a>
       </section>
 
+
+      <div class="help-modal" id="measure-bed-modal" aria-hidden="true">
+        <div class="help-modal-backdrop" data-modal-close></div>
+        <div class="help-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="measure-bed-title">
+          <button class="help-modal-close" type="button" data-modal-close aria-label="Close measuring guide">×</button>
+          <p class="mini-title">How-To Guide</p>
+          <h2 id="measure-bed-title">How to measure your truck bed.</h2>
+          <p>Measure the inside box length from the inside edge of the box to the inside edge of the tailgate. If you are unsure, send us a photo and we can help.</p>
+          <img src="assets/images/how-to/measure-truck-bed.jpg" alt="Diagram showing how to measure inside truck bed box length from the inside edge of the box to the inside edge of the tailgate" />
+        </div>
+      </div>
+
       <section class="contact-details">
         <div>📍 3123 Cartwright Street, Dallas, Texas 75212</div>
         <div>★ Built on quality. Backed by experience.</div>
@@ -164,6 +176,6 @@
       <p><a href="mailto:clint@betterbeds.pro">clint@betterbeds.pro</a></p>
     </footer>
 
-    <script src="script.js?v=20260505-forms2"></script>
+    <script src="script.js?v=20260505-modal1"></script>
   </body>
 </html>
