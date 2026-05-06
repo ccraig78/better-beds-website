@@ -2357,3 +2357,197 @@ body.modal-open {
   background: #12396b;
   transform: translateY(-1px);
 }
+
+/* Compact expandable panels for detail-heavy pages. */
+.collapsible-panel {
+  transition: box-shadow .18s ease, transform .18s ease;
+}
+
+.collapsible-panel.is-collapsed {
+  min-height: 0 !important;
+}
+
+.collapsible-panel-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.collapsible-panel-header h3 {
+  flex: 1 1 auto;
+}
+
+.collapsible-panel-toggle {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 10px 14px;
+  border: 2px solid currentColor;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--navy);
+  cursor: pointer;
+  font-family: "Barlow Condensed", Impact, sans-serif;
+  font-size: 17px;
+  font-weight: 900;
+  letter-spacing: .055em;
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.collapsible-panel-toggle b {
+  display: inline-grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--navy);
+  color: #fff;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.collapsible-panel-toggle:hover,
+.collapsible-panel-toggle:focus-visible {
+  background: var(--steel);
+  outline: none;
+}
+
+.collapsible-panel-body {
+  margin-top: 14px;
+}
+
+.service-card-grid .collapsible-panel-toggle,
+.process-grid .collapsible-panel-toggle {
+  background: rgba(255,255,255,.95);
+  color: #082247;
+}
+
+.service-card-grid .collapsible-panel-toggle b,
+.process-grid .collapsible-panel-toggle b {
+  background: #082247;
+  color: #fff;
+}
+
+.service-card-grid .collapsible-panel-header {
+  margin-bottom: 0;
+}
+
+.process-grid .collapsible-panel-header {
+  margin-top: 12px;
+}
+
+.process-grid .collapsible-panel-toggle {
+  margin-top: -6px;
+}
+
+@media (max-width: 640px) {
+  .collapsible-panel-header {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .collapsible-panel-toggle {
+    width: 100%;
+    min-height: 48px;
+  }
+
+  .service-card-top span {
+    width: fit-content;
+  }
+}
+
+/* Keep generic service chip styling from affecting text inside compact-panel buttons. */
+.service-card-top .collapsible-panel-toggle span {
+  display: inline;
+  width: auto;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  border-radius: 0;
+  background: transparent !important;
+  color: inherit !important;
+  font: inherit;
+  line-height: inherit;
+  text-align: inherit;
+  text-transform: inherit;
+}
+
+/* Compact-panel mobile sizing safety: fix oversized page headings/cards instead of hiding overflow. */
+@media (max-width: 520px) {
+  .page-hero,
+  .service-menu,
+  .faq,
+  .about-specialty,
+  .about-process-detail,
+  .process-section {
+    overflow-x: hidden;
+  }
+
+  .page-hero .section-heading,
+  .service-menu .section-heading,
+  .faq .section-heading,
+  .about-specialty .section-heading,
+  .about-process-detail .section-heading {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  .page-hero h1 {
+    max-width: 100%;
+    font-size: clamp(2.05rem, 9.4vw, 2.85rem);
+    line-height: .96;
+    letter-spacing: .012em;
+  }
+
+  .section-heading h2,
+  .service-menu .section-heading h2 {
+    max-width: 100%;
+    font-size: clamp(2rem, 8.8vw, 2.75rem);
+    line-height: 1;
+    letter-spacing: .018em;
+  }
+
+  .service-card-grid,
+  .faq-grid,
+  .about-card-grid,
+  .about-services-list,
+  .process-grid {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  .service-card-grid article,
+  .faq-grid article,
+  .about-card-grid article,
+  .about-services-list article,
+  .process-grid article {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .collapsible-panel-toggle {
+    max-width: 100%;
+  }
+}
+
+/* Slightly tighten detail-heavy sections now that panels expand on demand. */
+.service-menu.section-pad,
+.faq.section-pad,
+.about-specialty.section-pad,
+.about-process-detail.section-pad {
+  padding-top: clamp(44px, 5vw, 72px);
+  padding-bottom: clamp(44px, 5vw, 72px);
+}

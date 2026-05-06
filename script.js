@@ -177,3 +177,66 @@ modalClosers.forEach((closer) => {
 document.addEventListener('keydown', (event) => {
   if (event.key === 'Escape') closeHelpModal();
 });
+
+const collapsiblePanelSelectors = [
+  '.service-card-grid > article',
+  '.faq-grid > article',
+  '.about-card-grid > article',
+  '.about-services-list > article',
+  '.process-grid > article'
+];
+
+const collapsiblePanels = document.querySelectorAll(collapsiblePanelSelectors.join(','));
+collapsiblePanels.forEach((panel, index) => {
+  if (panel.dataset.collapsibleReady === 'true') return;
+
+  const existingTop = panel.querySelector(':scope > .service-card-top');
+  const title = existingTop ? existingTop.querySelector('h3') : panel.querySelector(':scope > h3');
+  if (!title) return;
+
+  const panelId = panel.id || `collapsible-panel-${index + 1}`;
+  const bodyId = `${panelId}-details`;
+  panel.id = panelId;
+  panel.dataset.collapsibleReady = 'true';
+  panel.classList.add('collapsible-panel', 'is-collapsed');
+
+  let header = existingTop;
+  if (!header) {
+    header = document.createElement('div');
+    header.className = 'collapsible-panel-header';
+    panel.insertBefore(header, title);
+    header.appendChild(title);
+  } else {
+    header.classList.add('collapsible-panel-header');
+  }
+
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.className = 'collapsible-panel-toggle';
+  button.setAttribute('aria-expanded', 'false');
+  button.setAttribute('aria-controls', bodyId);
+  button.innerHTML = '<span>View details</span><b aria-hidden="true">+</b>';
+  header.appendChild(button);
+
+  const body = document.createElement('div');
+  body.className = 'collapsible-panel-body';
+  body.id = bodyId;
+  body.hidden = true;
+
+  let node = header.nextSibling;
+  while (node) {
+    const next = node.nextSibling;
+    body.appendChild(node);
+    node = next;
+  }
+  panel.appendChild(body);
+
+  button.addEventListener('click', () => {
+    const isOpen = panel.classList.toggle('is-open');
+    panel.classList.toggle('is-collapsed', !isOpen);
+    body.hidden = !isOpen;
+    button.setAttribute('aria-expanded', String(isOpen));
+    button.querySelector('span').textContent = isOpen ? 'Hide details' : 'View details';
+    button.querySelector('b').textContent = isOpen ? '−' : '+';
+  });
+});
