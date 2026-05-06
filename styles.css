@@ -106,9 +106,10 @@ h1, h2, h3, p { margin-top: 0; }
 .nav-toggle {
   display: none;
   justify-self: end;
-  border: 1px solid rgba(6, 26, 53, .35);
-  background: rgba(255,255,255,.45);
+  border: 2px solid rgba(6, 26, 53, .55);
+  background: #fff;
   color: var(--navy);
+  box-shadow: 0 8px 18px rgba(6, 26, 53, .18);
   font-size: 30px;
   padding: 4px 11px;
 }
