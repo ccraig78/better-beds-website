@@ -1922,3 +1922,37 @@ body.modal-open {
     font-size: clamp(2rem, 9vw, 2.8rem);
   }
 }
+
+/* About page contrast/caching safety overrides. */
+.about-specialty.dark-section .section-heading h2,
+.about-specialty.dark-section .section-heading p,
+.about-specialty.dark-section .mini-title {
+  color: #fff !important;
+  text-shadow: 0 2px 12px rgba(0,0,0,.26);
+}
+.about-specialty.dark-section .section-heading p:last-child {
+  color: rgba(255,255,255,.84) !important;
+}
+.about-story .about-stats article {
+  background: var(--navy) !important;
+  color: #fff !important;
+  border: 1px solid rgba(255,255,255,.12);
+}
+.about-story .about-stats strong,
+.about-story .about-stats span {
+  display: block;
+  color: #fff !important;
+}
+.about-story .about-stats span {
+  color: rgba(255,255,255,.82) !important;
+}
+.about-specialty .about-card-grid article {
+  background: #fff !important;
+  color: var(--ink) !important;
+}
+.about-specialty .about-card-grid h3 {
+  color: var(--navy) !important;
+}
+.about-specialty .about-card-grid p {
+  color: #33445c !important;
+}
