@@ -179,11 +179,8 @@ document.addEventListener('keydown', (event) => {
 });
 
 const collapsiblePanelSelectors = [
-  '.service-card-grid > article',
-  '.faq-grid > article',
-  '.about-card-grid > article',
-  '.about-services-list > article',
-  '.process-grid > article'
+  'body.about-page .about-card-grid > article',
+  'body.about-page .about-services-list > article'
 ];
 
 const collapsiblePanels = document.querySelectorAll(collapsiblePanelSelectors.join(','));
@@ -215,7 +212,7 @@ collapsiblePanels.forEach((panel, index) => {
   button.className = 'collapsible-panel-toggle';
   button.setAttribute('aria-expanded', 'false');
   button.setAttribute('aria-controls', bodyId);
-  button.innerHTML = '<span>View details</span><b aria-hidden="true">+</b>';
+  button.innerHTML = '<span>More info</span><b aria-hidden="true">?</b>';
   header.appendChild(button);
 
   const body = document.createElement('div');
@@ -236,7 +233,7 @@ collapsiblePanels.forEach((panel, index) => {
     panel.classList.toggle('is-collapsed', !isOpen);
     body.hidden = !isOpen;
     button.setAttribute('aria-expanded', String(isOpen));
-    button.querySelector('span').textContent = isOpen ? 'Hide details' : 'View details';
-    button.querySelector('b').textContent = isOpen ? '−' : '+';
+    button.querySelector('span').textContent = isOpen ? 'Hide info' : 'More info';
+    button.querySelector('b').textContent = isOpen ? '−' : '?';
   });
 });

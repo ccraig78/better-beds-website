@@ -2544,10 +2544,130 @@ body.modal-open {
 }
 
 /* Slightly tighten detail-heavy sections now that panels expand on demand. */
-.service-menu.section-pad,
-.faq.section-pad,
-.about-specialty.section-pad,
-.about-process-detail.section-pad {
+.about-page .about-specialty.section-pad,
+.about-page .about-process-detail.section-pad {
   padding-top: clamp(44px, 5vw, 72px);
   padding-bottom: clamp(44px, 5vw, 72px);
+}
+
+/* About-only title-list experiment. The original layout is still recoverable from commit a701771. */
+.about-page .about-card-grid,
+.about-page .about-services-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  max-width: 920px;
+  margin-inline: auto;
+}
+
+.about-page .about-card-grid article,
+.about-page .about-services-list article {
+  min-height: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid rgba(6, 26, 53, .16);
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 10px 28px rgba(6, 26, 53, .08);
+}
+
+.about-page .about-specialty.dark-section .about-card-grid article {
+  border-color: rgba(255,255,255,.22);
+  background: rgba(255,255,255,.94);
+}
+
+.about-page .about-card-grid .collapsible-panel-header,
+.about-page .about-services-list .collapsible-panel-header {
+  align-items: center;
+  gap: 14px;
+  padding: 17px 18px;
+}
+
+.about-page .about-card-grid .collapsible-panel-header h3,
+.about-page .about-services-list .collapsible-panel-header h3 {
+  margin: 0;
+  color: var(--navy);
+  font-family: "Barlow Condensed", Impact, sans-serif;
+  font-size: clamp(1.45rem, 3vw, 2rem);
+  line-height: 1;
+  letter-spacing: .045em;
+  text-transform: uppercase;
+}
+
+.about-page .about-card-grid .collapsible-panel-toggle,
+.about-page .about-services-list .collapsible-panel-toggle {
+  min-width: 44px;
+  width: 44px;
+  height: 44px;
+  min-height: 44px;
+  padding: 0;
+  border-radius: 50%;
+  background: var(--navy);
+  color: #fff;
+  box-shadow: 0 8px 18px rgba(6, 26, 53, .16);
+}
+
+.about-page .about-card-grid .collapsible-panel-toggle span,
+.about-page .about-services-list .collapsible-panel-toggle span {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.about-page .about-card-grid .collapsible-panel-toggle b,
+.about-page .about-services-list .collapsible-panel-toggle b {
+  width: auto;
+  height: auto;
+  background: transparent;
+  color: inherit;
+  font-size: 24px;
+}
+
+.about-page .about-card-grid .collapsible-panel-toggle:hover,
+.about-page .about-card-grid .collapsible-panel-toggle:focus-visible,
+.about-page .about-services-list .collapsible-panel-toggle:hover,
+.about-page .about-services-list .collapsible-panel-toggle:focus-visible {
+  background: #12396b;
+}
+
+.about-page .about-card-grid .collapsible-panel-body,
+.about-page .about-services-list .collapsible-panel-body {
+  margin-top: 0;
+  padding: 0 18px 18px;
+}
+
+.about-page .about-card-grid .collapsible-panel-body p,
+.about-page .about-services-list .collapsible-panel-body p {
+  margin: 0;
+  color: #26384f;
+  font-weight: 650;
+}
+
+.about-page .about-card-grid .collapsible-panel.is-open,
+.about-page .about-services-list .collapsible-panel.is-open {
+  box-shadow: 0 16px 38px rgba(6, 26, 53, .13);
+}
+
+@media (max-width: 640px) {
+  .about-page .about-card-grid .collapsible-panel-header,
+  .about-page .about-services-list .collapsible-panel-header {
+    flex-direction: row;
+    align-items: center;
+    padding: 15px 14px;
+  }
+
+  .about-page .about-card-grid .collapsible-panel-header h3,
+  .about-page .about-services-list .collapsible-panel-header h3 {
+    font-size: 1.35rem;
+  }
+
+  .about-page .about-card-grid .collapsible-panel-toggle,
+  .about-page .about-services-list .collapsible-panel-toggle {
+    flex: 0 0 42px;
+    width: 42px;
+    height: 42px;
+  }
 }
