@@ -1956,3 +1956,12 @@ body.modal-open {
 .about-specialty .about-card-grid p {
   color: #33445c !important;
 }
+
+/* Dark sections with regular section headings need light text for readability. */
+.dark-section .section-heading h2,
+.dark-section .section-heading .mini-title {
+  color: #fff;
+}
+.dark-section .section-heading p:last-child {
+  color: rgba(255,255,255,.84);
+}
