@@ -93,26 +93,46 @@
         </div>
       </section>
 
-      <section class="quote-checklist section-pad light-section" aria-label="What to send for a fast Better Beds quote">
+      <section class="quote-checklist quote-builder-section section-pad light-section" aria-label="Build a fast Better Beds quote message">
         <div class="section-heading centered">
-          <p class="mini-title">Fast Quote Checklist</p>
-          <h2>For a fast quote, send us these details.</h2>
-          <p>Texting photos is usually the quickest way for us to understand what you need and what options may fit your truck.</p>
+          <p class="mini-title">Fast Quote Builder</p>
+          <h2>Tell us what you know. We’ll help with the rest.</h2>
+          <p>Fill in what you can, then tap text or email. We’ll automatically build the message for you — and you can attach photos before sending.</p>
         </div>
-        <div class="checklist-card">
-          <ul>
-            <li>Year, make, and model</li>
-            <li>Bed length or style — short, standard, long, or “not sure”</li>
-            <li>Single rear wheel or dually, if applicable</li>
-            <li>Paint code or color</li>
-            <li>Photos of your current bed, damage, paint code sticker, or the bed you are looking for</li>
-            <li>Whether you need repair, paint, installation, pickup only, or help finding a bed</li>
-          </ul>
-          <div class="checklist-actions">
-            <a class="btn primary" href="sms:2145248401?body=Hi%20Better%20Beds%2C%20I%27d%20like%20a%20quote.%20I%27ll%20send%20truck%20photos%20and%20details.">Text Photos for a Quote <span>›</span></a>
+        <form class="quote-builder" data-quote-builder>
+          <div class="quote-builder-fields">
+            <label>
+              <span>Truck details</span>
+              <input type="text" name="truck" placeholder="Year, make, and model — example: 2019 Chevy Silverado 1500" />
+            </label>
+            <label>
+              <span>Bed length or style</span>
+              <input type="text" name="bedLength" placeholder="Short, standard, long, dually, or not sure" />
+            </label>
+            <label>
+              <span>Rear wheel setup</span>
+              <input type="text" name="rearWheel" placeholder="Single rear wheel, dually, or not sure" />
+            </label>
+            <label>
+              <span>Paint code or color</span>
+              <input type="text" name="paint" placeholder="Paint code, color, or not sure" />
+            </label>
+            <label>
+              <span>Photos you can send</span>
+              <input type="text" name="photos" placeholder="Current bed, damage, paint sticker, or bed you found" />
+            </label>
+            <label>
+              <span>What do you need?</span>
+              <textarea name="needs" rows="3" placeholder="Repair, paint, installation, pickup only, help finding a bed, insurance repair, etc."></textarea>
+            </label>
+          </div>
+          <div class="quote-builder-actions">
+            <a class="btn primary quote-builder-text" href="sms:2145248401?body=Hi%20Better%20Beds%2C%20I%27d%20like%20a%20quote.%20I%27ll%20send%20truck%20photos%20and%20details." data-quote-sms>Text Quote Info <span>›</span></a>
+            <a class="btn ghost dark-ghost quote-builder-email" href="mailto:info@betterbeds.pro" data-quote-email>Email Quote Info</a>
             <a class="btn ghost dark-ghost" href="tel:2145248401">Call 214-524-8401</a>
           </div>
-        </div>
+          <p class="quote-builder-note">Tip: after the text or email opens, attach photos of your truck, damage, paint code sticker, or the bed you are looking for.</p>
+        </form>
       </section>
 
       <section class="contact-form-section section-pad light-section" aria-label="Better Beds quote request form">

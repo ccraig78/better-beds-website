@@ -2986,3 +2986,121 @@ body.modal-open {
     white-space: normal;
   }
 }
+
+/* Quote builder: turns the checklist into a pre-filled text/email helper. */
+.quote-builder {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: clamp(22px, 4vw, 38px);
+  background: #fff;
+  border: 1px solid var(--line);
+  border-top: 7px solid var(--navy);
+  box-shadow: 0 18px 50px rgba(6, 26, 53, .11);
+}
+.quote-builder-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+.quote-builder label {
+  display: grid;
+  gap: 8px;
+  color: var(--navy);
+  font-family: "Barlow Condensed", Impact, sans-serif;
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: .045em;
+  text-transform: uppercase;
+}
+.quote-builder label:last-child {
+  grid-column: 1 / -1;
+}
+.quote-builder input,
+.quote-builder textarea {
+  width: 100%;
+  min-width: 0;
+  border: 2px solid rgba(6, 26, 53, .22);
+  background: #f8fafc;
+  color: var(--ink);
+  font: 700 1rem/1.4 Inter, Arial, sans-serif;
+  letter-spacing: 0;
+  text-transform: none;
+  padding: 14px 15px;
+  border-radius: 0;
+}
+.quote-builder textarea {
+  resize: vertical;
+}
+.quote-builder input:focus,
+.quote-builder textarea:focus {
+  outline: 3px solid rgba(16, 47, 90, .22);
+  border-color: var(--navy);
+  background: #fff;
+}
+.quote-builder-actions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 22px;
+}
+.quote-builder-actions .btn {
+  min-width: 0;
+  width: 100%;
+  text-align: center;
+  white-space: normal;
+}
+.quote-builder-note {
+  margin: 16px 0 0;
+  color: var(--muted);
+  font-weight: 800;
+  text-align: center;
+}
+@media (max-width: 760px) {
+  .quote-builder-fields,
+  .quote-builder-actions {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 520px) {
+  .quote-builder {
+    padding: 20px 14px;
+  }
+  .quote-builder label {
+    font-size: 18px;
+  }
+  .quote-builder input,
+  .quote-builder textarea {
+    padding: 13px 12px;
+  }
+}
+
+/* Tablet/narrow-browser guard: Chrome headless and some phones report a wider layout viewport than the screenshot width. */
+@media (max-width: 760px) {
+  .quote-builder-section.section-pad {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+  .quote-builder-section .section-heading,
+  .quote-builder,
+  .quote-builder-fields,
+  .quote-builder label,
+  .quote-builder input,
+  .quote-builder textarea,
+  .quote-builder-actions,
+  .quote-builder-actions .btn {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+  .quote-builder-section .section-heading h2 {
+    font-size: clamp(1.85rem, 8vw, 2.55rem);
+    line-height: 1.02;
+    overflow-wrap: anywhere;
+  }
+  .quote-builder-section .section-heading p,
+  .quote-builder input,
+  .quote-builder textarea {
+    overflow-wrap: anywhere;
+  }
+}

@@ -237,3 +237,42 @@ collapsiblePanels.forEach((panel, index) => {
     button.querySelector('b').textContent = isOpen ? '−' : '?';
   });
 });
+
+const quoteBuilders = document.querySelectorAll('[data-quote-builder]');
+quoteBuilders.forEach((builder) => {
+  const smsLink = builder.querySelector('[data-quote-sms]');
+  const emailLink = builder.querySelector('[data-quote-email]');
+  const fields = Array.from(builder.querySelectorAll('input, textarea'));
+
+  const labels = {
+    truck: 'Truck',
+    bedLength: 'Bed length/style',
+    rearWheel: 'Rear wheel setup',
+    paint: 'Paint code/color',
+    photos: 'Photos I can send',
+    needs: 'What I need'
+  };
+
+  const buildMessage = () => {
+    const lines = ['Hi Better Beds, I would like a truck bed quote.'];
+    fields.forEach((field) => {
+      const value = field.value.trim();
+      if (!value) return;
+      lines.push(`${labels[field.name] || field.name}: ${value}`);
+    });
+    lines.push('I can attach photos next.');
+    return lines.join('\n');
+  };
+
+  const updateLinks = () => {
+    const message = buildMessage();
+    const encodedMessage = encodeURIComponent(message);
+    if (smsLink) smsLink.href = `sms:2145248401?body=${encodedMessage}`;
+    if (emailLink) {
+      emailLink.href = `mailto:info@betterbeds.pro?subject=${encodeURIComponent('Better Beds quote request')}&body=${encodedMessage}`;
+    }
+  };
+
+  fields.forEach((field) => field.addEventListener('input', updateLinks));
+  updateLinks();
+});
