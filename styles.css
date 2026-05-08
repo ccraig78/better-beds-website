@@ -3104,3 +3104,31 @@ body.modal-open {
     overflow-wrap: anywhere;
   }
 }
+
+/* Quote builder clarity pass: make the auto-filled message purpose impossible to miss. */
+.quote-builder-intro {
+  max-width: 980px;
+  margin-left: auto;
+  margin-right: auto;
+  color: var(--navy) !important;
+  font-size: clamp(1.05rem, 1.7vw, 1.28rem);
+  line-height: 1.55;
+}
+.quote-builder-intro strong {
+  font-weight: 950;
+}
+.quote-builder label small {
+  display: block;
+  margin-top: -3px;
+  color: var(--muted);
+  font-family: Inter, Arial, sans-serif;
+  font-size: .9rem;
+  font-weight: 800;
+  line-height: 1.35;
+  letter-spacing: 0;
+  text-transform: none;
+}
+.quote-builder-note {
+  color: var(--navy);
+  font-size: 1rem;
+}

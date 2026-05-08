@@ -454,34 +454,35 @@
       <section class="quote-checklist quote-builder-section section-pad light-section" aria-label="Build a fast Better Beds quote message">
         <div class="section-heading centered">
           <p class="mini-title">Fast Quote Builder</p>
-          <h2>Tell us what you know. We’ll help with the rest.</h2>
-          <p>Fill in what you can, then tap text or email. We’ll automatically build the message for you — and you can attach photos before sending.</p>
+          <h2>Fill this out once. We’ll turn it into your text or email.</h2>
+          <p class="quote-builder-intro"><strong>Type what you know below, then tap Text or Email.</strong> The message will be automatically filled in for you. If you prefer to call, use these fields as a quick reference while you talk.</p>
         </div>
         <form class="quote-builder" data-quote-builder>
           <div class="quote-builder-fields">
             <label>
               <span>Truck details</span>
-              <input type="text" name="truck" placeholder="Year, make, and model — example: 2019 Chevy Silverado 1500" />
+              <small>Year, make, and model — example: 2019 Chevy Silverado 1500</small>
+              <input type="text" name="truck" placeholder="2019 Chevy Silverado 1500" />
             </label>
             <label>
               <span>Bed length or style</span>
-              <input type="text" name="bedLength" placeholder="Short, standard, long, dually, or not sure" />
+              <small>Short bed, standard bed, long bed, or not sure</small>
+              <input type="text" name="bedLength" placeholder="Short bed, standard bed, long bed, or not sure" />
             </label>
             <label>
               <span>Rear wheel setup</span>
+              <small>Single rear wheel, dually, or not sure</small>
               <input type="text" name="rearWheel" placeholder="Single rear wheel, dually, or not sure" />
             </label>
             <label>
               <span>Paint code or color</span>
+              <small>Paint code, color, or not sure</small>
               <input type="text" name="paint" placeholder="Paint code, color, or not sure" />
             </label>
             <label>
-              <span>Photos you can send</span>
-              <input type="text" name="photos" placeholder="Current bed, damage, paint sticker, or bed you found" />
-            </label>
-            <label>
               <span>What do you need?</span>
-              <textarea name="needs" rows="3" placeholder="Repair, paint, installation, pickup only, help finding a bed, insurance repair, etc."></textarea>
+              <small>Repair, paint, installation, pickup only, help finding a bed, insurance repair, etc.</small>
+              <textarea name="needs" rows="3" placeholder="Tell us what you need help with"></textarea>
             </label>
           </div>
           <div class="quote-builder-actions">

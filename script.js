@@ -249,7 +249,6 @@ quoteBuilders.forEach((builder) => {
     bedLength: 'Bed length/style',
     rearWheel: 'Rear wheel setup',
     paint: 'Paint code/color',
-    photos: 'Photos I can send',
     needs: 'What I need'
   };
 
@@ -260,7 +259,7 @@ quoteBuilders.forEach((builder) => {
       if (!value) return;
       lines.push(`${labels[field.name] || field.name}: ${value}`);
     });
-    lines.push('I can attach photos next.');
+    lines.push('I can attach photos after this message opens.');
     return lines.join('\n');
   };
 
