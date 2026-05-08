@@ -3132,3 +3132,22 @@ body.modal-open {
   color: var(--navy);
   font-size: 1rem;
 }
+
+.inline-help-button {
+  display: inline;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--navy);
+  font: inherit;
+  font-weight: 950;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.inline-help-button:hover,
+.inline-help-button:focus-visible {
+  color: var(--navy-3);
+}

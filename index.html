@@ -270,7 +270,7 @@
             </label>
             <label>
               <span>Bed length or style</span>
-              <small>Short bed, standard bed, long bed, or not sure</small>
+              <small>Short bed, standard bed, long bed, or not sure. <button type="button" class="inline-help-button" data-modal-open="measure-bed-modal">How do I measure it?</button></small>
               <input type="text" name="bedLength" placeholder="Short bed, standard bed, long bed, or not sure" />
             </label>
             <label>
@@ -360,6 +360,18 @@
         <a class="btn primary" href="sms:2145248401?body=Hi%20Better%20Beds%2C%20I%27d%20like%20a%20quote.%20I%27ll%20send%20truck%20photos%20and%20details.">Text Photos for a Quote <span>›</span></a>
         <a class="phone-link" href="tel:2145248401">☎ 214-524-8401</a>
       </section>
+
+
+      <div class="help-modal" id="measure-bed-modal" aria-hidden="true">
+        <div class="help-modal-backdrop" data-modal-close></div>
+        <div class="help-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="measure-bed-title">
+          <button class="help-modal-close" type="button" data-modal-close aria-label="Close measuring guide">×</button>
+          <p class="mini-title">How-To Guide</p>
+          <h2 id="measure-bed-title">How to measure your truck bed.</h2>
+          <p>Measure the inside box length from the inside edge of the box to the inside edge of the tailgate. If you are unsure, send us a photo and we can help.</p>
+          <img src="assets/images/how-to/measure-truck-bed.jpg" alt="Diagram showing how to measure inside truck bed box length from the inside edge of the box to the inside edge of the tailgate" />
+        </div>
+      </div>
 
       <section class="contact-details">
         <div>📍 3123 Cartwright Street, Dallas, Texas 75212</div>
