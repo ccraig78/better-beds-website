@@ -3151,3 +3151,90 @@ body.modal-open {
 .inline-help-button:focus-visible {
   color: var(--navy-3);
 }
+
+/* Conversion polish from Codi review: next steps, proof row, and quote choices. */
+.trust-strip {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  background: var(--navy);
+  color: #fff;
+  border-top: 1px solid rgba(255,255,255,.18);
+  border-bottom: 1px solid rgba(6,26,53,.4);
+}
+.trust-strip article {
+  padding: 24px clamp(16px, 2.5vw, 34px);
+  border-right: 1px solid rgba(255,255,255,.16);
+}
+.trust-strip article:last-child { border-right: 0; }
+.trust-strip strong {
+  display: block;
+  font-family: "Barlow Condensed", Impact, sans-serif;
+  font-size: clamp(1.25rem, 2vw, 1.65rem);
+  font-weight: 950;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+.trust-strip span {
+  display: block;
+  margin-top: 6px;
+  color: rgba(255,255,255,.78);
+  font-weight: 750;
+}
+.hero-inline-actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 26px;
+}
+.quote-choice-grid {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+.quote-choice-grid article {
+  padding: 26px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-top: 6px solid var(--navy);
+  box-shadow: 0 16px 42px rgba(6, 26, 53, .1);
+}
+.quote-choice-grid strong {
+  color: var(--muted);
+  font-family: "Barlow Condensed", Impact, sans-serif;
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.quote-choice-grid h3 {
+  margin: 6px 0 8px;
+  color: var(--navy);
+  font-family: "Barlow Condensed", Impact, sans-serif;
+  font-size: 30px;
+  line-height: .95;
+  text-transform: uppercase;
+}
+.quote-choice-grid p {
+  color: var(--muted);
+  font-weight: 750;
+}
+.quote-choice-grid a {
+  color: var(--navy);
+  font-weight: 950;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+@media (max-width: 860px) {
+  .trust-strip,
+  .quote-choice-grid {
+    grid-template-columns: 1fr;
+  }
+  .trust-strip article {
+    border-right: 0;
+    border-bottom: 1px solid rgba(255,255,255,.16);
+  }
+}
