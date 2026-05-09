@@ -3261,7 +3261,7 @@ body.modal-open {
   border: 2px solid rgba(255, 255, 255, .82);
   border-radius: 999px;
   background: rgba(6, 26, 53, .4);
-  color: #fff;
+  color: #ff9d21;
   font-family: "Barlow Condensed", Impact, sans-serif;
   font-size: clamp(19px, 2.2vw, 24px);
   font-weight: 900;
@@ -3295,7 +3295,7 @@ body.modal-open {
 .floating-apply-cta small {
   display: block;
   margin-top: 2px;
-  color: rgba(255,255,255,.86);
+  color: #ffb24a;
   font-family: Arial, sans-serif;
   font-size: 10px;
   font-weight: 900;
@@ -3304,7 +3304,7 @@ body.modal-open {
 
 .floating-apply-cta:hover,
 .floating-apply-cta:focus-visible {
-  color: #fff;
+  color: #ff9d21;
   background: rgba(6, 26, 53, .58);
   transform: translateY(-3px);
   box-shadow: 0 22px 48px rgba(6, 26, 53, .42), 0 7px 0 rgba(6, 26, 53, .2);
