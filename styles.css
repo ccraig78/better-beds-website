@@ -304,6 +304,9 @@ h1, h2, h3, p { margin-top: 0; }
 }
 .process-grid article {
   position: relative;
+  display: grid;
+  grid-template-rows: 82px minmax(50px, auto) 1fr;
+  align-content: start;
   min-height: 238px;
   padding: 52px 22px 28px;
   border: 2px solid rgba(255,255,255,.62);
@@ -337,7 +340,7 @@ h1, h2, h3, p { margin-top: 0; }
 .process-icon {
   display: grid;
   place-items: center;
-  min-height: 56px;
+  height: 82px;
   color: #fff;
 }
 .process-icon .icon-svg,
@@ -352,9 +355,14 @@ h1, h2, h3, p { margin-top: 0; }
 }
 .process-icon .truck-icon {
   width: 132px;
-  height: 108px;
+  height: 82px;
 }
 .process-grid h3 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50px;
+  margin-bottom: 18px;
   color: #fff;
   font-family: "Barlow Condensed", Impact, sans-serif;
   font-size: 25px;
@@ -3236,5 +3244,107 @@ body.modal-open {
   .trust-strip article {
     border-right: 0;
     border-bottom: 1px solid rgba(255,255,255,.16);
+  }
+}
+
+/* Floating financing CTA: always-visible Apply Now link. */
+.floating-apply-cta {
+  position: fixed;
+  right: clamp(14px, 2.2vw, 28px);
+  bottom: clamp(14px, 2.2vw, 28px);
+  z-index: 900;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 56px;
+  padding: 13px 20px 13px 16px;
+  border: 2px solid rgba(255, 255, 255, .82);
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--red), #b5131d);
+  color: #fff;
+  font-family: "Barlow Condensed", Impact, sans-serif;
+  font-size: clamp(19px, 2.2vw, 24px);
+  font-weight: 900;
+  letter-spacing: .065em;
+  line-height: 1;
+  text-decoration: none;
+  text-transform: uppercase;
+  box-shadow: 0 18px 42px rgba(6, 26, 53, .34), 0 5px 0 rgba(6, 26, 53, .18);
+  transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+}
+
+.floating-apply-cta::before {
+  content: "$";
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--red);
+  font-family: Arial, sans-serif;
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: 0;
+}
+
+.floating-apply-cta span {
+  display: block;
+}
+
+.floating-apply-cta small {
+  display: block;
+  margin-top: 2px;
+  color: rgba(255,255,255,.86);
+  font-family: Arial, sans-serif;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: .12em;
+}
+
+.floating-apply-cta:hover,
+.floating-apply-cta:focus-visible {
+  color: #fff;
+  background: linear-gradient(135deg, #f02b36, var(--red));
+  transform: translateY(-3px);
+  box-shadow: 0 22px 48px rgba(6, 26, 53, .42), 0 7px 0 rgba(6, 26, 53, .2);
+}
+
+@media (max-width: 640px) {
+  .floating-apply-cta {
+    right: 12px;
+    bottom: 12px;
+    min-height: 50px;
+    padding: 10px 15px 10px 12px;
+    font-size: 18px;
+  }
+
+  .floating-apply-cta::before {
+    width: 30px;
+    height: 30px;
+    font-size: 18px;
+  }
+
+  .floating-apply-cta small {
+    font-size: 9px;
+  }
+}
+
+@media (max-width: 640px) {
+  body {
+    padding-bottom: 74px;
+  }
+
+  .floating-apply-cta {
+    left: 50%;
+    right: auto;
+    bottom: max(10px, env(safe-area-inset-bottom));
+    transform: translateX(-50%);
+    white-space: nowrap;
+  }
+
+  .floating-apply-cta:hover,
+  .floating-apply-cta:focus-visible {
+    transform: translateX(-50%) translateY(-2px);
   }
 }

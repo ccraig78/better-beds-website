@@ -275,3 +275,15 @@ quoteBuilders.forEach((builder) => {
   fields.forEach((field) => field.addEventListener('input', updateLinks));
   updateLinks();
 });
+
+const floatingApplyCtaHref = 'https://americanfirstfinance.com/how-it-works/#apply-online';
+if (!document.querySelector('.floating-apply-cta')) {
+  const floatingApplyCta = document.createElement('a');
+  floatingApplyCta.className = 'floating-apply-cta';
+  floatingApplyCta.href = floatingApplyCtaHref;
+  floatingApplyCta.target = '_blank';
+  floatingApplyCta.rel = 'noopener';
+  floatingApplyCta.setAttribute('aria-label', 'Apply now for Better Beds financing');
+  floatingApplyCta.innerHTML = '<span>Apply Now<small>Financing</small></span>';
+  document.body.appendChild(floatingApplyCta);
+}
