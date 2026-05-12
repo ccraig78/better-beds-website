@@ -25,7 +25,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css?v=20260512-quote-options" />
+    <link rel="stylesheet" href="styles.css?v=20260512-quote-contact" />
   </head>
   <body>
     <header class="site-header" id="top">
@@ -101,6 +101,16 @@
         </div>
         <form class="quote-builder" data-quote-builder>
           <div class="quote-builder-fields">
+            <label>
+              <span>Your name</span>
+              <small>Optional, but helpful if we are replying by email.</small>
+              <input type="text" name="customerName" autocomplete="name" placeholder="Your name" />
+            </label>
+            <label>
+              <span>Phone number</span>
+              <small>Required only if emailing us but you want a call or text back.</small>
+              <input type="tel" name="customerPhone" autocomplete="tel" placeholder="Best phone number" />
+            </label>
             <label>
               <span>Truck details</span>
               <small>Year, make, and model — example: 2019 Chevy Silverado 1500</small>
@@ -287,6 +297,6 @@
       </nav>
     </footer>
 
-    <script src="script.js?v=20260512-quote-options"></script>
+    <script src="script.js?v=20260512-quote-contact"></script>
   </body>
 </html>

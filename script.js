@@ -245,6 +245,8 @@ quoteBuilders.forEach((builder) => {
   const fields = Array.from(builder.querySelectorAll('input, textarea'));
 
   const labels = {
+    customerName: 'Name',
+    customerPhone: 'Phone',
     truck: 'Truck',
     bedLength: 'Bed length/style',
     rearWheel: 'Rear wheel setup',
@@ -256,7 +258,7 @@ quoteBuilders.forEach((builder) => {
     needs: 'What I need'
   };
 
-  const fieldOrder = ['truck', 'bedLength', 'rearWheel', 'quoteType', 'paymentType', 'paint', 'preferredContact', 'callWindow', 'needs'];
+  const fieldOrder = ['customerName', 'customerPhone', 'truck', 'bedLength', 'rearWheel', 'quoteType', 'paymentType', 'paint', 'preferredContact', 'callWindow', 'needs'];
 
   const getFieldValue = (name) => {
     const matchingFields = fields.filter((field) => field.name === name);
@@ -288,10 +290,24 @@ quoteBuilders.forEach((builder) => {
     }
   };
 
+  const validateEmailContact = (event) => {
+    const preferredContact = getFieldValue('preferredContact').toLowerCase();
+    const wantsCallOrText = preferredContact.includes('call') || preferredContact.includes('text');
+    const phoneField = builder.querySelector('[name="customerPhone"]');
+    const phone = phoneField ? phoneField.value.trim() : '';
+
+    if (wantsCallOrText && !phone) {
+      event.preventDefault();
+      alert('Please enter your phone number before emailing the quote request, since you selected call or text as a preferred contact method.');
+      if (phoneField) phoneField.focus();
+    }
+  };
+
   fields.forEach((field) => {
     field.addEventListener('input', updateLinks);
     field.addEventListener('change', updateLinks);
   });
+  if (emailLink) emailLink.addEventListener('click', validateEmailContact);
   updateLinks();
 });
 
