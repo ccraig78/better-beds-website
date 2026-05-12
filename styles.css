@@ -3332,20 +3332,21 @@ body.modal-open {
 
 @media (max-width: 640px) {
   body {
-    padding-bottom: 74px;
+    padding-bottom: 96px;
   }
 
   .floating-apply-cta {
-    left: 50%;
-    right: auto;
+    left: auto;
+    right: 10px;
     bottom: max(10px, env(safe-area-inset-bottom));
-    transform: translateX(-50%);
-    white-space: nowrap;
+    max-width: 178px;
+    transform: none;
+    white-space: normal;
   }
 
   .floating-apply-cta:hover,
   .floating-apply-cta:focus-visible {
-    transform: translateX(-50%) translateY(-2px);
+    transform: translateY(-2px);
   }
 }
 
@@ -3465,7 +3466,7 @@ body.modal-open {
     overflow-wrap: anywhere;
   }
   .floating-apply-cta {
-    display: none;
+    display: inline-flex;
   }
 }
 
