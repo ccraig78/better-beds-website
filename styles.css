@@ -3406,6 +3406,29 @@ body.modal-open {
   margin: 0;
   accent-color: var(--navy);
 }
+.finance-inline-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: fit-content;
+  margin-top: 4px;
+  padding: 9px 12px;
+  border-radius: 999px;
+  background: var(--gold);
+  color: var(--navy) !important;
+  font-family: Inter, Arial, sans-serif;
+  font-size: .92rem;
+  font-weight: 950;
+  line-height: 1;
+  text-decoration: none;
+  box-shadow: 0 10px 22px rgba(217, 163, 64, .22);
+}
+.finance-inline-link:hover,
+.finance-inline-link:focus-visible {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 26px rgba(217, 163, 64, .3);
+}
 .form-options-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(260px, 1fr));

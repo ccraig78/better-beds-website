@@ -311,14 +311,14 @@ quoteBuilders.forEach((builder) => {
   updateLinks();
 });
 
-const floatingApplyCtaHref = 'https://americanfirstfinance.com/how-it-works/#apply-online';
+const floatingApplyCtaHref = 'https://americanfirstfinance.com/app/?dealer=28821&loc=1&src=UA&usetextpin=Y';
 if (!document.querySelector('.floating-apply-cta')) {
   const floatingApplyCta = document.createElement('a');
   floatingApplyCta.className = 'floating-apply-cta';
   floatingApplyCta.href = floatingApplyCtaHref;
   floatingApplyCta.target = '_blank';
   floatingApplyCta.rel = 'noopener';
-  floatingApplyCta.setAttribute('aria-label', 'Apply now for Better Beds financing');
-  floatingApplyCta.innerHTML = '<span>Apply Now<small>Financing</small></span>';
+  floatingApplyCta.setAttribute('aria-label', 'Apply with American First Finance');
+  floatingApplyCta.innerHTML = '<span>Apply with AFF<small>Financing</small></span>';
   document.body.appendChild(floatingApplyCta);
 }
