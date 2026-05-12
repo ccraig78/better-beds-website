@@ -25,7 +25,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css?v=20260509-floating-apply" />
+    <link rel="stylesheet" href="styles.css?v=20260512-quote-options" />
   </head>
   <body>
     <header class="site-header" id="top">
@@ -104,19 +104,47 @@
               <small>Short bed, standard bed, long bed, or not sure. <button type="button" class="inline-help-button" data-modal-open="measure-bed-modal">How do I measure it?</button></small>
               <input type="text" name="bedLength" placeholder="Short bed, standard bed, long bed, or not sure" />
             </label>
-            <label>
-              <span>Rear wheel setup</span>
-              <small>Single rear wheel, dually, or not sure</small>
-              <input type="text" name="rearWheel" placeholder="Single rear wheel, dually, or not sure" />
-            </label>
+            <fieldset class="choice-group">
+              <legend>Rear wheel setup</legend>
+              <small>Choose what applies — not sure is okay.</small>
+              <label class="choice-option"><input type="checkbox" name="rearWheel" value="Single rear wheel" /> <span>Single rear wheel</span></label>
+              <label class="choice-option"><input type="checkbox" name="rearWheel" value="Dually" /> <span>Dually</span></label>
+              <label class="choice-option"><input type="checkbox" name="rearWheel" value="Not sure" /> <span>Not sure</span></label>
+            </fieldset>
+            <fieldset class="choice-group">
+              <legend>Quote type</legend>
+              <small>Tell us whether you are comparing repair, replacement, or both.</small>
+              <label class="choice-option"><input type="checkbox" name="quoteType" value="Repair quote" /> <span>Repair quote</span></label>
+              <label class="choice-option"><input type="checkbox" name="quoteType" value="Replacement bed quote" /> <span>Replacement bed quote</span></label>
+              <label class="choice-option"><input type="checkbox" name="quoteType" value="Not sure / please advise" /> <span>Not sure / please advise</span></label>
+            </fieldset>
+            <fieldset class="choice-group">
+              <legend>Payment type</legend>
+              <small>This helps us understand how to guide the quote.</small>
+              <label class="choice-option"><input type="checkbox" name="paymentType" value="Self-pay" /> <span>Self-pay</span></label>
+              <label class="choice-option"><input type="checkbox" name="paymentType" value="Insurance" /> <span>Insurance</span></label>
+              <label class="choice-option"><input type="checkbox" name="paymentType" value="Not sure" /> <span>Not sure</span></label>
+            </fieldset>
             <label>
               <span>Paint code or color</span>
               <small>Paint code, color, or not sure</small>
               <input type="text" name="paint" placeholder="Paint code, color, or not sure" />
             </label>
+            <fieldset class="choice-group">
+              <legend>Preferred contact</legend>
+              <small>Choose any that work. If calling, add a good time if needed.</small>
+              <label class="choice-option"><input type="checkbox" name="preferredContact" value="Call" /> <span>Call</span></label>
+              <label class="choice-option"><input type="checkbox" name="preferredContact" value="Text" /> <span>Text</span></label>
+              <label class="choice-option"><input type="checkbox" name="preferredContact" value="Email" /> <span>Email</span></label>
+            </fieldset>
+            <label>
+              <span>Best time to call</span>
+              <small>Optional — example: after 5pm, 12–1, mornings only</small>
+              <input type="text" name="callWindow" placeholder="After 5pm, 12–1, mornings only, etc." />
+            </label>
             <label>
               <span>What do you need?</span>
-              <small>Repair, paint, installation, pickup only, help finding a bed, insurance repair, etc.</small>
+              <small>Repair, replacement, paint, installation, pickup only, help finding a bed, insurance repair, etc.</small>
               <textarea name="needs" rows="3" placeholder="Tell us what you need help with"></textarea>
             </label>
           </div>
@@ -175,14 +203,44 @@
               <input type="text" name="bed_length" placeholder="Short bed, standard bed, long bed, or not sure" />
               <span class="field-help">Not sure? <button type="button" class="field-help-button" data-modal-open="measure-bed-modal">See how to measure your truck bed.</button></span>
             </label>
+            <fieldset class="form-choice-group">
+              <legend>Rear wheel setup <span class="optional-label">optional</span></legend>
+              <label><input type="checkbox" name="rear_wheel[]" value="Single rear wheel" /> Single rear wheel</label>
+              <label><input type="checkbox" name="rear_wheel[]" value="Dually" /> Dually</label>
+              <label><input type="checkbox" name="rear_wheel[]" value="Not sure" /> Not sure</label>
+            </fieldset>
             <label>
               Paint code / color <span class="optional-label">optional</span>
               <input type="text" name="paint_code" placeholder="Paint code or color, if known" />
             </label>
           </div>
+          <div class="form-options-grid">
+            <fieldset class="form-choice-group">
+              <legend>Quote type <span class="optional-label">optional</span></legend>
+              <label><input type="checkbox" name="quote_type[]" value="Repair quote" /> Repair quote</label>
+              <label><input type="checkbox" name="quote_type[]" value="Replacement bed quote" /> Replacement bed quote</label>
+              <label><input type="checkbox" name="quote_type[]" value="Not sure / please advise" /> Not sure / please advise</label>
+            </fieldset>
+            <fieldset class="form-choice-group">
+              <legend>Payment type <span class="optional-label">optional</span></legend>
+              <label><input type="checkbox" name="payment_type[]" value="Self-pay" /> Self-pay</label>
+              <label><input type="checkbox" name="payment_type[]" value="Insurance" /> Insurance</label>
+              <label><input type="checkbox" name="payment_type[]" value="Not sure" /> Not sure</label>
+            </fieldset>
+            <fieldset class="form-choice-group">
+              <legend>Preferred contact <span class="optional-label">optional</span></legend>
+              <label><input type="checkbox" name="preferred_contact[]" value="Call" /> Call</label>
+              <label><input type="checkbox" name="preferred_contact[]" value="Text" /> Text</label>
+              <label><input type="checkbox" name="preferred_contact[]" value="Email" /> Email</label>
+            </fieldset>
+            <label class="call-window-field">
+              Best time to call <span class="optional-label">optional</span>
+              <input type="text" name="best_time_to_call" placeholder="Example: after 5pm, 12–1, mornings only" />
+            </label>
+          </div>
           <label>
             What do you need help with? *
-            <textarea name="message" rows="6" placeholder="Tell us if you need a rust-free OEM replacement bed, insurance repair, paint match, installation, or help finding the right bed." required></textarea>
+            <textarea name="message" rows="6" placeholder="Tell us if you need a repair or replacement, self-pay or insurance, paint match, installation, pickup only, or help finding the right bed." required></textarea>
           </label>
           <button class="btn primary" type="submit">Send Quote Request <span>›</span></button>
           <p class="form-note">Please do not include payment information in this form. We’ll follow up by phone or email.</p>
@@ -232,6 +290,6 @@
       </nav>
     </footer>
 
-    <script src="script.js?v=20260509-floating-apply"></script>
+    <script src="script.js?v=20260512-quote-options"></script>
   </body>
 </html>

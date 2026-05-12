@@ -248,16 +248,32 @@ quoteBuilders.forEach((builder) => {
     truck: 'Truck',
     bedLength: 'Bed length/style',
     rearWheel: 'Rear wheel setup',
+    quoteType: 'Quote type',
+    paymentType: 'Payment type',
     paint: 'Paint code/color',
+    preferredContact: 'Preferred contact',
+    callWindow: 'Best time to call',
     needs: 'What I need'
+  };
+
+  const fieldOrder = ['truck', 'bedLength', 'rearWheel', 'quoteType', 'paymentType', 'paint', 'preferredContact', 'callWindow', 'needs'];
+
+  const getFieldValue = (name) => {
+    const matchingFields = fields.filter((field) => field.name === name);
+    if (!matchingFields.length) return '';
+    const values = matchingFields
+      .filter((field) => field.type !== 'checkbox' || field.checked)
+      .map((field) => field.value.trim())
+      .filter(Boolean);
+    return values.join(', ');
   };
 
   const buildMessage = () => {
     const lines = ['Hi Better Beds, I would like a truck bed quote.'];
-    fields.forEach((field) => {
-      const value = field.value.trim();
+    fieldOrder.forEach((name) => {
+      const value = getFieldValue(name);
       if (!value) return;
-      lines.push(`${labels[field.name] || field.name}: ${value}`);
+      lines.push(`${labels[name] || name}: ${value}`);
     });
     lines.push('I can attach photos after this message opens.');
     return lines.join('\n');
@@ -272,7 +288,10 @@ quoteBuilders.forEach((builder) => {
     }
   };
 
-  fields.forEach((field) => field.addEventListener('input', updateLinks));
+  fields.forEach((field) => {
+    field.addEventListener('input', updateLinks);
+    field.addEventListener('change', updateLinks);
+  });
   updateLinks();
 });
 

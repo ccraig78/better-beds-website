@@ -3348,3 +3348,166 @@ body.modal-open {
     transform: translateX(-50%) translateY(-2px);
   }
 }
+
+/* Quote request option groups: repair/replacement, insurance/self-pay, rear wheel, contact preference. */
+.choice-group,
+.form-choice-group {
+  margin: 0;
+  padding: 14px 15px;
+  border: 2px solid rgba(6, 26, 53, .16);
+  background: #f8fafc;
+  color: var(--navy);
+}
+.choice-group {
+  display: grid;
+  gap: 8px;
+}
+.choice-group legend,
+.form-choice-group legend {
+  padding: 0 6px;
+  color: var(--navy);
+  font-family: "Barlow Condensed", Impact, sans-serif;
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: .045em;
+  text-transform: uppercase;
+}
+.choice-group small {
+  display: block;
+  margin: 0 0 4px;
+  color: var(--muted);
+  font-family: Inter, Arial, sans-serif;
+  font-size: .9rem;
+  font-weight: 800;
+  line-height: 1.35;
+  letter-spacing: 0;
+  text-transform: none;
+}
+.choice-option,
+.form-choice-group label {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 9px !important;
+  margin: 0 !important;
+  color: var(--ink) !important;
+  font-family: Inter, Arial, sans-serif !important;
+  font-size: .98rem !important;
+  font-weight: 850 !important;
+  letter-spacing: 0 !important;
+  line-height: 1.25 !important;
+  text-transform: none !important;
+}
+.choice-option input,
+.form-choice-group input[type="checkbox"] {
+  width: auto;
+  min-height: 0;
+  margin: 0;
+  accent-color: var(--navy);
+}
+.form-options-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(260px, 1fr));
+  gap: 18px 22px;
+  margin-bottom: 18px;
+}
+.form-choice-group {
+  display: grid;
+  gap: 10px;
+  border-radius: 14px;
+}
+.call-window-field {
+  margin-bottom: 0 !important;
+}
+@media (max-width: 760px) {
+  .form-options-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+}
+
+/* Quote page mobile containment fixes after adding option groups. */
+@media (max-width: 760px) {
+  html,
+  body {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+  .quote-form,
+  .quote-builder,
+  .quote-builder-section .section-heading,
+  .form-grid,
+  .quote-form .form-grid,
+  .form-options-grid,
+  .choice-group,
+  .form-choice-group,
+  .call-window-field {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+  }
+  .quote-form .form-grid,
+  .quote-builder-fields,
+  .form-options-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+  .quote-builder label:last-child {
+    grid-column: auto;
+  }
+  .quote-builder-section .section-heading h2,
+  .quote-builder-section .section-heading p,
+  .quote-form label,
+  .choice-group legend,
+  .form-choice-group legend,
+  .choice-option,
+  .form-choice-group label {
+    overflow-wrap: anywhere;
+  }
+  .floating-apply-cta {
+    display: none;
+  }
+}
+
+@media (max-width: 520px) {
+  main,
+  section,
+  .section-pad,
+  .page-hero,
+  .quote-choice-section,
+  .quote-builder-section,
+  .sms-quote-section,
+  .quote-page-form,
+  .section-heading,
+  .quote-choice-grid,
+  .quote-choice-grid article,
+  .sms-quote-card,
+  .sms-quote-card-wide {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+  }
+  .section-heading h1,
+  .section-heading h2,
+  .quote-choice-grid h3,
+  .sms-quote-card h2 {
+    max-width: 100% !important;
+    overflow-wrap: anywhere !important;
+    word-break: normal;
+  }
+  .quote-choice-grid article,
+  .sms-quote-card,
+  .quote-builder,
+  .quote-form {
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+  }
+  .btn,
+  .quote-choice-grid a,
+  .sms-quote-button {
+    max-width: 100% !important;
+    white-space: normal !important;
+    overflow-wrap: anywhere !important;
+  }
+}
