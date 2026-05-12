@@ -3336,12 +3336,14 @@ body.modal-open {
   }
 
   .floating-apply-cta {
-    left: auto;
-    right: 10px;
+    left: 12px;
+    right: 12px;
     bottom: max(10px, env(safe-area-inset-bottom));
-    max-width: 178px;
+    justify-content: center;
+    width: auto;
+    max-width: none;
     transform: none;
-    white-space: normal;
+    white-space: nowrap;
   }
 
   .floating-apply-cta:hover,
