@@ -114,7 +114,7 @@
       <button class="bb-faq-toggle" type="button" aria-expanded="false">💬 Ask Better Beds</button>
       <div class="bb-faq-panel" role="dialog" aria-modal="false" aria-label="Better Beds FAQ assistant">
         <div class="bb-faq-header">
-          <div><strong>Better Beds helper</strong><span>Quick answers. If I’m not sure, Euro flags the question for Better Beds.</span></div>
+          <div><strong>Better Beds helper</strong><span>Quick answers about truck beds, repair, paint, and installation.</span></div>
           <button class="bb-faq-close" type="button" aria-label="Close FAQ assistant">×</button>
         </div>
         <div class="bb-faq-messages" aria-live="polite"></div>
@@ -186,7 +186,7 @@
       if (match) {
         addMessage(messages, match.answer);
       } else {
-        addMessage(messages, "I’m not fully sure on that one, and I don’t want to guess. I can send it to Better Beds so Euro can flag it and the approved answer can be added to the FAQ for next time.");
+        addMessage(messages, "I’m not fully sure on that one, and I don’t want to guess. Send it to Better Beds and someone can follow up with the right answer.");
         showEscalation(root, question);
       }
     });
@@ -214,7 +214,7 @@
           body: JSON.stringify(payload)
         });
         if (!response.ok) throw new Error('Bad response');
-        addMessage(messages, 'Got it — Better Beds has been notified. If you left contact info, Better Beds can follow up directly.');
+        addMessage(messages, 'Got it — Better Beds received your question. If you left contact info, someone can follow up directly.');
         hideEscalation(root);
         form.reset();
       } catch (error) {
