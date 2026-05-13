@@ -1,0 +1,70 @@
+{
+  "businessName": "Better Beds",
+  "phone": "214-524-8401",
+  "email": "clint@betterbeds.pro",
+  "location": "3123 Cartwright Street, Dallas, Texas 75212",
+  "hours": "Monday-Saturday, 9AM-5PM. Installs are by appointment only.",
+  "defaultIntake": "To help Better Beds quote it, please send your truck year, make, model, bed length if you know it, single rear wheel or dually, color or paint code if available, what you need done, and photos of the truck, bed, damage, or paint code sticker.",
+  "entries": [
+    {
+      "id": "services",
+      "question": "What does Better Beds do?",
+      "keywords": ["what do you do", "services", "repair", "replace", "replacement", "paint", "bedliner", "install"],
+      "answer": "Better Beds helps customers find, repair, paint, bedline, and install OEM-style factory pickup truck beds in Dallas. We focus on replacement truck beds, truck bed repair, paint matching, spray-in bedliners, and scheduled installation."
+    },
+    {
+      "id": "location",
+      "question": "Where are you located?",
+      "keywords": ["where", "location", "address", "directions", "dallas"],
+      "answer": "Better Beds is at 3123 Cartwright Street, Dallas, Texas 75212."
+    },
+    {
+      "id": "hours",
+      "question": "What are your hours?",
+      "keywords": ["hours", "open", "close", "saturday", "appointment"],
+      "answer": "Better Beds is open Monday through Saturday, 9AM to 5PM. Installs are by appointment only so we can plan the work and keep wait times shorter."
+    },
+    {
+      "id": "quote-info",
+      "question": "What information do you need for a quote?",
+      "keywords": ["quote", "estimate", "price", "cost", "how much", "need for quote"],
+      "answer": "Pricing depends on the truck, bed availability, condition, paint work, bedliner, installation, parts, timing, and whether insurance is involved. For the fastest quote, text photos and details to 214-524-8401: year, make, model, bed length, single rear wheel or dually, color or paint code if you have it, and what you need done."
+    },
+    {
+      "id": "inventory",
+      "question": "Do you have a specific bed in stock?",
+      "keywords": ["in stock", "inventory", "available", "have a", "do you have", "f250", "silverado", "ram", "dually"],
+      "answer": "Inventory changes quickly, so we do not want to promise a specific bed without checking. Text or call 214-524-8401 with your truck year, make, model, bed length, single rear wheel or dually, color, and photos if available, and Better Beds can confirm current options."
+    },
+    {
+      "id": "paint-match",
+      "question": "Will the paint match exactly?",
+      "keywords": ["paint", "paint match", "color match", "match exactly", "paint code", "pearl"],
+      "answer": "Better Beds works to match factory color as closely as possible. Age, sun fade, pearl colors, previous paint work, and the truck’s condition can affect how exact the match looks. Text photos and your paint code if available to 214-524-8401."
+    },
+    {
+      "id": "installation",
+      "question": "Do you install truck beds?",
+      "keywords": ["install", "installation", "same day", "wait", "appointment"],
+      "answer": "Yes. Scheduled bed installations are usually completed the same day once the bed is repaired, painted, and ready. Many customers wait in the lobby, but timing depends on the truck and job details. Please call or text before traveling."
+    },
+    {
+      "id": "shipping",
+      "question": "Do you ship beds?",
+      "keywords": ["ship", "shipping", "freight", "carrier", "delivery", "out of state"],
+      "answer": "Customers can arrange freight shipping. Better Beds can prepare the bed and help load it for the freight carrier, but the customer is responsible for arranging freight, and the bed must be paid in full before leaving Better Beds."
+    },
+    {
+      "id": "payment",
+      "question": "What payment methods do you accept?",
+      "keywords": ["pay", "payment", "credit card", "debit", "cash", "zelle", "paypal", "venmo", "financing", "deposit"],
+      "answer": "Better Beds accepts cash, debit, credit, Zelle, PayPal, and Venmo. Financing through American First Finance is available from the website. Please do not send card, bank, or payment information through chat, forms, or messages."
+    },
+    {
+      "id": "insurance",
+      "question": "Do you work with insurance?",
+      "keywords": ["insurance", "claim", "covered", "adjuster", "deductible"],
+      "answer": "Yes, Better Beds works with insurance companies for truck bed and body repairs when damage is covered, but coverage and final pricing depend on the claim. Ask about insurance repair options before paying fully out of pocket."
+    }
+  ]
+}
