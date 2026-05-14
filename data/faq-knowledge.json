@@ -25,7 +25,6 @@
       "id": "location",
       "question": "Where are you located?",
       "keywords": [
-        "where",
         "location",
         "address",
         "directions",
@@ -227,6 +226,404 @@
         "still available"
       ],
       "answer": "If you saw a Better Beds listing on Facebook, the fastest next step is to confirm your truck details and what you need: year, make, model, bed length, single rear wheel or dually, color/paint code if available, and whether you need the bed only, paint, bedliner, installation, pickup, or freight. Inventory and pricing can change, so text details and photos to 214-524-8401 for the most accurate next step."
+    },
+    {
+      "id": "what-is-the-fastest-way-to-get-a-quote",
+      "question": "What is the fastest way to get a quote?",
+      "keywords": [
+        "fastest",
+        "quote"
+      ],
+      "answer": "Text photos and truck details to 214-524-8401. Include your year, make, model, bed length, color or paint code if you have it, and what you need done."
+    },
+    {
+      "id": "what-info-do-you-need-for-a-quote",
+      "question": "What info do you need for a quote?",
+      "keywords": [
+        "info",
+        "quote"
+      ],
+      "answer": "We usually need the truck year, make, model, bed length/style, single rear wheel or dually, color or paint code if available, what you need done, and photos of the truck, damage, current bed, or paint code sticker."
+    },
+    {
+      "id": "how-do-i-know-what-bed-length-i-have",
+      "question": "How do I know what bed length I have?",
+      "keywords": [
+        "bed length",
+        "short bed",
+        "long bed",
+        "measure",
+        "know",
+        "bed",
+        "length"
+      ],
+      "answer": "The safest way is to measure the inside of the bed from the inside front of the box to the inside edge of the tailgate, or send Better Beds a photo. For Chevy/GMC trucks since 1999, 1500 Crew Cab trucks usually have a 5 ft 9 in bed, while 1500 regular cab and extended cab trucks can be 6 ft 6 in or 8 ft. Chevy/GMC 2500/3500 trucks are either 6 ft 6 in or 8 ft. Photos are often easiest because customers may use “short bed” differently."
+    },
+    {
+      "id": "what-does-short-bed-mean-on-a-chevy-or-gmc-truck",
+      "question": "What does short bed mean on a Chevy or GMC truck?",
+      "keywords": [
+        "chevy",
+        "gmc",
+        "silverado",
+        "sierra",
+        "bed length",
+        "short bed",
+        "long bed",
+        "measure",
+        "short",
+        "bed",
+        "mean"
+      ],
+      "answer": "For Chevy/GMC 2500/3500 trucks, short bed means 6 ft 6 in and long bed means 8 ft. For 1500 trucks, there are three possible lengths: 5 ft 9 in, 6 ft 6 in, and 8 ft. Some people call a 6 ft 6 in 1500 bed a short bed because it is shorter than an 8 ft bed, so Better Beds should verify by measurement or photo."
+    },
+    {
+      "id": "will-a-chevy-bed-fit-a-gmc-truck-or-a-gmc-bed-fi",
+      "question": "Will a Chevy bed fit a GMC truck, or a GMC bed fit a Chevy?",
+      "keywords": [
+        "chevy",
+        "gmc",
+        "silverado",
+        "sierra",
+        "bed",
+        "fit"
+      ],
+      "answer": "Sometimes yes, but Better Beds needs to confirm the correct generation, series, and bed length. Chevy and GMC beds can fit each other in the right setup, but they have different looks/body lines and different tail lights. If a Chevy bed goes on a GMC truck, it needs Chevy tail lights, and if a GMC bed goes on a Chevy truck, it needs GMC tail lights."
+    },
+    {
+      "id": "what-chevy-gmc-generation-is-my-truck",
+      "question": "What Chevy/GMC generation is my truck?",
+      "keywords": [
+        "chevy",
+        "gmc",
+        "silverado",
+        "sierra",
+        "generation"
+      ],
+      "answer": "Chevy/GMC 1500 generations are 1999-2006, 2007-2013, 2014-2018, and 2019-present. Chevy/GMC 2500/3500 generations are 1999-2007, 2008-2014, 2015-2019, and 2020-present. Better Beds should confirm the exact series, year range, and bed length before saying a bed will fit."
+    },
+    {
+      "id": "will-chevy-gmc-1500-and-2500-3500-beds-overlap-b",
+      "question": "Will Chevy/GMC 1500 and 2500/3500 beds overlap by year?",
+      "keywords": [
+        "chevy",
+        "gmc",
+        "silverado",
+        "sierra",
+        "1500",
+        "2500",
+        "3500",
+        "overlap",
+        "year"
+      ],
+      "answer": "Yes, but the rule is brand-specific and length-specific. For Chevy, 2007-2013 1500 beds match 2008-2014 2500/3500 beds, and 2014-2018 1500 beds match 2015-2019 2500/3500 beds when the bed length matches. The same year-range overlap is true for GMC-to-GMC. But Chevy beds and GMC beds are not the same as each other; they have different body lines/looks and different tail lights. Better Beds should confirm year, brand, series, and length before promising fitment."
+    },
+    {
+      "id": "do-2019-newer-chevy-gmc-1500-beds-fit-2500-3500",
+      "question": "Do 2019-newer Chevy/GMC 1500 beds fit 2500/3500 trucks?",
+      "keywords": [
+        "chevy",
+        "gmc",
+        "silverado",
+        "sierra",
+        "2019",
+        "newer",
+        "1500",
+        "fit",
+        "2500",
+        "3500"
+      ],
+      "answer": "No. Starting with the 2019 Chevy/GMC 1500 body style, 1500 trucks correctly use 1500-series beds only. Starting with the 2020 Chevy/GMC 2500/3500 body style, 2500/3500 trucks correctly use 2500/3500-series beds only. The older 1500-to-HD overlap rules do not continue after those body-style changes."
+    },
+    {
+      "id": "can-a-different-year-chevy-gmc-bed-physically-bo",
+      "question": "Can a different-year Chevy/GMC bed physically bolt on?",
+      "keywords": [
+        "chevy",
+        "gmc",
+        "silverado",
+        "sierra",
+        "different",
+        "year",
+        "bed",
+        "physically",
+        "bolt"
+      ],
+      "answer": "Sometimes, yes. Chevy/GMC bed mounting holes from 1999 through current trucks are in the same locations within the same bed-length category, so a same-length bed may physically bolt on even if it is not the correct style for the truck. That does not mean it will look right or be the best match. A mismatched generation/style bed may need the matching tailgate and tail lights for that bed. Better Beds should confirm whether the customer wants the correct style or just a physically installable bed."
+    },
+    {
+      "id": "what-bed-length-does-my-ford-truck-have",
+      "question": "What bed length does my Ford truck have?",
+      "keywords": [
+        "ford",
+        "f150",
+        "f-150",
+        "f250",
+        "f-250",
+        "f350",
+        "f-350",
+        "bed length",
+        "short bed",
+        "long bed",
+        "measure",
+        "bed",
+        "length"
+      ],
+      "answer": "Ford has a similar setup to Chevy/GMC, but the lengths are a little different. F-150 Crew Cab trucks have 5 ft 6 in beds. F-150 regular cab and extended cab trucks can have 6 ft 6 in short beds or 8 ft long beds. F-250/F-350 trucks can have 6 ft 9 in short beds or 8 ft long beds. The safest way to confirm is still to measure the inside bed length or send Better Beds a driver-side photo."
+    },
+    {
+      "id": "can-an-f-150-bed-fit-an-f-250-or-f-350",
+      "question": "Can an F-150 bed fit an F-250 or F-350?",
+      "keywords": [
+        "ford",
+        "f150",
+        "f-150",
+        "f250",
+        "f-250",
+        "f350",
+        "f-350",
+        "150",
+        "bed",
+        "fit",
+        "250",
+        "350"
+      ],
+      "answer": "No. Ford F-150 beds and F-250/F-350 beds are not interchangeable just because the length is similar. An F-150 needs an F-150 bed, and an F-250/F-350 needs an F-250/F-350 bed."
+    },
+    {
+      "id": "do-you-only-sell-beds-you-already-have",
+      "question": "Do you only sell beds you already have?",
+      "keywords": [
+        "sell",
+        "already"
+      ],
+      "answer": "No. If we know what you need, Better Beds may be able to locate a rust-free OEM / used factory original bed or find a repairable factory bed and paint it to match."
+    },
+    {
+      "id": "can-you-repair-my-existing-truck-bed",
+      "question": "Can you repair my existing truck bed?",
+      "keywords": [
+        "repair",
+        "existing",
+        "bed"
+      ],
+      "answer": "Yes. Better Beds handles truck bed repair, paint, and related collision work through the Dallas repair facility, including insurance repair work when applicable."
+    },
+    {
+      "id": "how-long-does-installation-take",
+      "question": "How long does installation take?",
+      "keywords": [
+        "install",
+        "installation",
+        "installed",
+        "long",
+        "take"
+      ],
+      "answer": "Scheduled bed installs are usually completed the same day. When the bed is already repaired, painted, and ready, many customers wait in the lobby for about two hours, but timing depends on the truck and job details."
+    },
+    {
+      "id": "how-much-does-installation-cost",
+      "question": "How much does installation cost?",
+      "keywords": [
+        "install",
+        "installation",
+        "installed",
+        "cost"
+      ],
+      "answer": "Installation starts at $250. If we know the truck type and whether the bed is coming from Better Beds or somewhere else, we can use the correct starting install price for that setup. For example, basic single-rear-wheel 1500/F-150 installs start at $250 when the bed is purchased from Better Beds, while heavy-duty, dually, or customer-supplied-bed installs may start higher. Flatbeds, service bodies, utility beds, spray-in bedliners, and special situations need Better Beds to quote the job. Text truck details and photos to 214-524-8401 for the right install quote."
+    },
+    {
+      "id": "what-is-included-in-basic-installation",
+      "question": "What is included in basic installation?",
+      "keywords": [
+        "install",
+        "installation",
+        "installed",
+        "included",
+        "basic"
+      ],
+      "answer": "Basic installation includes removing the customer's current truck bed and installing the replacement bed. If a gooseneck hole is needed, cutting the hole is included in the basic install price. If the truck currently has a flatbed, service body, or utility bed, Better Beds needs to quote the installation."
+    },
+    {
+      "id": "how-much-is-a-gooseneck-hole-or-spray-in-bedline",
+      "question": "How much is a gooseneck hole or spray-in bedliner?",
+      "keywords": [
+        "gooseneck",
+        "5th wheel",
+        "fifth wheel",
+        "hole",
+        "spray",
+        "bedliner"
+      ],
+      "answer": "A standalone gooseneck hole cut is $250. Spray-in bedliners start at $500, but bedliner work should be quoted by Better Beds based on the job."
+    },
+    {
+      "id": "do-you-have-rust-free-oem-truck-beds",
+      "question": "Do you have rust-free OEM truck beds?",
+      "keywords": [
+        "rust",
+        "free",
+        "oem"
+      ],
+      "answer": "Rust-free OEM, used factory, and used factory original truck beds are a major focus, especially for customers from areas where clean beds are hard to find. Availability changes quickly, so text your truck details to 214-524-8401 and Better Beds can check options."
+    },
+    {
+      "id": "are-these-factory-original-beds",
+      "question": "Are these factory original beds?",
+      "keywords": [
+        "these",
+        "factory",
+        "original"
+      ],
+      "answer": "Better Beds focuses on OEM, factory original, and used factory truck beds rather than flimsy aftermarket beds. If a used factory original bed needs repair, paint, or installation, Better Beds can often handle that too."
+    },
+    {
+      "id": "do-you-work-with-toyota-nissan-jeep-gladiator-or",
+      "question": "Do you work with Toyota, Nissan, Jeep Gladiator, or other less common beds?",
+      "keywords": [
+        "work",
+        "toyota",
+        "nissan",
+        "jeep",
+        "gladiator",
+        "other",
+        "less",
+        "common"
+      ],
+      "answer": "Yes, Better Beds will do what it can for any customer needing a pickup bed. Chevy/GMC, Ford, and Dodge/Ram are the most common, so less common manufacturers may require extra fitment or parts-interchange research before quoting options."
+    },
+    {
+      "id": "how-much-does-a-replacement-truck-bed-cost",
+      "question": "How much does a replacement truck bed cost?",
+      "keywords": [
+        "replacement",
+        "bed",
+        "cost"
+      ],
+      "answer": "Pricing depends on truck year, make, model, bed length, bed condition, paint work, installation, parts, timing, and whether insurance is involved. Installation starts at $250, but the bed price and final job total need Better Beds to check the exact truck and options. Text photos and truck details for the fastest accurate quote."
+    },
+    {
+      "id": "what-affects-the-price",
+      "question": "What affects the price?",
+      "keywords": [
+        "affects",
+        "price"
+      ],
+      "answer": "The bed itself, repair work, paint color, bedliner, installation, parts, and timing can all affect price. Clean beds and high-demand beds can sell quickly."
+    },
+    {
+      "id": "is-paint-included",
+      "question": "Is paint included?",
+      "keywords": [
+        "paint",
+        "paint match",
+        "color match",
+        "paint code",
+        "included"
+      ],
+      "answer": "Sometimes yes and sometimes no. Some customers buy a bed only, some need paint, and some want a same-day install. Better Beds will quote the option that matches what the customer needs."
+    },
+    {
+      "id": "can-i-reserve-a-bed-before-driving-to-dallas",
+      "question": "Can I reserve a bed before driving to Dallas?",
+      "keywords": [
+        "reserve",
+        "bed",
+        "driving",
+        "dallas"
+      ],
+      "answer": "Yes. Once the bed, price, timing, and paint plan are agreed on, Better Beds typically collects a $500 deposit and the paint code to reserve the bed and start the process."
+    },
+    {
+      "id": "can-i-pick-up-a-bed-instead-of-having-you-instal",
+      "question": "Can I pick up a bed instead of having you install it?",
+      "keywords": [
+        "install",
+        "installation",
+        "installed",
+        "pick",
+        "bed",
+        "instead",
+        "having"
+      ],
+      "answer": "Yes. Pickup is welcome. Customers do not have to use Better Beds for installation. Better Beds can help load the bed with a forklift or manpower when available."
+    },
+    {
+      "id": "do-i-need-an-appointment",
+      "question": "Do I need an appointment?",
+      "keywords": [
+        "appointment"
+      ],
+      "answer": "Appointments help Better Beds plan installs, inspections, paint work, and customer travel. Text or call before driving in so the shop can confirm what is available and what needs to happen next."
+    },
+    {
+      "id": "do-you-charge-to-dispose-of-the-old-bed",
+      "question": "Do you charge to dispose of the old bed?",
+      "keywords": [
+        "charge",
+        "dispose",
+        "old",
+        "bed"
+      ],
+      "answer": "Better Beds does not charge disposal fees for the old bed. If the customer wants to keep the old bed, Better Beds can help you load it up."
+    },
+    {
+      "id": "do-you-do-spray-in-bedliners",
+      "question": "Do you do spray-in bedliners?",
+      "keywords": [
+        "spray",
+        "bedliners"
+      ],
+      "answer": "Yes. Better Beds offers spray-in bedliners and can include bedliner work with repair, paint, or replacement work when requested."
+    },
+    {
+      "id": "do-you-do-body-work-beyond-beds",
+      "question": "Do you do body work beyond beds?",
+      "keywords": [
+        "body",
+        "work",
+        "beyond"
+      ],
+      "answer": "Better Beds mainly specializes in truck beds, but also handles related body damage, panels, fenders, doors, insurance repair, and other truck/body work by request."
+    },
+    {
+      "id": "do-you-do-gooseneck-or-5th-wheel-prep",
+      "question": "Do you do gooseneck or 5th wheel prep?",
+      "keywords": [
+        "gooseneck",
+        "5th wheel",
+        "fifth wheel",
+        "5th",
+        "wheel",
+        "prep"
+      ],
+      "answer": "Yes, Better Beds can handle gooseneck / 5th wheel prep and related modifications when available/scheduled."
+    },
+    {
+      "id": "do-you-do-lift-kits-or-mechanical-work",
+      "question": "Do you do lift kits or mechanical work?",
+      "keywords": [
+        "lift",
+        "kits",
+        "mechanical",
+        "work"
+      ],
+      "answer": "Some related truck work may be available by request, including minor mechanical repair, frame adjustment after damage, and lift kit sales/installation. Ask for availability."
+    },
+    {
+      "id": "should-i-send-payment-info-through-the-website-f",
+      "question": "Should I send payment info through the website form?",
+      "keywords": [
+        "payment",
+        "pay",
+        "finance",
+        "financing",
+        "should",
+        "info",
+        "website",
+        "form"
+      ],
+      "answer": "No. Do not include payment information in forms or messages. Better Beds will follow up directly."
     }
   ]
 }
