@@ -294,7 +294,7 @@ Roadie is having trouble connecting right now.`);
         const startTop = Math.max(86, Math.min(window.innerHeight * 0.28, 220));
         const ghost = document.createElement('div');
         ghost.className = 'bb-faq-intro-ghost';
-        ghost.innerHTML = '💬 Ask Better Beds <small>AI truck bed helper</small>';
+        ghost.textContent = '💬 Ask Better Beds…';
         ghost.style.left = `${startLeft}px`;
         ghost.style.top = `${startTop}px`;
         ghost.style.width = `${startWidth}px`;
