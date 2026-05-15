@@ -3750,3 +3750,13 @@ body.modal-open {
     margin-right: auto;
   }
 }
+
+.text-link {
+  display: inline-flex;
+  margin-top: 12px;
+  color: var(--navy);
+  font-weight: 950;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.dark-section .text-link { color: #fff; }
