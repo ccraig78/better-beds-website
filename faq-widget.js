@@ -293,21 +293,23 @@ Roadie is having trouble connecting right now.`);
         const startLeft = (window.innerWidth - startWidth) / 2;
         const startTop = Math.max(86, Math.min(window.innerHeight * 0.28, 220));
         const ghost = document.createElement('div');
+        const startFontSize = Math.min(24, Math.max(18, window.innerWidth / 26));
+        const targetFontSize = parseFloat(window.getComputedStyle(toggle).fontSize) || 16;
         ghost.className = 'bb-faq-intro-ghost';
         ghost.textContent = '💬 Ask Better Beds…';
         ghost.style.left = `${startLeft}px`;
         ghost.style.top = `${startTop}px`;
         ghost.style.width = `${startWidth}px`;
         ghost.style.height = `${startHeight}px`;
-        ghost.style.fontSize = `${Math.min(24, Math.max(18, window.innerWidth / 26))}px`;
+        ghost.style.fontSize = `${startFontSize}px`;
         document.body.appendChild(ghost);
         toggle.classList.add('bb-faq-intro-hidden');
 
         const animation = ghost.animate([
-          { left: `${startLeft}px`, top: `${startTop}px`, width: `${startWidth}px`, height: `${startHeight}px`, opacity: 0, transform: 'scale(.98)' },
-          { left: `${startLeft}px`, top: `${startTop}px`, width: `${startWidth}px`, height: `${startHeight}px`, opacity: 1, transform: 'scale(1)', offset: .18 },
-          { left: `${startLeft}px`, top: `${startTop}px`, width: `${startWidth}px`, height: `${startHeight}px`, opacity: 1, transform: 'scale(1)', offset: .52 },
-          { left: `${target.left}px`, top: `${target.top}px`, width: `${target.width}px`, height: `${target.height}px`, opacity: 1, transform: 'scale(1)' }
+          { left: `${startLeft}px`, top: `${startTop}px`, width: `${startWidth}px`, height: `${startHeight}px`, fontSize: `${startFontSize}px`, opacity: 0, transform: 'scale(.98)' },
+          { left: `${startLeft}px`, top: `${startTop}px`, width: `${startWidth}px`, height: `${startHeight}px`, fontSize: `${startFontSize}px`, opacity: 1, transform: 'scale(1)', offset: .18 },
+          { left: `${startLeft}px`, top: `${startTop}px`, width: `${startWidth}px`, height: `${startHeight}px`, fontSize: `${startFontSize}px`, opacity: 1, transform: 'scale(1)', offset: .52 },
+          { left: `${target.left}px`, top: `${target.top}px`, width: `${target.width}px`, height: `${target.height}px`, fontSize: `${targetFontSize}px`, opacity: 1, transform: 'scale(1)' }
         ], { duration: 2550, easing: 'cubic-bezier(.2,.8,.2,1)', fill: 'forwards' });
 
         animation.addEventListener('finish', () => {
