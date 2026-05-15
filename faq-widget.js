@@ -1,7 +1,9 @@
 (() => {
   const CONFIG = {
-    knowledgeUrl: 'data/faq-knowledge.json?v=20260513-faq-assistant',
+    knowledgeUrl: 'data/faq-knowledge.json?v=20260515-roadie-fallback',
+    chatEndpoint: 'https://chat.betterbeds.pro/better-beds-chat',
     unansweredEndpoint: 'api/faq-unanswered.php',
+    guardrailVersion: 'website-chatbot-live-guardrails-2026-05-14',
     smsHref: 'sms:2145248401?body=Hi%20Better%20Beds%2C%20I%27d%20like%20a%20quote.%20I%27ll%20send%20truck%20photos%20and%20details.',
     phoneHref: 'tel:2145248401'
   };
@@ -43,7 +45,9 @@
   const state = {
     knowledge: null,
     lastQuestion: '',
-    escalationVisible: false
+    escalationVisible: false,
+    sessionId: (globalThis.crypto?.randomUUID ? globalThis.crypto.randomUUID() : `bb-${Date.now()}-${Math.random().toString(16).slice(2)}`),
+    conversationHistory: []
   };
 
   const escapeHtml = (value) => String(value).replace(/[&<>'"]/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[char]));
@@ -55,6 +59,7 @@
     bubble.innerHTML = escapeHtml(text).replace(/\n/g, '<br>');
     messages.appendChild(bubble);
     messages.scrollTop = messages.scrollHeight;
+    return bubble;
   };
 
   const scoreEntry = (query, entry) => {
@@ -87,6 +92,44 @@
     return bestScore >= 3 ? best : null;
   };
 
+
+
+  const rememberTurn = (role, content) => {
+    state.conversationHistory.push({ role, content: String(content || '').slice(0, 2000), timestamp: new Date().toISOString() });
+    if (state.conversationHistory.length > 12) state.conversationHistory = state.conversationHistory.slice(-12);
+  };
+
+  const callRoadie = async (question, fallbackMatch = null) => {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 45000);
+    try {
+      const response = await fetch(CONFIG.chatEndpoint, {
+        method: 'POST',
+        signal: controller.signal,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          sessionId: state.sessionId,
+          messageId: `turn-${Date.now()}-${Math.random().toString(16).slice(2, 10)}`,
+          timestamp: new Date().toISOString(),
+          page: window.location.href,
+          message: question,
+          conversationHistory: state.conversationHistory.slice(-10),
+          guardrailVersion: CONFIG.guardrailVersion,
+          sourceFallbackMatch: fallbackMatch
+        })
+      });
+      if (!response.ok) throw new Error(`Roadie HTTP ${response.status}`);
+      const data = await response.json();
+      const reply = data.reply || data.answer;
+      if (!reply) throw new Error('Roadie empty reply');
+      return { ok: true, data, reply };
+    } catch (error) {
+      return { ok: false, error };
+    } finally {
+      clearTimeout(timeout);
+    }
+  };
+
   const showEscalation = (root, question = '') => {
     state.escalationVisible = true;
     const escalation = root.querySelector('.bb-faq-escalation');
@@ -109,13 +152,13 @@
 
     const root = document.createElement('section');
     root.className = 'bb-faq-widget';
-    root.setAttribute('aria-label', 'Better Beds FAQ assistant');
+    root.setAttribute('aria-label', 'Better Beds Roadie chat assistant');
     root.innerHTML = `
       <button class="bb-faq-toggle" type="button" aria-expanded="false">💬 Ask Better Beds</button>
-      <div class="bb-faq-panel" role="dialog" aria-modal="false" aria-label="Better Beds FAQ assistant">
+      <div class="bb-faq-panel" role="dialog" aria-modal="false" aria-label="Better Beds Roadie chat assistant">
         <div class="bb-faq-header">
-          <div><strong>Better Beds helper</strong><span>Quick answers about truck beds, repair, paint, and installation.</span></div>
-          <button class="bb-faq-close" type="button" aria-label="Close FAQ assistant">×</button>
+          <div><strong>Roadie</strong><span>Better Beds AI helper for truck beds, repair, paint, installs, and quotes.</span></div>
+          <button class="bb-faq-close" type="button" aria-label="Close Roadie chat assistant">×</button>
         </div>
         <div class="bb-faq-messages" aria-live="polite"></div>
         <div class="bb-faq-quick" aria-label="Common questions">
@@ -154,7 +197,7 @@
     const detailsInput = root.querySelector('[name="bbFaqQuestionDetails"]');
     const submitQuestion = root.querySelector('.bb-faq-submit-question');
 
-    addMessage(messages, 'Hi — I can answer common Better Beds questions about replacement beds, repair, paint, installation, shipping, payment, and quotes.');
+    addMessage(messages, 'Hi — I’m Roadie, the Better Beds AI helper. I can help with truck beds, repair, paint, installs, bedliners, and quote questions.');
 
     toggle.addEventListener('click', () => {
       root.classList.add('is-open');
@@ -173,20 +216,47 @@
       });
     });
 
-    form.addEventListener('submit', (event) => {
+    form.addEventListener('submit', async (event) => {
       event.preventDefault();
       const question = questionInput.value.trim();
       if (!question) return;
       state.lastQuestion = question;
       addMessage(messages, question, 'user');
+      rememberTurn('customer', question);
       questionInput.value = '';
       hideEscalation(root);
 
       const match = findAnswer(question);
+      const fallbackMatch = match ? {
+        matched: true,
+        source: 'faq',
+        questionId: match.id || null,
+        confidence: 1,
+        approvedAnswer: match.answer
+      } : { matched: false, source: 'none', questionId: null, confidence: 0, approvedAnswer: null };
+
+      const thinking = addMessage(messages, 'Roadie is checking that…');
+      const roadie = await callRoadie(question, fallbackMatch);
+      thinking.remove();
+
+      if (roadie.ok) {
+        addMessage(messages, roadie.reply);
+        rememberTurn('assistant', roadie.reply);
+        if (roadie.data?.escalate) showEscalation(root, question);
+        return;
+      }
+
       if (match) {
-        addMessage(messages, match.answer);
+        addMessage(messages, `${match.answer}
+
+Roadie is having trouble connecting right now, so I used a saved Better Beds answer.`);
+        rememberTurn('assistant', match.answer);
       } else {
-        addMessage(messages, "I’m not fully sure on that one, and I don’t want to guess. Send it to Better Beds and someone can follow up with the right answer.");
+        const fallback = "I’m not fully sure on that one, and I don’t want to guess. Send it to Better Beds and someone can follow up with the right answer.";
+        addMessage(messages, `${fallback}
+
+Roadie is having trouble connecting right now.`);
+        rememberTurn('assistant', fallback);
         showEscalation(root, question);
       }
     });
