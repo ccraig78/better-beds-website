@@ -247,6 +247,8 @@ quoteBuilders.forEach((builder) => {
   const labels = {
     customerName: 'Name',
     customerPhone: 'Phone',
+    customerLocation: 'Location',
+    travelPlan: 'Travel / pickup plan',
     truck: 'Truck',
     bedLength: 'Bed length/style',
     rearWheel: 'Rear wheel setup',
@@ -255,10 +257,11 @@ quoteBuilders.forEach((builder) => {
     paint: 'Paint code/color',
     preferredContact: 'Preferred contact',
     callWindow: 'Best time to call',
+    timing: 'Timing',
     needs: 'What I need'
   };
 
-  const fieldOrder = ['customerName', 'customerPhone', 'truck', 'bedLength', 'rearWheel', 'quoteType', 'paymentType', 'paint', 'preferredContact', 'callWindow', 'needs'];
+  const fieldOrder = ['customerName', 'customerPhone', 'customerLocation', 'travelPlan', 'truck', 'bedLength', 'rearWheel', 'quoteType', 'paymentType', 'paint', 'preferredContact', 'callWindow', 'timing', 'needs'];
 
   const getFieldValue = (name) => {
     const matchingFields = fields.filter((field) => field.name === name);

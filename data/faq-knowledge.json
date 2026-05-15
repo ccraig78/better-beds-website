@@ -55,7 +55,7 @@
         "how much",
         "need for quote"
       ],
-      "answer": "Pricing depends on the truck, bed availability, condition, paint work, bedliner, installation, parts, timing, and whether insurance is involved. For the fastest quote, text photos and details to 214-524-8401: year, make, model, bed length, single rear wheel or dually, color or paint code if you have it, and what you need done."
+      "answer": "Pricing depends on the truck, bed availability, condition, repair needs, paint work, bedliner, installation, parts, timing, and whether insurance is involved. Most complete replacement bed jobs are around $3,000 when they include the bed, needed repairs, paint to paint code, spray-in bedliner, and installation. For the fastest quote, text photos and details to 214-524-8401."
     },
     {
       "id": "inventory",
@@ -84,7 +84,7 @@
         "paint code",
         "pearl"
       ],
-      "answer": "Better Beds works to match factory color as closely as possible. Age, sun fade, pearl colors, previous paint work, and the truck’s condition can affect how exact the match looks. Text photos and your paint code if available to 214-524-8401."
+      "answer": "Better Beds works to match factory color as closely as possible. Age, sun fade, pearl colors, previous paint work, and the truck\u2019s condition can affect how exact the match looks. Text photos and your paint code if available to 214-524-8401."
     },
     {
       "id": "installation",
@@ -96,7 +96,7 @@
         "wait",
         "appointment"
       ],
-      "answer": "Yes. Scheduled bed installations are usually completed the same day once the bed is repaired, painted, and ready. Many customers wait in the lobby, but timing depends on the truck and job details. Please call or text before traveling."
+      "answer": "Yes. Better Beds installs truck beds at our Dallas shop by appointment. Scheduled bed installations are usually completed the same day once the bed is repaired, painted, bedlined, and ready, but timing depends on the truck and job details. Please call or text before traveling."
     },
     {
       "id": "shipping",
@@ -107,9 +107,11 @@
         "freight",
         "carrier",
         "delivery",
-        "out of state"
+        "out of state",
+        "drive",
+        "travel"
       ],
-      "answer": "Customers can arrange freight shipping. Better Beds can prepare the bed and help load it for the freight carrier, but the customer is responsible for arranging freight, and the bed must be paid in full before leaving Better Beds."
+      "answer": "Customer-arranged freight shipping may be possible, and Better Beds can help load the carrier, but shipping adds cost and is not the main path. Most out-of-state customers drive to Dallas for a scheduled installation so they can head home with the bed replacement handled."
     },
     {
       "id": "payment",
@@ -195,7 +197,7 @@
         "reserve",
         "hold bed"
       ],
-      "answer": "Once the bed, price, timing, and paint plan are agreed on, Better Beds typically collects a deposit to reserve the bed and start the process. Final payment depends on the job plan. Please do not send card, bank, or payment information through chat or forms — Better Beds will handle payment directly through approved methods."
+      "answer": "Once the bed, price, timing, and paint plan are agreed on, Better Beds typically collects a deposit to reserve the bed and start the process. Final payment depends on the job plan. Please do not send card, bank, or payment information through chat or forms \u2014 Better Beds will handle payment directly through approved methods."
     },
     {
       "id": "payment-methods-expanded",
@@ -257,7 +259,7 @@
         "bed",
         "length"
       ],
-      "answer": "The safest way is to measure the inside of the bed from the inside front of the box to the inside edge of the tailgate, or send Better Beds a photo. For Chevy/GMC trucks since 1999, 1500 Crew Cab trucks usually have a 5 ft 9 in bed, while 1500 regular cab and extended cab trucks can be 6 ft 6 in or 8 ft. Chevy/GMC 2500/3500 trucks are either 6 ft 6 in or 8 ft. Photos are often easiest because customers may use “short bed” differently."
+      "answer": "The safest way is to measure the inside of the bed from the inside front of the box to the inside edge of the tailgate, or send Better Beds a photo. For Chevy/GMC trucks since 1999, 1500 Crew Cab trucks usually have a 5 ft 9 in bed, while 1500 regular cab and extended cab trucks can be 6 ft 6 in or 8 ft. Chevy/GMC 2500/3500 trucks are either 6 ft 6 in or 8 ft. Photos are often easiest because customers may use \u201cshort bed\u201d differently."
     },
     {
       "id": "what-does-short-bed-mean-on-a-chevy-or-gmc-truck",
@@ -624,6 +626,60 @@
         "form"
       ],
       "answer": "No. Do not include payment information in forms or messages. Better Beds will follow up directly."
+    },
+    {
+      "id": "out-of-state-rust-free-beds",
+      "question": "Do you help out-of-state customers find rust-free truck beds?",
+      "keywords": [
+        "out of state",
+        "rust free",
+        "rust-free",
+        "clean southern",
+        "northern",
+        "road salt",
+        "michigan",
+        "ohio",
+        "missouri",
+        "kansas",
+        "oklahoma",
+        "iowa",
+        "indiana",
+        "illinois",
+        "minnesota",
+        "wisconsin",
+        "colorado",
+        "wyoming",
+        "arkansas"
+      ],
+      "answer": "Yes. Better Beds helps out-of-state customers who are tired of rusty local beds. The normal path is to contact us first, confirm the bed plan, then drive to Dallas for the replacement bed, needed repairs, paint to paint code, spray-in bedliner, and installation."
+    },
+    {
+      "id": "out-of-state-price",
+      "question": "How much is a complete out-of-state truck bed replacement?",
+      "keywords": [
+        "3000",
+        "3,000",
+        "complete job",
+        "complete replacement",
+        "includes bedliner",
+        "includes install",
+        "painted installed",
+        "out of state price"
+      ],
+      "answer": "Most complete replacement bed jobs are around $3,000 when they include a rust-free or clean southern bed, needed repairs, paint to your paint code, spray-in bedliner, and installation at Better Beds in Dallas. Final price depends on truck model, bed availability, condition, parts, repair needs, paint, and timing."
+    },
+    {
+      "id": "out-of-state-installs",
+      "question": "Do you install truck beds out of state?",
+      "keywords": [
+        "install out of state",
+        "come to me",
+        "mobile install",
+        "travel install",
+        "out of state install",
+        "will you install here"
+      ],
+      "answer": "No. Better Beds does not do out-of-state installs. We want customers to come to the Dallas shop so fitment, installation, and final details can be handled correctly."
     }
   ]
 }

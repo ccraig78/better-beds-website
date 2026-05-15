@@ -102,6 +102,7 @@
       <nav class="site-nav" aria-label="Primary navigation">
         <a href="index.html">Home</a>
         <a href="services.html">Services</a>
+        <a href="rust-free-texas-truck-beds.html">Out-of-State</a>
         <a href="process.html">How It Works</a>
         <a href="gallery.html">Gallery</a>
         <a href="faq.html">FAQ</a>
@@ -140,7 +141,7 @@
           </article>
           <article>
             <h3>Do you install the bed?</h3>
-            <p>Yes. Scheduled bed installations are completed the same day unless you request something different.</p>
+            <p>Yes. Scheduled bed installations are usually completed the same day once the bed is repaired, painted, bedlined, and ready, but timing depends on the truck and job details.</p>
           </article>
           <article>
             <h3>Do you have rust-free<br />OEM truck beds?</h3>
@@ -175,8 +176,20 @@
             <p>Yes, once the bed, price, timing, and paint plan are agreed on, we typically collect a $500 deposit and your paint code to reserve the bed and start the process.</p>
           </article>
           <article>
+            <h3>Do you help out-of-state customers?</h3>
+            <p>Yes. Many customers contact us from states where road salt makes clean beds hard to find. Contact us before traveling so we can review fitment, availability, paint, bedliner, timing, and installation.</p>
+          </article>
+          <article>
+            <h3>How much is a complete out-of-state bed job?</h3>
+            <p>Most complete replacement bed jobs are around $3,000 including a rust-free or clean southern bed, needed repairs, paint to your paint code, spray-in bedliner, and installation here in Dallas. Final price depends on the truck and bed.</p>
+          </article>
+          <article>
+            <h3>Do you install beds out of state?</h3>
+            <p>No. We do not do out-of-state installs. The normal path is to come to Better Beds in Dallas for scheduled installation, then head home with the truck bed replacement handled.</p>
+          </article>
+          <article>
             <h3>Do you ship beds?</h3>
-            <p>Customers can arrange freight shipping. We can prepare the bed and help load it for the freight carrier, but the customer is responsible for arranging shipping.</p>
+            <p>Customer-arranged freight may be possible, and we can help load the carrier, but shipping adds cost. Most out-of-state customers come to Dallas for scheduled installation.</p>
           </article>
           <article>
             <h3>Will the paint match exactly?</h3>
@@ -235,6 +248,19 @@
               <input type="tel" name="customerPhone" autocomplete="tel" placeholder="Best phone number" />
             </label>
             <label>
+              <span>Where are you coming from?</span>
+              <small>City/state helps us plan out-of-state travel and availability.</small>
+              <input type="text" name="customerLocation" autocomplete="address-level1" placeholder="Example: Tulsa OK, Michigan, Dallas TX" />
+            </label>
+            <fieldset class="choice-group">
+              <legend>Travel / pickup plan</legend>
+              <small>Most out-of-state customers drive to Dallas for installation.</small>
+              <label class="choice-option"><input type="checkbox" name="travelPlan" value="Drive to Dallas for install" /> <span>Drive to Dallas for install</span></label>
+              <label class="choice-option"><input type="checkbox" name="travelPlan" value="Local Dallas-Fort Worth customer" /> <span>Local Dallas-Fort Worth customer</span></label>
+              <label class="choice-option"><input type="checkbox" name="travelPlan" value="Pickup only" /> <span>Pickup only</span></label>
+              <label class="choice-option"><input type="checkbox" name="travelPlan" value="Customer-arranged freight" /> <span>Customer-arranged freight</span></label>
+            </fieldset>
+            <label>
               <span>Truck details</span>
               <small>Year, make, and model — example: 2019 Chevy Silverado 1500</small>
               <input type="text" name="truck" placeholder="2019 Chevy Silverado 1500" />
@@ -281,6 +307,11 @@
               <span>Best time to call</span>
               <small>Optional — example: after 5pm, 12–1, mornings only</small>
               <input type="text" name="callWindow" placeholder="After 5pm, 12–1, mornings only, etc." />
+            </label>
+            <label>
+              <span>How soon do you need it?</span>
+              <small>Optional — helps us prioritize inventory searches and travel timing.</small>
+              <input type="text" name="timing" placeholder="ASAP, this month, before a trip, flexible, etc." />
             </label>
             <label>
               <span>What do you need?</span>
