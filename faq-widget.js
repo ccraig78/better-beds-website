@@ -24,6 +24,9 @@
     .bb-faq-message { border-radius: 16px; padding: 10px 12px; line-height: 1.35; font-size: .94rem; max-width: 92%; }
     .bb-faq-message.bot { background: white; border: 1px solid rgba(9, 35, 70, .10); justify-self: start; }
     .bb-faq-message.user { background: #0b4f9c; color: white; justify-self: end; }
+    .bb-faq-message.thinking { display: inline-flex; align-items: center; gap: 8px; }
+    .bb-faq-spinner { width: 14px; height: 14px; border: 2px solid rgba(11,79,156,.22); border-top-color: #0b4f9c; border-radius: 999px; animation: bb-faq-spin .8s linear infinite; flex: 0 0 auto; }
+    @keyframes bb-faq-spin { to { transform: rotate(360deg); } }
     .bb-faq-quick { display: flex; flex-wrap: wrap; gap: 7px; padding: 0 14px 12px; background: #f4f7fb; }
     .bb-faq-chip { border: 1px solid rgba(11,79,156,.20); background: white; color: #0b376b; border-radius: 999px; padding: 7px 10px; cursor: pointer; font-weight: 800; font-size: .78rem; }
     .bb-faq-chip:hover { background: #eaf4ff; }
@@ -235,7 +238,9 @@
         approvedAnswer: match.answer
       } : { matched: false, source: 'none', questionId: null, confidence: 0, approvedAnswer: null };
 
-      const thinking = addMessage(messages, 'Roadie is checking that…');
+      const thinking = addMessage(messages, 'Roadie is thinking…');
+      thinking.classList.add('thinking');
+      thinking.insertAdjacentHTML('afterbegin', '<span class="bb-faq-spinner" aria-hidden="true"></span>');
       const roadie = await callRoadie(question, fallbackMatch);
       thinking.remove();
 
