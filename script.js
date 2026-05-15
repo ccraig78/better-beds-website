@@ -273,15 +273,87 @@ quoteBuilders.forEach((builder) => {
     return values.join(', ');
   };
 
+  const getFieldValues = () => fieldOrder.reduce((values, name) => {
+    const value = getFieldValue(name);
+    if (value) values[name] = value;
+    return values;
+  }, {});
+
   const buildMessage = () => {
     const lines = ['Hi Better Beds, I would like a truck bed quote.'];
+    const fieldValues = getFieldValues();
     fieldOrder.forEach((name) => {
-      const value = getFieldValue(name);
+      const value = fieldValues[name];
       if (!value) return;
       lines.push(`${labels[name] || name}: ${value}`);
     });
     lines.push('I can attach photos after this message opens.');
     return lines.join('\n');
+  };
+
+  const quoteCaptureEndpoint = 'https://chat.betterbeds.pro/better-beds-chat';
+
+  const getQuoteSessionId = () => {
+    const key = 'betterBedsQuoteSessionId';
+    try {
+      const existing = window.localStorage.getItem(key);
+      if (existing) return existing;
+      const created = `quote-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
+      window.localStorage.setItem(key, created);
+      return created;
+    } catch (error) {
+      return `quote-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
+    }
+  };
+
+  const captureQuoteLead = (action) => {
+    const fieldValues = getFieldValues();
+    const filledFields = Object.entries(fieldValues);
+    if (!filledFields.length) return;
+
+    const quoteMessage = buildMessage();
+    const fieldLines = filledFields.map(([name, value]) => `${labels[name] || name}: ${value}`);
+    const payload = {
+      sessionId: getQuoteSessionId(),
+      messageId: `quote-${action}-${Date.now()}`,
+      timestamp: new Date().toISOString(),
+      page: window.location.href,
+      message: [
+        'WEBSITE QUOTE BUILDER LEAD COPY',
+        `Customer action: ${action}`,
+        `Page: ${window.location.href}`,
+        ...fieldLines,
+        'Customer-facing message:',
+        quoteMessage
+      ].join('\n'),
+      conversationHistory: [],
+      knownCustomerFields: fieldValues,
+      currentLeadSummary: fieldLines.join('; '),
+      guardrailVersion: 'website-quote-lead-copy-2026-05-15',
+      source: 'betterbeds.pro quote builder'
+    };
+    const body = JSON.stringify(payload);
+
+    try {
+      if (navigator.sendBeacon) {
+        const blob = new Blob([body], { type: 'application/json' });
+        if (navigator.sendBeacon(quoteCaptureEndpoint, blob)) return;
+      }
+    } catch (error) {
+      // Fall back to keepalive fetch below.
+    }
+
+    try {
+      fetch(quoteCaptureEndpoint, {
+        method: 'POST',
+        mode: 'cors',
+        keepalive: true,
+        headers: { 'Content-Type': 'application/json' },
+        body
+      }).catch(() => {});
+    } catch (error) {
+      // Do not block opening the customer's text/email app if capture fails.
+    }
   };
 
   const updateLinks = () => {
@@ -303,14 +375,24 @@ quoteBuilders.forEach((builder) => {
       event.preventDefault();
       alert('Please enter your phone number before emailing the quote request, since you selected call or text as a preferred contact method.');
       if (phoneField) phoneField.focus();
+      return false;
     }
+    return true;
   };
 
   fields.forEach((field) => {
     field.addEventListener('input', updateLinks);
     field.addEventListener('change', updateLinks);
   });
-  if (emailLink) emailLink.addEventListener('click', validateEmailContact);
+  if (smsLink) {
+    smsLink.addEventListener('click', () => captureQuoteLead('sms'));
+  }
+  if (emailLink) {
+    emailLink.addEventListener('click', (event) => {
+      if (validateEmailContact(event) === false) return;
+      captureQuoteLead('email');
+    });
+  }
   updateLinks();
 });
 
