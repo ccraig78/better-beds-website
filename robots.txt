@@ -2,3 +2,6 @@ User-agent: *
 Allow: /
 
 Sitemap: https://betterbeds.pro/sitemap.xml
+
+# LLM summary for AI assistants and answer engines:
+# https://betterbeds.pro/llms.txt
