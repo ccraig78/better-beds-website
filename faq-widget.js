@@ -13,6 +13,11 @@
     .bb-faq-widget { position: fixed; right: clamp(14px, 2.2vw, 28px); bottom: 96px; z-index: 9999; font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #07182e; }
     .bb-faq-toggle { border: 0; border-radius: 999px; background: linear-gradient(135deg, #0b4f9c, #0d7dd8); color: white; box-shadow: 0 14px 35px rgba(0, 30, 80, .35); padding: 13px 18px; font-weight: 900; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; letter-spacing: .01em; }
     .bb-faq-toggle:hover, .bb-faq-toggle:focus { transform: translateY(-1px); outline: 3px solid rgba(13, 125, 216, .25); }
+    .bb-faq-toggle.bb-faq-intro-hidden { visibility: hidden; }
+    .bb-faq-toggle.bb-faq-intro-pulse { animation: bb-faq-button-pulse 1.05s ease-out 1; }
+    .bb-faq-intro-ghost { position: fixed; z-index: 10000; border: 0; border-radius: 999px; background: linear-gradient(135deg, #0b4f9c, #0d7dd8); color: white; box-shadow: 0 24px 70px rgba(0, 30, 80, .36); font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-weight: 950; letter-spacing: .01em; display: inline-flex; align-items: center; justify-content: center; gap: 10px; pointer-events: none; overflow: hidden; white-space: nowrap; }
+    .bb-faq-intro-ghost small { display: block; font-size: .72em; font-weight: 800; opacity: .82; margin-left: 4px; }
+    @keyframes bb-faq-button-pulse { 0% { transform: scale(1); box-shadow: 0 14px 35px rgba(0, 30, 80, .35); } 45% { transform: scale(1.08); box-shadow: 0 18px 48px rgba(13, 125, 216, .48); } 100% { transform: scale(1); box-shadow: 0 14px 35px rgba(0, 30, 80, .35); } }
     .bb-faq-panel { width: min(494px, calc(100vw - 28px)); max-height: min(680px, calc(100vh - 100px)); display: none; flex-direction: column; overflow: hidden; border-radius: 22px; background: #fff; box-shadow: 0 22px 70px rgba(2, 12, 30, .38); border: 1px solid rgba(9, 35, 70, .14); }
     .bb-faq-widget.is-open .bb-faq-panel { display: flex; }
     .bb-faq-widget.is-open .bb-faq-toggle { display: none; }
@@ -265,6 +270,56 @@ Roadie is having trouble connecting right now.`);
         showEscalation(root, question);
       }
     });
+
+    const playHomepageIntro = () => {
+      const isHomePage = ['/', '/index.html', ''].includes(window.location.pathname);
+      if (!isHomePage || root.classList.contains('is-open')) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      try {
+        if (sessionStorage.getItem('betterBedsRoadieIntroSeen') === 'true') return;
+        sessionStorage.setItem('betterBedsRoadieIntroSeen', 'true');
+      } catch (error) {
+        // If storage is unavailable, still show the intro once for this page load.
+      }
+      if (!toggle.animate) return;
+
+      window.setTimeout(() => {
+        if (!document.body.contains(toggle) || root.classList.contains('is-open')) return;
+        const target = toggle.getBoundingClientRect();
+        if (!target.width || !target.height) return;
+
+        const startWidth = Math.min(window.innerWidth - 28, 820);
+        const startHeight = Math.max(target.height * 1.75, 74);
+        const startLeft = (window.innerWidth - startWidth) / 2;
+        const startTop = Math.max(86, Math.min(window.innerHeight * 0.28, 220));
+        const ghost = document.createElement('div');
+        ghost.className = 'bb-faq-intro-ghost';
+        ghost.innerHTML = '💬 Ask Better Beds <small>AI truck bed helper</small>';
+        ghost.style.left = `${startLeft}px`;
+        ghost.style.top = `${startTop}px`;
+        ghost.style.width = `${startWidth}px`;
+        ghost.style.height = `${startHeight}px`;
+        ghost.style.fontSize = `${Math.min(24, Math.max(18, window.innerWidth / 26))}px`;
+        document.body.appendChild(ghost);
+        toggle.classList.add('bb-faq-intro-hidden');
+
+        const animation = ghost.animate([
+          { left: `${startLeft}px`, top: `${startTop}px`, width: `${startWidth}px`, height: `${startHeight}px`, opacity: 0, transform: 'scale(.98)' },
+          { left: `${startLeft}px`, top: `${startTop}px`, width: `${startWidth}px`, height: `${startHeight}px`, opacity: 1, transform: 'scale(1)', offset: .18 },
+          { left: `${startLeft}px`, top: `${startTop}px`, width: `${startWidth}px`, height: `${startHeight}px`, opacity: 1, transform: 'scale(1)', offset: .52 },
+          { left: `${target.left}px`, top: `${target.top}px`, width: `${target.width}px`, height: `${target.height}px`, opacity: 1, transform: 'scale(1)' }
+        ], { duration: 2550, easing: 'cubic-bezier(.2,.8,.2,1)', fill: 'forwards' });
+
+        animation.addEventListener('finish', () => {
+          ghost.remove();
+          toggle.classList.remove('bb-faq-intro-hidden');
+          toggle.classList.add('bb-faq-intro-pulse');
+          window.setTimeout(() => toggle.classList.remove('bb-faq-intro-pulse'), 1200);
+        });
+      }, 650);
+    };
+
+    playHomepageIntro();
 
     submitQuestion.addEventListener('click', async () => {
       const payload = {
