@@ -3760,3 +3760,6 @@ body.modal-open {
   text-underline-offset: 4px;
 }
 .dark-section .text-link { color: #fff; }
+
+.partner-strip { background: linear-gradient(135deg, #f7fbff, #ffffff); }
+.partner-strip a:not(.text-link) { color: var(--navy); font-weight: 950; }
