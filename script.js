@@ -238,30 +238,153 @@ collapsiblePanels.forEach((panel, index) => {
   });
 });
 
+const quoteCaptureEndpoint = 'https://chat.betterbeds.pro/better-beds-chat';
+const quoteSessionStorageKey = 'betterBedsQuoteFields';
+const quoteSessionTimestampKey = 'betterBedsQuoteFieldsUpdatedAt';
+
+const quoteFieldLabels = {
+  customerName: 'Name',
+  customerPhone: 'Phone',
+  customerLocation: 'Location',
+  travelPlan: 'Travel / pickup plan',
+  truck: 'Truck',
+  bedLength: 'Bed length/style',
+  rearWheel: 'Rear wheel setup',
+  quoteType: 'Quote type',
+  paymentType: 'Payment type',
+  paint: 'Paint code/color',
+  preferredContact: 'Preferred contact',
+  callWindow: 'Best time to call',
+  timing: 'Timing',
+  needs: 'What I need'
+};
+
+const quoteFieldOrder = ['customerName', 'customerPhone', 'customerLocation', 'travelPlan', 'truck', 'bedLength', 'rearWheel', 'quoteType', 'paymentType', 'paint', 'preferredContact', 'callWindow', 'timing', 'needs'];
+
+const getQuoteSessionId = () => {
+  const key = 'betterBedsQuoteSessionId';
+  try {
+    const existing = window.localStorage.getItem(key);
+    if (existing) return existing;
+    const created = `quote-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
+    window.localStorage.setItem(key, created);
+    return created;
+  } catch (error) {
+    return `quote-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
+  }
+};
+
+const sendQuoteCapture = (payload) => {
+  const body = JSON.stringify(payload);
+
+  try {
+    if (navigator.sendBeacon) {
+      const blob = new Blob([body], { type: 'application/json' });
+      if (navigator.sendBeacon(quoteCaptureEndpoint, blob)) return;
+    }
+  } catch (error) {
+    // Fall back to keepalive fetch below.
+  }
+
+  try {
+    fetch(quoteCaptureEndpoint, {
+      method: 'POST',
+      mode: 'cors',
+      keepalive: true,
+      headers: { 'Content-Type': 'application/json' },
+      body
+    }).catch(() => {});
+  } catch (error) {
+    // Do not block opening the customer's text/email/call app if capture fails.
+  }
+};
+
+const buildQuoteMessageFromFields = (fieldValues) => {
+  const lines = ['Hi Better Beds, I would like a truck bed quote.'];
+  quoteFieldOrder.forEach((name) => {
+    const value = fieldValues[name];
+    if (!value) return;
+    lines.push(`${quoteFieldLabels[name] || name}: ${value}`);
+  });
+  lines.push('I can attach photos after this message opens.');
+  return lines.join('\n');
+};
+
+const makeQuoteCapturePayload = ({ action, fieldValues, source, linkHref = '', linkText = '' }) => {
+  const filledFields = Object.entries(fieldValues || {}).filter(([, value]) => value);
+  if (!filledFields.length) return null;
+
+  const quoteMessage = buildQuoteMessageFromFields(fieldValues);
+  const fieldLines = filledFields.map(([name, value]) => `${quoteFieldLabels[name] || name}: ${value}`);
+
+  return {
+    sessionId: getQuoteSessionId(),
+    messageId: `quote-${action}-${Date.now()}`,
+    timestamp: new Date().toISOString(),
+    page: window.location.href,
+    message: [
+      'WEBSITE QUOTE / CONTACT LEAD COPY',
+      `Customer action: ${action}`,
+      `Page: ${window.location.href}`,
+      linkText ? `Button text: ${linkText}` : '',
+      linkHref ? `Button href: ${linkHref}` : '',
+      ...fieldLines,
+      'Customer-facing message:',
+      quoteMessage
+    ].filter(Boolean).join('\n'),
+    conversationHistory: [],
+    knownCustomerFields: fieldValues,
+    currentLeadSummary: fieldLines.join('; '),
+    guardrailVersion: 'website-quote-lead-copy-2026-05-25-any-contact-v2',
+    source
+  };
+};
+
+const rememberQuoteFields = (fieldValues) => {
+  if (!fieldValues || !Object.keys(fieldValues).length) return;
+  try {
+    window.sessionStorage.setItem(quoteSessionStorageKey, JSON.stringify(fieldValues));
+    window.sessionStorage.setItem(quoteSessionTimestampKey, new Date().toISOString());
+  } catch (error) {
+    // Some browsers block storage; capture still works from live fields.
+  }
+};
+
+const getStoredQuoteFields = () => {
+  try {
+    const raw = window.sessionStorage.getItem(quoteSessionStorageKey);
+    if (!raw) return {};
+    const parsed = JSON.parse(raw);
+    return parsed && typeof parsed === 'object' ? parsed : {};
+  } catch (error) {
+    return {};
+  }
+};
+
+const getLiveQuoteFields = () => {
+  const fields = Array.from(document.querySelectorAll('[data-quote-builder] input, [data-quote-builder] textarea, [data-quote-builder] select'));
+  return quoteFieldOrder.reduce((values, name) => {
+    const matchingFields = fields.filter((field) => field.name === name);
+    if (!matchingFields.length) return values;
+    const fieldValues = matchingFields
+      .filter((field) => field.type !== 'checkbox' || field.checked)
+      .map((field) => field.value.trim())
+      .filter(Boolean);
+    if (fieldValues.length) values[name] = fieldValues.join(', ');
+    return values;
+  }, {});
+};
+
+const getBestKnownQuoteFields = () => ({
+  ...getStoredQuoteFields(),
+  ...getLiveQuoteFields()
+});
+
 const quoteBuilders = document.querySelectorAll('[data-quote-builder]');
 quoteBuilders.forEach((builder) => {
   const smsLink = builder.querySelector('[data-quote-sms]');
   const emailLink = builder.querySelector('[data-quote-email]');
-  const fields = Array.from(builder.querySelectorAll('input, textarea'));
-
-  const labels = {
-    customerName: 'Name',
-    customerPhone: 'Phone',
-    customerLocation: 'Location',
-    travelPlan: 'Travel / pickup plan',
-    truck: 'Truck',
-    bedLength: 'Bed length/style',
-    rearWheel: 'Rear wheel setup',
-    quoteType: 'Quote type',
-    paymentType: 'Payment type',
-    paint: 'Paint code/color',
-    preferredContact: 'Preferred contact',
-    callWindow: 'Best time to call',
-    timing: 'Timing',
-    needs: 'What I need'
-  };
-
-  const fieldOrder = ['customerName', 'customerPhone', 'customerLocation', 'travelPlan', 'truck', 'bedLength', 'rearWheel', 'quoteType', 'paymentType', 'paint', 'preferredContact', 'callWindow', 'timing', 'needs'];
+  const fields = Array.from(builder.querySelectorAll('input, textarea, select'));
 
   const getFieldValue = (name) => {
     const matchingFields = fields.filter((field) => field.name === name);
@@ -273,91 +396,31 @@ quoteBuilders.forEach((builder) => {
     return values.join(', ');
   };
 
-  const getFieldValues = () => fieldOrder.reduce((values, name) => {
+  const getFieldValues = () => quoteFieldOrder.reduce((values, name) => {
     const value = getFieldValue(name);
     if (value) values[name] = value;
     return values;
   }, {});
 
-  const buildMessage = () => {
-    const lines = ['Hi Better Beds, I would like a truck bed quote.'];
+  const buildMessage = () => buildQuoteMessageFromFields(getFieldValues());
+
+  const captureQuoteLead = (action, link) => {
     const fieldValues = getFieldValues();
-    fieldOrder.forEach((name) => {
-      const value = fieldValues[name];
-      if (!value) return;
-      lines.push(`${labels[name] || name}: ${value}`);
+    rememberQuoteFields(fieldValues);
+    const payload = makeQuoteCapturePayload({
+      action,
+      fieldValues,
+      source: 'betterbeds.pro quote builder',
+      linkHref: link?.getAttribute('href') || '',
+      linkText: link?.textContent?.trim() || ''
     });
-    lines.push('I can attach photos after this message opens.');
-    return lines.join('\n');
-  };
-
-  const quoteCaptureEndpoint = 'https://chat.betterbeds.pro/better-beds-chat';
-
-  const getQuoteSessionId = () => {
-    const key = 'betterBedsQuoteSessionId';
-    try {
-      const existing = window.localStorage.getItem(key);
-      if (existing) return existing;
-      const created = `quote-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
-      window.localStorage.setItem(key, created);
-      return created;
-    } catch (error) {
-      return `quote-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
-    }
-  };
-
-  const captureQuoteLead = (action) => {
-    const fieldValues = getFieldValues();
-    const filledFields = Object.entries(fieldValues);
-    if (!filledFields.length) return;
-
-    const quoteMessage = buildMessage();
-    const fieldLines = filledFields.map(([name, value]) => `${labels[name] || name}: ${value}`);
-    const payload = {
-      sessionId: getQuoteSessionId(),
-      messageId: `quote-${action}-${Date.now()}`,
-      timestamp: new Date().toISOString(),
-      page: window.location.href,
-      message: [
-        'WEBSITE QUOTE BUILDER LEAD COPY',
-        `Customer action: ${action}`,
-        `Page: ${window.location.href}`,
-        ...fieldLines,
-        'Customer-facing message:',
-        quoteMessage
-      ].join('\n'),
-      conversationHistory: [],
-      knownCustomerFields: fieldValues,
-      currentLeadSummary: fieldLines.join('; '),
-      guardrailVersion: 'website-quote-lead-copy-2026-05-15',
-      source: 'betterbeds.pro quote builder'
-    };
-    const body = JSON.stringify(payload);
-
-    try {
-      if (navigator.sendBeacon) {
-        const blob = new Blob([body], { type: 'application/json' });
-        if (navigator.sendBeacon(quoteCaptureEndpoint, blob)) return;
-      }
-    } catch (error) {
-      // Fall back to keepalive fetch below.
-    }
-
-    try {
-      fetch(quoteCaptureEndpoint, {
-        method: 'POST',
-        mode: 'cors',
-        keepalive: true,
-        headers: { 'Content-Type': 'application/json' },
-        body
-      }).catch(() => {});
-    } catch (error) {
-      // Do not block opening the customer's text/email app if capture fails.
-    }
+    if (payload) sendQuoteCapture(payload);
   };
 
   const updateLinks = () => {
-    const message = buildMessage();
+    const fieldValues = getFieldValues();
+    rememberQuoteFields(fieldValues);
+    const message = buildQuoteMessageFromFields(fieldValues);
     const encodedMessage = encodeURIComponent(message);
     if (smsLink) smsLink.href = `sms:2145248401?body=${encodedMessage}`;
     if (emailLink) {
@@ -385,15 +448,42 @@ quoteBuilders.forEach((builder) => {
     field.addEventListener('change', updateLinks);
   });
   if (smsLink) {
-    smsLink.addEventListener('click', () => captureQuoteLead('sms'));
+    smsLink.addEventListener('click', () => captureQuoteLead('sms', smsLink));
   }
   if (emailLink) {
     emailLink.addEventListener('click', (event) => {
       if (validateEmailContact(event) === false) return;
-      captureQuoteLead('email');
+      captureQuoteLead('email', emailLink);
     });
   }
   updateLinks();
+});
+
+document.addEventListener('click', (event) => {
+  const link = event.target instanceof Element ? event.target.closest('a[href]') : null;
+  if (!link) return;
+  if (link.matches('[data-quote-sms], [data-quote-email]')) return;
+
+  const href = link.getAttribute('href') || '';
+  const hrefLower = href.toLowerCase();
+  let action = '';
+  if (hrefLower.startsWith('sms:')) action = 'sms_contact_button';
+  if (hrefLower.startsWith('tel:')) action = 'call_contact_button';
+  if (hrefLower.startsWith('mailto:')) action = 'email_contact_button';
+  if (!action) return;
+
+  const fieldValues = getBestKnownQuoteFields();
+  if (!Object.keys(fieldValues).length) return;
+  rememberQuoteFields(fieldValues);
+
+  const payload = makeQuoteCapturePayload({
+    action,
+    fieldValues,
+    source: 'betterbeds.pro contact button quote snapshot',
+    linkHref: href,
+    linkText: link.textContent.trim()
+  });
+  if (payload) sendQuoteCapture(payload);
 });
 
 const floatingApplyCtaHref = 'https://americanfirstfinance.com/app/?dealer=28821&loc=1&src=UA&usetextpin=Y';
