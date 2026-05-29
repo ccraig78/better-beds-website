@@ -86,7 +86,18 @@
     return score;
   };
 
-  const findAnswer = (question) => {
+  const shouldRoadieReview = (question, match) => {
+    const q = normalize(question);
+    if (!match?.entry) return true;
+    const hasSpecificTruck = /\b(19\d{2}|20\d{2}|chevy|gmc|ford|ram|dodge|toyota|nissan|jeep|silverado|sierra|f150|f-150|f250|f-250|f350|f-350|1500|2500|3500|dually)\b/.test(q);
+    const asksExactInventory = /\b(in stock|inventory|available|do you have|have a|have any|currently have|ready now)\b/.test(q);
+    const asksExactFitment = /\b(fit|fits|compatible|interchange|bolt on|work on my)\b/.test(q) && hasSpecificTruck;
+    const asksFinalQuote = /\b(final quote|exact price|firm price|out the door|total price)\b/.test(q);
+    const mentionsPhotosOrDamage = /\b(photo|picture|damage|damaged|wreck|collision|rusted out|repair this|estimate this)\b/.test(q) && hasSpecificTruck;
+    return asksExactInventory || asksExactFitment || asksFinalQuote || mentionsPhotosOrDamage;
+  };
+
+  const classifyMatch = (question) => {
     const entries = state.knowledge?.entries || [];
     let best = null;
     let bestScore = 0;
@@ -97,10 +108,51 @@
         bestScore = score;
       }
     });
-    return bestScore >= 3 ? best : null;
+    if (!best || bestScore < 3) return { entry: null, score: bestScore, level: 'none', roadieNeeded: true };
+    const level = bestScore >= 7 ? 'high' : 'medium';
+    return { entry: best, score: bestScore, level, roadieNeeded: shouldRoadieReview(question, { entry: best, score: bestScore, level }) };
   };
 
+  const conversationalFaqAnswer = (match) => {
+    if (!match?.entry?.answer) return '';
+    if (match.level === 'medium') {
+      return `${match.entry.answer}\n\nIf you want, send your truck details/photos and Better Beds can get more specific.`;
+    }
+    return match.entry.answer;
+  };
 
+  const findAnswer = (question) => {
+    const match = classifyMatch(question);
+    return match.entry ? match.entry : null;
+  };
+
+  const shouldShowLeadPrompt = (question, answer = '') => {
+    const text = normalize(`${question} ${answer}`);
+    return /\b(quote|estimate|price|cost|how much|repair|replace|replacement|in stock|available|inventory|damage|damaged|collision|rust|rusted|paint|bedliner|install|photos|pictures)\b/.test(text);
+  };
+
+  const logLowConfidenceQuestion = (question, match) => {
+    if (match?.level === 'high' && !match.roadieNeeded) return;
+    try {
+      fetch(CONFIG.unansweredEndpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          question,
+          source: 'roadie-low-confidence-log',
+          faqMatchId: match?.entry?.id || null,
+          faqScore: match?.score || 0,
+          faqLevel: match?.level || 'none',
+          roadieNeeded: Boolean(match?.roadieNeeded),
+          page: window.location.href,
+          userAgent: navigator.userAgent,
+          submittedAt: new Date().toISOString()
+        })
+      }).catch(() => {});
+    } catch (error) {
+      // Best-effort improvement log only.
+    }
+  };
 
   const rememberTurn = (role, content) => {
     state.conversationHistory.push({ role, content: String(content || '').slice(0, 2000), timestamp: new Date().toISOString() });
@@ -234,15 +286,33 @@
       questionInput.value = '';
       hideEscalation(root);
 
-      const match = findAnswer(question);
-      const fallbackMatch = match ? {
+      const faqMatch = classifyMatch(question);
+      const faqAnswer = faqMatch.entry ? conversationalFaqAnswer(faqMatch) : '';
+      const fallbackMatch = faqMatch.entry ? {
         matched: true,
         source: 'faq',
-        questionId: match.id || null,
-        confidence: 1,
-        approvedAnswer: match.answer
-      } : { matched: false, source: 'none', questionId: null, confidence: 0, approvedAnswer: null };
+        questionId: faqMatch.entry.id || null,
+        confidence: faqMatch.score || 0,
+        approvedAnswer: faqMatch.entry.answer,
+        level: faqMatch.level
+      } : { matched: false, source: 'none', questionId: null, confidence: faqMatch.score || 0, approvedAnswer: null };
 
+      if (faqMatch.entry && !faqMatch.roadieNeeded && faqMatch.level === 'high') {
+        addMessage(messages, faqAnswer);
+        rememberTurn('assistant', faqAnswer);
+        if (shouldShowLeadPrompt(question, faqAnswer)) showEscalation(root, question);
+        return;
+      }
+
+      if (faqMatch.entry && !faqMatch.roadieNeeded && faqMatch.level === 'medium') {
+        addMessage(messages, faqAnswer);
+        rememberTurn('assistant', faqAnswer);
+        logLowConfidenceQuestion(question, faqMatch);
+        if (shouldShowLeadPrompt(question, faqAnswer)) showEscalation(root, question);
+        return;
+      }
+
+      logLowConfidenceQuestion(question, faqMatch);
       const thinking = addMessage(messages, 'Roadie is thinking…');
       thinking.classList.add('thinking');
       thinking.insertAdjacentHTML('afterbegin', '<span class="bb-faq-spinner" aria-hidden="true"></span>');
@@ -252,15 +322,16 @@
       if (roadie.ok) {
         addMessage(messages, roadie.reply);
         rememberTurn('assistant', roadie.reply);
-        if (roadie.data?.escalate) showEscalation(root, question);
+        if (roadie.data?.escalate || shouldShowLeadPrompt(question, roadie.reply)) showEscalation(root, question);
         return;
       }
 
-      if (match) {
-        addMessage(messages, `${match.answer}
+      if (faqMatch.entry) {
+        addMessage(messages, `${faqAnswer}
 
 Roadie is having trouble connecting right now, so I used a saved Better Beds answer.`);
-        rememberTurn('assistant', match.answer);
+        rememberTurn('assistant', faqAnswer);
+        if (shouldShowLeadPrompt(question, faqAnswer)) showEscalation(root, question);
       } else {
         const fallback = "I’m not fully sure on that one, and I don’t want to guess. Send it to Better Beds and someone can follow up with the right answer.";
         addMessage(messages, `${fallback}
