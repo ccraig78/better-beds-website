@@ -11,7 +11,7 @@
 
   const styles = `
     .bb-faq-widget * { box-sizing: border-box; }
-    .bb-faq-widget { position: fixed; right: clamp(14px, 2.2vw, 28px); bottom: 96px; z-index: 9999; font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #07182e; }
+    .bb-faq-widget { position: fixed; right: clamp(14px, 2.2vw, 28px); bottom: 112px; z-index: 9999; font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #07182e; }
     .bb-faq-toggle { border: 0; border-radius: 999px; background: linear-gradient(135deg, #0b4f9c, #0d7dd8); color: white; box-shadow: 0 14px 35px rgba(0, 30, 80, .35); padding: 13px 18px; font-weight: 900; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; letter-spacing: .01em; }
     .bb-faq-toggle:hover, .bb-faq-toggle:focus { transform: translateY(-1px); outline: 3px solid rgba(13, 125, 216, .25); }
     .bb-faq-toggle.bb-faq-intro-hidden { visibility: hidden; }
@@ -54,7 +54,7 @@
     .bb-faq-footer-cta a { color: #0b4f9c; font-weight: 900; text-decoration: underline; text-underline-offset: .16em; }
     .bb-faq-cta-card { justify-self: start; max-width: 92%; background: #eef7ff; border: 1px solid rgba(11,79,156,.16); border-radius: 16px; padding: 12px; display: grid; gap: 9px; }
     .bb-faq-cta-card strong { color: #09284a; }
-    @media (max-width: 760px) { .bb-faq-widget { left: 8px; right: 8px; bottom: calc(72px + env(safe-area-inset-bottom)); transform: none; display: block; width: auto; } .bb-faq-widget.is-open { bottom: calc(8px + env(safe-area-inset-bottom)); } .bb-faq-toggle { margin-left: auto; padding: 12px 16px; justify-content: center; width: max-content; max-width: 100%; } .bb-faq-panel { width: calc(100vw - 16px); height: min(760px, calc(100dvh - 18px)); min-height: 0; max-height: none; border-radius: 18px; } .bb-faq-message { max-width: 94%; } .bb-faq-header { padding: 15px; } .bb-faq-messages { padding: 14px; } }
+    @media (max-width: 760px) { .bb-faq-widget { left: 8px; right: 8px; bottom: calc(112px + env(safe-area-inset-bottom)); transform: none; display: block; width: auto; } .bb-faq-widget.is-open { bottom: calc(8px + env(safe-area-inset-bottom)); } .bb-faq-toggle { margin-left: auto; padding: 12px 16px; justify-content: center; width: max-content; max-width: 100%; } .bb-faq-panel { width: calc(100vw - 16px); height: min(760px, calc(100dvh - 18px)); min-height: 0; max-height: none; border-radius: 18px; } .bb-faq-message { max-width: 94%; } .bb-faq-header { padding: 15px; } .bb-faq-messages { padding: 14px; } }
   `;
 
   const state = {
