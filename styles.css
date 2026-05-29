@@ -3854,3 +3854,18 @@ button[disabled] {
   opacity: .65;
   cursor: wait;
 }
+
+.agent-human-note {
+  display: inline-block;
+  margin: 1rem auto 0;
+  padding: .85rem 1rem;
+  border: 1px solid rgba(255, 255, 255, .24);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .1);
+  color: #fff;
+  font-weight: 700;
+}
+.agent-price-card {
+  background: #fff8e8;
+  border-color: rgba(209, 151, 39, .35);
+}
