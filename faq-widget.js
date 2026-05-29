@@ -1,16 +1,17 @@
 (() => {
   const CONFIG = {
-    knowledgeUrl: 'data/faq-knowledge.json?v=20260515-roadie-fallback',
+    knowledgeUrl: 'data/faq-knowledge.json?v=20260529-chat-ux-v2',
     chatEndpoint: 'https://chat.betterbeds.pro/better-beds-chat',
     unansweredEndpoint: 'api/faq-unanswered.php',
     guardrailVersion: 'website-chatbot-live-guardrails-2026-05-14',
     smsHref: 'sms:2145248401?body=Hi%20Better%20Beds%2C%20I%27d%20like%20a%20quote.%20I%27ll%20send%20truck%20photos%20and%20details.',
-    phoneHref: 'tel:2145248401'
+    phoneHref: 'tel:2145248401',
+    quoteHref: 'quote.html'
   };
 
   const styles = `
     .bb-faq-widget * { box-sizing: border-box; }
-    .bb-faq-widget { position: fixed; right: clamp(14px, 2.2vw, 28px); bottom: 96px; z-index: 9999; font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #07182e; }
+    .bb-faq-widget { position: fixed; right: clamp(14px, 2.2vw, 28px); bottom: clamp(18px, 3vh, 36px); z-index: 9999; font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #07182e; }
     .bb-faq-toggle { border: 0; border-radius: 999px; background: linear-gradient(135deg, #0b4f9c, #0d7dd8); color: white; box-shadow: 0 14px 35px rgba(0, 30, 80, .35); padding: 13px 18px; font-weight: 900; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; letter-spacing: .01em; }
     .bb-faq-toggle:hover, .bb-faq-toggle:focus { transform: translateY(-1px); outline: 3px solid rgba(13, 125, 216, .25); }
     .bb-faq-toggle.bb-faq-intro-hidden { visibility: hidden; }
@@ -18,36 +19,41 @@
     .bb-faq-intro-ghost { position: fixed; z-index: 10000; border: 0; border-radius: 999px; background: linear-gradient(135deg, #0b4f9c, #0d7dd8); color: white; box-shadow: 0 24px 70px rgba(0, 30, 80, .36); font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-weight: 950; letter-spacing: .01em; display: inline-flex; align-items: center; justify-content: center; gap: 10px; pointer-events: none; overflow: hidden; white-space: nowrap; }
     .bb-faq-intro-ghost small { display: block; font-size: .72em; font-weight: 800; opacity: .82; margin-left: 4px; }
     @keyframes bb-faq-button-pulse { 0% { transform: scale(1); box-shadow: 0 14px 35px rgba(0, 30, 80, .35); } 45% { transform: scale(1.08); box-shadow: 0 18px 48px rgba(13, 125, 216, .48); } 100% { transform: scale(1); box-shadow: 0 14px 35px rgba(0, 30, 80, .35); } }
-    .bb-faq-panel { width: min(494px, calc(100vw - 28px)); max-height: min(680px, calc(100vh - 100px)); display: none; flex-direction: column; overflow: hidden; border-radius: 22px; background: #fff; box-shadow: 0 22px 70px rgba(2, 12, 30, .38); border: 1px solid rgba(9, 35, 70, .14); }
+    .bb-faq-panel { width: min(620px, calc(100vw - 32px)); height: min(720px, calc(100vh - 120px)); min-height: 560px; display: none; flex-direction: column; overflow: hidden; border-radius: 22px; background: #fff; box-shadow: 0 22px 70px rgba(2, 12, 30, .38); border: 1px solid rgba(9, 35, 70, .14); }
     .bb-faq-widget.is-open .bb-faq-panel { display: flex; }
     .bb-faq-widget.is-open .bb-faq-toggle { display: none; }
-    .bb-faq-header { background: linear-gradient(135deg, #061a35, #0b4f9c); color: white; padding: 16px; display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; }
-    .bb-faq-header strong { display: block; font-size: 1.05rem; }
-    .bb-faq-header span { display: block; color: rgba(255,255,255,.82); font-size: .86rem; margin-top: 2px; }
-    .bb-faq-close { background: rgba(255,255,255,.14); color: white; border: 1px solid rgba(255,255,255,.22); width: 32px; height: 32px; border-radius: 999px; cursor: pointer; font-size: 20px; line-height: 1; }
-    .bb-faq-messages { padding: 14px; overflow-y: auto; background: #f4f7fb; display: grid; gap: 10px; }
-    .bb-faq-message { border-radius: 16px; padding: 10px 12px; line-height: 1.35; font-size: .94rem; max-width: 92%; }
+    .bb-faq-header { background: linear-gradient(135deg, #061a35, #0b4f9c); color: white; padding: 18px 20px; display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; }
+    .bb-faq-header strong { display: block; font-size: 1.16rem; }
+    .bb-faq-header span { display: block; color: rgba(255,255,255,.86); font-size: .92rem; margin-top: 3px; }
+    .bb-faq-close { background: rgba(255,255,255,.14); color: white; border: 1px solid rgba(255,255,255,.22); width: 36px; height: 36px; border-radius: 999px; cursor: pointer; font-size: 22px; line-height: 1; flex: 0 0 auto; }
+    .bb-faq-messages { padding: 18px; overflow-y: auto; background: #f4f7fb; display: grid; gap: 12px; align-content: start; flex: 1 1 auto; min-height: 260px; }
+    .bb-faq-message { border-radius: 16px; padding: 12px 14px; line-height: 1.42; font-size: .98rem; max-width: 88%; }
     .bb-faq-message.bot { background: white; border: 1px solid rgba(9, 35, 70, .10); justify-self: start; }
     .bb-faq-message.user { background: #0b4f9c; color: white; justify-self: end; }
     .bb-faq-message.thinking { display: inline-flex; align-items: center; gap: 8px; }
     .bb-faq-spinner { width: 14px; height: 14px; border: 2px solid rgba(11,79,156,.22); border-top-color: #0b4f9c; border-radius: 999px; animation: bb-faq-spin .8s linear infinite; flex: 0 0 auto; }
     @keyframes bb-faq-spin { to { transform: rotate(360deg); } }
-    .bb-faq-quick { display: flex; flex-wrap: wrap; gap: 7px; padding: 0 14px 12px; background: #f4f7fb; }
-    .bb-faq-chip { border: 1px solid rgba(11,79,156,.20); background: white; color: #0b376b; border-radius: 999px; padding: 7px 10px; cursor: pointer; font-weight: 800; font-size: .78rem; }
+    .bb-faq-quick { display: flex; flex-wrap: wrap; gap: 8px; padding: 0 18px 14px; background: #f4f7fb; }
+    .bb-faq-chip { border: 1px solid rgba(11,79,156,.20); background: white; color: #0b376b; border-radius: 999px; padding: 9px 12px; cursor: pointer; font-weight: 850; font-size: .84rem; }
     .bb-faq-chip:hover { background: #eaf4ff; }
-    .bb-faq-form { border-top: 1px solid rgba(9, 35, 70, .12); padding: 12px; display: grid; gap: 8px; background: white; }
-    .bb-faq-row { display: flex; gap: 8px; }
-    .bb-faq-input { flex: 1; min-width: 0; border: 1px solid rgba(9, 35, 70, .20); border-radius: 14px; padding: 11px 12px; font: inherit; }
-    .bb-faq-send { border: 0; border-radius: 14px; background: #0b4f9c; color: white; font-weight: 900; padding: 0 14px; cursor: pointer; }
-    .bb-faq-escalation { display: none; gap: 8px; grid-template-columns: 1fr; }
+    .bb-faq-form { border-top: 1px solid rgba(9, 35, 70, .12); padding: 14px; display: grid; gap: 10px; background: white; flex: 0 0 auto; }
+    .bb-faq-row { display: flex; gap: 9px; }
+    .bb-faq-input { flex: 1; min-width: 0; border: 1px solid rgba(9, 35, 70, .20); border-radius: 14px; padding: 12px 13px; font: inherit; }
+    .bb-faq-send { border: 0; border-radius: 14px; background: #0b4f9c; color: white; font-weight: 900; padding: 0 16px; cursor: pointer; }
+    .bb-faq-escalation { display: none; gap: 8px; grid-template-columns: 1fr; border-top: 1px dashed rgba(9,35,70,.18); padding-top: 10px; }
     .bb-faq-escalation.is-visible { display: grid; }
     .bb-faq-escalation input, .bb-faq-escalation textarea { width: 100%; border: 1px solid rgba(9, 35, 70, .20); border-radius: 12px; padding: 9px 10px; font: inherit; }
-    .bb-faq-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+    .bb-faq-actions { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
     .bb-faq-actions a, .bb-faq-actions button { text-decoration: none; border: 0; border-radius: 999px; padding: 9px 12px; font-weight: 900; cursor: pointer; font-size: .84rem; }
     .bb-faq-actions a { background: #eaf4ff; color: #073b73; }
+    .bb-faq-actions .bb-faq-primary-link { background: #0b4f9c; color: white; }
     .bb-faq-submit-question { background: #0b4f9c; color: white; }
-    .bb-faq-small { color: #526070; font-size: .78rem; line-height: 1.3; }
-    @media (max-width: 560px) { .bb-faq-widget { left: 50%; right: auto; bottom: calc(72px + env(safe-area-inset-bottom)); transform: translateX(-50%); display: flex; justify-content: center; width: min(360px, calc(100vw - 24px)); } .bb-faq-toggle { padding: 12px 16px; justify-content: center; width: max-content; max-width: 100%; } .bb-faq-panel { width: min(380px, calc(100vw - 24px)); max-height: calc(100vh - 116px); } }
+    .bb-faq-small { color: #526070; font-size: .8rem; line-height: 1.35; }
+    .bb-faq-footer-cta { color: #526070; font-size: .8rem; line-height: 1.35; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+    .bb-faq-footer-cta a { color: #0b4f9c; font-weight: 900; text-decoration: underline; text-underline-offset: .16em; }
+    .bb-faq-cta-card { justify-self: start; max-width: 92%; background: #eef7ff; border: 1px solid rgba(11,79,156,.16); border-radius: 16px; padding: 12px; display: grid; gap: 9px; }
+    .bb-faq-cta-card strong { color: #09284a; }
+    @media (max-width: 760px) { .bb-faq-widget { left: 8px; right: 8px; bottom: calc(8px + env(safe-area-inset-bottom)); transform: none; display: block; width: auto; } .bb-faq-toggle { margin-left: auto; padding: 12px 16px; justify-content: center; width: max-content; max-width: 100%; } .bb-faq-panel { width: calc(100vw - 16px); height: min(760px, calc(100dvh - 18px)); min-height: 0; max-height: none; border-radius: 18px; } .bb-faq-message { max-width: 94%; } .bb-faq-header { padding: 15px; } .bb-faq-messages { padding: 14px; } }
   `;
 
   const state = {
@@ -201,6 +207,24 @@
   const hideEscalation = (root) => {
     state.escalationVisible = false;
     root.querySelector('.bb-faq-escalation')?.classList.remove('is-visible');
+    root.querySelectorAll('.bb-faq-cta-card').forEach((card) => card.remove());
+  };
+
+  const showQuoteCta = (messages) => {
+    if (messages.querySelector('.bb-faq-cta-card')) return;
+    const card = document.createElement('div');
+    card.className = 'bb-faq-cta-card';
+    card.innerHTML = `
+      <strong>Need a real quote?</strong>
+      <div class="bb-faq-small">Roadie can answer quick questions here. For an accurate quote, photos and truck details help most.</div>
+      <div class="bb-faq-actions">
+        <a class="bb-faq-primary-link" href="${CONFIG.quoteHref}">Open photo quote form</a>
+        <a href="${CONFIG.smsHref}">Text photos</a>
+        <a href="${CONFIG.phoneHref}">Call</a>
+      </div>
+    `;
+    messages.appendChild(card);
+    messages.scrollTop = messages.scrollHeight;
   };
 
   const buildWidget = () => {
@@ -243,7 +267,7 @@
               <a href="${CONFIG.phoneHref}">Call now</a>
             </div>
           </div>
-          <div class="bb-faq-small">For quotes, photos help a lot: truck year/make/model, bed length, SRW/dually, color or paint code, and what you need done.</div>
+          <div class="bb-faq-footer-cta">Ask Roadie here first. Ready for an estimate? <a href="${CONFIG.quoteHref}">Open the photo quote form</a>.</div>
         </form>
       </div>
     `;
@@ -300,7 +324,7 @@
       if (faqMatch.entry && !faqMatch.roadieNeeded && faqMatch.level === 'high') {
         addMessage(messages, faqAnswer);
         rememberTurn('assistant', faqAnswer);
-        if (shouldShowLeadPrompt(question, faqAnswer)) showEscalation(root, question);
+        if (shouldShowLeadPrompt(question, faqAnswer)) showQuoteCta(messages);
         return;
       }
 
@@ -308,7 +332,7 @@
         addMessage(messages, faqAnswer);
         rememberTurn('assistant', faqAnswer);
         logLowConfidenceQuestion(question, faqMatch);
-        if (shouldShowLeadPrompt(question, faqAnswer)) showEscalation(root, question);
+        if (shouldShowLeadPrompt(question, faqAnswer)) showQuoteCta(messages);
         return;
       }
 
@@ -322,7 +346,8 @@
       if (roadie.ok) {
         addMessage(messages, roadie.reply);
         rememberTurn('assistant', roadie.reply);
-        if (roadie.data?.escalate || shouldShowLeadPrompt(question, roadie.reply)) showEscalation(root, question);
+        if (roadie.data?.escalate) showEscalation(root, question);
+        else if (shouldShowLeadPrompt(question, roadie.reply)) showQuoteCta(messages);
         return;
       }
 
@@ -331,7 +356,7 @@
 
 Roadie is having trouble connecting right now, so I used a saved Better Beds answer.`);
         rememberTurn('assistant', faqAnswer);
-        if (shouldShowLeadPrompt(question, faqAnswer)) showEscalation(root, question);
+        if (shouldShowLeadPrompt(question, faqAnswer)) showQuoteCta(messages);
       } else {
         const fallback = "I’m not fully sure on that one, and I don’t want to guess. Send it to Better Beds and someone can follow up with the right answer.";
         addMessage(messages, `${fallback}
