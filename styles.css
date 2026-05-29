@@ -3869,3 +3869,14 @@ button[disabled] {
   background: #fff8e8;
   border-color: rgba(209, 151, 39, .35);
 }
+
+.map-link {
+  color: inherit;
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: .18em;
+}
+.map-link:hover,
+.map-link:focus {
+  text-decoration-thickness: .16em;
+}
