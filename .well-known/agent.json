@@ -151,5 +151,40 @@
     "Chevy Silverado bed",
     "GMC Sierra bed",
     "Dodge Ram truck bed"
-  ]
+  ],
+  "agentic_workflow": {
+    "current_live_actions": [
+      "text photos and details",
+      "email photos and details",
+      "submit website quote/free estimate form",
+      "call for urgent fitment/travel/scheduling questions"
+    ],
+    "prepared_backend_actions": [
+      {
+        "id": "request_free_estimate",
+        "method": "POST",
+        "path": "/estimate-requests",
+        "content_types": [
+          "application/json",
+          "multipart/form-data"
+        ],
+        "status": "built locally; public HTTPS route not enabled yet",
+        "returns": [
+          "leadId",
+          "status",
+          "receivedAt",
+          "recommendedNextSteps",
+          "businessFollowUp"
+        ]
+      }
+    ],
+    "ideal_agent_flow": [
+      "collect customer/truck/contact details",
+      "collect damage or need summary",
+      "collect photos if available",
+      "ask whether customer wants photo review or scheduled in-person estimate",
+      "submit estimate request",
+      "use returned next steps to gather missing details"
+    ]
+  }
 }
