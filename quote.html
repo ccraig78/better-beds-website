@@ -51,6 +51,7 @@
         <a href="gallery.html">Gallery</a>
         <a href="faq.html">FAQ</a>
         <a href="quote.html">Get a Quote</a>
+        <a href="agent.html">AI Agents</a>
       </nav>
 
       <a class="call-box" href="tel:2145248401" aria-label="Call Better Beds">
@@ -209,9 +210,9 @@
         <div class="section-heading">
           <p class="mini-title">Start Here</p>
           <h2>Request a Better Beds quote.</h2>
-          <p>This form goes directly to Better Beds. Need to send photos? Use the text button above — the form does not upload images.</p>
+          <p>This form goes directly to Better Beds. You can upload photos below, or use the text button above if sending pictures from your phone is easier.</p>
         </div>
-        <form class="quote-form" action="https://formsubmit.co/clint@betterbeds.pro" method="POST">
+        <form class="quote-form" action="https://formsubmit.co/clint@betterbeds.pro" method="POST" enctype="multipart/form-data">
           <input type="hidden" name="_subject" value="New Better Beds quote request" />
           <input type="hidden" name="_cc" value="info@betterbeds.pro" />
           <input type="hidden" name="_template" value="table" />
@@ -272,6 +273,8 @@
               <legend>Quote type <span class="optional-label">optional</span></legend>
               <label><input type="checkbox" name="quote_type[]" value="Repair quote" /> Repair quote</label>
               <label><input type="checkbox" name="quote_type[]" value="Replacement bed quote" /> Replacement bed quote</label>
+              <label><input type="checkbox" name="quote_type[]" value="Truck bed collision repair" /> Truck bed collision repair</label>
+              <label><input type="checkbox" name="quote_type[]" value="Paint / bedliner / installation" /> Paint / bedliner / installation</label>
               <label><input type="checkbox" name="quote_type[]" value="Not sure / please advise" /> Not sure / please advise</label>
             </fieldset>
             <fieldset class="form-choice-group">
@@ -291,10 +294,19 @@
               Best time to call <span class="optional-label">optional</span>
               <input type="text" name="best_time_to_call" placeholder="Example: after 5pm, 12–1, mornings only" />
             </label>
+            <label class="call-window-field">
+              Preferred estimate / appointment times <span class="optional-label">optional</span>
+              <input type="text" name="preferred_estimate_times" placeholder="Example: Tuesday morning, Friday after 2, anytime next week" />
+            </label>
           </div>
+          <label class="photo-upload-field">
+            Upload truck or damage photos <span class="optional-label">optional</span>
+            <input type="file" name="photos" accept="image/*" multiple />
+            <span class="field-help">Photos help us quote repair, replacement, paint, and collision damage. If upload is inconvenient, text photos to 214-524-8401 instead.</span>
+          </label>
           <label>
             What do you need help with? *
-            <textarea name="message" rows="6" placeholder="Tell us if you need a repair or replacement, self-pay or insurance, paint match, installation, pickup only, or help finding the right bed." required></textarea>
+            <textarea name="message" rows="6" placeholder="Tell us if you need a repair or replacement, truck bed collision repair, self-pay or insurance, paint match, installation, pickup only, or help finding the right bed." required></textarea>
           </label>
           <button class="btn primary" type="submit">Send Quote Request <span>›</span></button>
           <p class="form-note">Please do not include payment information in this form. We’ll follow up by phone or email.</p>

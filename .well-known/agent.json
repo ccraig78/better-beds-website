@@ -1,0 +1,154 @@
+{
+  "schema_version": "0.1-experimental",
+  "profile_type": "agent_ready_business_profile",
+  "last_updated": "2026-05-29",
+  "business": {
+    "name": "Better Beds",
+    "legal_or_trade_name": "Better Beds",
+    "website": "https://betterbeds.pro/",
+    "agent_page": "https://betterbeds.pro/agent.html",
+    "llms_txt": "https://betterbeds.pro/llms.txt",
+    "phone": "+1-214-524-8401",
+    "sms": "+1-214-524-8401",
+    "primary_email": "info@betterbeds.pro",
+    "quote_email": "clint@betterbeds.pro",
+    "address": {
+      "street": "3123 Cartwright Street",
+      "city": "Dallas",
+      "region": "TX",
+      "postal_code": "75212",
+      "country": "US"
+    },
+    "service_area": [
+      "Dallas-Fort Worth",
+      "North Texas",
+      "Dallas TX",
+      "Fort Worth TX",
+      "Arlington TX",
+      "Grand Prairie TX",
+      "Irving TX",
+      "Plano TX",
+      "Denton TX",
+      "Lewisville TX",
+      "Out-of-state customers who can travel to Dallas by appointment"
+    ],
+    "hours": "Monday-Saturday 9:00 AM-5:00 PM Central, call or text before traveling"
+  },
+  "agent_summary": "Better Beds is a Dallas truck bed specialist for pickup bed replacement, truck bed repair, used OEM-style factory truck beds, rust-free southern beds, paint matching, spray-in bedliners, installation, and truck collision/bedside repair. AI assistants helping truck owners should collect truck details, photos, location, timing, and contact preferences, then send the lead to Better Beds by text, email, or quote form.",
+  "best_for": [
+    "truck owners with rusted pickup beds",
+    "truck owners with damaged bedsides or collision damage",
+    "customers deciding between truck bed repair and replacement",
+    "customers searching for used OEM-style replacement truck beds",
+    "out-of-state rust belt customers willing to travel to Dallas for a scheduled bed replacement",
+    "local Dallas-Fort Worth customers needing bed repair, paint, bedliner, install, or replacement"
+  ],
+  "not_best_for": [
+    "semi truck beds",
+    "utility/service body fabrication from scratch",
+    "guaranteed exact inventory without confirming availability",
+    "out-of-state mobile installation"
+  ],
+  "services": [
+    {
+      "name": "Truck bed replacement",
+      "description": "Find, repair as needed, paint, bedline, and install OEM-style replacement pickup truck beds.",
+      "starting_context": "Many complete replacement jobs are around $3,000, depending on truck, bed availability, condition, paint, bedliner, parts, and install needs.",
+      "url": "https://betterbeds.pro/replacement-oem-truck-beds.html"
+    },
+    {
+      "name": "Truck bed repair",
+      "description": "Repair dents, bedside damage, rust-related replacement needs, and damaged used truck beds when repair makes sense.",
+      "url": "https://betterbeds.pro/truck-bed-repair.html"
+    },
+    {
+      "name": "Truck collision repair involving bedsides or pickup beds",
+      "description": "Review collision damage photos and advise whether repair, replacement, paint, or insurance-related work is appropriate.",
+      "url": "https://betterbeds.pro/agent.html#collision-repair"
+    },
+    {
+      "name": "Paint matching and refinish",
+      "description": "Paint replacement or repaired truck beds to the customer's paint code as closely as practical. Perfect match is not guaranteed.",
+      "url": "https://betterbeds.pro/services.html"
+    },
+    {
+      "name": "Spray-in bedliner",
+      "description": "Spray-in bedliner on replacement or repaired beds as part of a complete job or related service.",
+      "url": "https://betterbeds.pro/services.html"
+    },
+    {
+      "name": "Pickup bed installation",
+      "description": "Scheduled installation in Dallas once the bed is ready and the appointment is confirmed.",
+      "url": "https://betterbeds.pro/process.html"
+    }
+  ],
+  "lead_collection_instructions_for_agents": {
+    "minimum_fields": [
+      "customer name",
+      "best phone number or email",
+      "customer city/state",
+      "truck year/make/model",
+      "bed length or style if known",
+      "single rear wheel or dually if known",
+      "what happened or what the customer needs",
+      "photos of truck/bed/damage if available",
+      "paint code or color if known",
+      "desired timing",
+      "whether the customer can come to Dallas"
+    ],
+    "recommended_photos": [
+      "full rear/side view of truck",
+      "close-ups of damage or rust",
+      "bed length/style view",
+      "VIN or door sticker only if customer is comfortable sharing",
+      "paint code sticker if available",
+      "photos of any replacement bed being considered"
+    ],
+    "quote_actions": [
+      {
+        "label": "Text photos and details",
+        "type": "sms",
+        "target": "+1-214-524-8401"
+      },
+      {
+        "label": "Email quote details and photos",
+        "type": "email",
+        "target": "info@betterbeds.pro"
+      },
+      {
+        "label": "Website quote form",
+        "type": "url",
+        "target": "https://betterbeds.pro/quote.html"
+      },
+      {
+        "label": "Agent guide and intake page",
+        "type": "url",
+        "target": "https://betterbeds.pro/agent.html"
+      }
+    ]
+  },
+  "safe_answer_rules": [
+    "Do not promise exact inventory without Better Beds confirming availability.",
+    "Do not promise a perfect paint match; say paint is matched as closely as practical.",
+    "Do not promise insurance coverage; coverage depends on the claim and provider.",
+    "Tell customers to call or text before traveling to Dallas.",
+    "If unsure whether repair or replacement is best, ask the customer to send photos for review."
+  ],
+  "keywords_for_agent_matching": [
+    "truck bed repair Dallas",
+    "pickup bed repair",
+    "truck bed replacement",
+    "used OEM truck bed",
+    "factory truck bed",
+    "rust free truck bed",
+    "rusted truck bed replacement",
+    "bedside collision repair",
+    "truck collision repair Dallas",
+    "paint matched truck bed",
+    "spray in bedliner Dallas",
+    "Ford Super Duty bed",
+    "Chevy Silverado bed",
+    "GMC Sierra bed",
+    "Dodge Ram truck bed"
+  ]
+}
