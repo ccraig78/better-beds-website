@@ -3774,6 +3774,7 @@ body.modal-open {
   justify-content: center;
   gap: 1rem;
 }
+.agent-hero-actions { margin-top: 1.35rem; }
 .agent-card-grid,
 .agent-checklist {
   display: grid;
@@ -3866,8 +3867,8 @@ button[disabled] {
   font-weight: 700;
 }
 .agent-price-card {
-  background: #fff8e8;
-  border-color: rgba(209, 151, 39, .35);
+  background: #fff;
+  border-color: rgba(6, 26, 53, 0.12);
 }
 
 .map-link {
