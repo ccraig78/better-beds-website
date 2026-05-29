@@ -497,3 +497,39 @@ if (!document.querySelector('.floating-apply-cta')) {
   floatingApplyCta.innerHTML = '<span>Apply with AFF<small>Financing</small></span>';
   document.body.appendChild(floatingApplyCta);
 }
+
+// Better Beds secure estimate/photo upload form.
+(function () {
+  const form = document.querySelector('form[data-agent-upload="true"]');
+  if (!form) return;
+  const status = form.querySelector('[data-form-status]');
+  const submit = form.querySelector('button[type="submit"]');
+  const setStatus = (message, kind) => {
+    if (!status) return;
+    status.textContent = message;
+    status.dataset.kind = kind || '';
+  };
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const honey = form.querySelector('input[name="_honey"]');
+    if (honey && honey.value) return;
+    const data = new FormData(form);
+    data.delete('_honey');
+    setStatus('Uploading your free estimate request…', 'pending');
+    if (submit) submit.disabled = true;
+    try {
+      const response = await fetch(form.action, { method: 'POST', body: data, mode: 'cors' });
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok || !result.ok) {
+        const error = result.error || result.message || 'upload_failed';
+        throw new Error(error);
+      }
+      setStatus(`Request received. Better Beds will review it soon. Request ID: ${result.id || result.leadId || 'received'}.`, 'success');
+      form.reset();
+    } catch (error) {
+      setStatus('Upload did not go through. Please text photos/details to 214-524-8401 or try again in a moment.', 'error');
+    } finally {
+      if (submit) submit.disabled = false;
+    }
+  });
+})();

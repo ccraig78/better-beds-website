@@ -210,14 +210,9 @@
         <div class="section-heading">
           <p class="mini-title">Start Here</p>
           <h2>Request a free Better Beds estimate.</h2>
-          <p>This form goes directly to Better Beds. You can upload photos, request a scheduled in-person estimate, or use the text button above if sending pictures from your phone is easier.</p>
+          <p>This secure form uploads directly to Better Beds. You can attach photos, request a scheduled in-person estimate, or use the text button above if sending pictures from your phone is easier.</p>
         </div>
-        <form class="quote-form" action="https://formsubmit.co/clint@betterbeds.pro" method="POST" enctype="multipart/form-data">
-          <input type="hidden" name="_subject" value="New Better Beds free estimate request" />
-          <input type="hidden" name="_cc" value="info@betterbeds.pro" />
-          <input type="hidden" name="_template" value="table" />
-          <input type="hidden" name="_captcha" value="false" />
-          <input type="hidden" name="_next" value="https://betterbeds.pro/thanks.html" />
+        <form class="quote-form" action="https://chat.betterbeds.pro/estimate-requests" method="POST" enctype="multipart/form-data" data-agent-upload="true">
           <input type="text" name="_honey" tabindex="-1" autocomplete="off" class="form-honey" aria-hidden="true" style="display:none" />
 
           <div class="form-grid">
@@ -309,6 +304,7 @@
             <textarea name="message" rows="6" placeholder="Tell us if you need a repair or replacement, truck bed collision repair, self-pay or insurance, paint match, installation, pickup only, or help finding the right bed." required></textarea>
           </label>
           <button class="btn primary" type="submit">Send Free Estimate Request <span>›</span></button>
+          <p class="form-status" data-form-status aria-live="polite"></p>
           <p class="form-note">Please do not include payment information in this form. We’ll follow up by phone or email.</p>
         </form>
       </section>

@@ -208,7 +208,7 @@
         <div class="section-heading centered">
           <p class="mini-title">Actions Agents Can Take</p>
           <h2>Free estimate, photos, or scheduled in-person estimate request.</h2>
-          <p>Current best path is text or email with photos, or a scheduled in-person estimate when the customer can bring the truck to Dallas. A richer upload/scheduling flow is planned so agents can submit photos and appointment requests cleanly.</p>
+          <p>Current best path is the secure quote/photo upload form, text, or email with photos. Agents can also help request a scheduled in-person estimate when the customer can bring the truck to Dallas.</p>
         </div>
         <div class="agent-action-grid">
           <a class="agent-action-card" href="sms:2145248401?body=Hi%20Better%20Beds%2C%20I%27m%20helping%20request%20a%20truck%20bed%20quote.%20Truck%20details%3A%20%0AName%3A%20%0APhone%3A%20%0ACity%2FState%3A%20%0AYear%2FMake%2FModel%3A%20%0ABed%20length%3A%20%0ARepair%20or%20replacement%3A%20%0APhotos%20available%3A%20">
@@ -221,7 +221,7 @@
           </a>
           <a class="agent-action-card" href="quote.html">
             <strong>Use quote form</strong>
-            <span>Structured customer details, photo upload, and preferred estimate times.</span>
+            <span>Secure photo upload, structured customer details, and preferred estimate times.</span>
           </a>
           <a class="agent-action-card" href="tel:2145248401">
             <strong>Call Better Beds</strong>
@@ -234,7 +234,7 @@
         <div class="section-heading centered">
           <p class="mini-title">Agentic Workflow</p>
           <h2>Best workflow for customer agents</h2>
-          <p>For now, agents should collect the customer’s details, photos, timing, and contact preference, then submit through text, email, or the quote form. Better Beds is preparing a direct agent action endpoint for structured estimate requests and secure photo uploads.</p>
+          <p>For now, agents should collect the customer’s details, photos, timing, and contact preference, then submit through text, email, or the quote form. Better Beds has a direct VPS-hosted upload endpoint for structured estimate requests and secure photo uploads.</p>
         </div>
         <div class="agent-card-grid">
           <article class="agent-card">
@@ -247,7 +247,7 @@
           </article>
           <article class="agent-card">
             <h3>3. Send a usable lead</h3>
-            <p>Use the quote form, text, or email. The upcoming action endpoint will return a lead ID and next-step guidance for missing details.</p>
+            <p>Use the quote form, text, or email. The live upload endpoint returns a saved request ID after a usable estimate request is submitted.</p>
           </article>
         </div>
       </section>
@@ -259,6 +259,7 @@
           <p>Better Beds publishes an experimental agent-ready JSON profile and an llms.txt file so AI assistants can understand services, contact paths, safe wording, quote requirements, and the emerging agentic estimate workflow.</p>
         </div>
         <div class="agent-code-links">
+          <a href="https://chat.betterbeds.pro/agent-actions">https://chat.betterbeds.pro/agent-actions</a>
           <a href=".well-known/agent.json">https://betterbeds.pro/.well-known/agent.json</a>
           <a href="llms.txt">https://betterbeds.pro/llms.txt</a>
           <a href="sitemap.xml">https://betterbeds.pro/sitemap.xml</a>

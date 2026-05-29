@@ -107,6 +107,13 @@
     ],
     "quote_actions": [
       {
+        "label": "Direct agent estimate upload endpoint",
+        "type": "url",
+        "method": "POST",
+        "target": "https://chat.betterbeds.pro/estimate-requests",
+        "contentType": "multipart/form-data"
+      },
+      {
         "label": "Text photos and details",
         "type": "sms",
         "target": "+1-214-524-8401"
@@ -117,7 +124,7 @@
         "target": "info@betterbeds.pro"
       },
       {
-        "label": "Website free estimate form",
+        "label": "Secure website free estimate and photo upload form",
         "type": "url",
         "target": "https://betterbeds.pro/quote.html"
       },
@@ -154,27 +161,36 @@
   ],
   "agentic_workflow": {
     "current_live_actions": [
+      "submit secure quote/photo upload form",
       "text photos and details",
       "email photos and details",
-      "submit website quote/free estimate form",
       "call for urgent fitment/travel/scheduling questions"
     ],
     "prepared_backend_actions": [
       {
-        "id": "request_free_estimate",
+        "id": "estimate-request",
         "method": "POST",
-        "path": "/estimate-requests",
+        "url": "https://chat.betterbeds.pro/estimate-requests",
         "content_types": [
-          "application/json",
           "multipart/form-data"
         ],
-        "status": "built locally; public HTTPS route not enabled yet",
+        "status": "live",
+        "constraints": {
+          "image_files_only": true,
+          "max_files": 6,
+          "max_file_bytes": 5242880,
+          "max_body_bytes": 15728640,
+          "cors_origins": [
+            "https://betterbeds.pro",
+            "https://www.betterbeds.pro"
+          ]
+        },
         "returns": [
-          "leadId",
-          "status",
-          "receivedAt",
-          "recommendedNextSteps",
-          "businessFollowUp"
+          "ok",
+          "id",
+          "saved",
+          "files",
+          "message"
         ]
       }
     ],
@@ -186,5 +202,7 @@
       "submit estimate request",
       "use returned next steps to gather missing details"
     ]
-  }
+  },
+  "agent_actions_url": "https://chat.betterbeds.pro/agent-actions",
+  "upload_health_url": "https://chat.betterbeds.pro/agent-upload-healthz"
 }

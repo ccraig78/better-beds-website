@@ -3842,3 +3842,15 @@ body.modal-open {
   .agent-checklist { grid-template-columns: 1fr; }
   .agent-hero-actions .btn { width: 100%; justify-content: center; }
 }
+
+.form-status {
+  margin: 1rem 0 0;
+  font-weight: 800;
+}
+.form-status[data-kind="pending"] { color: #8a5a00; }
+.form-status[data-kind="success"] { color: #116329; }
+.form-status[data-kind="error"] { color: #a32020; }
+button[disabled] {
+  opacity: .65;
+  cursor: wait;
+}
