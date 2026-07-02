@@ -143,7 +143,7 @@ h1, h2, h3, p { margin-top: 0; }
 .hero-bg-brand-truck {
   background:
     linear-gradient(90deg, rgba(30,39,87,.96), rgba(30,39,87,.88) 46%, rgba(30,39,87,.48) 66%, rgba(30,39,87,0)),
-    var(--hero-image) right -3% center / min(52vw, 820px) auto no-repeat;
+    var(--hero-image) right -3% center / min(78vw, 1230px) auto no-repeat;
   filter: drop-shadow(0 22px 34px rgba(0,0,0,.20)) saturate(1.02) contrast(1.02);
 }
 .hero-angle { display: none; }
@@ -557,7 +557,7 @@ blockquote cite { display: block; margin-top: 18px; color: var(--navy); font-sty
   .hero-bg-brand-truck {
     background:
       linear-gradient(180deg, rgba(30,39,87,.12), rgba(30,39,87,.78) 38%, rgba(30,39,87,.88)),
-      var(--hero-image) center top 32px / min(82vw, 720px) auto no-repeat;
+      var(--hero-image) center top 32px / min(123vw, 1080px) auto no-repeat;
   }
   .hero-content { max-width: 700px; }
   .feature-strip,
@@ -607,7 +607,7 @@ blockquote cite { display: block; margin-top: 18px; color: var(--navy); font-sty
   .hero-bg-brand-truck {
     background:
       linear-gradient(180deg, rgba(30,39,87,.10), rgba(30,39,87,.78) 30%, rgba(30,39,87,.90)),
-      var(--hero-image) center top 28px / 78vw auto no-repeat;
+      var(--hero-image) center top 28px / 117vw auto no-repeat;
   }
   .hero-content {
     margin: 42px 16px;
