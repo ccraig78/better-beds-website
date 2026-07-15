@@ -14,11 +14,6 @@
     .bb-faq-widget { position: fixed; right: clamp(14px, 2.2vw, 28px); bottom: 112px; z-index: 9999; font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #07182e; }
     .bb-faq-toggle { border: 0; border-radius: 999px; background: linear-gradient(135deg, #0b4f9c, #0d7dd8); color: white; box-shadow: 0 14px 35px rgba(0, 30, 80, .35); padding: 13px 18px; font-weight: 900; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; letter-spacing: .01em; }
     .bb-faq-toggle:hover, .bb-faq-toggle:focus { transform: translateY(-1px); outline: 3px solid rgba(13, 125, 216, .25); }
-    .bb-faq-toggle.bb-faq-intro-hidden { visibility: hidden; }
-    .bb-faq-toggle.bb-faq-intro-pulse { animation: bb-faq-button-pulse 1.05s ease-out 1; }
-    .bb-faq-intro-ghost { position: fixed; z-index: 10000; border: 0; border-radius: 999px; background: linear-gradient(135deg, #0b4f9c, #0d7dd8); color: white; box-shadow: 0 24px 70px rgba(0, 30, 80, .36); font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-weight: 950; letter-spacing: .01em; display: inline-flex; align-items: center; justify-content: center; gap: 10px; pointer-events: none; overflow: hidden; white-space: nowrap; }
-    .bb-faq-intro-ghost small { display: block; font-size: .72em; font-weight: 800; opacity: .82; margin-left: 4px; }
-    @keyframes bb-faq-button-pulse { 0% { transform: scale(1); box-shadow: 0 14px 35px rgba(0, 30, 80, .35); } 45% { transform: scale(1.08); box-shadow: 0 18px 48px rgba(13, 125, 216, .48); } 100% { transform: scale(1); box-shadow: 0 14px 35px rgba(0, 30, 80, .35); } }
     .bb-faq-panel { width: min(620px, calc(100vw - 32px)); height: min(720px, calc(100vh - 120px)); min-height: 560px; display: none; flex-direction: column; overflow: hidden; border-radius: 22px; background: #fff; box-shadow: 0 22px 70px rgba(2, 12, 30, .38); border: 1px solid rgba(9, 35, 70, .14); }
     .bb-faq-widget.is-open { bottom: clamp(18px, 3vh, 36px); }
     .bb-faq-widget.is-open .bb-faq-panel { display: flex; }
@@ -63,6 +58,17 @@
     escalationVisible: false,
     sessionId: (globalThis.crypto?.randomUUID ? globalThis.crypto.randomUUID() : `bb-${Date.now()}-${Math.random().toString(16).slice(2)}`),
     conversationHistory: []
+  };
+  let knowledgePromise = null;
+
+  const loadKnowledge = () => {
+    if (state.knowledge || knowledgePromise) return knowledgePromise || Promise.resolve();
+    knowledgePromise = fetch(CONFIG.knowledgeUrl, { cache: 'no-store' })
+      .then((response) => (response.ok ? response.json() : null))
+      .then((knowledge) => { if (knowledge) state.knowledge = knowledge; })
+      .catch(() => {})
+      .finally(() => { knowledgePromise = null; });
+    return knowledgePromise;
   };
 
   const escapeHtml = (value) => String(value).replace(/[&<>'"]/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[char]));
@@ -285,6 +291,7 @@
     addMessage(messages, 'Hi — I’m Roadie, the Better Beds AI helper. I can help with truck beds, repair, paint, installs, bedliners, and quote questions.');
 
     toggle.addEventListener('click', () => {
+      void loadKnowledge();
       root.classList.add('is-open');
       toggle.setAttribute('aria-expanded', 'true');
       setTimeout(() => questionInput.focus(), 50);
@@ -310,6 +317,7 @@
       rememberTurn('customer', question);
       questionInput.value = '';
       hideEscalation(root);
+      await loadKnowledge();
 
       const faqMatch = classifyMatch(question);
       const faqAnswer = faqMatch.entry ? conversationalFaqAnswer(faqMatch) : '';
@@ -368,58 +376,6 @@ Roadie is having trouble connecting right now.`);
       }
     });
 
-    const playHomepageIntro = () => {
-      const isHomePage = ['/', '/index.html', ''].includes(window.location.pathname);
-      if (!isHomePage || root.classList.contains('is-open')) return;
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-      try {
-        if (sessionStorage.getItem('betterBedsRoadieIntroSeen') === 'true') return;
-        sessionStorage.setItem('betterBedsRoadieIntroSeen', 'true');
-      } catch (error) {
-        // If storage is unavailable, still show the intro once for this page load.
-      }
-      if (!toggle.animate) return;
-
-      window.setTimeout(() => {
-        if (!document.body.contains(toggle) || root.classList.contains('is-open')) return;
-        const target = toggle.getBoundingClientRect();
-        if (!target.width || !target.height) return;
-
-        const startWidth = Math.min(window.innerWidth - 28, 820);
-        const startHeight = Math.max(target.height * 1.75, 74);
-        const startLeft = (window.innerWidth - startWidth) / 2;
-        const startTop = Math.max(86, Math.min(window.innerHeight * 0.28, 220));
-        const ghost = document.createElement('div');
-        const startFontSize = Math.min(24, Math.max(18, window.innerWidth / 26));
-        const targetFontSize = parseFloat(window.getComputedStyle(toggle).fontSize) || 16;
-        ghost.className = 'bb-faq-intro-ghost';
-        ghost.textContent = '💬 Ask Better Beds…';
-        ghost.style.left = `${startLeft}px`;
-        ghost.style.top = `${startTop}px`;
-        ghost.style.width = `${startWidth}px`;
-        ghost.style.height = `${startHeight}px`;
-        ghost.style.fontSize = `${startFontSize}px`;
-        document.body.appendChild(ghost);
-        toggle.classList.add('bb-faq-intro-hidden');
-
-        const animation = ghost.animate([
-          { left: `${startLeft}px`, top: `${startTop}px`, width: `${startWidth}px`, height: `${startHeight}px`, fontSize: `${startFontSize}px`, opacity: 0, transform: 'scale(.98)' },
-          { left: `${startLeft}px`, top: `${startTop}px`, width: `${startWidth}px`, height: `${startHeight}px`, fontSize: `${startFontSize}px`, opacity: 1, transform: 'scale(1)', offset: .18 },
-          { left: `${startLeft}px`, top: `${startTop}px`, width: `${startWidth}px`, height: `${startHeight}px`, fontSize: `${startFontSize}px`, opacity: 1, transform: 'scale(1)', offset: .52 },
-          { left: `${target.left}px`, top: `${target.top}px`, width: `${target.width}px`, height: `${target.height}px`, fontSize: `${targetFontSize}px`, opacity: 1, transform: 'scale(1)' }
-        ], { duration: 2550, easing: 'cubic-bezier(.2,.8,.2,1)', fill: 'forwards' });
-
-        animation.addEventListener('finish', () => {
-          ghost.remove();
-          toggle.classList.remove('bb-faq-intro-hidden');
-          toggle.classList.add('bb-faq-intro-pulse');
-          window.setTimeout(() => toggle.classList.remove('bb-faq-intro-pulse'), 1200);
-        });
-      }, 650);
-    };
-
-    playHomepageIntro();
-
     submitQuestion.addEventListener('click', async () => {
       const payload = {
         question: detailsInput.value.trim() || state.lastQuestion,
@@ -461,15 +417,7 @@ Roadie is having trouble connecting right now.`);
     });
   };
 
-  const init = async () => {
-    try {
-      const response = await fetch(CONFIG.knowledgeUrl, { cache: 'no-store' });
-      if (response.ok) state.knowledge = await response.json();
-    } catch (error) {
-      // Use empty state; unanswered path will still work.
-    }
-    buildWidget();
-  };
+  const init = () => buildWidget();
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);

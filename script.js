@@ -2,6 +2,7 @@ const navToggle = document.querySelector('.nav-toggle');
 const siteNav = document.querySelector('.site-nav');
 const year = document.querySelector('#year');
 const heroSlides = Array.from(document.querySelectorAll('.hero-bg'));
+const heroRotator = document.querySelector('.hero-rotator');
 
 if (year) {
   year.textContent = new Date().getFullYear();
@@ -23,12 +24,35 @@ if (navToggle && siteNav) {
 
 if (heroSlides.length > 1 && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
   let currentHeroSlide = 0;
+  let heroIsChanging = false;
 
-  window.setInterval(() => {
+  const loadHeroSlide = (slide) => new Promise((resolve) => {
+    if (!(slide instanceof HTMLImageElement) || !slide.dataset.src) {
+      resolve();
+      return;
+    }
+
+    const finish = () => resolve();
+    slide.addEventListener('load', finish, { once: true });
+    slide.addEventListener('error', finish, { once: true });
+    slide.src = slide.dataset.src;
+    delete slide.dataset.src;
+  });
+
+  const rotateHero = async () => {
+    if (heroIsChanging) return;
+    heroIsChanging = true;
+    const nextHeroSlide = (currentHeroSlide + 1) % heroSlides.length;
+    await loadHeroSlide(heroSlides[nextHeroSlide]);
     heroSlides[currentHeroSlide].classList.remove('active');
-    currentHeroSlide = (currentHeroSlide + 1) % heroSlides.length;
+    currentHeroSlide = nextHeroSlide;
     heroSlides[currentHeroSlide].classList.add('active');
-  }, 4500);
+    heroRotator?.classList.toggle('brand-active', currentHeroSlide === 0);
+    heroIsChanging = false;
+    window.setTimeout(rotateHero, 5500);
+  };
+
+  window.setTimeout(rotateHero, 8000);
 }
 
 const businessCard = document.querySelector('.business-card-3d');
