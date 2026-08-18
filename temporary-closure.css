@@ -1,0 +1,118 @@
+:root {
+  color-scheme: dark;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(circle at 15% 10%, rgba(247, 181, 0, 0.16), transparent 34rem),
+    linear-gradient(145deg, #061a35 0%, #0b294d 58%, #07172b 100%);
+  color: #f8fafc;
+}
+
+body > :not(.temporary-closure):not(script) {
+  display: none !important;
+}
+
+body > .temporary-closure {
+  display: grid !important;
+}
+
+.temporary-closure,
+.temporary-closure * {
+  box-sizing: border-box;
+}
+
+.temporary-closure {
+  min-height: 100vh;
+  place-items: center;
+  padding: clamp(1.25rem, 4vw, 3.5rem);
+  font-family: Inter, Arial, sans-serif;
+}
+
+.temporary-closure-card {
+  width: min(100%, 46rem);
+  padding: clamp(2rem, 6vw, 4.25rem);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 1.5rem;
+  background: rgba(3, 18, 36, 0.9);
+  box-shadow: 0 2rem 6rem rgba(0, 0, 0, 0.38);
+  text-align: center;
+}
+
+.temporary-closure-logo {
+  display: block;
+  width: min(15rem, 72%);
+  max-height: 7rem;
+  margin: 0 auto 2rem;
+  object-fit: contain;
+}
+
+.temporary-closure-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin: 0 0 1rem;
+  color: #f7c948;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.temporary-closure-status::before {
+  width: 0.62rem;
+  height: 0.62rem;
+  border-radius: 50%;
+  background: #f7b500;
+  content: "";
+  box-shadow: 0 0 0 0.32rem rgba(247, 181, 0, 0.15);
+}
+
+.temporary-closure h1 {
+  margin: 0 0 1.25rem;
+  color: #fff;
+  font-family: "Barlow Condensed", Arial, sans-serif;
+  font-size: clamp(3rem, 9vw, 5.7rem);
+  font-weight: 900;
+  letter-spacing: -0.025em;
+  line-height: 0.92;
+  text-transform: uppercase;
+}
+
+.temporary-closure p {
+  max-width: 38rem;
+  margin: 0 auto 1rem;
+  color: #dce7f3;
+  font-size: clamp(1rem, 2.3vw, 1.17rem);
+  line-height: 1.7;
+}
+
+.temporary-closure .temporary-closure-existing {
+  margin-top: 1.8rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.temporary-closure a {
+  color: #ffd257;
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+
+.temporary-closure .temporary-closure-note {
+  margin-top: 1.4rem;
+  color: #aebfd2;
+  font-size: 0.92rem;
+}
+
+@media (max-width: 520px) {
+  .temporary-closure-card {
+    border-radius: 1rem;
+  }
+}
