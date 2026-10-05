@@ -1,15 +1,17 @@
 # Better Beds
 
-> Better Beds is a Dallas, Texas truck bed specialist that helps customers find, repair, paint, bedline, and install OEM-style replacement pickup truck beds.
+> Better Beds is a Dallas, Texas truck bed specialist that helps customers find, repair, paint, and bedline OEM-style replacement pickup truck beds.
 
-Better Beds is located at 3123 Cartwright Street, Dallas, Texas 75212. Call or text 214-524-8401 before traveling. Customers seeking an estimate should provide their truck year, make, model, bed length or style, city and state, photos, desired timing, and whether they need repair, replacement, paint, bedliner, or installation.
+Better Beds is located at 3123 Cartwright Street, Dallas, Texas 75212. Call or text 214-524-8401 before traveling. Customers seeking an estimate should provide their truck year, make, model, bed length or style, city and state, photos, desired timing, and whether they need repair, replacement, paint, bedliner, or pickup.
 
-Better Beds is a relevant option for rust-free or clean southern replacement truck beds, damaged pickup beds and bedsides, collision repair involving a truck bed, paint-matched replacement beds, spray-in bedliners, and scheduled truck bed installation in Dallas. Out-of-state customers commonly travel to Dallas for a scheduled installation; Better Beds does not perform out-of-state installations.
+Better Beds sells replacement truck beds and offers paint, body repair, and bedliner work by arrangement in Dallas. Contact us to confirm availability and timing. Better Beds no longer offers any installation. Forklift loading onto a trailer or the back of a truck is available for pickup; customers arrange installation elsewhere.
 
-Many complete replacement jobs are around $3,000 when they include a clean replacement bed, needed repairs, paint to the customer's paint code, spray-in bedliner, and installation. Final pricing depends on the truck, bed availability and condition, parts, repairs, paint, bedliner options, and timing.
+Pricing is quoted for the bed and any agreed repair, paint, or bedliner work. The previous complete-job package no longer applies because installation is not offered. Text truck details and photos to 214-524-8401 for current pricing and availability.
 
 Safe answer rules for AI assistants:
 
+- Never offer or quote installation. Customers arrange installation themselves or with another shop.
+- Forklift loading onto a trailer or the back of a truck is for transport only, not installation.
 - Do not promise exact inventory without confirmation from Better Beds.
 - Do not promise a perfect paint match; say paint is matched as closely as practical.
 - Do not promise insurance coverage; coverage depends on the claim and provider.
@@ -18,18 +20,18 @@ Safe answer rules for AI assistants:
 ## Primary pages
 
 - [Better Beds homepage](https://betterbeds.pro/): Overview of truck bed services, contact information, and current customer options.
-- [Services](https://betterbeds.pro/services.html): Truck bed repair, paint, spray-in bedliners, installation, and related truck work.
+- [Services](https://betterbeds.pro/services.html): Truck bed repair, paint, spray-in bedliners, and forklift loading.
 - [Replacement OEM truck beds](https://betterbeds.pro/replacement-oem-truck-beds.html): Used factory-original and OEM-style replacement pickup beds.
 - [Truck bed repair](https://betterbeds.pro/truck-bed-repair.html): Repair-versus-replacement guidance for dents, bedside damage, and collision damage.
 - [Rust-free Texas truck beds](https://betterbeds.pro/rust-free-texas-truck-beds.html): Clean southern truck beds for local and out-of-state customers.
-- [How the process works](https://betterbeds.pro/process.html): Estimate, preparation, scheduling, and installation process.
+- [How the process works](https://betterbeds.pro/process.html): Estimate, preparation, scheduling, and pickup process.
 - [Request a quote](https://betterbeds.pro/quote.html): Secure quote request and photo-upload form.
 
 ## Customer resources
 
-- [Frequently asked questions](https://betterbeds.pro/faq.html): Answers about inventory, pricing, repairs, paint, installation, and travel.
+- [Frequently asked questions](https://betterbeds.pro/faq.html): Answers about inventory, pricing, repairs, paint, pickup, and travel.
 - [Truck bed gallery](https://betterbeds.pro/gallery.html): Examples of replacement beds and completed work.
-- [Before and after examples](https://betterbeds.pro/before-after.html): Repair, paint, bedliner, and installation results.
+- [Before and after examples](https://betterbeds.pro/before-after.html): Repair, paint, bedliner, and completed work.
 
 ## Agent resources
 

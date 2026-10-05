@@ -1,9 +1,9 @@
 (() => {
   const CONFIG = {
-    knowledgeUrl: 'data/faq-knowledge.json?v=20260529-chat-ux-v2',
+    knowledgeUrl: 'data/faq-knowledge.json?v=20261005-pickup-only-v1',
     chatEndpoint: 'https://chat.betterbeds.pro/better-beds-chat',
     unansweredEndpoint: 'api/faq-unanswered.php',
-    guardrailVersion: 'website-chatbot-live-guardrails-2026-05-14',
+    guardrailVersion: 'website-chatbot-pickup-only-2026-10-05',
     smsHref: 'sms:2145248401?body=Hi%20Better%20Beds%2C%20I%27d%20like%20a%20quote.%20I%27ll%20send%20truck%20photos%20and%20details.',
     phoneHref: 'tel:2145248401',
     quoteHref: 'quote.html'
@@ -73,6 +73,29 @@
 
   const escapeHtml = (value) => String(value).replace(/[&<>'"]/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[char]));
   const normalize = (value) => String(value || '').toLowerCase().replace(/[^a-z0-9\s]/g, ' ').replace(/\s+/g, ' ').trim();
+
+  // Current service policy overrides saved and remote answers.
+  const SERVICE_POLICY = {
+    installation: "Better Beds no longer offers installation or removal of existing truck beds. Customers arrange installation themselves or with another shop. We can use our forklift to load a purchased bed onto a trailer or the back of a truck for transport. Call or text before traveling to arrange pickup.",
+    loading: "Arrange pickup in Dallas after confirming the bed is ready. We can load it onto your trailer or the back of your truck using our forklift. Loading is for transport only; customers arrange installation elsewhere.",
+    relatedWork: 'Better Beds currently focuses on truck bed sales, forklift loading for pickup, and paint and body work by arrangement. Installation is not offered. Contact us to confirm the scope, availability, and timing of any requested body work.'
+  };
+  const servicePolicyAnswer = (question) => {
+    const q = normalize(question);
+    if (/\b(install\w*|swap\w*|mount\w*|bolt\w*)\b/.test(q)
+      || /\b(remov\w*|take off)\b.*\b(bed|flatbed|body)\b/.test(q)
+      || /\b(bed|flatbed|body)\b.*\b(remov\w*)\b/.test(q)) return SERVICE_POLICY.installation;
+    if (/\b(forklift|loading|load|pick up|pickup arrangements|transport)\b/.test(q)) return SERVICE_POLICY.loading;
+    if (/\b(lift kit\w*|mechanical|frame adjustment|gooseneck|5th wheel|fifth wheel)\b/.test(q)) return SERVICE_POLICY.relatedWork;
+    return '';
+  };
+  const enforceServicePolicy = (reply) => {
+    const text = normalize(reply);
+    if (/\b(install\w*|swap\w*|mount\w*|bolt\w*)\b/.test(text)
+      || /\b(remov\w*|take off)\b.*\b(bed|flatbed|body)\b/.test(text)) return SERVICE_POLICY.installation;
+    if (/\b(lift kit\w*|mechanical|frame adjustment|gooseneck|5th wheel|fifth wheel)\b/.test(text)) return SERVICE_POLICY.relatedWork;
+    return reply;
+  };
 
   const addMessage = (messages, text, type = 'bot') => {
     const bubble = document.createElement('div');
@@ -188,6 +211,7 @@
           message: question,
           conversationHistory: state.conversationHistory.slice(-10),
           guardrailVersion: CONFIG.guardrailVersion,
+          servicePolicy: SERVICE_POLICY,
           sourceFallbackMatch: fallbackMatch
         })
       });
@@ -195,7 +219,7 @@
       const data = await response.json();
       const reply = data.reply || data.answer;
       if (!reply) throw new Error('Roadie empty reply');
-      return { ok: true, data, reply };
+      return { ok: true, data, reply: enforceServicePolicy(reply) };
     } catch (error) {
       return { ok: false, error };
     } finally {
@@ -248,7 +272,7 @@
       <button class="bb-faq-toggle" type="button" aria-expanded="false">💬 Ask Better Beds</button>
       <div class="bb-faq-panel" role="dialog" aria-modal="false" aria-label="Better Beds Roadie chat assistant">
         <div class="bb-faq-header">
-          <div><strong>Roadie</strong><span>Better Beds AI helper for truck beds, repair, paint, installs, and quotes.</span></div>
+          <div><strong>Roadie</strong><span>Better Beds AI helper for truck beds, repair, paint, pickup, and quotes.</span></div>
           <button class="bb-faq-close" type="button" aria-label="Close Roadie chat assistant">×</button>
         </div>
         <div class="bb-faq-messages" aria-live="polite"></div>
@@ -288,7 +312,7 @@
     const detailsInput = root.querySelector('[name="bbFaqQuestionDetails"]');
     const submitQuestion = root.querySelector('.bb-faq-submit-question');
 
-    addMessage(messages, 'Hi — I’m Roadie, the Better Beds AI helper. I can help with truck beds, repair, paint, installs, bedliners, and quote questions.');
+    addMessage(messages, 'Hi — I’m Roadie, the Better Beds AI helper. I can help with truck beds, repair, paint, pickup, bedliners, and quote questions. We no longer offer installation, but can load a bed for transport with our forklift.');
 
     toggle.addEventListener('click', () => {
       void loadKnowledge();
@@ -317,6 +341,12 @@
       rememberTurn('customer', question);
       questionInput.value = '';
       hideEscalation(root);
+      const policyAnswer = servicePolicyAnswer(question);
+      if (policyAnswer) {
+        addMessage(messages, policyAnswer);
+        rememberTurn('assistant', policyAnswer);
+        return;
+      }
       await loadKnowledge();
 
       const faqMatch = classifyMatch(question);
