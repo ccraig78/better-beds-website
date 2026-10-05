@@ -10,7 +10,7 @@
     "llms_txt": "https://betterbeds.pro/llms.txt",
     "phone": "+1-214-524-8401",
     "sms": "+1-214-524-8401",
-    "primary_email": "info@betterbeds.pro",
+    "primary_email": "clint@betterbeds.pro",
     "quote_email": "clint@betterbeds.pro",
     "address": {
       "street": "3123 Cartwright Street",
@@ -121,7 +121,7 @@
       {
         "label": "Email quote details and photos",
         "type": "email",
-        "target": "info@betterbeds.pro"
+        "target": "clint@betterbeds.pro"
       },
       {
         "label": "Secure website free estimate and photo upload form",

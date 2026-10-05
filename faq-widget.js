@@ -408,7 +408,7 @@ Roadie is having trouble connecting right now.`);
         addMessage(messages, 'I could not send that automatically from this page. You can still email it to Better Beds with the button that just appeared.');
         const actionRow = document.createElement('div');
         actionRow.className = 'bb-faq-actions';
-        actionRow.innerHTML = `<a href="mailto:info@betterbeds.pro?subject=${subject}&body=${body}">Email this question</a>`;
+        actionRow.innerHTML = `<a href="mailto:clint@betterbeds.pro?subject=${subject}&body=${body}">Email this question</a>`;
         messages.appendChild(actionRow);
       } finally {
         submitQuestion.disabled = false;

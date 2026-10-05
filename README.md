@@ -51,7 +51,7 @@ If the widget cannot confidently answer, it asks the visitor for name/contact in
 The PHP endpoint:
 
 1. saves the question to `private/faq-unanswered.jsonl`;
-2. emails `info@betterbeds.pro` by default, where Euro can see it;
+2. emails `clint@betterbeds.pro` by default;
 3. reminds Euro/Buddy to add the approved answer to `data/faq-knowledge.json` after Clint approves it.
 
 Hostinger should run the PHP endpoint if the site is deployed on PHP-capable hosting. If the endpoint is not available, the widget falls back to a `mailto:` button so the visitor can still email the question.
