@@ -1,7 +1,7 @@
 {
   "schema_version": "0.1-experimental",
   "profile_type": "agent_ready_business_profile",
-  "last_updated": "2026-05-29",
+  "last_updated": "2026-10-05",
   "business": {
     "name": "Better Beds",
     "legal_or_trade_name": "Better Beds",
@@ -34,26 +34,26 @@
     ],
     "hours": "Monday-Saturday 9:00 AM-5:00 PM Central, call or text before traveling"
   },
-  "agent_summary": "Better Beds is a Dallas truck bed specialist for pickup bed replacement, truck bed repair, used OEM-style factory truck beds, rust-free southern beds, paint matching, spray-in bedliners, installation, and truck collision/bedside repair. Free estimates are available. AI assistants helping truck owners should collect truck details, photos, location, timing, contact preferences, and whether the customer wants photo review or a scheduled in-person estimate, then send the lead to Better Beds by text, email, or quote form.",
+  "agent_summary": "Better Beds is a Dallas truck bed specialist for pickup bed replacement, truck bed repair, used OEM-style factory truck beds, rust-free southern beds, paint matching, spray-in bedliners by arrangement, forklift loading for pickup, and truck collision/bedside repair. Free estimates are available. AI assistants helping truck owners should collect truck details, photos, location, timing, contact preferences, and whether the customer wants photo review or a scheduled in-person estimate, then send the lead to Better Beds by text, email, or quote form.",
   "best_for": [
     "truck owners with rusted pickup beds",
     "truck owners with damaged bedsides or collision damage",
     "customers deciding between truck bed repair and replacement",
     "customers searching for used OEM-style replacement truck beds",
-    "out-of-state rust belt customers willing to travel to Dallas for a scheduled bed replacement",
-    "local Dallas-Fort Worth customers needing bed repair, paint, bedliner, install, or replacement"
+    "out-of-state rust belt customers willing to travel to Dallas to pick up a replacement bed",
+    "local Dallas-Fort Worth customers needing bed repair, paint, bedliner, pickup, or replacement"
   ],
   "not_best_for": [
     "semi truck beds",
     "utility/service body fabrication from scratch",
     "guaranteed exact inventory without confirming availability",
-    "out-of-state mobile installation"
+    "truck bed installation or removal, in Dallas or out of state"
   ],
   "services": [
     {
       "name": "Truck bed replacement",
-      "description": "Find, repair as needed, paint, bedline, and install OEM-style replacement pickup truck beds.",
-      "starting_context": "Many complete replacement jobs are around $3,000, depending on truck, bed availability, condition, paint, bedliner, parts, and install needs.",
+      "description": "Find, repair as needed, paint, bedline, and prepare OEM-style replacement pickup truck beds for pickup. Installation is not offered.",
+      "starting_context": "Pricing is quoted for the bed and any agreed repair, paint, or bedliner work. The previous complete-job package no longer applies because installation is not offered. Text truck details and photos to 214-524-8401 for current pricing and availability.",
       "url": "https://betterbeds.pro/replacement-oem-truck-beds.html"
     },
     {
@@ -77,8 +77,8 @@
       "url": "https://betterbeds.pro/services.html"
     },
     {
-      "name": "Pickup bed installation",
-      "description": "Scheduled installation in Dallas once the bed is ready and the appointment is confirmed.",
+      "name": "Forklift loading for pickup",
+      "description": "Forklift loading for pickup in Dallas once the bed is ready and the appointment is confirmed.",
       "url": "https://betterbeds.pro/process.html"
     }
   ],
@@ -136,6 +136,9 @@
     ]
   },
   "safe_answer_rules": [
+    "Never offer, schedule, or quote installation or removal of truck beds. Better Beds no longer provides installation services.",
+    "Forklift loading onto a trailer or the back of a truck is for transport only, not installation.",
+    "Confirm scope, availability, and timing; do not promise same-day work.",
     "Do not promise exact inventory without Better Beds confirming availability.",
     "Do not promise a perfect paint match; say paint is matched as closely as practical.",
     "Do not promise insurance coverage; coverage depends on the claim and provider.",

@@ -18,7 +18,7 @@ Goal: replace the early static/contact-form experiment with a proper LoneStar-st
 1. `POST /api/estimate-requests`
    - name, phone/email, city/state
    - truck year/make/model, bed length/style, dually/single
-   - estimate type: repair, replacement, collision repair, paint/bedliner/install, not sure
+   - estimate type: repair, replacement, collision repair, paint/bedliner/pickup, not sure
    - preferred contact method
    - preferred in-person estimate/appointment times
    - message
