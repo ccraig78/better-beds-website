@@ -448,7 +448,7 @@ quoteBuilders.forEach((builder) => {
     const encodedMessage = encodeURIComponent(message);
     if (smsLink) smsLink.href = `sms:2145248401?body=${encodedMessage}`;
     if (emailLink) {
-      emailLink.href = `mailto:info@betterbeds.pro?subject=${encodeURIComponent('Better Beds quote request')}&body=${encodedMessage}`;
+      emailLink.href = `mailto:clint@betterbeds.pro?subject=${encodeURIComponent('Better Beds quote request')}&body=${encodedMessage}`;
     }
   };
 

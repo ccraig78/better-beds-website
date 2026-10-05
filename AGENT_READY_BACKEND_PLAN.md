@@ -30,7 +30,7 @@ Goal: replace the early static/contact-form experiment with a proper LoneStar-st
    - admin-only links to view photos
 
 3. Notifications
-   - send email to `info@betterbeds.pro` and/or `clint@betterbeds.pro`
+   - send email to `clint@betterbeds.pro`
    - later: SMS notification to 214-524-8401
 
 4. Customer response

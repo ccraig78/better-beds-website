@@ -62,7 +62,7 @@ if (!is_dir($privateDir)) {
 $queueFile = $privateDir . '/faq-unanswered.jsonl';
 @file_put_contents($queueFile, json_encode($entry, JSON_UNESCAPED_SLASHES) . PHP_EOL, FILE_APPEND | LOCK_EX);
 
-$to = getenv('BB_FAQ_NOTIFY_EMAIL') ?: 'info@betterbeds.pro';
+$to = getenv('BB_FAQ_NOTIFY_EMAIL') ?: 'clint@betterbeds.pro';
 $subject = 'Better Beds FAQ needs an answer';
 $body = "A website visitor asked a question the FAQ assistant could not answer.\n\n"
     . "Question:\n{$question}\n\n"
@@ -77,7 +77,7 @@ $body = "A website visitor asked a question the FAQ assistant could not answer.\
 
 $headers = [
     'From: Better Beds FAQ Assistant <no-reply@betterbeds.pro>',
-    'Reply-To: info@betterbeds.pro',
+    'Reply-To: clint@betterbeds.pro',
     'Content-Type: text/plain; charset=UTF-8'
 ];
 
