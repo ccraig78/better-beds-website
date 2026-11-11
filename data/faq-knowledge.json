@@ -3,689 +3,171 @@
   "phone": "214-524-8401",
   "email": "clint@betterbeds.pro",
   "location": "3123 Cartwright Street, Dallas, Texas 75212",
-  "hours": "Monday-Saturday, 9AM-5PM. Call or text to confirm availability and arrange pickup. Installation is not available.",
-  "defaultIntake": "To help Better Beds quote it, please send your truck year, make, model, bed length if you know it, single rear wheel or dually, color or paint code if available, what you need done, and photos of the truck, bed, damage, or paint code sticker.",
+  "hours": "Monday–Saturday, 9 AM–5 PM Central. Call/text before traveling.",
+  "defaultIntake": "Send your truck year, make, model, bed length, rear wheel setup, and the inventory item you are interested in. Confirm stock, fitment, condition, included parts, price, and pickup.",
   "entries": [
     {
-      "id": "services",
-      "question": "What does Better Beds do?",
+      "id": "takeoff",
+      "question": "What is a new takeoff bed?",
       "keywords": [
-        "what do you do",
-        "services",
-        "repair",
-        "replace",
-        "replacement",
-        "paint",
-        "bedliner",
-        "install"
+        "takeoff",
+        "take-off",
+        "new bed",
+        "factory"
       ],
-      "answer": "Better Beds sells OEM-style factory replacement pickup beds and offers repair, paint matching, and spray-in bedliner work by arrangement in Dallas. Contact us to confirm scope, availability, and timing. Installation is not available. We can load a bed onto a trailer or the back of a truck using our forklift."
-    },
-    {
-      "id": "location",
-      "question": "Where are you located?",
-      "keywords": [
-        "location",
-        "address",
-        "directions",
-        "dallas"
-      ],
-      "answer": "Better Beds is at 3123 Cartwright Street, Dallas, Texas 75212."
-    },
-    {
-      "id": "hours",
-      "question": "What are your hours?",
-      "keywords": [
-        "hours",
-        "open",
-        "close",
-        "saturday",
-        "appointment"
-      ],
-      "answer": "Better Beds is open Monday through Saturday, 9AM to 5PM. Call or text before traveling to confirm availability and arrange pickup. Installation is not available."
-    },
-    {
-      "id": "quote-info",
-      "question": "What information do you need for a quote?",
-      "keywords": [
-        "quote",
-        "estimate",
-        "price",
-        "cost",
-        "how much",
-        "need for quote"
-      ],
-      "answer": "Pricing is quoted for the bed and any agreed repair, paint, or bedliner work. The previous complete-job package no longer applies because installation is not offered. Text truck details and photos to 214-524-8401 for current pricing and availability."
+      "answer": "A new takeoff bed is a factory truck bed removed from a new truck, commonly during a conversion to a flatbed or service body. Check the individual listing for condition and included parts, and ask about any handling or storage marks."
     },
     {
       "id": "inventory",
-      "question": "Do you have a specific bed in stock?",
+      "question": "What beds do you have, and what do they cost?",
       "keywords": [
-        "in stock",
         "inventory",
+        "in stock",
         "available",
-        "have a",
-        "do you have",
+        "ford",
         "f250",
-        "silverado",
-        "ram",
-        "dually"
+        "f350",
+        "price",
+        "cost"
       ],
-      "answer": "Inventory changes quickly, so we do not want to promise a specific bed without checking. Text or call 214-524-8401 with your truck year, make, model, bed length, single rear wheel or dually, color, and photos if available, and Better Beds can confirm current options."
+      "answer": "Our listed inventory includes: 2023–2026 Ford F-250 / F-350 short bed, white, new condition, $2,500, bed only. Call or text 214-524-8401 to confirm availability, exact fitment, condition, and what is included before purchasing or traveling. Ask about other takeoff parts in current stock."
     },
     {
-      "id": "paint-match",
-      "question": "Will the paint match exactly?",
+      "id": "included",
+      "question": "What comes with a bed?",
       "keywords": [
-        "paint",
-        "paint match",
-        "color match",
-        "match exactly",
-        "paint code",
-        "pearl"
+        "included",
+        "tailgate",
+        "taillights",
+        "lights",
+        "bumper",
+        "hardware",
+        "bed only"
       ],
-      "answer": "Better Beds works to match factory color as closely as possible. Age, sun fade, pearl colors, previous paint work, and the truck\u2019s condition can affect how exact the match looks. Text photos and your paint code if available to 214-524-8401."
+      "answer": "Check the “Includes” details on the individual listing. A bed-only listing should not be assumed to include a tailgate, lights, bumper, hardware, or other accessories. Confirm the exact contents of the item with Better Beds before purchasing."
+    },
+    {
+      "id": "fitment",
+      "question": "How do I confirm a bed will fit my truck?",
+      "keywords": [
+        "fitment",
+        "fit",
+        "compatible",
+        "wheel",
+        "dually",
+        "year",
+        "model"
+      ],
+      "answer": "Send your truck year, make, model, bed length, and whether it has single rear wheels or dual rear wheels, plus the listing you are interested in. Better Beds will help check compatibility before you buy. Model year alone does not establish exact fitment."
+    },
+    {
+      "id": "photos",
+      "question": "Are the pictures of the actual inventory?",
+      "keywords": [
+        "photo",
+        "picture",
+        "image",
+        "placeholder"
+      ],
+      "answer": "Inventory photos are coming soon. Images labeled “Photo coming soon” are illustrations, not photographs of the actual item. Contact Better Beds to confirm item condition and ask about photos before making a trip."
+    },
+    {
+      "id": "older-beds",
+      "question": "Do you still have older beds that can be repaired and painted?",
+      "keywords": [
+        "older",
+        "used",
+        "repair",
+        "paint",
+        "refinish"
+      ],
+      "answer": "Yes. A limited selection of older beds remains in our inventory and can be repaired and painted by arrangement. Contact Better Beds to discuss available beds, the agreed finish, price, and timing. Our main focus is new takeoff inventory. We are not advertising a general repair or bed-sourcing service."
     },
     {
       "id": "installation",
-      "question": "Do you install truck beds?",
+      "question": "Do you install beds or remove the old one?",
       "keywords": [
-        "install",
         "installation",
-        "same day",
-        "wait",
+        "install",
+        "removal",
+        "remove"
+      ],
+      "answer": "Installation and removal are not offered. Customers arrange that work separately. Better Beds can use a forklift to load a purchased bed onto a suitable trailer or truck for transport; loading is not installation."
+    },
+    {
+      "id": "pickup",
+      "question": "How does pickup work?",
+      "keywords": [
+        "pickup",
+        "loading",
+        "forklift",
+        "trailer",
+        "travel",
         "appointment"
       ],
-      "answer": "Better Beds no longer offers installation or removal of existing truck beds. Customers arrange installation themselves or with another shop. We can use our forklift to load a purchased bed onto a trailer or the back of a truck for transport. Call or text before traveling to arrange pickup."
+      "answer": "Pickup is at 3123 Cartwright Street, Dallas, Texas 75212. Call or text first to confirm the item, price, payment arrangements, and pickup time. Bring a suitable truck or trailer and tie-downs. Forklift loading is available for purchased beds."
     },
     {
       "id": "shipping",
-      "question": "Do you ship beds?",
+      "question": "Can an out-of-state buyer purchase a bed?",
       "keywords": [
-        "ship",
         "shipping",
         "freight",
-        "carrier",
-        "delivery",
         "out of state",
-        "drive",
-        "travel"
+        "carrier",
+        "delivery"
       ],
-      "answer": "Customer-arranged freight may be possible; contact Better Beds to confirm loading arrangements before booking a carrier. Pickup in Dallas with forklift loading is available. Installation is not offered."
+      "answer": "Out-of-state buyers can arrange pickup in Dallas. Customer-arranged freight may be possible; confirm loading and carrier requirements with Better Beds before booking transport. Do not assume shipping or delivery is included."
+    },
+    {
+      "id": "hours",
+      "question": "Where are you located, and when are you open?",
+      "keywords": [
+        "hours",
+        "open",
+        "address",
+        "location",
+        "dallas",
+        "saturday"
+      ],
+      "answer": "Better Beds is at 3123 Cartwright Street, Dallas, Texas 75212. Hours are Monday–Saturday, 9 AM–5 PM Central. Call or text 214-524-8401 before traveling to confirm stock and arrange pickup."
     },
     {
       "id": "payment",
-      "question": "What payment methods do you accept?",
+      "question": "How do payment and financing work?",
       "keywords": [
-        "pay",
         "payment",
-        "credit card",
-        "debit",
-        "cash",
-        "zelle",
-        "paypal",
-        "venmo",
-        "financing",
-        "deposit"
-      ],
-      "answer": "Better Beds accepts cash, debit, credit, Zelle, PayPal, and Venmo. Financing through American First Finance is available from the website. Please do not send card, bank, or payment information through chat, forms, or messages."
-    },
-    {
-      "id": "insurance",
-      "question": "Do you work with insurance?",
-      "keywords": [
-        "insurance",
-        "claim",
-        "covered",
-        "adjuster",
-        "deductible"
-      ],
-      "answer": "Yes, Better Beds works with insurance companies for truck bed and body repairs when damage is covered, but coverage and final pricing depend on the claim. Ask about insurance repair options before paying fully out of pocket."
-    },
-    {
-      "id": "why-price-high",
-      "question": "Why is the price so high?",
-      "keywords": [
-        "why so high",
-        "price high",
-        "too expensive",
-        "why expensive",
-        "cheaper",
-        "salvage yard",
-        "marketplace",
-        "facebook price"
-      ],
-      "answer": "OEM-style truck beds are large, high-demand parts, and clean rust-free beds can be hard to find. Price can include the bed itself, condition, repair work, paint, bedliner, parts, and timing depending on the job. Better Beds focuses on helping you get a bed that fits and looks right instead of gambling on a random damaged or rusty bed."
-    },
-    {
-      "id": "is-install-included",
-      "question": "Is installation included?",
-      "keywords": [
-        "install included",
-        "installation included",
-        "does it include install",
-        "installed price",
-        "with install",
-        "pickup only"
-      ],
-      "answer": "Better Beds no longer offers installation or removal of existing truck beds. Customers arrange installation themselves or with another shop. We can use our forklift to load a purchased bed onto a trailer or the back of a truck for transport. Call or text before traveling to arrange pickup."
-    },
-    {
-      "id": "how-financing-works",
-      "question": "How does financing work?",
-      "keywords": [
-        "financing",
+        "pay",
         "finance",
-        "payments",
-        "payment plan",
-        "american first finance",
-        "aff",
-        "monthly payments",
-        "apply"
-      ],
-      "answer": "Financing is available through American First Finance from the Better Beds website. Approval, terms, and payment amounts are handled by the finance company, not directly by Better Beds. You can use the Apply with AFF button on the site to start the application."
-    },
-    {
-      "id": "how-payment-works",
-      "question": "How does payment work?",
-      "keywords": [
-        "how does payment work",
-        "pay",
-        "payment",
+        "financing",
         "deposit",
-        "balance",
-        "reserve",
-        "hold bed"
+        "hold",
+        "reserve"
       ],
-      "answer": "Once the bed, price, timing, and paint plan are agreed on, Better Beds typically collects a deposit to reserve the bed and start the process. Final payment depends on the job plan. Please do not send card, bank, or payment information through chat or forms \u2014 Better Beds will handle payment directly through approved methods."
+      "answer": "We accept cash, debit, credit, Zelle, PayPal, and Venmo. American First Finance applications are linked from the website; approval and terms are handled by the finance company. Confirm payment or hold arrangements directly with Better Beds. Do not send card or bank details in website forms or messages."
     },
     {
-      "id": "payment-methods-expanded",
-      "question": "What forms of payment do you take?",
+      "id": "sourcing",
+      "question": "Will you find a bed that is not in your inventory?",
       "keywords": [
-        "forms of payment",
-        "payment methods",
-        "cash",
-        "card",
-        "credit",
-        "debit",
-        "zelle",
-        "paypal",
-        "venmo"
+        "sourcing",
+        "source",
+        "find",
+        "locate",
+        "special order"
       ],
-      "answer": "Better Beds accepts cash, debit, credit, Zelle, PayPal, and Venmo. Financing through American First Finance is also available from the website. Please do not send card, bank, or payment information through chat, text, or website forms."
+      "answer": "Better Beds now focuses on selling the inventory we have on hand. Contact us to check current stock. A bed not listed or confirmed by Better Beds should not be assumed available, and we are not advertising a bed-finding service."
     },
     {
-      "id": "facebook-listing-repeat-info",
-      "question": "I saw a bed on Facebook. What do I need to know?",
+      "id": "bed-length",
+      "question": "How do I measure my bed?",
       "keywords": [
-        "facebook",
-        "marketplace",
-        "listing",
-        "saw your bed",
-        "is this available",
-        "how much are you asking",
-        "still available"
-      ],
-      "answer": "If you saw a Better Beds listing on Facebook, the fastest next step is to confirm your truck details and what you need: year, make, model, bed length, single rear wheel or dually, color/paint code if available, and whether you need the bed only, paint, bedliner, pickup, pickup, or freight. Inventory and pricing can change, so text details and photos to 214-524-8401 for the most accurate next step."
-    },
-    {
-      "id": "what-is-the-fastest-way-to-get-a-quote",
-      "question": "What is the fastest way to get a quote?",
-      "keywords": [
-        "fastest",
-        "quote"
-      ],
-      "answer": "Text photos and truck details to 214-524-8401. Include your year, make, model, bed length, color or paint code if you have it, and what you need done."
-    },
-    {
-      "id": "what-info-do-you-need-for-a-quote",
-      "question": "What info do you need for a quote?",
-      "keywords": [
-        "info",
-        "quote"
-      ],
-      "answer": "We usually need the truck year, make, model, bed length/style, single rear wheel or dually, color or paint code if available, what you need done, and photos of the truck, damage, current bed, or paint code sticker."
-    },
-    {
-      "id": "how-do-i-know-what-bed-length-i-have",
-      "question": "How do I know what bed length I have?",
-      "keywords": [
+        "measure",
         "bed length",
         "short bed",
-        "long bed",
-        "measure",
-        "know",
-        "bed",
-        "length"
+        "long bed"
       ],
-      "answer": "The safest way is to measure the inside of the bed from the inside front of the box to the inside edge of the tailgate, or send Better Beds a photo. For Chevy/GMC trucks since 1999, 1500 Crew Cab trucks usually have a 5 ft 9 in bed, while 1500 regular cab and extended cab trucks can be 6 ft 6 in or 8 ft. Chevy/GMC 2500/3500 trucks are either 6 ft 6 in or 8 ft. Photos are often easiest because customers may use \u201cshort bed\u201d differently."
-    },
-    {
-      "id": "what-does-short-bed-mean-on-a-chevy-or-gmc-truck",
-      "question": "What does short bed mean on a Chevy or GMC truck?",
-      "keywords": [
-        "chevy",
-        "gmc",
-        "silverado",
-        "sierra",
-        "bed length",
-        "short bed",
-        "long bed",
-        "measure",
-        "short",
-        "bed",
-        "mean"
-      ],
-      "answer": "For Chevy/GMC 2500/3500 trucks, short bed means 6 ft 6 in and long bed means 8 ft. For 1500 trucks, there are three possible lengths: 5 ft 9 in, 6 ft 6 in, and 8 ft. Some people call a 6 ft 6 in 1500 bed a short bed because it is shorter than an 8 ft bed, so Better Beds should verify by measurement or photo."
-    },
-    {
-      "id": "will-a-chevy-bed-fit-a-gmc-truck-or-a-gmc-bed-fi",
-      "question": "Will a Chevy bed fit a GMC truck, or a GMC bed fit a Chevy?",
-      "keywords": [
-        "chevy",
-        "gmc",
-        "silverado",
-        "sierra",
-        "bed",
-        "fit"
-      ],
-      "answer": "Sometimes yes, but Better Beds needs to confirm the correct generation, series, and bed length. Chevy and GMC beds can fit each other in the right setup, but they have different looks/body lines and different tail lights. If a Chevy bed goes on a GMC truck, it needs Chevy tail lights, and if a GMC bed goes on a Chevy truck, it needs GMC tail lights."
-    },
-    {
-      "id": "what-chevy-gmc-generation-is-my-truck",
-      "question": "What Chevy/GMC generation is my truck?",
-      "keywords": [
-        "chevy",
-        "gmc",
-        "silverado",
-        "sierra",
-        "generation"
-      ],
-      "answer": "Chevy/GMC 1500 generations are 1999-2006, 2007-2013, 2014-2018, and 2019-present. Chevy/GMC 2500/3500 generations are 1999-2007, 2008-2014, 2015-2019, and 2020-present. Better Beds should confirm the exact series, year range, and bed length before saying a bed will fit."
-    },
-    {
-      "id": "will-chevy-gmc-1500-and-2500-3500-beds-overlap-b",
-      "question": "Will Chevy/GMC 1500 and 2500/3500 beds overlap by year?",
-      "keywords": [
-        "chevy",
-        "gmc",
-        "silverado",
-        "sierra",
-        "1500",
-        "2500",
-        "3500",
-        "overlap",
-        "year"
-      ],
-      "answer": "Yes, but the rule is brand-specific and length-specific. For Chevy, 2007-2013 1500 beds match 2008-2014 2500/3500 beds, and 2014-2018 1500 beds match 2015-2019 2500/3500 beds when the bed length matches. The same year-range overlap is true for GMC-to-GMC. But Chevy beds and GMC beds are not the same as each other; they have different body lines/looks and different tail lights. Better Beds should confirm year, brand, series, and length before promising fitment."
-    },
-    {
-      "id": "do-2019-newer-chevy-gmc-1500-beds-fit-2500-3500",
-      "question": "Do 2019-newer Chevy/GMC 1500 beds fit 2500/3500 trucks?",
-      "keywords": [
-        "chevy",
-        "gmc",
-        "silverado",
-        "sierra",
-        "2019",
-        "newer",
-        "1500",
-        "fit",
-        "2500",
-        "3500"
-      ],
-      "answer": "No. Starting with the 2019 Chevy/GMC 1500 body style, 1500 trucks correctly use 1500-series beds only. Starting with the 2020 Chevy/GMC 2500/3500 body style, 2500/3500 trucks correctly use 2500/3500-series beds only. The older 1500-to-HD overlap rules do not continue after those body-style changes."
-    },
-    {
-      "id": "can-a-different-year-chevy-gmc-bed-physically-bo",
-      "question": "Can a different-year Chevy/GMC bed physically bolt on?",
-      "keywords": [
-        "chevy",
-        "gmc",
-        "silverado",
-        "sierra",
-        "different",
-        "year",
-        "bed",
-        "physically",
-        "bolt"
-      ],
-      "answer": "Sometimes, yes. Chevy/GMC bed mounting holes from 1999 through current trucks are in the same locations within the same bed-length category, so a same-length bed may physically bolt on even if it is not the correct style for the truck. That does not mean it will look right or be the best match. A mismatched generation/style bed may need the matching tailgate and tail lights for that bed. Better Beds should confirm whether the customer wants the correct style or just a physically installable bed."
-    },
-    {
-      "id": "what-bed-length-does-my-ford-truck-have",
-      "question": "What bed length does my Ford truck have?",
-      "keywords": [
-        "ford",
-        "f150",
-        "f-150",
-        "f250",
-        "f-250",
-        "f350",
-        "f-350",
-        "bed length",
-        "short bed",
-        "long bed",
-        "measure",
-        "bed",
-        "length"
-      ],
-      "answer": "Ford has a similar setup to Chevy/GMC, but the lengths are a little different. F-150 Crew Cab trucks have 5 ft 6 in beds. F-150 regular cab and extended cab trucks can have 6 ft 6 in short beds or 8 ft long beds. F-250/F-350 trucks can have 6 ft 9 in short beds or 8 ft long beds. The safest way to confirm is still to measure the inside bed length or send Better Beds a driver-side photo."
-    },
-    {
-      "id": "can-an-f-150-bed-fit-an-f-250-or-f-350",
-      "question": "Can an F-150 bed fit an F-250 or F-350?",
-      "keywords": [
-        "ford",
-        "f150",
-        "f-150",
-        "f250",
-        "f-250",
-        "f350",
-        "f-350",
-        "150",
-        "bed",
-        "fit",
-        "250",
-        "350"
-      ],
-      "answer": "No. Ford F-150 beds and F-250/F-350 beds are not interchangeable just because the length is similar. An F-150 needs an F-150 bed, and an F-250/F-350 needs an F-250/F-350 bed."
-    },
-    {
-      "id": "do-you-only-sell-beds-you-already-have",
-      "question": "Do you only sell beds you already have?",
-      "keywords": [
-        "sell",
-        "already"
-      ],
-      "answer": "No. If we know what you need, Better Beds may be able to locate a rust-free OEM / used factory original bed or find a repairable factory bed and paint it to match."
-    },
-    {
-      "id": "can-you-repair-my-existing-truck-bed",
-      "question": "Can you repair my existing truck bed?",
-      "keywords": [
-        "repair",
-        "existing",
-        "bed"
-      ],
-      "answer": "Yes. Better Beds handles truck bed repair, paint, and related collision work through the Dallas repair facility, including insurance repair work when applicable."
-    },
-    {
-      "id": "how-long-does-installation-take",
-      "question": "How long does installation take?",
-      "keywords": [
-        "install",
-        "installation",
-        "installed",
-        "long",
-        "take"
-      ],
-      "answer": "Better Beds no longer offers installation or removal of existing truck beds. Customers arrange installation themselves or with another shop. We can use our forklift to load a purchased bed onto a trailer or the back of a truck for transport. Call or text before traveling to arrange pickup."
-    },
-    {
-      "id": "how-much-does-installation-cost",
-      "question": "How much does installation cost?",
-      "keywords": [
-        "how much is install",
-        "how much is installation",
-        "install cost",
-        "installation cost",
-        "install price",
-        "installation price",
-        "install",
-        "installation",
-        "installed",
-        "cost"
-      ],
-      "answer": "Better Beds no longer offers installation or removal of existing truck beds. Customers arrange installation themselves or with another shop. We can use our forklift to load a purchased bed onto a trailer or the back of a truck for transport. Call or text before traveling to arrange pickup."
-    },
-    {
-      "id": "what-is-included-in-basic-installation",
-      "question": "What is included in basic installation?",
-      "keywords": [
-        "install",
-        "installation",
-        "installed",
-        "included",
-        "basic"
-      ],
-      "answer": "Better Beds no longer offers installation or removal of existing truck beds. Customers arrange installation themselves or with another shop. We can use our forklift to load a purchased bed onto a trailer or the back of a truck for transport. Call or text before traveling to arrange pickup."
-    },
-    {
-      "id": "how-much-is-a-gooseneck-hole-or-spray-in-bedline",
-      "question": "How much is a gooseneck hole or spray-in bedliner?",
-      "keywords": [
-        "gooseneck",
-        "5th wheel",
-        "fifth wheel",
-        "hole",
-        "spray",
-        "bedliner"
-      ],
-      "answer": "Contact Better Beds for current bedliner pricing and availability. We do not offer installation; ask us to confirm the scope of any requested body work before making plans."
-    },
-    {
-      "id": "do-you-have-rust-free-oem-truck-beds",
-      "question": "Do you have rust-free OEM truck beds?",
-      "keywords": [
-        "rust",
-        "free",
-        "oem"
-      ],
-      "answer": "Rust-free OEM, used factory, and used factory original truck beds are a major focus, especially for customers from areas where clean beds are hard to find. Availability changes quickly, so text your truck details to 214-524-8401 and Better Beds can check options."
-    },
-    {
-      "id": "are-these-factory-original-beds",
-      "question": "Are these factory original beds?",
-      "keywords": [
-        "these",
-        "factory",
-        "original"
-      ],
-      "answer": "Better Beds focuses on OEM, factory original, and used factory truck beds rather than flimsy aftermarket beds. If a used factory original bed needs repair, paint, or bedliner, Better Beds can often handle that too."
-    },
-    {
-      "id": "do-you-work-with-toyota-nissan-jeep-gladiator-or",
-      "question": "Do you work with Toyota, Nissan, Jeep Gladiator, or other less common beds?",
-      "keywords": [
-        "work",
-        "toyota",
-        "nissan",
-        "jeep",
-        "gladiator",
-        "other",
-        "less",
-        "common"
-      ],
-      "answer": "Yes, Better Beds will do what it can for any customer needing a pickup bed. Chevy/GMC, Ford, and Dodge/Ram are the most common, so less common manufacturers may require extra fitment or parts-interchange research before quoting options."
-    },
-    {
-      "id": "how-much-does-a-replacement-truck-bed-cost",
-      "question": "How much does a replacement truck bed cost?",
-      "keywords": [
-        "replacement",
-        "bed",
-        "cost"
-      ],
-      "answer": "Pricing depends on truck year, make, model, bed length, bed condition, repair and paint work, parts, timing, and whether insurance is involved. Text photos and truck details for current pricing. Installation is not offered."
-    },
-    {
-      "id": "what-affects-the-price",
-      "question": "What affects the price?",
-      "keywords": [
-        "affects",
-        "price"
-      ],
-      "answer": "The bed itself, repair work, paint color, bedliner, parts, and timing can all affect price. Clean beds and high-demand beds can sell quickly."
-    },
-    {
-      "id": "is-paint-included",
-      "question": "Is paint included?",
-      "keywords": [
-        "paint",
-        "paint match",
-        "color match",
-        "paint code",
-        "included"
-      ],
-      "answer": "Paint and bedliner work are quoted according to the bed and the work requested. Contact us to confirm availability and timing. Installation is not offered."
-    },
-    {
-      "id": "can-i-reserve-a-bed-before-driving-to-dallas",
-      "question": "Can I reserve a bed before driving to Dallas?",
-      "keywords": [
-        "reserve",
-        "bed",
-        "driving",
-        "dallas"
-      ],
-      "answer": "Yes. Once the bed, price, timing, and paint plan are agreed on, Better Beds typically collects a $500 deposit and the paint code to reserve the bed and start the process."
-    },
-    {
-      "id": "can-i-pick-up-a-bed-instead-of-having-you-instal",
-      "question": "Can I pick up a bed instead of having you install it?",
-      "keywords": [
-        "install",
-        "installation",
-        "installed",
-        "pick",
-        "bed",
-        "instead",
-        "having"
-      ],
-      "answer": "Arrange pickup in Dallas after confirming the bed is ready. We can load it onto your trailer or the back of your truck using our forklift. Loading is for transport only; customers arrange installation elsewhere."
-    },
-    {
-      "id": "do-i-need-an-appointment",
-      "question": "Do I need an appointment?",
-      "keywords": [
-        "appointment"
-      ],
-      "answer": "Call or text before traveling so Better Beds can confirm inventory, pickup arrangements, and paint/body-work availability. Installation is not available."
-    },
-    {
-      "id": "do-you-charge-to-dispose-of-the-old-bed",
-      "question": "Do you charge to dispose of the old bed?",
-      "keywords": [
-        "charge",
-        "dispose",
-        "old",
-        "bed"
-      ],
-      "answer": "Better Beds does not charge disposal fees for the old bed. If the customer wants to keep the old bed, Better Beds can help you load it up."
-    },
-    {
-      "id": "do-you-do-spray-in-bedliners",
-      "question": "Do you do spray-in bedliners?",
-      "keywords": [
-        "spray",
-        "bedliners"
-      ],
-      "answer": "Yes. Better Beds offers spray-in bedliners and can include bedliner work with repair, paint, or replacement work when requested."
-    },
-    {
-      "id": "do-you-do-body-work-beyond-beds",
-      "question": "Do you do body work beyond beds?",
-      "keywords": [
-        "body",
-        "work",
-        "beyond"
-      ],
-      "answer": "Better Beds mainly specializes in truck beds, but also handles related body damage, panels, fenders, doors, insurance repair, and other truck/body work by request."
-    },
-    {
-      "id": "do-you-do-gooseneck-or-5th-wheel-prep",
-      "question": "Do you do gooseneck or 5th wheel prep?",
-      "keywords": [
-        "gooseneck",
-        "5th wheel",
-        "fifth wheel",
-        "5th",
-        "wheel",
-        "prep"
-      ],
-      "answer": "Better Beds no longer offers installation or installation-related prep. We sell truck beds, offer forklift loading for transport, and offer paint and body work by arrangement. Contact us to confirm the scope and availability of any requested body work."
-    },
-    {
-      "id": "do-you-do-lift-kits-or-mechanical-work",
-      "question": "Do you do lift kits or mechanical work?",
-      "keywords": [
-        "lift",
-        "kits",
-        "mechanical",
-        "work"
-      ],
-      "answer": "Better Beds no longer offers installation, including lift kit installation. Current services focus on truck bed sales, forklift loading for pickup, and paint and body work by arrangement. Mechanical or frame work is not advertised; confirm any requested work directly with Better Beds."
-    },
-    {
-      "id": "should-i-send-payment-info-through-the-website-f",
-      "question": "Should I send payment info through the website form?",
-      "keywords": [
-        "payment",
-        "pay",
-        "finance",
-        "financing",
-        "should",
-        "info",
-        "website",
-        "form"
-      ],
-      "answer": "No. Do not include payment information in forms or messages. Better Beds will follow up directly."
-    },
-    {
-      "id": "out-of-state-rust-free-beds",
-      "question": "Do you help out-of-state customers find rust-free truck beds?",
-      "keywords": [
-        "out of state",
-        "rust free",
-        "rust-free",
-        "clean southern",
-        "northern",
-        "road salt",
-        "michigan",
-        "ohio",
-        "missouri",
-        "kansas",
-        "oklahoma",
-        "iowa",
-        "indiana",
-        "illinois",
-        "minnesota",
-        "wisconsin",
-        "colorado",
-        "wyoming",
-        "arkansas"
-      ],
-      "answer": "Yes. Better Beds helps out-of-state customers who are tired of rusty local beds. The normal path is to contact us first, confirm the bed plan, then drive to Dallas for the replacement bed, needed repairs, paint to paint code, spray-in bedliner, and pickup."
-    },
-    {
-      "id": "out-of-state-price",
-      "question": "How much is a complete out-of-state truck bed replacement?",
-      "keywords": [
-        "3000",
-        "3,000",
-        "complete job",
-        "complete replacement",
-        "includes bedliner",
-        "includes install",
-        "painted installed",
-        "out of state price"
-      ],
-      "answer": "Pricing is quoted for the bed and any agreed repair, paint, or bedliner work. The previous complete-job package no longer applies because installation is not offered. Text truck details and photos to 214-524-8401 for current pricing and availability."
-    },
-    {
-      "id": "out-of-state-installs",
-      "question": "Do you install truck beds out of state?",
-      "keywords": [
-        "install out of state",
-        "come to me",
-        "mobile install",
-        "travel install",
-        "out of state install",
-        "will you install here"
-      ],
-      "answer": "Better Beds no longer offers installation or removal of existing truck beds. Customers arrange installation themselves or with another shop. We can use our forklift to load a purchased bed onto a trailer or the back of a truck for transport. Call or text before traveling to arrange pickup."
+      "answer": "Measure inside the bed from the front wall of the box to the inside of the closed tailgate. Send that measurement with your truck year, make, model, and rear wheel setup so we can check the listing with you."
     }
   ]
 }

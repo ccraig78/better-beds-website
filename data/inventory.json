@@ -1,0 +1,22 @@
+{
+  "items": [
+    {
+      "id": "ford-super-duty-short-bed-white",
+      "title": "2023–2026 Ford F-250 / F-350 short bed",
+      "make": "Ford",
+      "models": "F-250 / F-350",
+      "years": "2023–2026",
+      "bedLength": "Short bed",
+      "color": "White",
+      "condition": "New condition",
+      "category": "New takeoff beds",
+      "price": 2500,
+      "currency": "USD",
+      "includes": "Bed only",
+      "status": "available",
+      "image": null,
+      "imageAlt": null,
+      "url": "ford-super-duty-short-bed.html"
+    }
+  ]
+}

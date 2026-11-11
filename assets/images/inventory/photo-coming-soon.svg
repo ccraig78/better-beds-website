@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+  <defs>
+    <linearGradient id="surface" x2="1" y2="1"><stop stop-color="#eef0f4"/><stop offset="1" stop-color="#d9dfe8"/></linearGradient>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke="#1e2757" stroke-opacity=".045"/></pattern>
+  </defs>
+  <path fill="url(#surface)" d="M0 0h1200v800H0z"/><path fill="url(#grid)" d="M0 0h1200v800H0z"/>
+  <g fill="none" stroke="#8994ac" stroke-width="4" stroke-linejoin="round">
+    <path d="m275 355 350-145 290 125-345 165z"/><path d="M275 355v170l295 135 345-165V335M570 500v160"/>
+    <path d="m300 365 270 124 320-153M300 365v100l270 126 320-151V336M300 465l325-147 265 122M625 210v108"/>
+    <path d="m345 445 252 116m-213-134 252 115m-213-133 252 114m-212-132 251 113m-210-132 249 113" stroke-opacity=".5" stroke-width="2"/>
+    <path d="M275 525v-47c34-20 74-6 87 32v55m440-16v-49c35-29 69-27 82 6v17"/>
+  </g>
+  <g fill="#53617e" font-family="Arial,sans-serif" text-anchor="middle">
+    <text x="600" y="720" font-size="23" letter-spacing="5">PHOTO COMING SOON</text>
+    <text x="600" y="756" font-size="17" fill="#737f95">Illustration only · Not a photo of this item</text>
+  </g>
+</svg>

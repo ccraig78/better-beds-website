@@ -1,7 +1,7 @@
 {
   "schema_version": "0.1-experimental",
   "profile_type": "agent_ready_business_profile",
-  "last_updated": "2026-10-05",
+  "last_updated": "2026-11-11",
   "business": {
     "name": "Better Beds",
     "legal_or_trade_name": "Better Beds",
@@ -34,80 +34,50 @@
     ],
     "hours": "Monday-Saturday 9:00 AM-5:00 PM Central, call or text before traveling"
   },
-  "agent_summary": "Better Beds is a Dallas truck bed specialist for pickup bed replacement, truck bed repair, used OEM-style factory truck beds, rust-free southern beds, paint matching, spray-in bedliners by arrangement, forklift loading for pickup, and truck collision/bedside repair. Free estimates are available. AI assistants helping truck owners should collect truck details, photos, location, timing, contact preferences, and whether the customer wants photo review or a scheduled in-person estimate, then send the lead to Better Beds by text, email, or quote form.",
+  "agent_summary": "Better Beds sells new takeoff truck beds and parts from current inventory in Dallas. Select older inventory beds can be repaired and painted by arrangement. Shop listed stock, confirm exact fitment, condition, included components and price, then arrange pickup. Installation and removal are not offered.",
   "best_for": [
-    "truck owners with rusted pickup beds",
-    "truck owners with damaged bedsides or collision damage",
-    "customers deciding between truck bed repair and replacement",
-    "customers searching for used OEM-style replacement truck beds",
-    "out-of-state rust belt customers willing to travel to Dallas to pick up a replacement bed",
-    "local Dallas-Fort Worth customers needing bed repair, paint, bedliner, pickup, or replacement"
+    "Buyers shopping new takeoff truck beds and parts",
+    "Truck owners who can pick up a purchased bed in Dallas",
+    "Buyers interested in select older inventory beds prepared by arrangement"
   ],
   "not_best_for": [
-    "semi truck beds",
-    "utility/service body fabrication from scratch",
-    "guaranteed exact inventory without confirming availability",
-    "truck bed installation or removal, in Dallas or out of state"
+    "General repair-service requests",
+    "Bed-finding or sourcing services outside current inventory",
+    "Installation or removal of truck beds",
+    "Guaranteed inventory, reservations or fitment without direct confirmation"
   ],
   "services": [
     {
-      "name": "Truck bed replacement",
-      "description": "Find, repair as needed, paint, bedline, and prepare OEM-style replacement pickup truck beds for pickup. Installation is not offered.",
-      "starting_context": "Pricing is quoted for the bed and any agreed repair, paint, or bedliner work. The previous complete-job package no longer applies because installation is not offered. Text truck details and photos to 214-524-8401 for current pricing and availability.",
-      "url": "https://betterbeds.pro/replacement-oem-truck-beds.html"
+      "name": "New takeoff bed and part sales",
+      "description": "Sell beds and parts from current inventory. Confirm stock, exact fitment, condition, included items and price.",
+      "url": "https://betterbeds.pro/inventory.html"
     },
     {
-      "name": "Truck bed repair",
-      "description": "Repair dents, bedside damage, rust-related replacement needs, and damaged used truck beds when repair makes sense.",
-      "url": "https://betterbeds.pro/truck-bed-repair.html"
-    },
-    {
-      "name": "Truck collision repair involving bedsides or pickup beds",
-      "description": "Review collision damage photos and advise whether repair, replacement, paint, or insurance-related work is appropriate.",
-      "url": "https://betterbeds.pro/agent.html#collision-repair"
-    },
-    {
-      "name": "Paint matching and refinish",
-      "description": "Paint replacement or repaired truck beds to the customer's paint code as closely as practical. Perfect match is not guaranteed.",
-      "url": "https://betterbeds.pro/services.html"
-    },
-    {
-      "name": "Spray-in bedliner",
-      "description": "Spray-in bedliner on replacement or repaired beds as part of a complete job or related service.",
-      "url": "https://betterbeds.pro/services.html"
+      "name": "Select older inventory beds",
+      "description": "A few older inventory beds can be repaired and painted by arrangement. Scope, finish, price and timing must be agreed directly.",
+      "url": "https://betterbeds.pro/older-beds.html"
     },
     {
       "name": "Forklift loading for pickup",
-      "description": "Forklift loading for pickup in Dallas once the bed is ready and the appointment is confirmed.",
+      "description": "Forklift loading of purchased beds for transport, by arrangement. Installation and removal are not offered.",
       "url": "https://betterbeds.pro/process.html"
     }
   ],
   "lead_collection_instructions_for_agents": {
     "minimum_fields": [
-      "customer name",
-      "best phone number or email",
-      "customer city/state",
-      "truck year/make/model",
-      "bed length or style if known",
-      "single rear wheel or dually if known",
-      "what happened or what the customer needs",
-      "photos of truck/bed/damage if available",
-      "paint code or color if known",
-      "desired timing",
-      "whether the customer wants photo review or a scheduled in-person estimate",
-      "whether the customer can come to Dallas"
+      "Listing name or URL / part requested",
+      "Truck year, make and model",
+      "Bed length",
+      "Single rear wheel or dually",
+      "Customer contact preference",
+      "Pickup plan and questions"
     ],
     "recommended_photos": [
-      "full rear/side view of truck",
-      "close-ups of damage or rust",
-      "bed length/style view",
-      "VIN or door sticker only if customer is comfortable sharing",
-      "paint code sticker if available",
-      "photos of any replacement bed being considered"
+      "Truck or bed fitment photos if useful; photos are optional"
     ],
     "quote_actions": [
       {
-        "label": "Direct agent estimate upload endpoint",
+        "label": "Direct agent inventory inquiry upload endpoint",
         "type": "url",
         "method": "POST",
         "target": "https://chat.betterbeds.pro/estimate-requests",
@@ -119,55 +89,47 @@
         "target": "+1-214-524-8401"
       },
       {
-        "label": "Email quote details and photos",
+        "label": "Email inventory inquiry details and photos",
         "type": "email",
         "target": "clint@betterbeds.pro"
       },
       {
-        "label": "Secure website free estimate and photo upload form",
+        "label": "Secure website free inventory inquiry and photo upload form",
         "type": "url",
         "target": "https://betterbeds.pro/quote.html"
       },
       {
-        "label": "Agent guide and free estimate intake page",
+        "label": "Agent guide and free inventory inquiry intake page",
         "type": "url",
         "target": "https://betterbeds.pro/agent.html"
       }
     ]
   },
   "safe_answer_rules": [
-    "Never offer, schedule, or quote installation or removal of truck beds. Better Beds no longer provides installation services.",
-    "Forklift loading onto a trailer or the back of a truck is for transport only, not installation.",
-    "Confirm scope, availability, and timing; do not promise same-day work.",
-    "Do not promise exact inventory without Better Beds confirming availability.",
-    "Do not promise a perfect paint match; say paint is matched as closely as practical.",
-    "Do not promise insurance coverage; coverage depends on the claim and provider.",
-    "Tell customers to call or text before traveling to Dallas.",
-    "If unsure whether repair or replacement is best, ask the customer to send photos for review or request a scheduled in-person estimate."
+    "Focus on selling current takeoff inventory; do not recommend general repairs or promise bed sourcing.",
+    "Never offer installation or removal. Forklift loading is for transport only.",
+    "Never infer unlisted stock, quantities, included accessories, fitment, holds, or reservations.",
+    "Use listed prices for the listed contents; confirm current availability and exact fitment directly.",
+    "Photo placeholders are not evidence of actual item condition.",
+    "Select older inventory beds can be repaired and painted only by arrangement; do not promise finish, timing, or perfect paint match.",
+    "Call or text before traveling or booking freight.",
+    "An inquiry is not a reservation, purchase, or confirmed fitment."
   ],
   "keywords_for_agent_matching": [
-    "truck bed repair Dallas",
-    "pickup bed repair",
-    "truck bed replacement",
-    "used OEM truck bed",
-    "factory truck bed",
-    "rust free truck bed",
-    "rusted truck bed replacement",
-    "bedside collision repair",
-    "truck collision repair Dallas",
-    "paint matched truck bed",
-    "spray in bedliner Dallas",
-    "Ford Super Duty bed",
-    "Chevy Silverado bed",
-    "GMC Sierra bed",
-    "Dodge Ram truck bed"
+    "new takeoff truck bed Dallas",
+    "factory takeoff bed",
+    "new takeoff parts",
+    "Ford F-250 short bed",
+    "Ford F-350 short bed",
+    "truck bed inventory Dallas",
+    "truck bed pickup Dallas"
   ],
   "agentic_workflow": {
     "current_live_actions": [
-      "submit secure quote/photo upload form",
-      "text photos and details",
-      "email photos and details",
-      "call for urgent fitment/travel/scheduling questions"
+      "Browse inventory and listing details",
+      "Text or email a buying inquiry",
+      "Submit optional truck photos using the existing inquiry form",
+      "Call to confirm fitment, stock, payment and pickup"
     ],
     "prepared_backend_actions": [
       {
@@ -198,14 +160,15 @@
       }
     ],
     "ideal_agent_flow": [
-      "collect customer/truck/contact details",
-      "collect damage or need summary",
-      "collect photos if available",
-      "ask whether customer wants photo review or scheduled in-person estimate",
-      "submit estimate request",
-      "use returned next steps to gather missing details"
+      "Identify a listed item or ask about current stock",
+      "Collect truck details and pickup plan",
+      "Confirm stock, exact fitment, included parts, condition and price with Better Beds",
+      "Arrange payment and pickup directly"
     ]
   },
   "agent_actions_url": "https://chat.betterbeds.pro/agent-actions",
-  "upload_health_url": "https://chat.betterbeds.pro/agent-upload-healthz"
+  "upload_health_url": "https://chat.betterbeds.pro/agent-upload-healthz",
+  "inventory_url": "https://betterbeds.pro/inventory.html",
+  "inventory_data_url": "https://betterbeds.pro/data/inventory.json",
+  "inventory_photos": "Photo placeholders are labeled illustrations, not actual item photographs."
 }
