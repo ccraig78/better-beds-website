@@ -612,6 +612,36 @@
       "imageWidth": 1280,
       "imageHeight": 960,
       "url": "ford-super-duty-tailgate-star-white-step.html"
+    },
+    {
+      "id": "ford-super-duty-tailgate-carbonized-gray-no-step",
+      "title": "2023–2026 Ford F-250 / F-350 Carbonized Gray Metallic tailgate — no step",
+      "make": "Ford",
+      "models": "F-250 / F-350",
+      "years": "2023–2026",
+      "productType": "Tailgates",
+      "color": "Carbonized Gray Metallic",
+      "condition": "New condition",
+      "category": "New takeoff tailgates",
+      "price": 1000,
+      "currency": "USD",
+      "includes": "Tailgate only; camera not included",
+      "status": "available",
+      "features": [
+        {
+          "name": "Step",
+          "value": "No step"
+        },
+        {
+          "name": "Camera",
+          "value": "Removed — not included"
+        }
+      ],
+      "image": "assets/images/inventory/ford-super-duty-tailgate-carbonized-gray-no-step.jpg",
+      "imageAlt": "Carbonized Gray Metallic Ford F-250 / F-350 Super Duty tailgate without a step, photographed on a shop floor; camera removed",
+      "imageWidth": 960,
+      "imageHeight": 1280,
+      "url": "ford-super-duty-tailgate-carbonized-gray-no-step.html"
     }
   ]
 }
