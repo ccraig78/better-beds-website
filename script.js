@@ -84,3 +84,20 @@ if (upload) {
     }
   });
 }
+
+// Select an actual item photo while keeping its full-size link and caption in sync.
+document.querySelectorAll('[data-product-gallery]').forEach(gallery => {
+  const main = gallery.querySelector('[data-gallery-main]');
+  const full = gallery.querySelector('[data-gallery-full]');
+  const caption = gallery.querySelector('[data-gallery-caption]');
+  const thumbnails = [...gallery.querySelectorAll('[data-photo-src]')];
+  thumbnails.forEach(button => button.addEventListener('click', () => {
+    main.src = button.dataset.photoSrc;
+    main.alt = button.dataset.photoAlt;
+    main.width = Number(button.dataset.photoWidth);
+    main.height = Number(button.dataset.photoHeight);
+    full.href = button.dataset.photoSrc;
+    caption.textContent = button.dataset.photoCaption;
+    thumbnails.forEach(thumbnail => thumbnail.setAttribute('aria-pressed', String(thumbnail === button)));
+  }));
+});

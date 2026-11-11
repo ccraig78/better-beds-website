@@ -6,7 +6,7 @@ Static GitHub Pages site for https://betterbeds.pro/. GitHub Pages publishes the
 
 1. Edit `data/inventory.json`. Each item needs a unique `id` and root-level `.html` `url`, title, make, models, years, bedLength, color, condition, category, numeric price, currency, includes, and status. Use `status: "available"` for active inventory.
 2. Leave `image` and `imageAlt` as `null` until actual photos are available. The site shows an explicitly labeled placeholder. Do not use old damaged-bed photos as takeoff photos.
-3. For real photos, save an optimized image under `assets/images/inventory/` and set `image` to its relative path and `imageAlt` to an accurate description.
+3. For real photos, save an optimized image under `assets/images/inventory/` and set `image` to its relative path, `imageAlt` to an accurate description, and `imageWidth` / `imageHeight` to its dimensions. Add a `photos` array for multiple views; each entry uses `src`, `alt`, `caption`, `width`, and `height`. The first view should match `image`. Photos are presented unchanged, and the listing contents determine what is included.
 4. Run `python tools/build-site.py` from any directory. This generates the homepage, inventory, individual product pages, shared pages, legacy redirects, structured data and sitemap. Generated HTML is committed for GitHub Pages, which does not require Python at runtime.
 5. Review the pages, commit the JSON/photo/template changes along with generated HTML, and publish through the normal repository process.
 

@@ -1222,3 +1222,32 @@ figure {
 .product-media>img {
   object-fit:contain
 }
+/* Preserve the whole item photo, including the bed edges, in every placement. */
+.hero-visual img {
+  object-fit: contain;
+}
+.photo-thumbnails {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 16px;
+}
+.photo-thumb {
+  width: 112px;
+  padding: 3px;
+  background: #fff;
+  border: 2px solid var(--line);
+  border-radius: 5px;
+}
+.photo-thumb[aria-pressed="true"] {
+  border-color: var(--navy);
+}
+.photo-thumb img {
+  width: 100%;
+  height: auto;
+  border-radius: 2px;
+}
+.gallery-note {
+  font-size: .72rem;
+  margin: 12px 0 0;
+}
