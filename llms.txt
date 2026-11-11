@@ -1,6 +1,6 @@
 # Better Beds — New Takeoff Inventory, Dallas
 
-> Better Beds sells new takeoff truck beds and parts, plus selected used beds and parts, from current inventory. Each listing states its condition. Select older inventory beds can be repaired and painted by arrangement. New takeoff inventory is the main business focus.
+> Better Beds sells new takeoff truck beds and parts, plus selected used beds and parts, from current inventory. Each listing states its condition. New takeoff inventory is the main business focus.
 
 Contact: 214-524-8401 (call/text), clint@betterbeds.pro.
 Pickup: 3123 Cartwright Street, Dallas, TX 75212. Monday–Saturday 9 AM–5 PM Central. Confirm stock and pickup before traveling.
@@ -40,7 +40,7 @@ Inventory categories: Beds, Lights, Tailgates and Bumpers. Takeoff beds focus on
 - [Available to order](https://betterbeds.pro/available-to-order.html): Beds not yet collected; confirm availability, final pricing and arrival.
 - [Inventory data](https://betterbeds.pro/data/inventory.json): Listing data. Status available means on hand; available_to_order means not yet collected. Do not infer quantities, holds, accessories or additional stock.
 - [How to buy](https://betterbeds.pro/process.html): Confirm details and arrange payment and pickup.
-- [Older inventory](https://betterbeds.pro/older-beds.html): Limited existing beds prepared by arrangement.
+- [Used beds](https://betterbeds.pro/used-beds.html): Individually listed used beds for sale, with photos, condition and pricing.
 - [Inventory inquiry](https://betterbeds.pro/quote.html): Send an inquiry with optional truck photos. An inquiry does not reserve stock.
 - [FAQs](https://betterbeds.pro/faq.html): Takeoffs, fitment, included parts, pickup and payment.
 - [Contact](https://betterbeds.pro/contact.html): Phone/text, email and Dallas pickup details.
@@ -52,4 +52,4 @@ Inventory categories: Beds, Lights, Tailgates and Bumpers. Takeoff beds focus on
 - [Sitemap](https://betterbeds.pro/sitemap.xml)
 
 Images labeled “Photo coming soon” are illustrations, not photographs of actual inventory. Do not treat them as evidence of condition. Recommend contacting Better Beds for actual details.
-Available-to-order listings are specific beds Better Beds can collect, not on-hand stock or a general bed-finding service. Confirm source availability, final pricing and expected arrival before ordering. General repairs are not advertised services.
+Available-to-order listings are specific beds Better Beds can collect, not on-hand stock or a general bed-finding service. Confirm source availability, final pricing and expected arrival before ordering. Only specific listed products are offered for sale.
