@@ -11,7 +11,7 @@ from urllib.parse import quote
 from xml.etree import ElementTree as ET
 
 ROOT=Path(__file__).resolve().parents[1]
-VERSION='20261111-inventory-v4'
+VERSION='20261111-inventory-v5'
 ORIGIN='https://betterbeds.pro/'
 PLACEHOLDER='assets/images/inventory/photo-coming-soon.svg'
 PART_PLACEHOLDER='assets/images/inventory/part-photo-coming-soon.svg'
@@ -32,6 +32,10 @@ def length_aliases(item):
     if not match: return ''
     feet,inches=int(match[1]),int(match[2] or 0)
     return f'{feet} ft {inches} in {feet} foot {inches} inch {feet} feet {inches} inches {feet*12+inches} inch {feet+inches/12:g} ft'
+
+def length_inches(item):
+    match=re.fullmatch(r"(\d+)'(?:(\d+)\")?",item.get('bedLength',''))
+    return int(match[1])*12+int(match[2] or 0) if match else ''
 
 def feature_summary(item):
     return '; '.join(f'{feature["name"]}: {feature["value"]}' for feature in item.get('features',[]))
@@ -78,7 +82,7 @@ def card(item):
     terms=' '.join(str(item.get(key,'')) for key in ['title','make','models','years','color','bedLength','bedStyle','condition','includes','category','productType'])+' '+length_aliases(item)+' '+feature_summary(item)
     specs=[item['color'],bed_spec(item),item['condition'],item['includes']]
     chips=''.join(f'<span>{esc(value)}</span>' for value in specs if value)
-    return f'''<article class="product-card" data-inventory-item data-search="{esc(terms)}" data-type="{esc(product_type(item))}" data-make="{esc(item['make'])}" data-color="{esc(item['color'])}">
+    return f'''<article class="product-card" data-inventory-item data-search="{esc(terms)}" data-type="{esc(product_type(item))}" data-make="{esc(item['make'])}" data-color="{esc(item['color'])}" data-bed-inches="{length_inches(item)}">
       <a class="product-media" href="{esc(item['url'])}" aria-label="View {esc(item['title'])}">{photo(item)}<span class="tag takeoff">New takeoff</span></a>
       <div class="product-body"><p class="product-category">{esc(item['category'])} · Dallas, TX</p><h3><a href="{esc(item['url'])}">{esc(item['title'])}</a></h3>
       <div class="specs">{chips}</div>

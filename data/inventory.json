@@ -187,6 +187,50 @@
       "imageWidth": 1280,
       "imageHeight": 960,
       "url": "ford-super-duty-chrome-rear-bumper-no-sensor-holes.html"
+    },
+    {
+      "id": "ford-f350-eight-foot-dually-star-white",
+      "title": "2023–2026 Ford F-350 8' dually bed",
+      "make": "Ford",
+      "models": "F-350",
+      "years": "2023–2026",
+      "productType": "Beds",
+      "bedLength": "8'",
+      "bedStyle": "Dually",
+      "color": "Star White Metallic Tri-Coat",
+      "condition": "New condition",
+      "category": "New takeoff beds",
+      "price": 2500,
+      "currency": "USD",
+      "includes": "Bed only",
+      "status": "available",
+      "features": [
+        {
+          "name": "Rear wheel setup",
+          "value": "Dually (dual rear wheel / DRW)"
+        }
+      ],
+      "image": "assets/images/inventory/ford-f350-eight-foot-dually-star-white-rear.jpg",
+      "imageAlt": "Star White Metallic Tri-Coat Ford F-350 8-foot dually takeoff bed with wide rear fenders, rear three-quarter view",
+      "imageWidth": 1280,
+      "imageHeight": 960,
+      "photos": [
+        {
+          "src": "assets/images/inventory/ford-f350-eight-foot-dually-star-white-rear.jpg",
+          "alt": "Star White Metallic Tri-Coat Ford F-350 8-foot dually takeoff bed with wide rear fenders, rear three-quarter view",
+          "caption": "Rear three-quarter view of the dually bed.",
+          "width": 1280,
+          "height": 960
+        },
+        {
+          "src": "assets/images/inventory/ford-f350-eight-foot-dually-star-white-opposite.jpg",
+          "alt": "Opposite-side view of the Star White Metallic Tri-Coat Ford F-350 8-foot dually bed and bed interior",
+          "caption": "Opposite-side view and bed interior.",
+          "width": 1280,
+          "height": 960
+        }
+      ],
+      "url": "ford-f350-eight-foot-dually-star-white.html"
     }
   ]
 }
