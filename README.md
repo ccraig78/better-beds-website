@@ -54,3 +54,5 @@ The inventory accepts shared filter links such as `inventory.html?type=Tailgates
 Use an optional `itemLabel` for a specific singular part name, such as `taillight`, so product buttons and inquiries describe an individual light correctly. For separate driver/passenger listings, use distinct IDs, URLs and correctly matched photos; state the side, halogen/LED type, included sensor/module, and whether the price is for one light or a pair. Sensor presence does not claim operational testing.
 
 When an inventory search includes a measurement, it compares the actual bed length numerically. For example, `8'` / `8 ft` / `96 inch` selects an eight-foot bed, while `6'9"` / `6.75 ft` / `81 inch` selects the short bed. Other search words and filters still apply.
+
+Condition labels also control badges and offer markup. `Gently used` maps to `UsedCondition` and gets a gently-used badge. Product descriptions use the stated category/condition instead of assuming every item is new. Use damage and bedliner features to record confirmed details; storage orientation in photo captions describes the photo, not damage.

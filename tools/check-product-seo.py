@@ -56,6 +56,9 @@ for item in items:
     product=products[0]; offer=product['offers']
     assert product['url']==url and offer['url']==url
     assert offer['price']==item['price'] and offer['priceCurrency']==item['currency']
+    condition={'New condition':'NewCondition','Gently used':'UsedCondition','Used condition':'UsedCondition','Refurbished':'RefurbishedCondition'}.get(item['condition'])
+    if condition: assert offer.get('itemCondition')=='https://schema.org/'+condition, item['id']+': incorrect item condition'
+    if condition=='UsedCondition': assert 'New takeoff inventory' not in product['description']
     expected={'available':'InStock','sold':'SoldOut'}.get(item['status'],'OutOfStock')
     assert offer['availability']=='https://schema.org/'+expected, item['id']+': stale stock markup'
     assert product['color']==item['color'] and product['brand']['name']==item['make']
