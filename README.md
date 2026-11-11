@@ -4,13 +4,13 @@ Static GitHub Pages site for https://betterbeds.pro/. GitHub Pages publishes the
 
 ## Add or update inventory
 
-1. Edit `data/inventory.json`. Each item needs a unique `id` and root-level `.html` `url`, title, make, models, years, bedLength, color, condition, category, numeric price, currency, includes, and status. Use `status: "available"` for active inventory.
+1. Edit `data/inventory.json`. Each item needs a unique `id` and root-level `.html` `url`, title, `productType` (Beds, Lights, Tailgates or Bumpers), make, models, years, color, condition, category, numeric price, currency, includes, and status. Beds also need `bedLength` (the actual measurement, such as `6'9"` or `8'`) and `bedStyle` (Short bed, Long bed or Dually). Include both in the bed title. Use Ford, Ram, Chevy or GMC consistently as the make. Add part-specific facts in `features`, an array of `{ "name": "Release", "value": "Manual release" }` entries. Use `status: "available"` for active inventory.
 2. Leave `image` and `imageAlt` as `null` until actual photos are available. The site shows an explicitly labeled placeholder. Do not use old damaged-bed photos as takeoff photos.
 3. For real photos, save an optimized image under `assets/images/inventory/` and set `image` to its relative path, `imageAlt` to an accurate description, and `imageWidth` / `imageHeight` to its dimensions. Add a `photos` array for multiple views; each entry uses `src`, `alt`, `caption`, `width`, and `height`. The first view should match `image`. Photos are presented unchanged, and the listing contents determine what is included.
 4. Run `python tools/build-site.py` from any directory. This generates the homepage, inventory, individual product pages, shared pages, legacy redirects, structured data and sitemap. Generated HTML is committed for GitHub Pages, which does not require Python at runtime.
 5. Review the pages, commit the JSON/photo/template changes along with generated HTML, and publish through the normal repository process.
 
-The product templates currently describe new takeoff, bed-only inventory. When adding other product types, adapt the product detail inclusion copy and condition schema in `tools/build-site.py` to match the confirmed item. Do not invent quantities, accessories, stock or fitment.
+The product templates support beds, lights, tailgates and bumpers. Bed-only measurements are omitted from other parts. Set the exact included contents and features for every item; no camera, step, wiring, modules, brackets or hardware should be assumed included. Condition schema is emitted only for recognized condition values. Do not invent quantities, accessories, stock or fitment. Inventory filters use the part type, make and actual listed colors; empty categories are shown as having zero listings.
 
 ## Shared content and behavior
 
@@ -48,3 +48,5 @@ Use `status: "sold"` when a bed sells. Keep its original ID and URL: the item le
 `robots.txt` explicitly permits Googlebot, Googlebot-Image, Bingbot, OAI-SearchBot and ChatGPT-User. Cloudflare can add its own crawler policy ahead of the source file; verify the public robots.txt and crawler access after hosting changes. OpenAI search and model-training crawlers are separate. Allowing search does not require changing the existing Cloudflare training policy.
 
 Search Console ownership verification, sitemap submission, URL inspection and monitoring happen in the Google account, outside this repository. The sitemap URL is `https://betterbeds.pro/sitemap.xml`. A Merchant Center feed or direct ChatGPT merchant feed is a separate account integration, not something this website claims to have submitted. Structured data and crawl access support discovery; search engines control indexing and appearance.
+
+The inventory accepts shared filter links such as `inventory.html?type=Tailgates&make=Ford&color=White`. These use the canonical inventory page; each actual product retains its own indexable URL. Bed measurements are searchable using feet/inches punctuation, spelled-out feet/inches, total inches, and familiar style names. These aliases help onsite search; exact measurements and style are also present in the visible product page, title and structured data.

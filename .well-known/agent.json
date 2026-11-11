@@ -170,5 +170,39 @@
   "upload_health_url": "https://chat.betterbeds.pro/agent-upload-healthz",
   "inventory_url": "https://betterbeds.pro/inventory.html",
   "inventory_data_url": "https://betterbeds.pro/data/inventory.json",
-  "inventory_photos": "The Ford short-bed listing has actual item photos. Other listings may use labeled placeholder illustrations. Pictured accessories are not necessarily included; confirm the listing contents."
+  "inventory_photos": "The Ford short-bed listing has actual item photos. Other listings may use labeled placeholder illustrations. Pictured accessories are not necessarily included; confirm the listing contents.",
+  "inventory_categories": [
+    "Beds",
+    "Lights",
+    "Tailgates",
+    "Bumpers"
+  ],
+  "takeoff_bed_model_range": {
+    "Ford": [
+      "F-250",
+      "F-350"
+    ],
+    "Ram": [
+      "2500",
+      "3500"
+    ],
+    "Chevy": [
+      "2500",
+      "3500"
+    ],
+    "GMC": [
+      "2500",
+      "3500"
+    ]
+  },
+  "inventory_attributes": [
+    "Actual bed length plus style name for beds",
+    "Part type",
+    "Make and models",
+    "Model years",
+    "Color",
+    "Condition",
+    "Price",
+    "Included components and features"
+  ]
 }

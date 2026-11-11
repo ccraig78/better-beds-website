@@ -4,22 +4,22 @@
   "email": "clint@betterbeds.pro",
   "location": "3123 Cartwright Street, Dallas, Texas 75212",
   "hours": "Monday–Saturday, 9 AM–5 PM Central. Call/text before traveling.",
-  "defaultIntake": "Send your truck year, make, model, bed length, rear wheel setup, and the inventory item you are interested in. Confirm stock, fitment, condition, included parts, price, and pickup.",
+  "defaultIntake": "Send the listing name or part type, truck year/make/model, and contact or pickup questions. For beds, include actual length and rear wheel setup. Confirm stock, exact fitment, condition, included parts, price, and pickup.",
   "entries": [
     {
       "id": "takeoff",
-      "question": "What is a new takeoff bed?",
+      "question": "What is a new takeoff bed or part?",
       "keywords": [
         "takeoff",
         "take-off",
         "new bed",
         "factory"
       ],
-      "answer": "A new takeoff bed is a factory truck bed removed from a new truck, commonly during a conversion to a flatbed or service body. Check the individual listing for condition and included parts, and ask about any handling or storage marks."
+      "answer": "A new takeoff is a factory bed or part removed from a new truck, often during a conversion to a flatbed or service body. Check the individual listing for condition, included components, and features. Ask about any handling or storage marks."
     },
     {
       "id": "inventory",
-      "question": "What beds do you have, and what do they cost?",
+      "question": "What beds and parts are available, and what do they cost?",
       "keywords": [
         "inventory",
         "in stock",
@@ -30,7 +30,7 @@
         "price",
         "cost"
       ],
-      "answer": "Our listed inventory includes: 2023–2026 Ford F-250 / F-350 short bed, white, new condition, $2,500, bed only. Call or text 214-524-8401 to confirm availability, exact fitment, condition, and what is included before purchasing or traveling. Ask about other takeoff parts in current stock."
+      "answer": "Our listed inventory includes: 2023–2026 Ford F-250 / F-350 6'9\" short bed, white, new condition, $2,500, bed only; 2023–2026 Ford F-250 / F-350 tailgate, white, new condition, $700, tailgate only; no camera included (Step: No step; Camera: Not included; Release: Manual release). Call or text 214-524-8401 to confirm availability, exact fitment, condition, and what is included before purchasing or traveling. Ask about other takeoff parts in current stock."
     },
     {
       "id": "included",
@@ -168,6 +168,21 @@
         "long bed"
       ],
       "answer": "Measure inside the bed from the front wall of the box to the inside of the closed tailgate. Send that measurement with your truck year, make, model, and rear wheel setup so we can check the listing with you."
+    },
+    {
+      "id": "part-types",
+      "question": "What types of takeoff parts do you list?",
+      "keywords": [
+        "tailgate",
+        "lights",
+        "bumper",
+        "parts",
+        "categories",
+        "chevy",
+        "gmc",
+        "ram"
+      ],
+      "answer": "Browse Beds, Lights, Tailgates, and Bumpers in the inventory. Use the make and color filters to find current listings. Our takeoff bed range focuses on Ford F-250/F-350 and Ram, Chevy, and GMC 2500/3500 series. Each bed listing includes its exact length and style name. Category and make filters do not guarantee stock; confirm the specific listing with Better Beds."
     }
   ]
 }
