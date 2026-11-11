@@ -538,6 +538,50 @@
         }
       ],
       "url": "ram-3500-eight-foot-dually-gray.html"
+    },
+    {
+      "id": "chevy-3500-eight-foot-dually-black",
+      "title": "2023–2026 Chevy 3500 8' dually bed — black",
+      "make": "Chevy",
+      "models": "3500",
+      "years": "2023–2026",
+      "productType": "Beds",
+      "bedLength": "8'",
+      "bedStyle": "Dually",
+      "color": "Black",
+      "condition": "New condition",
+      "category": "New takeoff beds",
+      "price": 2500,
+      "currency": "USD",
+      "includes": "Bed only",
+      "status": "available",
+      "features": [
+        {
+          "name": "Rear wheel setup",
+          "value": "Dually (dual rear wheel / DRW)"
+        }
+      ],
+      "image": "assets/images/inventory/chevy-3500-eight-foot-dually-black-rear.jpg",
+      "imageAlt": "Black Chevy 3500 8-foot dually takeoff bed, rear three-quarter view with wide rear fender and bed interior visible",
+      "imageWidth": 1280,
+      "imageHeight": 960,
+      "photos": [
+        {
+          "src": "assets/images/inventory/chevy-3500-eight-foot-dually-black-rear.jpg",
+          "alt": "Black Chevy 3500 8-foot dually takeoff bed, rear three-quarter view with wide rear fender and bed interior visible",
+          "caption": "Rear three-quarter view of the black dually bed.",
+          "width": 1280,
+          "height": 960
+        },
+        {
+          "src": "assets/images/inventory/chevy-3500-eight-foot-dually-black-opposite.jpg",
+          "alt": "Opposite-side view of the black Chevy 3500 8-foot dually bed showing the fuel door and wide rear fender",
+          "caption": "Opposite side, fuel door, and wide dually fender.",
+          "width": 1280,
+          "height": 960
+        }
+      ],
+      "url": "chevy-3500-eight-foot-dually-black.html"
     }
   ]
 }
