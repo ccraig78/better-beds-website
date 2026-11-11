@@ -795,6 +795,34 @@
         }
       ],
       "url": "ford-f350-eight-foot-dually-carbonized-gray.html"
+    },
+    {
+      "id": "ford-f350-eight-foot-dually-black",
+      "title": "2023–2026 Ford F-350 8' dually bed — black",
+      "make": "Ford",
+      "models": "F-350",
+      "years": "2023–2026",
+      "productType": "Beds",
+      "bedLength": "8'",
+      "bedStyle": "Dually",
+      "color": "Black",
+      "condition": "New condition",
+      "category": "New takeoff beds",
+      "price": 2500,
+      "currency": "USD",
+      "includes": "Bed only",
+      "status": "available_to_order",
+      "features": [
+        {
+          "name": "Rear wheel setup",
+          "value": "Dually (dual rear wheel / DRW)"
+        }
+      ],
+      "image": "assets/images/inventory/ford-f350-eight-foot-dually-black-rear.jpg",
+      "imageAlt": "Black Ford F-350 8-foot dually bed available to order, rear three-quarter view with wide rear fender",
+      "imageWidth": 1280,
+      "imageHeight": 1034,
+      "url": "ford-f350-eight-foot-dually-black.html"
     }
   ]
 }
