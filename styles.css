@@ -1251,6 +1251,40 @@ figure {
   font-size: .72rem;
   margin: 12px 0 0;
 }
+.tag.order-tag {
+  background: #fff0c2;
+  color: #533b00;
+}
+.order-notice {
+  padding: 22px 24px;
+  margin-bottom: 32px;
+  border-left: 4px solid var(--navy);
+  border-radius: 4px;
+  background: var(--paper);
+  color: var(--navy);
+}
+.order-notice p {
+  margin: 8px 0 0;
+}
+.order-notice .actions {
+  margin-top: 20px;
+}
+@media (min-width: 801px) and (max-width: 1000px) {
+  .nav-toggle { display: block; }
+  .site-nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    padding: 20px;
+    background: #fff;
+    border-bottom: 1px solid var(--line);
+    box-shadow: 0 12px 20px #15214b14;
+  }
+  .site-nav.open { display: grid; gap: 0; }
+  .site-nav a { padding: 13px 10px; font-size: .9rem; }
+}
 .category-links {
   display: grid;
   grid-template-columns: repeat(4,minmax(0,1fr));

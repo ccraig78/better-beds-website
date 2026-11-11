@@ -40,6 +40,7 @@ ns={'s':'http://www.sitemaps.org/schemas/sitemap/0.9','image':'http://www.google
 sitemap=ET.parse(ROOT/'sitemap.xml').getroot()
 sitemap_entries={entry.find('s:loc',ns).text:entry for entry in sitemap.findall('s:url',ns)}
 catalog=Page((ROOT/'inventory.html').read_text())
+order_catalog=Page((ROOT/'available-to-order.html').read_text())
 for item in items:
     url=ORIGIN+item['url']
     source=(ROOT/item['url']).read_text()
@@ -47,20 +48,30 @@ for item in items:
     assert page.canonical==url, item['id']+': canonical URL'
     assert 'noindex' not in page.metas['robots'], item['id']+': indexability'
     assert item['title'] in page.title and 'Dallas' in page.title, item['id']+': descriptive title'
-    assert '$'+format(item['price'],',.0f') in source and item['includes'] in source
+    expected_price='$'+format(item['price'],',.0f') if item.get('price') is not None else 'Contact for pricing'
+    assert expected_price in source and item['includes'] in source
     assert url in sitemap_entries, item['id']+': sitemap inclusion'
     for agent in ['Googlebot','Googlebot-Image','Bingbot','OAI-SearchBot','ChatGPT-User']:
         assert robots.can_fetch(agent,url), item['id']+': '+agent+' blocked'
     products=[schema for schema in page.schemas if schema['@type']=='Product']
     assert len(products)==1, item['id']+': must describe a single product'
-    product=products[0]; offer=product['offers']
-    assert product['url']==url and offer['url']==url
-    assert offer['price']==item['price'] and offer['priceCurrency']==item['currency']
+    product=products[0]; offer=product.get('offers')
+    assert product['url']==url
+    if item.get('price') is not None:
+        assert offer['url']==url and offer['price']==item['price'] and offer['priceCurrency']==item['currency']
+    else:
+        assert item['status']=='available_to_order' and offer is None, 'Do not invent a price for order beds'
     condition={'New condition':'NewCondition','Gently used':'UsedCondition','Used condition':'UsedCondition','Refurbished':'RefurbishedCondition'}.get(item['condition'])
-    if condition: assert offer.get('itemCondition')=='https://schema.org/'+condition, item['id']+': incorrect item condition'
+    if condition: assert (offer or product).get('itemCondition')=='https://schema.org/'+condition, item['id']+': incorrect item condition'
     if condition=='UsedCondition': assert 'New takeoff inventory' not in product['description']
-    expected={'available':'InStock','sold':'SoldOut'}.get(item['status'],'OutOfStock')
-    assert offer['availability']=='https://schema.org/'+expected, item['id']+': stale stock markup'
+    expected={'available':'InStock','available_to_order':'PreOrder','sold':'SoldOut'}.get(item['status'],'OutOfStock')
+    if offer: assert offer['availability']=='https://schema.org/'+expected, item['id']+': stale stock markup'
+    if item['status']=='available_to_order':
+        assert item['url'] in order_catalog.links and item['url'] not in catalog.links
+        assert 'not at our shop yet' in source and 'not at our Dallas shop yet' in product['description']
+        assert 'https://schema.org/InStock' not in source
+    elif item['status']=='available':
+        assert item['url'] not in order_catalog.links
     assert product['color']==item['color'] and product['brand']['name']==item['make']
     assert any(p['name']=='Includes' and p['value']==item['includes'] for p in product['additionalProperty'])
     assert any(schema['@type']=='BreadcrumbList' for schema in page.schemas)

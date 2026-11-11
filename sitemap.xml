@@ -7,6 +7,9 @@
     <loc>https://betterbeds.pro/inventory.html</loc>
   </url>
   <url>
+    <loc>https://betterbeds.pro/available-to-order.html</loc>
+  </url>
+  <url>
     <loc>https://betterbeds.pro/ford-super-duty-short-bed.html</loc>
     <image:image>
       <image:loc>https://betterbeds.pro/assets/images/inventory/ford-super-duty-short-bed-white-rear.jpg</image:loc>
@@ -145,6 +148,15 @@
     </image:image>
     <image:image>
       <image:loc>https://betterbeds.pro/assets/images/inventory/ford-super-duty-platinum-tailgate-black-used-stored.jpg</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://betterbeds.pro/gmc-sierra-3500-eight-foot-dually-white.html</loc>
+    <image:image>
+      <image:loc>https://betterbeds.pro/assets/images/inventory/gmc-sierra-3500-eight-foot-dually-white-rear.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://betterbeds.pro/assets/images/inventory/gmc-sierra-3500-eight-foot-dually-white-fuel-side.jpg</image:loc>
     </image:image>
   </url>
   <url>

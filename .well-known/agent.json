@@ -106,7 +106,7 @@
     ]
   },
   "safe_answer_rules": [
-    "Focus on selling current takeoff inventory; do not recommend general repairs or promise bed sourcing.",
+    "Focus on current inventory and specifically listed available-to-order beds; do not recommend general repairs or promise sourcing of unlisted beds.",
     "Never offer installation or removal. Forklift loading is for transport only.",
     "Never infer unlisted stock, quantities, included accessories, fitment, holds, or reservations.",
     "Use listed prices for the listed contents; confirm current availability and exact fitment directly.",
@@ -114,7 +114,8 @@
     "Select older inventory beds can be repaired and painted only by arrangement; do not promise finish, timing, or perfect paint match.",
     "Call or text before traveling or booking freight.",
     "An inquiry is not a reservation, purchase, or confirmed fitment.",
-    "Use the individual listing condition. Used beds and parts must not be described as new takeoffs or assigned NewCondition."
+    "Use the individual listing condition. Used beds and parts must not be described as new takeoffs or assigned NewCondition.",
+    "Available-to-order beds are specific listed beds we can collect, not on-hand stock or ready for Dallas pickup. Confirm source availability, final pricing and expected arrival. Do not promise a collection date or infer a deposit policy."
   ],
   "keywords_for_agent_matching": [
     "new takeoff truck bed Dallas",
@@ -205,5 +206,11 @@
     "Condition",
     "Price",
     "Included components and features"
-  ]
+  ],
+  "available_to_order_url": "https://betterbeds.pro/available-to-order.html",
+  "inventory_statuses": {
+    "available": "On hand; confirm current availability before pickup.",
+    "available_to_order": "Not yet collected; not at our Dallas shop. Confirm source availability, final pricing and expected arrival. An inquiry does not place an order.",
+    "sold": "Sold; not available."
+  }
 }

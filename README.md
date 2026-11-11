@@ -45,6 +45,14 @@ Run `python tools/check-product-seo.py` after generating pages. The check verifi
 
 Use `status: "sold"` when a bed sells. Keep its original ID and URL: the item leaves available-inventory lists while its page remains accessible and shows SoldOut in structured data. `reserved` and other unavailable statuses use OutOfStock. Update the record promptly; do not reuse a sold item's URL for a different item. New product types need their condition and included-parts copy checked as described above.
 
+## Beds available to order
+
+Use `status: "available_to_order"` for a specific bed Better Beds can collect but has not picked up yet. It appears on `available-to-order.html` with an explicit not-at-the-shop notice, and is excluded from on-hand cards, category counts and the on-hand FAQ stock summary. Use the same confirmed specifications, included components and actual-photo rules as other inventory. Do not invent collection dates, quantities or deposit terms.
+
+Priced order beds use `PreOrder` offer availability, never `InStock`. If an order price is not set, use `price: null`: the page says “Contact for pricing” and omits the Offer rather than fabricating a zero price. Once collected, change the same record to `status: "available"` and set the confirmed numeric price. Its URL stays the same, while the listing moves to on-hand inventory and its schema becomes `InStock`.
+
+Run `python tools/check-order-pages.py` to verify order listings, unknown prices and the transition to on-hand stock in a temporary workspace.
+
 `robots.txt` explicitly permits Googlebot, Googlebot-Image, Bingbot, OAI-SearchBot and ChatGPT-User. Cloudflare can add its own crawler policy ahead of the source file; verify the public robots.txt and crawler access after hosting changes. OpenAI search and model-training crawlers are separate. Allowing search does not require changing the existing Cloudflare training policy.
 
 Search Console ownership verification, sitemap submission, URL inspection and monitoring happen in the Google account, outside this repository. The sitemap URL is `https://betterbeds.pro/sitemap.xml`. A Merchant Center feed or direct ChatGPT merchant feed is a separate account integration, not something this website claims to have submitted. Structured data and crawl access support discovery; search engines control indexing and appearance.
