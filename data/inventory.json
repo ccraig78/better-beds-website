@@ -1,0 +1,40 @@
+{
+  "items": [
+    {
+      "id": "ford-super-duty-short-bed-white",
+      "title": "2023–2026 Ford F-250 / F-350 short bed",
+      "make": "Ford",
+      "models": "F-250 / F-350",
+      "years": "2023–2026",
+      "bedLength": "Short bed",
+      "color": "White",
+      "condition": "New condition",
+      "category": "New takeoff beds",
+      "price": 2500,
+      "currency": "USD",
+      "includes": "Bed only",
+      "status": "available",
+      "image": "assets/images/inventory/ford-super-duty-short-bed-white-rear.jpg",
+      "imageAlt": "White Ford F-250 / F-350 short takeoff bed, rear three-quarter view with the bed interior visible",
+      "url": "ford-super-duty-short-bed.html",
+      "imageWidth": 1280,
+      "imageHeight": 960,
+      "photos": [
+        {
+          "src": "assets/images/inventory/ford-super-duty-short-bed-white-rear.jpg",
+          "alt": "White Ford F-250 / F-350 short takeoff bed, rear three-quarter view with the bed interior visible",
+          "caption": "Rear three-quarter view and bed interior.",
+          "width": 1280,
+          "height": 960
+        },
+        {
+          "src": "assets/images/inventory/ford-super-duty-short-bed-white-side.jpg",
+          "alt": "Side view of the white Ford F-250 / F-350 short takeoff bed showing the fuel door and wheel opening",
+          "caption": "Side view, fuel door, and wheel opening.",
+          "width": 1280,
+          "height": 960
+        }
+      ]
+    }
+  ]
+}

@@ -1,71 +1,38 @@
-# Better Beds Website
+# Better Beds inventory website
 
-Website files for Better Beds Dallas.
+Static GitHub Pages site for https://betterbeds.pro/. GitHub Pages publishes the repository root on `main`. The site now focuses on new takeoff truck beds and parts, with select older inventory beds prepared by arrangement.
 
-## Current setup
+## Add or update inventory
 
-This is a simple static website so it can be hosted easily on Hostinger and versioned through GitHub.
+1. Edit `data/inventory.json`. Each item needs a unique `id` and root-level `.html` `url`, title, make, models, years, bedLength, color, condition, category, numeric price, currency, includes, and status. Use `status: "available"` for active inventory.
+2. Leave `image` and `imageAlt` as `null` until actual photos are available. The site shows an explicitly labeled placeholder. Do not use old damaged-bed photos as takeoff photos.
+3. For real photos, save an optimized image under `assets/images/inventory/` and set `image` to its relative path, `imageAlt` to an accurate description, and `imageWidth` / `imageHeight` to its dimensions. Add a `photos` array for multiple views; each entry uses `src`, `alt`, `caption`, `width`, and `height`. The first view should match `image`. Photos are presented unchanged, and the listing contents determine what is included.
+4. Run `python tools/build-site.py` from any directory. This generates the homepage, inventory, individual product pages, shared pages, legacy redirects, structured data and sitemap. Generated HTML is committed for GitHub Pages, which does not require Python at runtime.
+5. Review the pages, commit the JSON/photo/template changes along with generated HTML, and publish through the normal repository process.
 
-## Files
+The product templates currently describe new takeoff, bed-only inventory. When adding other product types, adapt the product detail inclusion copy and condition schema in `tools/build-site.py` to match the confirmed item. Do not invent quantities, accessories, stock or fitment.
 
-- `index.html` — page content and structure
-- `styles.css` — layout, colors, responsive design
-- `script.js` — mobile menu and small page behaviors
+## Shared content and behavior
 
-## Photo workflow
+- `tools/build-site.py`: shared layout, page content, product cards and metadata.
+- `styles.css`: responsive storefront styles.
+- `script.js`: mobile menu, inventory search, SMS/email message builder and existing multipart inquiry form integration.
+- `faq-widget.js`: Roadie quick answers from the published FAQ knowledge file. It does not call the old remote repair-oriented chatbot.
+- `data/faq-knowledge.json`: published FAQ page and Roadie answers. The generator updates the inventory answer from the listing data. Edit the other answers when business policies change.
+- `.well-known/agent.json`: assistant-facing business policies. `llms.txt` is generated with current listings. Update the profile when business policies change.
 
-Real job photos can be added later and used in the repair gallery. Best folders to add next:
+## Existing inquiry integration
 
-```text
-assets/
-  images/
-    jobs/
-      job-01-before.jpg
-      job-01-after.jpg
-```
+The inventory inquiry form retains `https://chat.betterbeds.pro/estimate-requests`, its multipart field names, and optional image upload limits (6 images, 5 MB each, 15 MB total). The endpoint path keeps its historical name. It is managed outside this repository. Do not submit test leads to production; intercept requests in browser tests. Call/text/email remain available if the form fails.
 
-## Contact form note
+Clarity project `uzvvg1g1vl`, the existing phone/email/address/hours, financing application link, pickup and forklift-loading policy are retained. Installation and removal are not offered.
 
-The first draft uses a temporary `mailto:` form. Before launch, connect this to one of these:
+Legacy gallery, repair-example and bed-finding URLs direct visitors to current inventory or the secondary older-bed page, without showing old damaged-bed photos.
 
-- Hostinger form/email handling
-- Formspree / Basin / Netlify-style form endpoint
-- A small PHP form handler on Hostinger
+## Restore point
 
-## FAQ Assistant Widget
+The verified pre-change website backup is at commit `45efac9bffaa1100b54cd896139851c083dbf9c1`. A full bundle and source archive were saved before this change. Production restoration should use a new commit that restores that source tree, preserving history.
 
-This site now includes a lightweight Better Beds FAQ assistant widget on every HTML page.
+## Checks
 
-### Files
-
-- `faq-widget.js` — floating chat/FAQ widget.
-- `data/faq-knowledge.json` — approved FAQ answers the widget can use.
-- `api/faq-unanswered.php` — PHP endpoint for questions the widget cannot answer.
-- `private/faq-unanswered.jsonl` — created on the server when unanswered questions arrive.
-- `tools/add-faq-answer.py` — local helper to add approved answers to the widget knowledge base.
-
-### How unanswered questions work
-
-If the widget cannot confidently answer, it asks the visitor for name/contact info and sends the question to `api/faq-unanswered.php`.
-
-The PHP endpoint:
-
-1. saves the question to `private/faq-unanswered.jsonl`;
-2. emails `clint@betterbeds.pro` by default;
-3. reminds Euro/Buddy to add the approved answer to `data/faq-knowledge.json` after Clint approves it.
-
-Hostinger should run the PHP endpoint if the site is deployed on PHP-capable hosting. If the endpoint is not available, the widget falls back to a `mailto:` button so the visitor can still email the question.
-
-### Adding Clint's approved answer to the knowledge base
-
-From the repo root:
-
-```bash
-tools/add-faq-answer.py "Customer question?" "Approved Better Beds answer." "keyword one, keyword two, keyword three"
-```
-
-Then commit/deploy the updated `data/faq-knowledge.json`.
-
-### Safety boundaries
-
-The widget should not promise exact pricing, exact inventory, perfect paint match, insurance coverage, or exact completion time unless Better Beds has verified it. It should never collect card, bank, or payment information.
+Run `python tools/build-site.py`, `node --check script.js`, `node --check faq-widget.js`, and `node tools/check-service-policy.cjs` before publication.

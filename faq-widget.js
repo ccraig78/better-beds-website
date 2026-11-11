@@ -1,457 +1,60 @@
-(() => {
-  const CONFIG = {
-    knowledgeUrl: 'data/faq-knowledge.json?v=20261005-pickup-only-v1',
-    chatEndpoint: 'https://chat.betterbeds.pro/better-beds-chat',
-    unansweredEndpoint: 'api/faq-unanswered.php',
-    guardrailVersion: 'website-chatbot-pickup-only-2026-10-05',
-    smsHref: 'sms:2145248401?body=Hi%20Better%20Beds%2C%20I%27d%20like%20a%20quote.%20I%27ll%20send%20truck%20photos%20and%20details.',
-    phoneHref: 'tel:2145248401',
-    quoteHref: 'quote.html'
-  };
-
-  const styles = `
-    .bb-faq-widget * { box-sizing: border-box; }
-    .bb-faq-widget { position: fixed; right: clamp(14px, 2.2vw, 28px); bottom: 112px; z-index: 9999; font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #07182e; }
-    .bb-faq-toggle { border: 0; border-radius: 999px; background: linear-gradient(135deg, #0b4f9c, #0d7dd8); color: white; box-shadow: 0 14px 35px rgba(0, 30, 80, .35); padding: 13px 18px; font-weight: 900; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; letter-spacing: .01em; }
-    .bb-faq-toggle:hover, .bb-faq-toggle:focus { transform: translateY(-1px); outline: 3px solid rgba(13, 125, 216, .25); }
-    .bb-faq-panel { width: min(620px, calc(100vw - 32px)); height: min(720px, calc(100vh - 120px)); min-height: 560px; display: none; flex-direction: column; overflow: hidden; border-radius: 22px; background: #fff; box-shadow: 0 22px 70px rgba(2, 12, 30, .38); border: 1px solid rgba(9, 35, 70, .14); }
-    .bb-faq-widget.is-open { bottom: clamp(18px, 3vh, 36px); }
-    .bb-faq-widget.is-open .bb-faq-panel { display: flex; }
-    .bb-faq-widget.is-open .bb-faq-toggle { display: none; }
-    .bb-faq-header { background: linear-gradient(135deg, #061a35, #0b4f9c); color: white; padding: 18px 20px; display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; }
-    .bb-faq-header strong { display: block; font-size: 1.16rem; }
-    .bb-faq-header span { display: block; color: rgba(255,255,255,.86); font-size: .92rem; margin-top: 3px; }
-    .bb-faq-close { background: rgba(255,255,255,.14); color: white; border: 1px solid rgba(255,255,255,.22); width: 36px; height: 36px; border-radius: 999px; cursor: pointer; font-size: 22px; line-height: 1; flex: 0 0 auto; }
-    .bb-faq-messages { padding: 18px; overflow-y: auto; background: #f4f7fb; display: grid; gap: 12px; align-content: start; flex: 1 1 auto; min-height: 260px; }
-    .bb-faq-message { border-radius: 16px; padding: 12px 14px; line-height: 1.42; font-size: .98rem; max-width: 88%; }
-    .bb-faq-message.bot { background: white; border: 1px solid rgba(9, 35, 70, .10); justify-self: start; }
-    .bb-faq-message.user { background: #0b4f9c; color: white; justify-self: end; }
-    .bb-faq-message.thinking { display: inline-flex; align-items: center; gap: 8px; }
-    .bb-faq-spinner { width: 14px; height: 14px; border: 2px solid rgba(11,79,156,.22); border-top-color: #0b4f9c; border-radius: 999px; animation: bb-faq-spin .8s linear infinite; flex: 0 0 auto; }
-    @keyframes bb-faq-spin { to { transform: rotate(360deg); } }
-    .bb-faq-quick { display: flex; flex-wrap: wrap; gap: 8px; padding: 0 18px 14px; background: #f4f7fb; }
-    .bb-faq-chip { border: 1px solid rgba(11,79,156,.20); background: white; color: #0b376b; border-radius: 999px; padding: 9px 12px; cursor: pointer; font-weight: 850; font-size: .84rem; }
-    .bb-faq-chip:hover { background: #eaf4ff; }
-    .bb-faq-form { border-top: 1px solid rgba(9, 35, 70, .12); padding: 14px; display: grid; gap: 10px; background: white; flex: 0 0 auto; }
-    .bb-faq-row { display: flex; gap: 9px; }
-    .bb-faq-input { flex: 1; min-width: 0; border: 1px solid rgba(9, 35, 70, .20); border-radius: 14px; padding: 12px 13px; font: inherit; }
-    .bb-faq-send { border: 0; border-radius: 14px; background: #0b4f9c; color: white; font-weight: 900; padding: 0 16px; cursor: pointer; }
-    .bb-faq-escalation { display: none; gap: 8px; grid-template-columns: 1fr; border-top: 1px dashed rgba(9,35,70,.18); padding-top: 10px; }
-    .bb-faq-escalation.is-visible { display: grid; }
-    .bb-faq-escalation input, .bb-faq-escalation textarea { width: 100%; border: 1px solid rgba(9, 35, 70, .20); border-radius: 12px; padding: 9px 10px; font: inherit; }
-    .bb-faq-actions { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
-    .bb-faq-actions a, .bb-faq-actions button { text-decoration: none; border: 0; border-radius: 999px; padding: 9px 12px; font-weight: 900; cursor: pointer; font-size: .84rem; }
-    .bb-faq-actions a { background: #eaf4ff; color: #073b73; }
-    .bb-faq-actions .bb-faq-primary-link { background: #0b4f9c; color: white; }
-    .bb-faq-submit-question { background: #0b4f9c; color: white; }
-    .bb-faq-small { color: #526070; font-size: .8rem; line-height: 1.35; }
-    .bb-faq-footer-cta { color: #526070; font-size: .8rem; line-height: 1.35; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
-    .bb-faq-footer-cta a { color: #0b4f9c; font-weight: 900; text-decoration: underline; text-underline-offset: .16em; }
-    .bb-faq-cta-card { justify-self: start; max-width: 92%; background: #eef7ff; border: 1px solid rgba(11,79,156,.16); border-radius: 16px; padding: 12px; display: grid; gap: 9px; }
-    .bb-faq-cta-card strong { color: #09284a; }
-    @media (max-width: 760px) { .bb-faq-widget { left: 8px; right: 8px; bottom: calc(112px + env(safe-area-inset-bottom)); transform: none; display: block; width: auto; } .bb-faq-widget.is-open { bottom: calc(8px + env(safe-area-inset-bottom)); } .bb-faq-toggle { margin-left: auto; padding: 12px 16px; justify-content: center; width: max-content; max-width: 100%; } .bb-faq-panel { width: calc(100vw - 16px); height: min(760px, calc(100dvh - 18px)); min-height: 0; max-height: none; border-radius: 18px; } .bb-faq-message { max-width: 94%; } .bb-faq-header { padding: 15px; } .bb-faq-messages { padding: 14px; } }
-  `;
-
-  const state = {
-    knowledge: null,
-    lastQuestion: '',
-    escalationVisible: false,
-    sessionId: (globalThis.crypto?.randomUUID ? globalThis.crypto.randomUUID() : `bb-${Date.now()}-${Math.random().toString(16).slice(2)}`),
-    conversationHistory: []
-  };
-  let knowledgePromise = null;
-
-  const loadKnowledge = () => {
-    if (state.knowledge || knowledgePromise) return knowledgePromise || Promise.resolve();
-    knowledgePromise = fetch(CONFIG.knowledgeUrl, { cache: 'no-store' })
-      .then((response) => (response.ok ? response.json() : null))
-      .then((knowledge) => { if (knowledge) state.knowledge = knowledge; })
-      .catch(() => {})
-      .finally(() => { knowledgePromise = null; });
-    return knowledgePromise;
-  };
-
-  const escapeHtml = (value) => String(value).replace(/[&<>'"]/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[char]));
-  const normalize = (value) => String(value || '').toLowerCase().replace(/[^a-z0-9\s]/g, ' ').replace(/\s+/g, ' ').trim();
-
-  // Current service policy overrides saved and remote answers.
-  const SERVICE_POLICY = {
-    installation: "Better Beds no longer offers installation or removal of existing truck beds. Customers arrange installation themselves or with another shop. We can use our forklift to load a purchased bed onto a trailer or the back of a truck for transport. Call or text before traveling to arrange pickup.",
-    loading: "Arrange pickup in Dallas after confirming the bed is ready. We can load it onto your trailer or the back of your truck using our forklift. Loading is for transport only; customers arrange installation elsewhere.",
-    relatedWork: 'Better Beds currently focuses on truck bed sales, forklift loading for pickup, and paint and body work by arrangement. Installation is not offered. Contact us to confirm the scope, availability, and timing of any requested body work.'
-  };
-  const servicePolicyAnswer = (question) => {
-    const q = normalize(question);
-    if (/\b(install\w*|swap\w*|mount\w*|bolt\w*)\b/.test(q)
-      || /\b(remov\w*|take off)\b.*\b(bed|flatbed|body)\b/.test(q)
-      || /\b(bed|flatbed|body)\b.*\b(remov\w*)\b/.test(q)) return SERVICE_POLICY.installation;
-    if (/\b(forklift|loading|load|pick up|pickup arrangements|transport)\b/.test(q)) return SERVICE_POLICY.loading;
-    if (/\b(lift kit\w*|mechanical|frame adjustment|gooseneck|5th wheel|fifth wheel)\b/.test(q)) return SERVICE_POLICY.relatedWork;
-    return '';
-  };
-  const enforceServicePolicy = (reply) => {
-    const text = normalize(reply);
-    if (/\b(install\w*|swap\w*|mount\w*|bolt\w*)\b/.test(text)
-      || /\b(remov\w*|take off)\b.*\b(bed|flatbed|body)\b/.test(text)) return SERVICE_POLICY.installation;
-    if (/\b(lift kit\w*|mechanical|frame adjustment|gooseneck|5th wheel|fifth wheel)\b/.test(text)) return SERVICE_POLICY.relatedWork;
-    return reply;
-  };
-
-  const addMessage = (messages, text, type = 'bot') => {
-    const bubble = document.createElement('div');
-    bubble.className = `bb-faq-message ${type}`;
-    bubble.innerHTML = escapeHtml(text).replace(/\n/g, '<br>');
-    messages.appendChild(bubble);
-    messages.scrollTop = messages.scrollHeight;
-    return bubble;
-  };
-
-  const scoreEntry = (query, entry) => {
-    const normalizedQuery = normalize(query);
-    if (!normalizedQuery) return 0;
-    let score = 0;
-    const haystack = normalize(`${entry.question} ${(entry.keywords || []).join(' ')}`);
-    (entry.keywords || []).forEach((keyword) => {
-      const normalizedKeyword = normalize(keyword);
-      if (!normalizedKeyword) return;
-      if (normalizedQuery.includes(normalizedKeyword)) score += Math.min(8, normalizedKeyword.split(' ').length * 2 + 1);
-    });
-    normalizedQuery.split(' ').forEach((word) => {
-      if (word.length > 2 && haystack.includes(word)) score += 1;
-    });
-    return score;
-  };
-
-  const shouldRoadieReview = (question, match) => {
-    const q = normalize(question);
-    if (!match?.entry) return true;
-    const hasSpecificTruck = /\b(19\d{2}|20\d{2}|chevy|gmc|ford|ram|dodge|toyota|nissan|jeep|silverado|sierra|f150|f-150|f250|f-250|f350|f-350|1500|2500|3500|dually)\b/.test(q);
-    const asksExactInventory = /\b(in stock|inventory|available|do you have|have a|have any|currently have|ready now)\b/.test(q);
-    const asksExactFitment = /\b(fit|fits|compatible|interchange|bolt on|work on my)\b/.test(q) && hasSpecificTruck;
-    const asksFinalQuote = /\b(final quote|exact price|firm price|out the door|total price)\b/.test(q);
-    const mentionsPhotosOrDamage = /\b(photo|picture|damage|damaged|wreck|collision|rusted out|repair this|estimate this)\b/.test(q) && hasSpecificTruck;
-    return asksExactInventory || asksExactFitment || asksFinalQuote || mentionsPhotosOrDamage;
-  };
-
-  const classifyMatch = (question) => {
-    const entries = state.knowledge?.entries || [];
-    let best = null;
-    let bestScore = 0;
-    entries.forEach((entry) => {
-      const score = scoreEntry(question, entry);
-      if (score > bestScore) {
-        best = entry;
-        bestScore = score;
-      }
-    });
-    if (!best || bestScore < 3) return { entry: null, score: bestScore, level: 'none', roadieNeeded: true };
-    const level = bestScore >= 7 ? 'high' : 'medium';
-    return { entry: best, score: bestScore, level, roadieNeeded: shouldRoadieReview(question, { entry: best, score: bestScore, level }) };
-  };
-
-  const conversationalFaqAnswer = (match) => {
-    if (!match?.entry?.answer) return '';
-    if (match.level === 'medium') {
-      return `${match.entry.answer}\n\nIf you want, send your truck details/photos and Better Beds can get more specific.`;
-    }
-    return match.entry.answer;
-  };
-
-  const findAnswer = (question) => {
-    const match = classifyMatch(question);
-    return match.entry ? match.entry : null;
-  };
-
-  const shouldShowLeadPrompt = (question, answer = '') => {
-    const text = normalize(`${question} ${answer}`);
-    return /\b(quote|estimate|price|cost|how much|repair|replace|replacement|in stock|available|inventory|damage|damaged|collision|rust|rusted|paint|bedliner|install|photos|pictures)\b/.test(text);
-  };
-
-  const logLowConfidenceQuestion = (question, match) => {
-    if (match?.level === 'high' && !match.roadieNeeded) return;
-    try {
-      fetch(CONFIG.unansweredEndpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          question,
-          source: 'roadie-low-confidence-log',
-          faqMatchId: match?.entry?.id || null,
-          faqScore: match?.score || 0,
-          faqLevel: match?.level || 'none',
-          roadieNeeded: Boolean(match?.roadieNeeded),
-          page: window.location.href,
-          userAgent: navigator.userAgent,
-          submittedAt: new Date().toISOString()
-        })
-      }).catch(() => {});
-    } catch (error) {
-      // Best-effort improvement log only.
-    }
-  };
-
-  const rememberTurn = (role, content) => {
-    state.conversationHistory.push({ role, content: String(content || '').slice(0, 2000), timestamp: new Date().toISOString() });
-    if (state.conversationHistory.length > 12) state.conversationHistory = state.conversationHistory.slice(-12);
-  };
-
-  const callRoadie = async (question, fallbackMatch = null) => {
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 45000);
-    try {
-      const response = await fetch(CONFIG.chatEndpoint, {
-        method: 'POST',
-        signal: controller.signal,
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          sessionId: state.sessionId,
-          messageId: `turn-${Date.now()}-${Math.random().toString(16).slice(2, 10)}`,
-          timestamp: new Date().toISOString(),
-          page: window.location.href,
-          message: question,
-          conversationHistory: state.conversationHistory.slice(-10),
-          guardrailVersion: CONFIG.guardrailVersion,
-          servicePolicy: SERVICE_POLICY,
-          sourceFallbackMatch: fallbackMatch
-        })
-      });
-      if (!response.ok) throw new Error(`Roadie HTTP ${response.status}`);
-      const data = await response.json();
-      const reply = data.reply || data.answer;
-      if (!reply) throw new Error('Roadie empty reply');
-      return { ok: true, data, reply: enforceServicePolicy(reply) };
-    } catch (error) {
-      return { ok: false, error };
-    } finally {
-      clearTimeout(timeout);
-    }
-  };
-
-  const showEscalation = (root, question = '') => {
-    state.escalationVisible = true;
-    const escalation = root.querySelector('.bb-faq-escalation');
-    const textarea = root.querySelector('[name="bbFaqQuestionDetails"]');
-    if (textarea && question) textarea.value = question;
-    escalation?.classList.add('is-visible');
-  };
-
-  const hideEscalation = (root) => {
-    state.escalationVisible = false;
-    root.querySelector('.bb-faq-escalation')?.classList.remove('is-visible');
-    root.querySelectorAll('.bb-faq-cta-card').forEach((card) => card.remove());
-  };
-
-  const showQuoteCta = (messages) => {
-    if (messages.querySelector('.bb-faq-cta-card')) return;
-    const card = document.createElement('div');
-    card.className = 'bb-faq-cta-card';
-    card.innerHTML = `
-      <strong>Need a real quote?</strong>
-      <div class="bb-faq-small">Roadie can answer quick questions here. For an accurate quote, photos and truck details help most.</div>
-      <div class="bb-faq-actions">
-        <a class="bb-faq-primary-link" href="${CONFIG.quoteHref}">Open photo quote form</a>
-        <a href="${CONFIG.smsHref}">Text photos</a>
-        <a href="${CONFIG.phoneHref}">Call</a>
-      </div>
-    `;
-    messages.appendChild(card);
-    messages.scrollTop = messages.scrollHeight;
-  };
-
-  const buildWidget = () => {
-    if (document.querySelector('.bb-faq-widget')) return;
-
-    const styleEl = document.createElement('style');
-    styleEl.textContent = styles;
-    document.head.appendChild(styleEl);
-
-    const root = document.createElement('section');
-    root.className = 'bb-faq-widget';
-    root.setAttribute('aria-label', 'Better Beds Roadie chat assistant');
-    root.innerHTML = `
-      <button class="bb-faq-toggle" type="button" aria-expanded="false">💬 Ask Better Beds</button>
-      <div class="bb-faq-panel" role="dialog" aria-modal="false" aria-label="Better Beds Roadie chat assistant">
-        <div class="bb-faq-header">
-          <div><strong>Roadie</strong><span>Better Beds AI helper for truck beds, repair, paint, pickup, and quotes.</span></div>
-          <button class="bb-faq-close" type="button" aria-label="Close Roadie chat assistant">×</button>
-        </div>
-        <div class="bb-faq-messages" aria-live="polite"></div>
-        <div class="bb-faq-quick" aria-label="Common questions">
-          <button class="bb-faq-chip" type="button">How much does a bed cost?</button>
-          <button class="bb-faq-chip" type="button">Do you install beds?</button>
-          <button class="bb-faq-chip" type="button">Where are you located?</button>
-          <button class="bb-faq-chip" type="button">Will paint match?</button>
-        </div>
-        <form class="bb-faq-form">
-          <div class="bb-faq-row">
-            <input class="bb-faq-input" name="bbFaqQuestion" autocomplete="off" placeholder="Ask a truck bed question…" aria-label="Ask a truck bed question" />
-            <button class="bb-faq-send" type="submit">Send</button>
-          </div>
-          <div class="bb-faq-escalation" aria-label="Send unanswered question to Better Beds">
-            <div class="bb-faq-small">Want Better Beds to answer this? Leave your name and the best phone/email. Please don’t send payment info here.</div>
-            <input name="bbFaqName" autocomplete="name" placeholder="Your name" />
-            <input name="bbFaqContact" autocomplete="email tel" placeholder="Phone or email for reply" />
-            <textarea name="bbFaqQuestionDetails" rows="3" placeholder="Question or truck details"></textarea>
-            <div class="bb-faq-actions">
-              <button class="bb-faq-submit-question" type="button">Send to Better Beds</button>
-              <a href="${CONFIG.smsHref}">Text photos instead</a>
-              <a href="${CONFIG.phoneHref}">Call now</a>
-            </div>
-          </div>
-          <div class="bb-faq-footer-cta">Ask Roadie here first. Ready for an estimate? <a href="${CONFIG.quoteHref}">Open the photo quote form</a>.</div>
-        </form>
-      </div>
-    `;
-    document.body.appendChild(root);
-
-    const toggle = root.querySelector('.bb-faq-toggle');
-    const close = root.querySelector('.bb-faq-close');
-    const messages = root.querySelector('.bb-faq-messages');
-    const form = root.querySelector('.bb-faq-form');
-    const questionInput = root.querySelector('[name="bbFaqQuestion"]');
-    const detailsInput = root.querySelector('[name="bbFaqQuestionDetails"]');
-    const submitQuestion = root.querySelector('.bb-faq-submit-question');
-
-    addMessage(messages, 'Hi — I’m Roadie, the Better Beds AI helper. I can help with truck beds, repair, paint, pickup, bedliners, and quote questions. We no longer offer installation, but can load a bed for transport with our forklift.');
-
-    toggle.addEventListener('click', () => {
-      void loadKnowledge();
-      root.classList.add('is-open');
-      toggle.setAttribute('aria-expanded', 'true');
-      setTimeout(() => questionInput.focus(), 50);
-    });
-    close.addEventListener('click', () => {
-      root.classList.remove('is-open');
-      toggle.setAttribute('aria-expanded', 'false');
-    });
-
-    root.querySelectorAll('.bb-faq-chip').forEach((chip) => {
-      chip.addEventListener('click', () => {
-        questionInput.value = chip.textContent.trim();
-        form.dispatchEvent(new Event('submit', { cancelable: true }));
-      });
-    });
-
-    form.addEventListener('submit', async (event) => {
-      event.preventDefault();
-      const question = questionInput.value.trim();
-      if (!question) return;
-      state.lastQuestion = question;
-      addMessage(messages, question, 'user');
-      rememberTurn('customer', question);
-      questionInput.value = '';
-      hideEscalation(root);
-      const policyAnswer = servicePolicyAnswer(question);
-      if (policyAnswer) {
-        addMessage(messages, policyAnswer);
-        rememberTurn('assistant', policyAnswer);
-        return;
-      }
-      await loadKnowledge();
-
-      const faqMatch = classifyMatch(question);
-      const faqAnswer = faqMatch.entry ? conversationalFaqAnswer(faqMatch) : '';
-      const fallbackMatch = faqMatch.entry ? {
-        matched: true,
-        source: 'faq',
-        questionId: faqMatch.entry.id || null,
-        confidence: faqMatch.score || 0,
-        approvedAnswer: faqMatch.entry.answer,
-        level: faqMatch.level
-      } : { matched: false, source: 'none', questionId: null, confidence: faqMatch.score || 0, approvedAnswer: null };
-
-      if (faqMatch.entry && !faqMatch.roadieNeeded && faqMatch.level === 'high') {
-        addMessage(messages, faqAnswer);
-        rememberTurn('assistant', faqAnswer);
-        if (shouldShowLeadPrompt(question, faqAnswer)) showQuoteCta(messages);
-        return;
-      }
-
-      if (faqMatch.entry && !faqMatch.roadieNeeded && faqMatch.level === 'medium') {
-        addMessage(messages, faqAnswer);
-        rememberTurn('assistant', faqAnswer);
-        logLowConfidenceQuestion(question, faqMatch);
-        if (shouldShowLeadPrompt(question, faqAnswer)) showQuoteCta(messages);
-        return;
-      }
-
-      logLowConfidenceQuestion(question, faqMatch);
-      const thinking = addMessage(messages, 'Roadie is thinking…');
-      thinking.classList.add('thinking');
-      thinking.insertAdjacentHTML('afterbegin', '<span class="bb-faq-spinner" aria-hidden="true"></span>');
-      const roadie = await callRoadie(question, fallbackMatch);
-      thinking.remove();
-
-      if (roadie.ok) {
-        addMessage(messages, roadie.reply);
-        rememberTurn('assistant', roadie.reply);
-        if (roadie.data?.escalate) showEscalation(root, question);
-        else if (shouldShowLeadPrompt(question, roadie.reply)) showQuoteCta(messages);
-        return;
-      }
-
-      if (faqMatch.entry) {
-        addMessage(messages, `${faqAnswer}
-
-Roadie is having trouble connecting right now, so I used a saved Better Beds answer.`);
-        rememberTurn('assistant', faqAnswer);
-        if (shouldShowLeadPrompt(question, faqAnswer)) showQuoteCta(messages);
-      } else {
-        const fallback = "I’m not fully sure on that one, and I don’t want to guess. Send it to Better Beds and someone can follow up with the right answer.";
-        addMessage(messages, `${fallback}
-
-Roadie is having trouble connecting right now.`);
-        rememberTurn('assistant', fallback);
-        showEscalation(root, question);
-      }
-    });
-
-    submitQuestion.addEventListener('click', async () => {
-      const payload = {
-        question: detailsInput.value.trim() || state.lastQuestion,
-        name: root.querySelector('[name="bbFaqName"]').value.trim(),
-        contact: root.querySelector('[name="bbFaqContact"]').value.trim(),
-        page: window.location.href,
-        userAgent: navigator.userAgent,
-        submittedAt: new Date().toISOString()
-      };
-      if (!payload.question) {
-        addMessage(messages, 'Please type the question first.');
-        return;
-      }
-
-      submitQuestion.disabled = true;
-      submitQuestion.textContent = 'Sending…';
-      try {
-        const response = await fetch(CONFIG.unansweredEndpoint, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-        if (!response.ok) throw new Error('Bad response');
-        addMessage(messages, 'Got it — Better Beds received your question. If you left contact info, someone can follow up directly.');
-        hideEscalation(root);
-        form.reset();
-      } catch (error) {
-        const subject = encodeURIComponent('Unanswered Better Beds website question');
-        const body = encodeURIComponent(`Question: ${payload.question}\nName: ${payload.name}\nContact: ${payload.contact}\nPage: ${payload.page}`);
-        addMessage(messages, 'I could not send that automatically from this page. You can still email it to Better Beds with the button that just appeared.');
-        const actionRow = document.createElement('div');
-        actionRow.className = 'bb-faq-actions';
-        actionRow.innerHTML = `<a href="mailto:clint@betterbeds.pro?subject=${subject}&body=${body}">Email this question</a>`;
-        messages.appendChild(actionRow);
-      } finally {
-        submitQuestion.disabled = false;
-        submitQuestion.textContent = 'Send to Better Beds';
-      }
-    });
-  };
-
-  const init = () => buildWidget();
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
+// Roadie uses the published FAQ answers, so the inventory policy stays consistent.
+function betterBedsFaqAnswer(question, entries, id) {
+  const fallback = 'Call or text 214-524-8401 with your truck year, make, model, bed length, and the item you’re interested in. Better Beds will confirm current stock, fitment, condition, what’s included, and pricing.';
+  const q = question.toLowerCase();
+  let match = id ? entries.find(entry => entry.id === id) : null;
+  const preferred = /\b(install|installation|remove|removal|swap)\b/.test(q) ? 'installation'
+    : /\b(pickup|loading|forklift|trailer)\b/.test(q) ? 'pickup'
+    : /\b(stock|available|inventory|ford|f.?250|f.?350|chevy|gmc|ram|price|cost|how much)\b/.test(q) ? 'inventory'
+    : /\b(takeoff|take-off)\b/.test(q) ? 'takeoff' : null;
+  if (!match && preferred) match = entries.find(entry => entry.id === preferred);
+  if (!match) {
+    const scored = entries.map(entry => ({ entry, score: entry.keywords.reduce((n, keyword) => n + (q.includes(keyword.toLowerCase()) ? keyword.length : 0), 0) })).sort((a, b) => b.score - a.score);
+    if (scored[0]?.score >= 4) match = scored[0].entry;
   }
+  return match?.answer || fallback;
+}
+if (typeof module !== 'undefined' && module.exports) module.exports = { betterBedsFaqAnswer };
+if (typeof document !== 'undefined') (() => {
+  const widget = document.createElement('aside');
+  widget.className = 'roadie';
+  widget.setAttribute('aria-label', 'Better Beds quick answers');
+  widget.innerHTML = `<button type="button" class="roadie-toggle" aria-expanded="false" aria-controls="roadie-panel">Questions? <span aria-hidden="true">↗</span></button>
+    <section id="roadie-panel" class="roadie-panel" aria-label="Roadie quick answers" hidden>
+      <div class="roadie-header"><div><strong>Roadie</strong><small>Better Beds · Quick answers</small></div><button type="button" class="roadie-close" aria-label="Close quick answers">×</button></div>
+      <div class="roadie-body"><p>Ask about takeoff beds, pricing, fitment, or pickup. Call or text to confirm a specific item.</p>
+      <div class="roadie-chips"><button type="button" data-question="takeoff">What’s a takeoff?</button><button type="button" data-question="inventory">Current stock</button><button type="button" data-question="installation">Pickup & installation</button></div>
+      <form class="roadie-form"><label for="roadie-question">Your question</label><div><input id="roadie-question" maxlength="500" placeholder="e.g. Do you have a Ford bed?" required><button type="submit">Ask</button></div></form>
+      <p class="roadie-answer" aria-live="polite"></p><a class="text-link" href="sms:2145248401?body=Hi%20Better%20Beds%2C%20I%20have%20an%20inventory%20question.">Text Better Beds →</a></div>
+    </section>`;
+  document.body.append(widget);
+  const toggle = widget.querySelector('.roadie-toggle');
+  const panel = widget.querySelector('.roadie-panel');
+  const input = widget.querySelector('input');
+  const answer = widget.querySelector('.roadie-answer');
+  let knowledge;
+  let pending;
+  const load = async () => {
+    if (knowledge) return knowledge;
+    if (pending) return pending;
+    pending = fetch('data/faq-knowledge.json?v=20261111-inventory').then(response => {
+      if (!response.ok) throw new Error('FAQ unavailable');
+      return response.json();
+    }).then(data => { knowledge = data; return data; }).catch(() => ({ entries: [] })).finally(() => { pending = null; });
+    return pending;
+  };
+  const close = () => { panel.hidden = true; toggle.hidden = false; toggle.setAttribute('aria-expanded', 'false'); toggle.focus(); };
+  toggle.addEventListener('click', () => { panel.hidden = false; toggle.hidden = true; toggle.setAttribute('aria-expanded', 'true'); input.focus(); load(); });
+  widget.querySelector('.roadie-close').addEventListener('click', close);
+  widget.addEventListener('keydown', event => { if (event.key === 'Escape') close(); });
+  let latest = 0;
+  const respond = async (question, id) => {
+    const request = ++latest;
+    answer.textContent = 'Checking…';
+    const data = await load();
+    if (request !== latest) return;
+    answer.textContent = betterBedsFaqAnswer(question, data.entries, id);
+  };
+  widget.querySelector('form').addEventListener('submit', event => { event.preventDefault(); respond(input.value); });
+  widget.querySelectorAll('[data-question]').forEach(button => button.addEventListener('click', () => respond('', button.dataset.question)));
 })();
