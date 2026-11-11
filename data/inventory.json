@@ -337,6 +337,50 @@
         }
       ],
       "url": "ford-super-duty-short-bed-black-bedliner.html"
+    },
+    {
+      "id": "ford-super-duty-eight-foot-srw-gray",
+      "title": "2023–2026 Ford F-250 / F-350 8' long bed — single rear wheel, gray",
+      "make": "Ford",
+      "models": "F-250 / F-350",
+      "years": "2023–2026",
+      "productType": "Beds",
+      "bedLength": "8'",
+      "bedStyle": "Long bed",
+      "color": "Gray",
+      "condition": "New condition",
+      "category": "New takeoff beds",
+      "price": 2000,
+      "currency": "USD",
+      "includes": "Bed only",
+      "status": "available",
+      "features": [
+        {
+          "name": "Rear wheel setup",
+          "value": "Single rear wheel (SRW)"
+        }
+      ],
+      "image": "assets/images/inventory/ford-super-duty-eight-foot-srw-gray-side.jpg",
+      "imageAlt": "Gray Ford F-250 / F-350 8-foot single rear wheel long bed, stored upside down above a white bed",
+      "imageWidth": 1280,
+      "imageHeight": 960,
+      "photos": [
+        {
+          "src": "assets/images/inventory/ford-super-duty-eight-foot-srw-gray-side.jpg",
+          "alt": "Gray Ford F-250 / F-350 8-foot single rear wheel long bed, stored upside down above a white bed",
+          "caption": "Side view of the gray bed, shown stored upside down above a white bed.",
+          "width": 1280,
+          "height": 960
+        },
+        {
+          "src": "assets/images/inventory/ford-super-duty-eight-foot-srw-gray-fuel-side.jpg",
+          "alt": "Fuel-door side of the gray Ford F-250 / F-350 8-foot single rear wheel bed, stored upside down",
+          "caption": "Fuel-door side of the gray bed, shown stored upside down.",
+          "width": 1280,
+          "height": 960
+        }
+      ],
+      "url": "ford-super-duty-eight-foot-srw-gray.html"
     }
   ]
 }
