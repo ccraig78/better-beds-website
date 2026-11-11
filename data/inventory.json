@@ -642,6 +642,64 @@
       "imageWidth": 960,
       "imageHeight": 1280,
       "url": "ford-super-duty-tailgate-carbonized-gray-no-step.html"
+    },
+    {
+      "id": "ford-super-duty-platinum-tailgate-black-used",
+      "title": "2023–2026 Ford F-250 / F-350 Platinum tailgate — black, with step and sensors",
+      "make": "Ford",
+      "models": "F-250 / F-350",
+      "years": "2023–2026",
+      "productType": "Tailgates",
+      "color": "Black",
+      "condition": "Used condition",
+      "category": "Used tailgates",
+      "price": 2000,
+      "currency": "USD",
+      "includes": "Tailgate with step and sensors; camera not included",
+      "status": "available",
+      "features": [
+        {
+          "name": "Trim",
+          "value": "Platinum"
+        },
+        {
+          "name": "Damage",
+          "value": "No damage"
+        },
+        {
+          "name": "Step",
+          "value": "Included"
+        },
+        {
+          "name": "Sensors",
+          "value": "Included"
+        },
+        {
+          "name": "Camera",
+          "value": "Removed — not included"
+        }
+      ],
+      "image": "assets/images/inventory/ford-super-duty-platinum-tailgate-black-used-front.jpg",
+      "imageAlt": "Front view of the black Ford F-250 / F-350 Platinum tailgate with its silver Platinum trim panel",
+      "imageWidth": 1280,
+      "imageHeight": 960,
+      "photos": [
+        {
+          "src": "assets/images/inventory/ford-super-duty-platinum-tailgate-black-used-front.jpg",
+          "alt": "Front view of the black Ford F-250 / F-350 Platinum tailgate with its silver Platinum trim panel",
+          "caption": "Front view of the black Platinum tailgate. Camera is removed and not included.",
+          "width": 1280,
+          "height": 960
+        },
+        {
+          "src": "assets/images/inventory/ford-super-duty-platinum-tailgate-black-used-stored.jpg",
+          "alt": "Black Ford Super Duty Platinum tailgate shown upside down on a truck bed during storage",
+          "caption": "Tailgate shown upside down on the bed during storage; the bed and lights are not included.",
+          "width": 1280,
+          "height": 960
+        }
+      ],
+      "url": "ford-super-duty-platinum-tailgate-black-used.html"
     }
   ]
 }
