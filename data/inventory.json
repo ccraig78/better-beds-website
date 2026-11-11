@@ -823,6 +823,50 @@
       "imageWidth": 1280,
       "imageHeight": 1034,
       "url": "ford-f350-eight-foot-dually-black.html"
+    },
+    {
+      "id": "ford-f250-eight-foot-srw-red",
+      "title": "2023–2026 Ford F-250 8' single rear wheel long bed — red",
+      "make": "Ford",
+      "models": "F-250",
+      "years": "2023–2026",
+      "productType": "Beds",
+      "bedLength": "8'",
+      "bedStyle": "Long bed",
+      "color": "Red",
+      "condition": "New condition",
+      "category": "New takeoff beds",
+      "price": 1500,
+      "currency": "USD",
+      "includes": "Bed only",
+      "status": "available_to_order",
+      "features": [
+        {
+          "name": "Rear wheel setup",
+          "value": "Single rear wheel (SRW)"
+        }
+      ],
+      "image": "assets/images/inventory/ford-f250-eight-foot-srw-red-fuel-side.jpg",
+      "imageAlt": "Red Ford F-250 8-foot single rear wheel long bed available to order, fuel-door side and bed interior",
+      "imageWidth": 1280,
+      "imageHeight": 960,
+      "photos": [
+        {
+          "src": "assets/images/inventory/ford-f250-eight-foot-srw-red-fuel-side.jpg",
+          "alt": "Red Ford F-250 8-foot single rear wheel long bed available to order, fuel-door side and bed interior",
+          "caption": "Fuel-door side and bed interior.",
+          "width": 1280,
+          "height": 960
+        },
+        {
+          "src": "assets/images/inventory/ford-f250-eight-foot-srw-red-opposite.jpg",
+          "alt": "Opposite-side view of the red Ford F-250 8-foot single rear wheel long bed available to order",
+          "caption": "Opposite side and front wall; separate parts pictured inside are not included.",
+          "width": 1280,
+          "height": 960
+        }
+      ],
+      "url": "ford-f250-eight-foot-srw-red.html"
     }
   ]
 }
