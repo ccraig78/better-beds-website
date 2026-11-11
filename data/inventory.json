@@ -480,6 +480,64 @@
         }
       ],
       "url": "ford-super-duty-eight-foot-srw-carbonized-gray.html"
+    },
+    {
+      "id": "ram-3500-eight-foot-dually-gray",
+      "title": "2020–2026 Ram 3500 8' dually bed — gray",
+      "make": "Ram",
+      "models": "3500",
+      "years": "2020–2026",
+      "productType": "Beds",
+      "bedLength": "8'",
+      "bedStyle": "Dually",
+      "color": "Gray",
+      "condition": "New condition",
+      "category": "New takeoff beds",
+      "price": 2500,
+      "currency": "USD",
+      "includes": "Bed only",
+      "status": "available",
+      "features": [
+        {
+          "name": "Rear wheel setup",
+          "value": "Dually (dual rear wheel / DRW)"
+        }
+      ],
+      "image": "assets/images/inventory/ram-3500-eight-foot-dually-gray-rear.jpg",
+      "imageAlt": "Gray Ram 3500 8-foot dually takeoff bed, fuel-door side and rear three-quarter view",
+      "imageWidth": 1280,
+      "imageHeight": 960,
+      "photos": [
+        {
+          "src": "assets/images/inventory/ram-3500-eight-foot-dually-gray-rear.jpg",
+          "alt": "Gray Ram 3500 8-foot dually takeoff bed, fuel-door side and rear three-quarter view",
+          "caption": "Fuel-door side and rear three-quarter view of the gray dually bed.",
+          "width": 1280,
+          "height": 960
+        },
+        {
+          "src": "assets/images/inventory/ram-3500-eight-foot-dually-gray-opposite.jpg",
+          "alt": "Opposite side of the gray Ram 3500 8-foot dually bed, showing the wide rear fender and bed interior",
+          "caption": "Opposite side and wide dually fender.",
+          "width": 1280,
+          "height": 960
+        },
+        {
+          "src": "assets/images/inventory/ram-3500-eight-foot-dually-gray-label.jpg",
+          "alt": "Close-up of the factory identification label on the gray Ram 3500 dually bed",
+          "caption": "Factory identification label on this bed.",
+          "width": 960,
+          "height": 1280
+        },
+        {
+          "src": "assets/images/inventory/ram-3500-eight-foot-dually-gray-interior.jpg",
+          "alt": "Interior of the gray Ram 3500 8-foot dually bed with separate parts stored inside",
+          "caption": "Bed interior; separate parts pictured inside are not included.",
+          "width": 1280,
+          "height": 960
+        }
+      ],
+      "url": "ram-3500-eight-foot-dually-gray.html"
     }
   ]
 }
