@@ -71,6 +71,84 @@
       "url": "ford-super-duty-tailgate-white-manual.html",
       "imageWidth": 960,
       "imageHeight": 1280
+    },
+    {
+      "id": "ford-super-duty-driver-halogen-taillight",
+      "title": "2023–2026 Ford F-250 / F-350 driver-side halogen taillight",
+      "make": "Ford",
+      "models": "F-250 / F-350",
+      "years": "2023–2026",
+      "productType": "Lights",
+      "itemLabel": "taillight",
+      "color": "Red / clear",
+      "condition": "New condition",
+      "category": "New takeoff taillights",
+      "price": 400,
+      "currency": "USD",
+      "includes": "One driver-side taillight; blind-spot sensor included",
+      "status": "available",
+      "features": [
+        {
+          "name": "Side",
+          "value": "Driver side"
+        },
+        {
+          "name": "Light type",
+          "value": "Halogen"
+        },
+        {
+          "name": "Blind-spot sensor",
+          "value": "Included (present)"
+        },
+        {
+          "name": "Sold as",
+          "value": "Individual taillight — $400 each"
+        }
+      ],
+      "image": "assets/images/inventory/ford-super-duty-driver-halogen-taillight.jpg",
+      "imageAlt": "Driver-side Ford Super Duty halogen taillight with red and clear lens sections and blind-spot sensor area visible",
+      "imageWidth": 960,
+      "imageHeight": 1280,
+      "url": "ford-super-duty-driver-halogen-taillight.html"
+    },
+    {
+      "id": "ford-super-duty-passenger-halogen-taillight",
+      "title": "2023–2026 Ford F-250 / F-350 passenger-side halogen taillight",
+      "make": "Ford",
+      "models": "F-250 / F-350",
+      "years": "2023–2026",
+      "productType": "Lights",
+      "itemLabel": "taillight",
+      "color": "Red / clear",
+      "condition": "New condition",
+      "category": "New takeoff taillights",
+      "price": 400,
+      "currency": "USD",
+      "includes": "One passenger-side taillight; blind-spot sensor included",
+      "status": "available",
+      "features": [
+        {
+          "name": "Side",
+          "value": "Passenger side"
+        },
+        {
+          "name": "Light type",
+          "value": "Halogen"
+        },
+        {
+          "name": "Blind-spot sensor",
+          "value": "Included (present)"
+        },
+        {
+          "name": "Sold as",
+          "value": "Individual taillight — $400 each"
+        }
+      ],
+      "image": "assets/images/inventory/ford-super-duty-passenger-halogen-taillight.jpg",
+      "imageAlt": "Passenger-side Ford Super Duty halogen taillight with red and clear lens sections and blind-spot sensor area visible",
+      "imageWidth": 960,
+      "imageHeight": 1280,
+      "url": "ford-super-duty-passenger-halogen-taillight.html"
     }
   ]
 }

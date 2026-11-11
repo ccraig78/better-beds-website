@@ -11,7 +11,7 @@ from urllib.parse import quote
 from xml.etree import ElementTree as ET
 
 ROOT=Path(__file__).resolve().parents[1]
-VERSION='20261111-inventory-v3'
+VERSION='20261111-inventory-v4'
 ORIGIN='https://betterbeds.pro/'
 PLACEHOLDER='assets/images/inventory/photo-coming-soon.svg'
 PART_PLACEHOLDER='assets/images/inventory/part-photo-coming-soon.svg'
@@ -22,7 +22,7 @@ def product_type(item):
     return item.get('productType','Beds')
 
 def part_name(item):
-    return {'Beds':'bed','Lights':'lights','Tailgates':'tailgate','Bumpers':'bumper'}[product_type(item)]
+    return item.get('itemLabel') or {'Beds':'bed','Lights':'lights','Tailgates':'tailgate','Bumpers':'bumper'}[product_type(item)]
 
 def bed_spec(item):
     return ' '.join(str(item.get(key,'')).strip() for key in ('bedLength','bedStyle') if item.get(key))
@@ -192,7 +192,7 @@ for item in items:
     detail_fields+=[('Color',item['color']),('Condition',item['condition']),('Includes',item['includes'])]
     detail_fields += [(feature['name'],feature['value']) for feature in item.get('features',[])]
     details=''.join(f'<dt>{esc(label)}</dt><dd>{esc(value)}</dd>' for label,value in detail_fields if value)
-    contact_label='Text about these lights' if kind=='Lights' else 'Text about this '+name
+    contact_label='Text about these '+name if name in ('lights','taillights') else 'Text about this '+name
     pickup_text='Arrange a time at 3123 Cartwright Street. Bring a suitable truck or trailer and tie-downs. Forklift loading is available.' if kind=='Beds' else 'Call or text before traveling to confirm availability and arrange pickup at 3123 Cartwright Street, Dallas, Texas.'
     fitment_text='Confirm model year, bed length, and single rear wheel or dually configuration. Installation and removal are arranged separately.' if kind=='Beds' else 'Confirm model year and the exact part configuration, features, and included components before buying. Installation is arranged separately.'
     body=f'''<section class="section"><div class="wrap"><nav class="breadcrumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span aria-hidden="true">/</span><a href="inventory.html?type={quote(kind)}">{esc(kind)}</a><span aria-hidden="true">/</span><span>{esc(item['title'])}</span></nav><div class="product-detail">{gallery(item)}<div class="detail-copy"><span class="tag takeoff">{esc(item['category'])}</span><h1>{esc(item['title'])}</h1><p>{esc(item['color'])}. {esc(item['condition'])}. {esc(item['includes'])}.</p><div class="product-price">${item['price']:,.0f}<small>{esc(item['includes'])} · {esc(availability_label)}</small></div><dl>{details}</dl><div class="actions">{button(contact_label,product_sms(item))}{button('Call us','tel:2145248401','outline')}</div><p class="stock-note">Send your truck details so we can confirm exact fitment. Call/text before traveling.</p></div></div></div></section>
