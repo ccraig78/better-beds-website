@@ -381,6 +381,61 @@
         }
       ],
       "url": "ford-super-duty-eight-foot-srw-gray.html"
+    },
+    {
+      "id": "ford-super-duty-eight-foot-srw-white-bedliner",
+      "title": "2023–2026 Ford F-250 / F-350 8' single rear wheel long bed with factory spray-in bedliner",
+      "make": "Ford",
+      "models": "F-250 / F-350",
+      "years": "2023–2026",
+      "productType": "Beds",
+      "bedLength": "8'",
+      "bedStyle": "Long bed",
+      "color": "White",
+      "condition": "New condition",
+      "category": "New takeoff beds",
+      "price": 1200,
+      "currency": "USD",
+      "includes": "Bed only",
+      "status": "available",
+      "features": [
+        {
+          "name": "Rear wheel setup",
+          "value": "Single rear wheel (SRW)"
+        },
+        {
+          "name": "Bedliner",
+          "value": "Factory spray-in bedliner"
+        }
+      ],
+      "image": "assets/images/inventory/ford-super-duty-eight-foot-srw-white-bedliner-rear.jpg",
+      "imageAlt": "White Ford F-250 / F-350 8-foot single rear wheel long bed with factory spray-in bedliner, rear three-quarter view",
+      "imageWidth": 1280,
+      "imageHeight": 960,
+      "photos": [
+        {
+          "src": "assets/images/inventory/ford-super-duty-eight-foot-srw-white-bedliner-rear.jpg",
+          "alt": "White Ford F-250 / F-350 8-foot single rear wheel long bed with factory spray-in bedliner, rear three-quarter view",
+          "caption": "Rear three-quarter view and factory spray-in bedliner.",
+          "width": 1280,
+          "height": 960
+        },
+        {
+          "src": "assets/images/inventory/ford-super-duty-eight-foot-srw-white-bedliner-fuel-side.jpg",
+          "alt": "Fuel-door side of the white Ford F-250 / F-350 8-foot single rear wheel long bed with factory spray-in bedliner",
+          "caption": "Fuel-door side and wheel opening.",
+          "width": 1280,
+          "height": 960
+        },
+        {
+          "src": "assets/images/inventory/ford-super-duty-eight-foot-srw-white-bedliner-bedliner.jpg",
+          "alt": "Interior of the white Ford Super Duty 8-foot long bed showing the factory spray-in bedliner and separate parts stored inside",
+          "caption": "Factory spray-in bedliner and bed interior; separate parts pictured inside are not included.",
+          "width": 1280,
+          "height": 960
+        }
+      ],
+      "url": "ford-super-duty-eight-foot-srw-white-bedliner.html"
     }
   ]
 }
