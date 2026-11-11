@@ -149,6 +149,44 @@
       "imageWidth": 960,
       "imageHeight": 1280,
       "url": "ford-super-duty-passenger-halogen-taillight.html"
+    },
+    {
+      "id": "ford-super-duty-chrome-rear-bumper-no-sensor-holes",
+      "title": "2023–2026 Ford F-250 / F-350 chrome rear bumper — no sensor holes",
+      "make": "Ford",
+      "models": "F-250 / F-350",
+      "years": "2023–2026",
+      "productType": "Bumpers",
+      "color": "Chrome",
+      "condition": "New condition",
+      "category": "New takeoff bumpers",
+      "price": 400,
+      "currency": "USD",
+      "includes": "Rear bumper only; mounting brackets not included",
+      "status": "available",
+      "features": [
+        {
+          "name": "Position",
+          "value": "Rear"
+        },
+        {
+          "name": "Finish",
+          "value": "Chrome"
+        },
+        {
+          "name": "Sensor holes",
+          "value": "None"
+        },
+        {
+          "name": "Mounting brackets",
+          "value": "Not included"
+        }
+      ],
+      "image": "assets/images/inventory/ford-super-duty-chrome-rear-bumper-no-sensor-holes.jpg",
+      "imageAlt": "Chrome Ford Super Duty rear bumper without sensor holes, with black step pads, photographed on concrete",
+      "imageWidth": 1280,
+      "imageHeight": 960,
+      "url": "ford-super-duty-chrome-rear-bumper-no-sensor-holes.html"
     }
   ]
 }
