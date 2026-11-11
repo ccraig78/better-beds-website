@@ -85,18 +85,6 @@
       "answer": "Listings with item photos show the actual bed or part. Check the listing contents; pictured accessories are not necessarily included. Images labeled “Photo coming soon” are placeholders, not photographs of the actual item."
     },
     {
-      "id": "older-beds",
-      "question": "Do you still have older beds that can be repaired and painted?",
-      "keywords": [
-        "older",
-        "used",
-        "repair",
-        "paint",
-        "refinish"
-      ],
-      "answer": "Yes. A limited selection of older beds remains in our inventory and can be repaired and painted by arrangement. Contact Better Beds to discuss available beds, the agreed finish, price, and timing. Our main focus is new takeoff inventory. We are not advertising a general repair or bed-sourcing service."
-    },
-    {
       "id": "installation",
       "question": "Do you install beds or remove the old one?",
       "keywords": [
@@ -210,7 +198,17 @@
         "used parts",
         "Platinum tailgate"
       ],
-      "answer": "Yes. Selected used beds and parts are listed in our inventory with their condition, price and included components. Check the individual listing for damage details and features. Older beds that need repair or paint are discussed separately by arrangement."
+      "answer": "Yes. Browse used-beds.html for used truck beds listed for sale, and the main inventory for used parts. Each listing gives the actual photos, condition, price and included components. Check individual listing details and confirm availability before pickup."
+    },
+    {
+      "id": "sales-focus",
+      "question": "What does Better Beds sell?",
+      "keywords": [
+        "business focus",
+        "what do you sell",
+        "product sales"
+      ],
+      "answer": "Better Beds sells new takeoff truck beds and parts, plus individually listed used beds and parts. Browse used-beds.html for used bed listings, inventory.html for on-hand products and available-to-order.html for beds not yet collected. Confirm the listed condition, included parts, price, availability and pickup."
     }
   ]
 }

@@ -4,6 +4,7 @@ function betterBedsFaqAnswer(question, entries, id) {
   const q = question.toLowerCase();
   let match = id ? entries.find(entry => entry.id === id) : null;
   const preferred = /\b(install|installation|remove|removal|swap)\b/.test(q) ? 'installation'
+    : /\b(repair|repairs|repaired|painting|paint|repaint|refinish|restoration)\b/.test(q) ? 'sales-focus'
     : /available[ -]to[ -]order|\bpre[ -]?order\b|order(?:ing)?\s+(?:a\s+)?bed|expected arrival|not (?:at|picked up)/.test(q) ? 'available-to-order'
     : /\b(pickup|loading|forklift|trailer)\b/.test(q) ? 'pickup'
     : /\b(stock|available|inventory|ford|f.?250|f.?350|chevy|gmc|ram|price|cost|how much)\b/.test(q) ? 'inventory'
@@ -13,7 +14,7 @@ function betterBedsFaqAnswer(question, entries, id) {
     const scored = entries.map(entry => ({ entry, score: entry.keywords.reduce((n, keyword) => n + (q.includes(keyword.toLowerCase()) ? keyword.length : 0), 0) })).sort((a, b) => b.score - a.score);
     if (scored[0]?.score >= 4) match = scored[0].entry;
   }
-  return match?.answer || fallback;
+  return (preferred === 'sales-focus' && match?.id === 'sales-focus' ? 'That service isn’t offered. ' : '') + (match?.answer || fallback);
 }
 if (typeof module !== 'undefined' && module.exports) module.exports = { betterBedsFaqAnswer };
 if (typeof document !== 'undefined') (() => {
@@ -38,7 +39,7 @@ if (typeof document !== 'undefined') (() => {
   const load = async () => {
     if (knowledge) return knowledge;
     if (pending) return pending;
-    pending = fetch('data/faq-knowledge.json?v=20261111-order').then(response => {
+    pending = fetch('data/faq-knowledge.json?v=20261111-sales').then(response => {
       if (!response.ok) throw new Error('FAQ unavailable');
       return response.json();
     }).then(data => { knowledge = data; return data; }).catch(() => ({ entries: [] })).finally(() => { pending = null; });

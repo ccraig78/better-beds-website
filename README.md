@@ -1,6 +1,6 @@
 # Better Beds inventory website
 
-Static GitHub Pages site for https://betterbeds.pro/. GitHub Pages publishes the repository root on `main`. The site now focuses on new takeoff truck beds and parts, with select older inventory beds prepared by arrangement.
+Static GitHub Pages site for https://betterbeds.pro/. GitHub Pages publishes the repository root on `main`. The site focuses on new takeoff beds and parts, individually listed used beds and parts, and specific beds available to order.
 
 ## Add or update inventory
 
@@ -27,7 +27,15 @@ The inventory inquiry form retains `https://chat.betterbeds.pro/estimate-request
 
 Clarity project `uzvvg1g1vl`, the existing phone/email/address/hours, financing application link, pickup and forklift-loading policy are retained. Installation and removal are not offered.
 
-Legacy gallery, repair-example and bed-finding URLs direct visitors to current inventory or the secondary older-bed page, without showing old damaged-bed photos.
+Legacy shopping URLs direct visitors to current inventory. Retired service URLs show a neutral inventory page with `noindex, follow`, are excluded from the sitemap, and have no internal promotional links. Keep them crawlable so search engines can see the removal instruction. GitHub Pages does not provide per-file HTTP redirects or 410 status configuration here.
+
+## Used beds and product-only search focus
+
+`used-beds.html` lists on-hand beds whose condition maps to UsedCondition or RefurbishedCondition. It excludes parts, new beds, order beds and sold beds. List additional used beds when ready for sale, with accurate condition details, actual photos and a confirmed price. Keep each product's existing URL.
+
+Public content and business metadata promote product sales only. Do not add workshop-service offers to navigation, forms, FAQs, titles, descriptions, structured data or assistant summaries. `python tools/check-sales-focus.py` checks this policy and the retired URLs. Search engines control when cached results change; a site cannot exclude itself from a particular search query.
+
+The hosting configuration excludes this README and `tools/` from the published website. Source and checks remain in GitHub.
 
 ## Restore point
 
