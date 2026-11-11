@@ -42,11 +42,23 @@ if (search) {
     select.value = [...select.options].find(option => option.value.toLowerCase() === (params.get(key) || '').toLowerCase())?.value || '';
   }
   const normalize = text => text.toLowerCase().replace(/[^a-z0-9]+/g, '');
+  const measuredQuery = text => {
+    const feet = text.match(/(?:^|\s)(\d+(?:\.\d+)?)\s*(?:['’′]|ft\b|foot\b|feet\b)(?:\s*(\d{1,2})(?!\d)\s*(?:["”″]|in\b|inch(?:es)?\b)?)?/i);
+    if (feet) {
+      const inches = Number(feet[2] || 0);
+      if (inches < 12) return { inches: Number(feet[1]) * 12 + inches, query: text.replace(feet[0], ' ') };
+    }
+    const inches = text.match(/(?:^|\s)(\d+(?:\.\d+)?)\s*(?:["”″]|in\b|inch(?:es)?\b)/i);
+    return inches ? { inches: Number(inches[1]), query: text.replace(inches[0], ' ') } : { inches: null, query: text };
+  };
   const filter = () => {
-    const terms = search.value.toLowerCase().trim().split(/\s+/).filter(Boolean).map(normalize);
+    const measurement = measuredQuery(search.value);
+    const terms = measurement.query.toLowerCase().trim().split(/\s+/).filter(Boolean).map(normalize);
+    const length = measurement.inches;
     let count = 0;
     cards.forEach(card => {
       card.hidden = !terms.every(term => normalize(card.dataset.search).includes(term))
+        || Boolean(length !== null && (card.dataset.bedInches === '' || Number(card.dataset.bedInches) !== length))
         || Boolean(activeType && card.dataset.type !== activeType)
         || Boolean(make.value && card.dataset.make !== make.value)
         || Boolean(color.value && card.dataset.color !== color.value);
