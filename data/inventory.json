@@ -231,6 +231,50 @@
         }
       ],
       "url": "ford-f350-eight-foot-dually-star-white.html"
+    },
+    {
+      "id": "ford-f350-eight-foot-dually-oxford-white",
+      "title": "2023–2026 Ford F-350 8' dually bed — Oxford White",
+      "make": "Ford",
+      "models": "F-350",
+      "years": "2023–2026",
+      "productType": "Beds",
+      "bedLength": "8'",
+      "bedStyle": "Dually",
+      "color": "Oxford White",
+      "condition": "New condition",
+      "category": "New takeoff beds",
+      "price": 2000,
+      "currency": "USD",
+      "includes": "Bed only",
+      "status": "available",
+      "features": [
+        {
+          "name": "Rear wheel setup",
+          "value": "Dually (dual rear wheel / DRW)"
+        }
+      ],
+      "image": "assets/images/inventory/ford-f350-eight-foot-dually-oxford-white-rear.jpg",
+      "imageAlt": "Oxford White Ford F-350 8-foot dually takeoff bed with wide rear fenders, rear three-quarter view",
+      "imageWidth": 1280,
+      "imageHeight": 960,
+      "photos": [
+        {
+          "src": "assets/images/inventory/ford-f350-eight-foot-dually-oxford-white-rear.jpg",
+          "alt": "Oxford White Ford F-350 8-foot dually takeoff bed with wide rear fenders, rear three-quarter view",
+          "caption": "Rear three-quarter view of the Oxford White dually bed.",
+          "width": 1280,
+          "height": 960
+        },
+        {
+          "src": "assets/images/inventory/ford-f350-eight-foot-dually-oxford-white-opposite.jpg",
+          "alt": "Opposite-side view of the Oxford White Ford F-350 8-foot dually bed and bed interior",
+          "caption": "Opposite-side view and bed interior.",
+          "width": 1280,
+          "height": 960
+        }
+      ],
+      "url": "ford-f350-eight-foot-dually-oxford-white.html"
     }
   ]
 }
