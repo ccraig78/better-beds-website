@@ -1,6 +1,14 @@
 User-agent: *
 Allow: /
 
+# Public product discovery in web search and ChatGPT Search.
+User-agent: Googlebot
+User-agent: Googlebot-Image
+User-agent: Bingbot
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+Allow: /
+
 Sitemap: https://betterbeds.pro/sitemap.xml
 
 # LLM summary for AI assistants and answer engines:

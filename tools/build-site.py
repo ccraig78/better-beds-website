@@ -7,6 +7,7 @@ from pathlib import Path
 import html
 import json
 from urllib.parse import quote
+from xml.etree import ElementTree as ET
 
 ROOT=Path(__file__).resolve().parents[1]
 VERSION='20261111-inventory-v2'
@@ -94,17 +95,31 @@ def faq_list(ids=None):
 def schema_business():
     return {'@context':'https://schema.org','@type':'AutoPartsStore','@id':ORIGIN+'#business','name':'Better Beds','url':ORIGIN,'description':'New takeoff truck beds and parts for sale from current inventory in Dallas, Texas. Select older inventory beds can be repaired and painted by arrangement.','telephone':'+1-214-524-8401','email':'clint@betterbeds.pro','logo':ORIGIN+'assets/images/logo.png','address':{'@type':'PostalAddress','streetAddress':'3123 Cartwright Street','addressLocality':'Dallas','addressRegion':'TX','postalCode':'75212','addressCountry':'US'},'openingHoursSpecification':[{'@type':'OpeningHoursSpecification','dayOfWeek':['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],'opens':'09:00','closes':'17:00'}],'sameAs':['https://www.facebook.com/61580202118726/','https://www.instagram.com/betterbedsdallas/']}
 
+def stock_status(item):
+    # Keep sold pages at their original URL, with accurate stock information.
+    return {
+        'available': ('InStock', 'Available — confirm before pickup'),
+        'sold': ('SoldOut', 'Sold — ask about current inventory'),
+        'reserved': ('OutOfStock', 'Reserved — ask about current inventory'),
+    }.get(item.get('status'), ('OutOfStock', 'Currently unavailable'))
+
 def page(path,title,description,body,active='',structured=None):
     PAGES.append(path)
     nav=[('inventory.html','Inventory'),('process.html','How to buy'),('older-beds.html','Older beds'),('faq.html','FAQ'),('contact.html','Contact')]
     navhtml=''.join(f'<a href="{link}"'+(' aria-current="page"' if link==active else '')+f'>{label}</a>' for link,label in nav)
     schemas=[schema_business()]+(structured or [])
+    product=next((schema for schema in schemas if schema.get('@type')=='Product'),None)
+    images=product.get('image',[]) if product else []
+    social_image=ORIGIN+'assets/images/logo.png'
+    if images: social_image=images[0] if isinstance(images,list) else images
+    social_type='product' if product else 'website'
+    twitter_card='summary_large_image' if images else 'summary'
     jsonld='\n'.join('<script type="application/ld+json">'+json.dumps(schema,ensure_ascii=False).replace('<','\\u003c')+'</script>' for schema in schemas)
     doc=f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{esc(title)} | Better Beds Dallas</title><meta name="description" content="{esc(description)}"><meta name="theme-color" content="#1e2757">
-<link rel="canonical" href="{ORIGIN if path=='index.html' else ORIGIN+path}"><meta name="robots" content="index, follow">
-<meta property="og:site_name" content="Better Beds"><meta property="og:type" content="website"><meta property="og:title" content="{esc(title)} | Better Beds Dallas"><meta property="og:description" content="{esc(description)}"><meta property="og:url" content="{ORIGIN if path=='index.html' else ORIGIN+path}"><meta property="og:image" content="{ORIGIN}assets/images/logo.png"><meta name="twitter:card" content="summary">
+<link rel="canonical" href="{ORIGIN if path=='index.html' else ORIGIN+path}"><meta name="robots" content="index, follow, max-image-preview:large">
+<meta property="og:site_name" content="Better Beds"><meta property="og:type" content="{social_type}"><meta property="og:title" content="{esc(title)} | Better Beds Dallas"><meta property="og:description" content="{esc(description)}"><meta property="og:url" content="{ORIGIN if path=='index.html' else ORIGIN+path}"><meta property="og:image" content="{esc(social_image)}"><meta name="twitter:card" content="{twitter_card}">
 <link rel="icon" type="image/png" href="assets/images/better-beds-favicon.png"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;650;700;750;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="styles.css?v={VERSION}">
 {jsonld}
 <script>(function(c,l,a,r,i,t,y){{c[a]=c[a]||function(){{(c[a].q=c[a].q||[]).push(arguments)}};t=l.createElement(r);t.async=1;t.src='https://www.clarity.ms/tag/'+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)}})(window,document,'clarity','script','uzvvg1g1vl');</script>
@@ -124,20 +139,23 @@ body=f'''<section class="hero"><div class="wrap hero-grid"><div class="hero-copy
 <section class="section"><div class="wrap"><div class="section-heading"><div><span class="eyebrow">On the lot</span><h2>Start with what’s here.</h2><p>See a bed that works for your truck? Call or text to confirm availability and arrange pickup.</p></div><a class="text-link" href="inventory.html">View all inventory →</a></div><div class="inventory-layout"><div class="inventory-grid">{cards()}</div>{side_note()}</div></div></section>
 <section class="section soft"><div class="wrap two-col"><div class="body-copy"><span class="eyebrow">Factory parts. A fresh opportunity.</span><h2>What’s a new takeoff?</h2><p>A factory bed removed from a new truck, often to make room for a flatbed or service body. A good takeoff can be a practical way to replace your bed while keeping the factory look.</p><p>We’ll confirm the condition and what’s included for the specific bed you choose.</p><a class="text-link" href="faq.html">Get the details →</a></div>{steps()}</div></section>
 {older_band()}{inquiry_section()}{cta()}'''
-page('index.html','New Takeoff Truck Beds & Parts for Sale','Shop new takeoff truck beds and parts in Dallas. White 2023–2026 Ford F-250/F-350 short bed, new condition, $2,500, bed only. Call/text to confirm stock.',body)
+page('index.html','New Takeoff Truck Beds & Parts for Sale','Shop new takeoff truck beds and parts for sale in Dallas. Browse current inventory, check fitment and pricing, and arrange pickup with forklift loading.',body)
 
 # INVENTORY
 body=hero('Shop current stock','Takeoff beds.<br>Ready for a new truck.','Browse our listed inventory and item photos. Confirm availability, fitment, condition, and included parts with us before purchase.')
 body+=f'''<section class="section"><div class="wrap"><div class="search-bar"><label>Search inventory<input type="search" data-inventory-search placeholder="Try Ford, F-250, white, or short bed" aria-label="Search inventory"></label><span class="listing-count" data-inventory-count>{len(items)} listing</span><button class="button outline" type="button" data-clear-search>Clear search</button></div><div class="inventory-layout"><div class="inventory-grid">{cards()}<div class="empty-state" data-inventory-empty hidden><h3>No listed items match that search.</h3><p>Call or text to ask about current stock. We’ll tell you what’s available.</p>{button('Ask about inventory',SMS)}</div></div>{side_note()}</div><p class="stock-note">Prices apply to the listed item and contents. Contact us to confirm current availability and pickup arrangements.</p></div></section>{older_band()}{cta()}'''
-page('inventory.html','New Takeoff Inventory','Browse new takeoff truck beds for sale in Dallas. Ford F-250/F-350 short bed, white, new condition, bed only, $2,500. Confirm stock by call or text.',body,'inventory.html')
+page('inventory.html','New Takeoff Inventory','Browse current new takeoff truck beds and parts for sale at Better Beds in Dallas. View individual listings, photos, prices and condition; confirm fitment and pickup.',body,'inventory.html')
 
 # PRODUCT PAGES: inventory data is the source of truth.
 for item in items:
-    body=f'''<section class="section"><div class="wrap"><nav class="breadcrumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span aria-hidden="true">/</span><a href="inventory.html">Inventory</a><span aria-hidden="true">/</span><span>{esc(item['make'])} short bed</span></nav><div class="product-detail">{gallery(item)}<div class="detail-copy"><span class="tag takeoff">{esc(item['category'])}</span><h1>{esc(item['title'])}</h1><p>{esc(item['color'])}. {esc(item['condition'])}. {esc(item['includes'])}.</p><div class="product-price">${item['price']:,.0f}<small>{esc(item['includes'])} · Confirm availability</small></div><dl><dt>Model years</dt><dd>{esc(item['years'])}</dd><dt>Truck</dt><dd>{esc(item['make'])} {esc(item['models'])}</dd><dt>Bed length</dt><dd>{esc(item['bedLength'])}</dd><dt>Color</dt><dd>{esc(item['color'])}</dd><dt>Condition</dt><dd>{esc(item['condition'])}</dd><dt>Includes</dt><dd>{esc(item['includes'])}</dd></dl><div class="actions">{button('Text about this bed',product_sms(item))}{button('Call us','tel:2145248401','outline')}</div><p class="stock-note">Send your truck details and rear wheel setup so we can confirm exact fitment. Call/text before traveling.</p></div></div></div></section>
+    availability,availability_label=stock_status(item)
+    body=f'''<section class="section"><div class="wrap"><nav class="breadcrumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span aria-hidden="true">/</span><a href="inventory.html">Inventory</a><span aria-hidden="true">/</span><span>{esc(item['make'])} short bed</span></nav><div class="product-detail">{gallery(item)}<div class="detail-copy"><span class="tag takeoff">{esc(item['category'])}</span><h1>{esc(item['title'])}</h1><p>{esc(item['color'])}. {esc(item['condition'])}. {esc(item['includes'])}.</p><div class="product-price">${item['price']:,.0f}<small>{esc(item['includes'])} · {esc(availability_label)}</small></div><dl><dt>Model years</dt><dd>{esc(item['years'])}</dd><dt>Truck</dt><dd>{esc(item['make'])} {esc(item['models'])}</dd><dt>Bed length</dt><dd>{esc(item['bedLength'])}</dd><dt>Color</dt><dd>{esc(item['color'])}</dd><dt>Condition</dt><dd>{esc(item['condition'])}</dd><dt>Includes</dt><dd>{esc(item['includes'])}</dd></dl><div class="actions">{button('Text about this bed',product_sms(item))}{button('Call us','tel:2145248401','outline')}</div><p class="stock-note">Send your truck details and rear wheel setup so we can confirm exact fitment. Call/text before traveling.</p></div></div></div></section>
 <section class="section soft"><div class="wrap info-grid"><article class="info-card"><span class="eyebrow">01 · What’s included</span><h3>{esc(item['includes'])}.</h3><p>Confirm the exact contents before purchase. A tailgate, lights, bumper, hardware, or other accessories should not be assumed included.</p></article><article class="info-card"><span class="eyebrow">02 · Pickup</span><h3>Pick up in Dallas.</h3><p>Arrange a time at 3123 Cartwright Street. Bring a suitable truck or trailer and tie-downs. Forklift loading is available.</p></article><article class="info-card"><span class="eyebrow">03 · Fitment</span><h3>Check your specific truck.</h3><p>Confirm the model year, bed length, and single rear wheel or dually configuration. Installation and removal are arranged separately.</p></article></div></section>{cta()}'''
-    product={'@context':'https://schema.org','@type':'Product','name':item['title']+' — '+item['color']+', '+item['includes'],'description':f'{item["condition"]}. {item["includes"]}. Confirm exact fitment and availability with Better Beds.','brand':{'@type':'Brand','name':item['make']},'color':item['color'],'offers':{'@type':'Offer','url':ORIGIN+item['url'],'price':item['price'],'priceCurrency':item['currency'],'itemCondition':'https://schema.org/NewCondition','seller':{'@id':ORIGIN+'#business'}}}
+    product={'@context':'https://schema.org','@type':'Product','@id':ORIGIN+item['url']+'#product','url':ORIGIN+item['url'],'name':item['title']+' — '+item['color']+', '+item['includes'],'description':f'{item["title"]}, {item["color"].lower()}, {item["condition"].lower()}, {item["includes"].lower()}. New takeoff inventory at Better Beds in Dallas, Texas. {availability_label}. Confirm exact fitment.','brand':{'@type':'Brand','name':item['make']},'color':item['color'],'category':item['category'],'additionalProperty':[{'@type':'PropertyValue','name':name,'value':item[key]} for name,key in [('Model years','years'),('Truck models','models'),('Bed length','bedLength'),('Includes','includes')]],'offers':{'@type':'Offer','url':ORIGIN+item['url'],'price':item['price'],'priceCurrency':item['currency'],'availability':'https://schema.org/'+availability,'itemCondition':'https://schema.org/NewCondition','seller':{'@id':ORIGIN+'#business'}}}
     if item.get('image'): product['image']=[ORIGIN+p['src'] for p in item['photos']] if item.get('photos') else ORIGIN+item['image']
-    page(item['url'],item['title']+f' — ${item["price"]:,.0f}',f'{item["title"]}, {item["color"].lower()}, {item["condition"].lower()}, {item["includes"].lower()}. ${item["price"]:,.0f}. Contact Better Beds in Dallas to confirm stock and fitment.',body,'inventory.html',[product])
+    breadcrumbs={'@context':'https://schema.org','@type':'BreadcrumbList','itemListElement':[{'@type':'ListItem','position':position,'name':name,'item':ORIGIN+url} for position,name,url in [(1,'Better Beds',''),(2,'Inventory','inventory.html'),(3,item['title'],item['url'])]]}
+    seo_title=item['title']+(' for Sale' if item.get('status')=='available' else ' — '+availability_label.split(' — ')[0])
+    page(item['url'],seo_title,f'{item["title"]} in Dallas: {item["color"].lower()}, {item["condition"].lower()}, {item["includes"].lower()}. ${item["price"]:,.0f}. {availability_label}. New takeoff inventory.',body,'inventory.html',[product,breadcrumbs])
 
 # BUYING & PICKUP
 body=hero('How to buy','Choose it. Check it.<br>Pick it up.','Buying from Better Beds starts with the inventory we have. Talk to us about a listed item, confirm the details, and arrange pickup in Dallas.')
@@ -174,7 +192,23 @@ redirects={'gallery.html':'inventory.html','before-after.html':'older-beds.html'
 for path,target in redirects.items():
     (ROOT/path).write_text(f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Better Beds — Current Inventory</title><meta name="description" content="Better Beds now focuses on selling new takeoff truck beds and parts from current inventory in Dallas."><link rel="canonical" href="{ORIGIN+target}"><meta http-equiv="refresh" content="0;url={target}"></head><body><main><h1>Shop Better Beds inventory.</h1><p>We now focus on new takeoff beds and parts, with select older inventory beds prepared by arrangement.</p><p><a href="{target}">Continue to Better Beds →</a></p></main></body></html>\n''')
 
-(ROOT/'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'+''.join(f'  <url><loc>{ORIGIN if path=="index.html" else ORIGIN+path}</loc></url>\n' for path in PAGES if path!='thanks.html')+'</urlset>\n')
+SITEMAP_NS='http://www.sitemaps.org/schemas/sitemap/0.9'
+IMAGE_NS='http://www.google.com/schemas/sitemap-image/1.1'
+ET.register_namespace('',SITEMAP_NS)
+ET.register_namespace('image',IMAGE_NS)
+sitemap=ET.Element(f'{{{SITEMAP_NS}}}urlset')
+products_by_url={item['url']:item for item in items}
+for path in PAGES:
+    if path=='thanks.html': continue
+    url=ET.SubElement(sitemap,f'{{{SITEMAP_NS}}}url')
+    ET.SubElement(url,f'{{{SITEMAP_NS}}}loc').text=ORIGIN if path=='index.html' else ORIGIN+path
+    item=products_by_url.get(path,{})
+    photos=item.get('photos') or ([{'src':item['image']}] if item.get('image') else [])
+    for photo in photos:
+        image=ET.SubElement(url,f'{{{IMAGE_NS}}}image')
+        ET.SubElement(image,f'{{{IMAGE_NS}}}loc').text=ORIGIN+photo['src']
+ET.indent(sitemap,space='  ')
+ET.ElementTree(sitemap).write(ROOT/'sitemap.xml',encoding='utf-8',xml_declaration=True)
 inventory_links='\n'.join(f'- [{item["title"]}]({ORIGIN+item["url"]}): {item["color"]}, {item["condition"].lower()}, {item["includes"].lower()}, ${item["price"]:,.0f}.' for item in available)
 (ROOT/'llms.txt').write_text(f'''# Better Beds — New Takeoff Inventory, Dallas
 

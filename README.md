@@ -36,3 +36,15 @@ The verified pre-change website backup is at commit `45efac9bffaa1100b54cd896139
 ## Checks
 
 Run `python tools/build-site.py`, `node --check script.js`, `node --check faq-widget.js`, and `node tools/check-service-policy.cjs` before publication.
+
+## Product search visibility
+
+Each inventory item gets a unique static product page, a descriptive title and canonical URL, visible specifications and price, and Product/Offer structured data generated from the same inventory record. Actual photos are included in the product markup, social preview and image sitemap. Product details and metadata are present in the initial HTML, so reading them does not require JavaScript.
+
+Run `python tools/check-product-seo.py` after generating pages. The check verifies product data, stock markup, crawler rules, sitemap images, internal links and social previews.
+
+Use `status: "sold"` when a bed sells. Keep its original ID and URL: the item leaves available-inventory lists while its page remains accessible and shows SoldOut in structured data. `reserved` and other unavailable statuses use OutOfStock. Update the record promptly; do not reuse a sold item's URL for a different item. New product types need their condition and included-parts copy checked as described above.
+
+`robots.txt` explicitly permits Googlebot, Googlebot-Image, Bingbot, OAI-SearchBot and ChatGPT-User. Cloudflare can add its own crawler policy ahead of the source file; verify the public robots.txt and crawler access after hosting changes. OpenAI search and model-training crawlers are separate. Allowing search does not require changing the existing Cloudflare training policy.
+
+Search Console ownership verification, sitemap submission, URL inspection and monitoring happen in the Google account, outside this repository. The sitemap URL is `https://betterbeds.pro/sitemap.xml`. A Merchant Center feed or direct ChatGPT merchant feed is a separate account integration, not something this website claims to have submitted. Structured data and crawl access support discovery; search engines control indexing and appearance.
