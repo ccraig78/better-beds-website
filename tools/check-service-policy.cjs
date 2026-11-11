@@ -44,4 +44,7 @@ assert(olderAnswer.includes('older beds') && olderAnswer.includes('by arrangemen
 assert(betterBedsFaqAnswer('Can you find me a bed?', knowledge.entries).includes('not advertising a bed-finding service'));
 assert(betterBedsFaqAnswer('Unrecognized question', []).includes('Call or text 214-524-8401'));
 assert(betterBedsFaqAnswer('', knowledge.entries, 'photos').includes('not photographs'));
+for (const question of ['What does available to order mean?', 'Can I pick up an available-to-order bed today?', 'What is the expected arrival for a preorder Ford bed?']) {
+  assert(betterBedsFaqAnswer(question, knowledge.entries).includes('not at our Dallas shop'), question);
+}
 console.log(`PASS: ${schemaCount} structured-data blocks; sales focus, no installation promises, confirmed-stock answers, older inventory scope, and FAQ fallback.`);

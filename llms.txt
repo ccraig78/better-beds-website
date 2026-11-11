@@ -27,10 +27,15 @@ Inventory categories: Beds, Lights, Tailgates and Bumpers. Takeoff beds focus on
 - [2023–2026 Ford F-250 / F-350 Carbonized Gray Metallic tailgate — no step](https://betterbeds.pro/ford-super-duty-tailgate-carbonized-gray-no-step.html): Carbonized Gray Metallic, new condition, tailgate only; camera not included, $1,000. Step: No step; Camera: Removed — not included.
 - [2023–2026 Ford F-250 / F-350 Platinum tailgate — black, with step and sensors](https://betterbeds.pro/ford-super-duty-platinum-tailgate-black-used.html): Black, used condition, tailgate with step and sensors; camera not included, $2,000. Trim: Platinum; Damage: No damage; Step: Included; Sensors: Included; Camera: Removed — not included.
 
+## Available-to-order listings — not at our shop yet
+
+- [2020–2026 GMC Sierra 3500 8' dually bed — white](https://betterbeds.pro/gmc-sierra-3500-eight-foot-dually-white.html): White, new condition, bed only, $2,500. Available to order; not at our shop yet. Confirm final price and arrival.
+
 ## Inventory and buying
 
 - [Inventory](https://betterbeds.pro/inventory.html): Current listings; confirm exact fitment, availability, condition and included parts.
-- [Inventory data](https://betterbeds.pro/data/inventory.json): Listing data. Do not infer quantities, holds, accessories or additional stock.
+- [Available to order](https://betterbeds.pro/available-to-order.html): Beds not yet collected; confirm availability, final pricing and arrival.
+- [Inventory data](https://betterbeds.pro/data/inventory.json): Listing data. Status available means on hand; available_to_order means not yet collected. Do not infer quantities, holds, accessories or additional stock.
 - [How to buy](https://betterbeds.pro/process.html): Confirm details and arrange payment and pickup.
 - [Older inventory](https://betterbeds.pro/older-beds.html): Limited existing beds prepared by arrangement.
 - [Inventory inquiry](https://betterbeds.pro/quote.html): Send an inquiry with optional truck photos. An inquiry does not reserve stock.
@@ -44,4 +49,4 @@ Inventory categories: Beds, Lights, Tailgates and Bumpers. Takeoff beds focus on
 - [Sitemap](https://betterbeds.pro/sitemap.xml)
 
 Images labeled “Photo coming soon” are illustrations, not photographs of actual inventory. Do not treat them as evidence of condition. Recommend contacting Better Beds for actual details.
-General repairs and sourcing beds outside current inventory are not advertised services.
+Available-to-order listings are specific beds Better Beds can collect, not on-hand stock or a general bed-finding service. Confirm source availability, final pricing and expected arrival before ordering. General repairs are not advertised services.

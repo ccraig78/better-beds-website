@@ -4,6 +4,7 @@ function betterBedsFaqAnswer(question, entries, id) {
   const q = question.toLowerCase();
   let match = id ? entries.find(entry => entry.id === id) : null;
   const preferred = /\b(install|installation|remove|removal|swap)\b/.test(q) ? 'installation'
+    : /available[ -]to[ -]order|\bpre[ -]?order\b|order(?:ing)?\s+(?:a\s+)?bed|expected arrival|not (?:at|picked up)/.test(q) ? 'available-to-order'
     : /\b(pickup|loading|forklift|trailer)\b/.test(q) ? 'pickup'
     : /\b(stock|available|inventory|ford|f.?250|f.?350|chevy|gmc|ram|price|cost|how much)\b/.test(q) ? 'inventory'
     : /\b(takeoff|take-off)\b/.test(q) ? 'takeoff' : null;
@@ -37,7 +38,7 @@ if (typeof document !== 'undefined') (() => {
   const load = async () => {
     if (knowledge) return knowledge;
     if (pending) return pending;
-    pending = fetch('data/faq-knowledge.json?v=20261111-inventory').then(response => {
+    pending = fetch('data/faq-knowledge.json?v=20261111-order').then(response => {
       if (!response.ok) throw new Error('FAQ unavailable');
       return response.json();
     }).then(data => { knowledge = data; return data; }).catch(() => ({ entries: [] })).finally(() => { pending = null; });
