@@ -582,6 +582,36 @@
         }
       ],
       "url": "chevy-3500-eight-foot-dually-black.html"
+    },
+    {
+      "id": "ford-super-duty-tailgate-star-white-step",
+      "title": "2023–2026 Ford F-250 / F-350 Star White tailgate with step",
+      "make": "Ford",
+      "models": "F-250 / F-350",
+      "years": "2023–2026",
+      "productType": "Tailgates",
+      "color": "Star White",
+      "condition": "New condition",
+      "category": "New takeoff tailgates",
+      "price": 1500,
+      "currency": "USD",
+      "includes": "Tailgate only; camera not included",
+      "status": "available",
+      "features": [
+        {
+          "name": "Step",
+          "value": "Included"
+        },
+        {
+          "name": "Camera",
+          "value": "Removed — not included"
+        }
+      ],
+      "image": "assets/images/inventory/ford-super-duty-tailgate-star-white-step.jpg",
+      "imageAlt": "Star White Ford F-250 / F-350 Super Duty tailgate with step, photographed on a takeoff bed; camera removed",
+      "imageWidth": 1280,
+      "imageHeight": 960,
+      "url": "ford-super-duty-tailgate-star-white-step.html"
     }
   ]
 }
