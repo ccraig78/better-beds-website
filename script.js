@@ -32,19 +32,44 @@ document.querySelectorAll('[data-inquiry-builder]').forEach(form => {
 const search = document.querySelector('[data-inventory-search]');
 if (search) {
   const cards = [...document.querySelectorAll('[data-inventory-item]')];
+  const typeButtons = [...document.querySelectorAll('[data-filter-type]')];
+  const make = document.querySelector('[data-filter-make]');
+  const color = document.querySelector('[data-filter-color]');
+  const params = new URLSearchParams(window.location.search);
+  let activeType = typeButtons.find(button => button.dataset.filterType.toLowerCase() === (params.get('type') || '').toLowerCase())?.dataset.filterType || '';
+  search.value = params.get('q') || '';
+  for (const [select, key] of [[make, 'make'], [color, 'color']]) {
+    select.value = [...select.options].find(option => option.value.toLowerCase() === (params.get(key) || '').toLowerCase())?.value || '';
+  }
   const normalize = text => text.toLowerCase().replace(/[^a-z0-9]+/g, '');
   const filter = () => {
     const terms = search.value.toLowerCase().trim().split(/\s+/).filter(Boolean).map(normalize);
     let count = 0;
     cards.forEach(card => {
-      card.hidden = !terms.every(term => normalize(card.dataset.search).includes(term));
+      card.hidden = !terms.every(term => normalize(card.dataset.search).includes(term))
+        || Boolean(activeType && card.dataset.type !== activeType)
+        || Boolean(make.value && card.dataset.make !== make.value)
+        || Boolean(color.value && card.dataset.color !== color.value);
       if (!card.hidden) count++;
     });
     document.querySelector('[data-inventory-count]').textContent = `${count} ${count === 1 ? 'listing' : 'listings'}`;
     document.querySelector('[data-inventory-empty]').hidden = count !== 0;
+    typeButtons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.filterType === activeType)));
+    const url = new URL(window.location.href);
+    for (const [key, value] of [['type', activeType], ['make', make.value], ['color', color.value], ['q', search.value.trim()]]) {
+      if (value) url.searchParams.set(key, value);
+      else url.searchParams.delete(key);
+    }
+    window.history.replaceState(null, '', url);
   };
   search.addEventListener('input', filter);
-  document.querySelector('[data-clear-search]').addEventListener('click', () => { search.value = ''; filter(); search.focus(); });
+  make.addEventListener('change', filter);
+  color.addEventListener('change', filter);
+  typeButtons.forEach(button => button.addEventListener('click', () => { activeType = button.dataset.filterType; filter(); }));
+  document.querySelector('[data-clear-search]').addEventListener('click', () => {
+    search.value = ''; make.value = ''; color.value = ''; activeType = '';
+    filter(); search.focus();
+  });
   filter();
 }
 

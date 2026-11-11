@@ -2,11 +2,11 @@
   "items": [
     {
       "id": "ford-super-duty-short-bed-white",
-      "title": "2023–2026 Ford F-250 / F-350 short bed",
+      "title": "2023–2026 Ford F-250 / F-350 6'9\" short bed",
       "make": "Ford",
       "models": "F-250 / F-350",
       "years": "2023–2026",
-      "bedLength": "Short bed",
+      "bedLength": "6'9\"",
       "color": "White",
       "condition": "New condition",
       "category": "New takeoff beds",
@@ -34,7 +34,41 @@
           "width": 1280,
           "height": 960
         }
-      ]
+      ],
+      "productType": "Beds",
+      "bedStyle": "Short bed"
+    },
+    {
+      "id": "ford-super-duty-tailgate-white-manual",
+      "title": "2023–2026 Ford F-250 / F-350 tailgate",
+      "make": "Ford",
+      "models": "F-250 / F-350",
+      "years": "2023–2026",
+      "productType": "Tailgates",
+      "color": "White",
+      "condition": "New condition",
+      "category": "New takeoff tailgates",
+      "price": 700,
+      "currency": "USD",
+      "includes": "Tailgate only; no camera included",
+      "status": "available",
+      "features": [
+        {
+          "name": "Step",
+          "value": "No step"
+        },
+        {
+          "name": "Camera",
+          "value": "Not included"
+        },
+        {
+          "name": "Release",
+          "value": "Manual release"
+        }
+      ],
+      "image": null,
+      "imageAlt": null,
+      "url": "ford-super-duty-tailgate-white-manual.html"
     }
   ]
 }

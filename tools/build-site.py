@@ -6,17 +6,43 @@ No package installation or runtime server is needed for GitHub Pages.
 from pathlib import Path
 import html
 import json
+import re
 from urllib.parse import quote
 from xml.etree import ElementTree as ET
 
 ROOT=Path(__file__).resolve().parents[1]
-VERSION='20261111-inventory-v2'
+VERSION='20261111-inventory-v3'
 ORIGIN='https://betterbeds.pro/'
 PLACEHOLDER='assets/images/inventory/photo-coming-soon.svg'
+PART_PLACEHOLDER='assets/images/inventory/part-photo-coming-soon.svg'
+PRODUCT_TYPES=('Beds','Lights','Tailgates','Bumpers')
+MAKES=('Ford','Ram','Chevy','GMC')
+
+def product_type(item):
+    return item.get('productType','Beds')
+
+def part_name(item):
+    return {'Beds':'bed','Lights':'lights','Tailgates':'tailgate','Bumpers':'bumper'}[product_type(item)]
+
+def bed_spec(item):
+    return ' '.join(str(item.get(key,'')).strip() for key in ('bedLength','bedStyle') if item.get(key))
+
+def length_aliases(item):
+    match=re.fullmatch(r"(\d+)'(?:(\d+)\")?",item.get('bedLength',''))
+    if not match: return ''
+    feet,inches=int(match[1]),int(match[2] or 0)
+    return f'{feet} ft {inches} in {feet} foot {inches} inch {feet} feet {inches} inches {feet*12+inches} inch {feet+inches/12:g} ft'
+
+def feature_summary(item):
+    return '; '.join(f'{feature["name"]}: {feature["value"]}' for feature in item.get('features',[]))
+
+def product_properties(item):
+    fields=[('Model years','years'),('Truck models','models'),('Bed length','bedLength'),('Bed style','bedStyle'),('Includes','includes')]
+    return [(name,item[key]) for name,key in fields if item.get(key)]+[(f['name'],f['value']) for f in item.get('features',[])]
 items=json.loads((ROOT/'data/inventory.json').read_text())['items']
 faq=json.loads((ROOT/'data/faq-knowledge.json').read_text())
 available=[item for item in items if item.get('status')=='available']
-stock_summary='; '.join(f'{item["title"]}, {item["color"].lower()}, {item["condition"].lower()}, ${item["price"]:,.0f}, {item["includes"].lower()}' for item in available)
+stock_summary='; '.join(f'{item["title"]}, {item["color"].lower()}, {item["condition"].lower()}, ${item["price"]:,.0f}, {item["includes"].lower()}'+(' ('+feature_summary(item)+')' if item.get('features') else '') for item in available)
 for entry in faq['entries']:
     if entry['id']=='inventory':
         entry['answer']=(f'Our listed inventory includes: {stock_summary}. ' if available else 'Contact us for current inventory. ')+ 'Call or text 214-524-8401 to confirm availability, exact fitment, condition, and what is included before purchasing or traveling. Ask about other takeoff parts in current stock.'
@@ -36,29 +62,35 @@ def product_sms(item):
     return 'sms:2145248401?body='+quote(f'Hi Better Beds, I’m interested in the {item["title"]}, {item["color"].lower()}, listed at ${item["price"]:,.0f} ({item["includes"].lower()}). Please confirm availability and fitment. My truck is: ')
 
 def photo(item,loading='lazy'):
-    return f'<img src="{esc(item.get("image") or PLACEHOLDER)}" alt="{esc(item.get("imageAlt") or "Photo coming soon — illustration only, not the actual item")}" width="{item.get("imageWidth",1200)}" height="{item.get("imageHeight",800)}" loading="{loading}" decoding="async">'
+    placeholder=PLACEHOLDER if product_type(item)=='Beds' else PART_PLACEHOLDER
+    return f'<img src="{esc(item.get("image") or placeholder)}" alt="{esc(item.get("imageAlt") or "Photo coming soon — placeholder, not the actual item")}" width="{item.get("imageWidth",1200)}" height="{item.get("imageHeight",800)}" loading="{loading}" decoding="async">'
 
 def gallery(item):
     photos=item.get('photos') or []
     if not photos:
-        caption='Photo of the listed item. Pictured accessories are not necessarily included.' if item.get('image') else 'Photo coming soon. This illustration is a placeholder, not a photo of the actual bed.'
+        caption='Photo of the listed item. Pictured accessories are not necessarily included.' if item.get('image') else 'Photo coming soon. This is a placeholder, not a photo of the actual item.'
         return f'<figure class="detail-image">{photo(item,"eager")}<figcaption>{caption}</figcaption></figure>'
     first=photos[0]
     thumbs=''.join(f'''<button type="button" class="photo-thumb" aria-label="View photo {index}: {esc(p['caption'])}" aria-pressed="{'true' if index==1 else 'false'}" data-photo-src="{esc(p['src'])}" data-photo-alt="{esc(p['alt'])}" data-photo-caption="{esc(p['caption'])}" data-photo-width="{p['width']}" data-photo-height="{p['height']}"><img src="{esc(p['src'])}" alt="" width="{p['width']}" height="{p['height']}" loading="lazy"></button>''' for index,p in enumerate(photos,1))
     return f'''<section class="product-gallery" data-product-gallery aria-label="Item photos"><figure class="detail-image"><a data-gallery-full href="{esc(first['src'])}" target="_blank" rel="noopener" aria-label="Open full-size item photo in a new tab"><img data-gallery-main src="{esc(first['src'])}" alt="{esc(first['alt'])}" width="{first['width']}" height="{first['height']}" decoding="async"></a><figcaption><span data-gallery-caption aria-live="polite">{esc(first['caption'])}</span> {esc(item['includes'])}; pictured accessories are not necessarily included.</figcaption></figure><div class="photo-thumbnails" aria-label="Choose an item photo">{thumbs}</div><p class="gallery-note">Choose a thumbnail, or open the main photo full-size.</p></section>'''
 
 def card(item):
-    terms=' '.join(str(item.get(key,'')) for key in ['title','make','models','years','color','bedLength','condition','includes','category'])
-    return f'''<article class="product-card" data-inventory-item data-search="{esc(terms)}">
+    terms=' '.join(str(item.get(key,'')) for key in ['title','make','models','years','color','bedLength','bedStyle','condition','includes','category','productType'])+' '+length_aliases(item)+' '+feature_summary(item)
+    specs=[item['color'],bed_spec(item),item['condition'],item['includes']]
+    chips=''.join(f'<span>{esc(value)}</span>' for value in specs if value)
+    return f'''<article class="product-card" data-inventory-item data-search="{esc(terms)}" data-type="{esc(product_type(item))}" data-make="{esc(item['make'])}" data-color="{esc(item['color'])}">
       <a class="product-media" href="{esc(item['url'])}" aria-label="View {esc(item['title'])}">{photo(item)}<span class="tag takeoff">New takeoff</span></a>
       <div class="product-body"><p class="product-category">{esc(item['category'])} · Dallas, TX</p><h3><a href="{esc(item['url'])}">{esc(item['title'])}</a></h3>
-      <div class="specs"><span>{esc(item['color'])}</span><span>{esc(item['bedLength'])}</span><span>{esc(item['condition'])}</span><span>{esc(item['includes'])}</span></div>
-      <div class="product-bottom"><div class="product-price">${item['price']:,.0f}<small>{esc(item['includes'])} · Confirm availability</small></div>{button('View bed',item['url'])}</div>
+      <div class="specs">{chips}</div>
+      <div class="product-bottom"><div class="product-price">${item['price']:,.0f}<small>{esc(item['includes'])} · Confirm availability</small></div>{button('View '+part_name(item),item['url'])}</div>
       </div></article>'''
 
 def cards():
     visible=[item for item in items if item.get('status')=='available']
     return ''.join(card(item) for item in visible) or '<div class="empty-state"><h3>Ask about current inventory.</h3><p>Call or text for beds, parts, and pricing available today.</p></div>'
+
+def category_links():
+    return '<nav class="category-links" aria-label="Shop by part type">'+''.join(f'<a href="inventory.html?type={quote(kind)}">{kind} <span>{sum(product_type(item)==kind for item in available)} listed</span></a>' for kind in PRODUCT_TYPES)+'</nav>'
 
 def side_note():
     return f'''<aside class="side-note"><span class="eyebrow">Straight from our inventory</span><h3>See a bed you like?<br>Let’s check the fit.</h3><p>Send your truck year, make, model, bed length, and rear wheel setup. We’ll confirm the details with you before pickup.</p><a class="text-link" href="{esc(SMS)}">Text 214-524-8401 →</a><hr><h3>Looking for takeoff parts?</h3><p>Ask what else is available with our current takeoff stock.</p><a class="text-link" href="quote.html">Ask about parts →</a></aside>'''
@@ -73,7 +105,7 @@ def builder():
       <p class="form-note">Opens your text or email app with your details. Review and send your message there.</p></form>'''
 
 def cta():
-    return f'''<section class="cta-band"><div class="wrap cta-inner"><div><h2>Your next bed could be right here.</h2><p>Confirm the fit. Get the price. Arrange your Dallas pickup.</p></div><div class="actions">{button('Text us',SMS)}{button('Call 214-524-8401','tel:2145248401','outline')}</div></div></section>'''
+    return f'''<section class="cta-band"><div class="wrap cta-inner"><div><h2>Find your next bed or part.</h2><p>Confirm the fit. Get the price. Arrange your Dallas pickup.</p></div><div class="actions">{button('Text us',SMS)}{button('Call 214-524-8401','tel:2145248401','outline')}</div></div></section>'''
 
 def older_band():
     return '''<section class="section"><div class="wrap secondary-band"><div><span class="eyebrow">Also in our inventory</span><h2>Older beds. A fresh start.</h2><p>We still have a few older beds that can be repaired and painted by arrangement. Ask about available options, the finish, and timing.</p></div><div class="actions"><a class="text-link" href="older-beds.html">Ask about prepared older beds →</a></div></div></section>'''
@@ -82,7 +114,7 @@ def inquiry_section():
     return f'''<section class="section soft"><div class="wrap two-col"><div class="body-copy"><span class="eyebrow">Let’s check your fit</span><h2>A few details.<br>A straightforward answer.</h2><p>Tell us what you drive and which item caught your eye. We’ll confirm availability, compatibility, and what’s included.</p><a class="text-link" href="quote.html">Prefer a website form? →</a></div>{builder()}</div></section>'''
 
 def steps():
-    steps=[('Choose your inventory','Browse the listed beds or ask about current takeoff parts. Confirm the item is available before making plans.'),('Confirm the details','We’ll check your truck details, the item’s condition, included parts, and price with you.'),('Pick up in Dallas','Arrange payment and a pickup time. Bring a suitable truck or trailer and tie-downs; forklift loading is available.')]
+    steps=[('Choose your inventory','Browse the listed beds, lights, tailgates, and bumpers. Confirm the item is available before making plans.'),('Confirm the details','We’ll check your truck details, the item’s condition, included parts, and price with you.'),('Pick up in Dallas','Arrange payment and a pickup time. Bring a suitable truck or trailer and tie-downs; forklift loading is available.')]
     return '<div class="number-list">'+''.join(f'<div class="number-row"><span>0{i}</span><div><h3>{title}</h3><p>{body}</p></div></div>' for i,(title,body) in enumerate(steps,1))+'</div>'
 
 def hero(kicker,title,body):
@@ -132,30 +164,48 @@ def page(path,title,description,body,active='',structured=None):
     (ROOT/path).write_text(doc+'\n')
 
 # HOME
-featured=next((item for item in items if item.get('status')=='available'),None)
-visual=(f'''<div class="hero-visual"><div class="visual-top"><span class="tag takeoff">New takeoff</span><span class="tag">{esc(featured['includes'])}</span></div><a href="{esc(featured['url'])}" aria-label="View {esc(featured['title'])}">{photo(featured,'eager')}</a><div class="visual-caption"><div><strong>{esc(featured['years'])} {esc(featured['models'])} short bed</strong><span>{esc(featured['color'])} · {esc(featured['condition'])} · Dallas pickup</span></div><a class="price" href="{esc(featured['url'])}">${featured['price']:,.0f}</a></div></div>''' if featured else '<div class="hero-visual"><img src="'+PLACEHOLDER+'" alt="Inventory photos coming soon" width="1200" height="800"></div>')
+featured=next((item for item in available if product_type(item)=='Beds'),next(iter(available),None))
+visual=(f'''<div class="hero-visual"><div class="visual-top"><span class="tag takeoff">New takeoff</span><span class="tag">{esc(featured['includes'])}</span></div><a href="{esc(featured['url'])}" aria-label="View {esc(featured['title'])}">{photo(featured,'eager')}</a><div class="visual-caption"><div><strong>{esc(featured['title'])}</strong><span>{esc(featured['color'])} · {esc(featured['condition'])} · Dallas pickup</span></div><a class="price" href="{esc(featured['url'])}">${featured['price']:,.0f}</a></div></div>''' if featured else '<div class="hero-visual"><img src="'+PLACEHOLDER+'" alt="Inventory photos coming soon" width="1200" height="800"></div>')
 body=f'''<section class="hero"><div class="wrap hero-grid"><div class="hero-copy"><span class="eyebrow">New takeoff inventory · Dallas, TX</span><h1>New takeoff beds.<br><span>Better deals.</span></h1><p>Factory takeoff truck beds and parts at a better price. Shop the inventory we have on hand, confirm your fit, and pick up in Dallas.</p><div class="actions">{button('Shop inventory','inventory.html','light')}{button('Talk to us',SMS,'light outline')}</div><p class="subnote">New takeoff stock is our focus. Select older beds are also available.</p></div>{visual}</div></section>
 <div class="trust-strip"><div class="wrap trust-inner"><div><span class="trust-icon" aria-hidden="true">✓</span>New takeoff beds &amp; parts</div><div><span class="trust-icon" aria-hidden="true">↔</span>Confirm fitment before you buy</div><div><span class="trust-icon" aria-hidden="true">↗</span>Dallas pickup &amp; forklift loading</div></div></div>
-<section class="section"><div class="wrap"><div class="section-heading"><div><span class="eyebrow">On the lot</span><h2>Start with what’s here.</h2><p>See a bed that works for your truck? Call or text to confirm availability and arrange pickup.</p></div><a class="text-link" href="inventory.html">View all inventory →</a></div><div class="inventory-layout"><div class="inventory-grid">{cards()}</div>{side_note()}</div></div></section>
+<section class="section"><div class="wrap"><div class="section-heading"><div><span class="eyebrow">On the lot</span><h2>Start with what’s here.</h2><p>See a bed that works for your truck? Call or text to confirm availability and arrange pickup.</p></div><a class="text-link" href="inventory.html">View all inventory →</a></div>{category_links()}<div class="inventory-grid home-products">{cards()}</div></div></section>
 <section class="section soft"><div class="wrap two-col"><div class="body-copy"><span class="eyebrow">Factory parts. A fresh opportunity.</span><h2>What’s a new takeoff?</h2><p>A factory bed removed from a new truck, often to make room for a flatbed or service body. A good takeoff can be a practical way to replace your bed while keeping the factory look.</p><p>We’ll confirm the condition and what’s included for the specific bed you choose.</p><a class="text-link" href="faq.html">Get the details →</a></div>{steps()}</div></section>
 {older_band()}{inquiry_section()}{cta()}'''
 page('index.html','New Takeoff Truck Beds & Parts for Sale','Shop new takeoff truck beds and parts for sale in Dallas. Browse current inventory, check fitment and pricing, and arrange pickup with forklift loading.',body)
 
 # INVENTORY
-body=hero('Shop current stock','Takeoff beds.<br>Ready for a new truck.','Browse our listed inventory and item photos. Confirm availability, fitment, condition, and included parts with us before purchase.')
-body+=f'''<section class="section"><div class="wrap"><div class="search-bar"><label>Search inventory<input type="search" data-inventory-search placeholder="Try Ford, F-250, white, or short bed" aria-label="Search inventory"></label><span class="listing-count" data-inventory-count>{len(items)} listing</span><button class="button outline" type="button" data-clear-search>Clear search</button></div><div class="inventory-layout"><div class="inventory-grid">{cards()}<div class="empty-state" data-inventory-empty hidden><h3>No listed items match that search.</h3><p>Call or text to ask about current stock. We’ll tell you what’s available.</p>{button('Ask about inventory',SMS)}</div></div>{side_note()}</div><p class="stock-note">Prices apply to the listed item and contents. Contact us to confirm current availability and pickup arrangements.</p></div></section>{older_band()}{cta()}'''
-page('inventory.html','New Takeoff Inventory','Browse current new takeoff truck beds and parts for sale at Better Beds in Dallas. View individual listings, photos, prices and condition; confirm fitment and pickup.',body,'inventory.html')
+body=hero('Shop current stock','Takeoff inventory.<br>Choose your part.','Browse listed beds, lights, tailgates, and bumpers by type, make, and color. Confirm availability, fitment, condition, and included parts before purchase.')
+type_buttons='<button class="inventory-type" type="button" data-filter-type="" aria-pressed="true">All items <span>'+str(len(available))+'</span></button>'+''.join(f'<button class="inventory-type" type="button" data-filter-type="{kind}" aria-pressed="false">{kind} <span>{sum(product_type(item)==kind for item in available)}</span></button>' for kind in PRODUCT_TYPES)
+make_options=''.join(f'<option value="{make}">{make}</option>' for make in MAKES)
+color_options=''.join(f'<option value="{esc(color)}">{esc(color)}</option>' for color in sorted({item['color'] for item in available if item.get('color')}))
+body+=f'''<section class="section"><div class="wrap"><div class="inventory-types" role="group" aria-label="Part type">{type_buttons}</div><div class="inventory-filters"><label>Search inventory<input type="search" data-inventory-search placeholder="Try 6'9&quot;, short bed, F-250, or tailgate" aria-label="Search inventory"></label><label>Make<select data-filter-make><option value="">All makes</option>{make_options}</select></label><label>Color<select data-filter-color><option value="">All colors</option>{color_options}</select></label></div><div class="search-summary"><span class="listing-count" data-inventory-count role="status" aria-live="polite">{len(available)} listings</span><button class="button outline" type="button" data-clear-search>Clear filters</button></div><div class="inventory-grid catalog-grid">{cards()}<div class="empty-state" data-inventory-empty hidden><h3>No listed items match those filters.</h3><p>Try another category or clear the filters. You can also call or text to ask about current inventory.</p>{button('Ask about inventory',SMS)}</div></div><p class="stock-note">Category counts show listings. Call or text to confirm available quantities and pickup.</p><div class="range-note"><h2>Takeoff beds for heavy-duty pickups.</h2><p>Our takeoff bed range focuses on Ford F-250 / F-350 and Ram, Chevy, and GMC 2500 / 3500 series. Each bed listing gives its actual length and familiar style name, such as short bed, long bed, or dually. Check the listings above for current stock.</p></div></div></section>{older_band()}{cta()}'''
+page('inventory.html','Takeoff Beds, Lights, Tailgates & Bumpers','Browse takeoff beds, lights, tailgates and bumpers in Dallas. Filter Ford, Ram, Chevy and GMC listings by type and color. See actual bed lengths, photos and prices.',body,'inventory.html')
 
-# PRODUCT PAGES: inventory data is the source of truth.
+# PRODUCT PAGES: inventory data is the source of truth for all part types.
 for item in items:
     availability,availability_label=stock_status(item)
-    body=f'''<section class="section"><div class="wrap"><nav class="breadcrumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span aria-hidden="true">/</span><a href="inventory.html">Inventory</a><span aria-hidden="true">/</span><span>{esc(item['make'])} short bed</span></nav><div class="product-detail">{gallery(item)}<div class="detail-copy"><span class="tag takeoff">{esc(item['category'])}</span><h1>{esc(item['title'])}</h1><p>{esc(item['color'])}. {esc(item['condition'])}. {esc(item['includes'])}.</p><div class="product-price">${item['price']:,.0f}<small>{esc(item['includes'])} · {esc(availability_label)}</small></div><dl><dt>Model years</dt><dd>{esc(item['years'])}</dd><dt>Truck</dt><dd>{esc(item['make'])} {esc(item['models'])}</dd><dt>Bed length</dt><dd>{esc(item['bedLength'])}</dd><dt>Color</dt><dd>{esc(item['color'])}</dd><dt>Condition</dt><dd>{esc(item['condition'])}</dd><dt>Includes</dt><dd>{esc(item['includes'])}</dd></dl><div class="actions">{button('Text about this bed',product_sms(item))}{button('Call us','tel:2145248401','outline')}</div><p class="stock-note">Send your truck details and rear wheel setup so we can confirm exact fitment. Call/text before traveling.</p></div></div></div></section>
-<section class="section soft"><div class="wrap info-grid"><article class="info-card"><span class="eyebrow">01 · What’s included</span><h3>{esc(item['includes'])}.</h3><p>Confirm the exact contents before purchase. A tailgate, lights, bumper, hardware, or other accessories should not be assumed included.</p></article><article class="info-card"><span class="eyebrow">02 · Pickup</span><h3>Pick up in Dallas.</h3><p>Arrange a time at 3123 Cartwright Street. Bring a suitable truck or trailer and tie-downs. Forklift loading is available.</p></article><article class="info-card"><span class="eyebrow">03 · Fitment</span><h3>Check your specific truck.</h3><p>Confirm the model year, bed length, and single rear wheel or dually configuration. Installation and removal are arranged separately.</p></article></div></section>{cta()}'''
-    product={'@context':'https://schema.org','@type':'Product','@id':ORIGIN+item['url']+'#product','url':ORIGIN+item['url'],'name':item['title']+' — '+item['color']+', '+item['includes'],'description':f'{item["title"]}, {item["color"].lower()}, {item["condition"].lower()}, {item["includes"].lower()}. New takeoff inventory at Better Beds in Dallas, Texas. {availability_label}. Confirm exact fitment.','brand':{'@type':'Brand','name':item['make']},'color':item['color'],'category':item['category'],'additionalProperty':[{'@type':'PropertyValue','name':name,'value':item[key]} for name,key in [('Model years','years'),('Truck models','models'),('Bed length','bedLength'),('Includes','includes')]],'offers':{'@type':'Offer','url':ORIGIN+item['url'],'price':item['price'],'priceCurrency':item['currency'],'availability':'https://schema.org/'+availability,'itemCondition':'https://schema.org/NewCondition','seller':{'@id':ORIGIN+'#business'}}}
+    kind=product_type(item)
+    name=part_name(item)
+    detail_fields=[('Model years',item['years']),('Truck',item['make']+' '+item['models'])]
+    if kind=='Beds':
+        detail_fields+=[('Bed length',item.get('bedLength','')),('Bed style',item.get('bedStyle',''))]
+    detail_fields+=[('Color',item['color']),('Condition',item['condition']),('Includes',item['includes'])]
+    detail_fields += [(feature['name'],feature['value']) for feature in item.get('features',[])]
+    details=''.join(f'<dt>{esc(label)}</dt><dd>{esc(value)}</dd>' for label,value in detail_fields if value)
+    contact_label='Text about these lights' if kind=='Lights' else 'Text about this '+name
+    pickup_text='Arrange a time at 3123 Cartwright Street. Bring a suitable truck or trailer and tie-downs. Forklift loading is available.' if kind=='Beds' else 'Call or text before traveling to confirm availability and arrange pickup at 3123 Cartwright Street, Dallas, Texas.'
+    fitment_text='Confirm model year, bed length, and single rear wheel or dually configuration. Installation and removal are arranged separately.' if kind=='Beds' else 'Confirm model year and the exact part configuration, features, and included components before buying. Installation is arranged separately.'
+    body=f'''<section class="section"><div class="wrap"><nav class="breadcrumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span aria-hidden="true">/</span><a href="inventory.html?type={quote(kind)}">{esc(kind)}</a><span aria-hidden="true">/</span><span>{esc(item['title'])}</span></nav><div class="product-detail">{gallery(item)}<div class="detail-copy"><span class="tag takeoff">{esc(item['category'])}</span><h1>{esc(item['title'])}</h1><p>{esc(item['color'])}. {esc(item['condition'])}. {esc(item['includes'])}.</p><div class="product-price">${item['price']:,.0f}<small>{esc(item['includes'])} · {esc(availability_label)}</small></div><dl>{details}</dl><div class="actions">{button(contact_label,product_sms(item))}{button('Call us','tel:2145248401','outline')}</div><p class="stock-note">Send your truck details so we can confirm exact fitment. Call/text before traveling.</p></div></div></div></section>
+<section class="section soft"><div class="wrap info-grid"><article class="info-card"><span class="eyebrow">01 · What’s included</span><h3>{esc(item['includes'])}.</h3><p>Confirm the listed contents and any hardware with us before purchase. Other parts are sold separately unless explicitly included.</p></article><article class="info-card"><span class="eyebrow">02 · Pickup</span><h3>Pick up in Dallas.</h3><p>{pickup_text}</p></article><article class="info-card"><span class="eyebrow">03 · Fitment</span><h3>Check your specific truck.</h3><p>{fitment_text}</p></article></div></section>{cta()}'''
+    feature_text=(' '+feature_summary(item)+'.') if item.get('features') else ''
+    product={'@context':'https://schema.org','@type':'Product','@id':ORIGIN+item['url']+'#product','url':ORIGIN+item['url'],'name':item['title']+' — '+item['color']+', '+item['includes'],'description':f'{item["title"]}, {item["color"].lower()}, {item["condition"].lower()}, {item["includes"].lower()}.{feature_text} New takeoff inventory at Better Beds in Dallas, Texas. {availability_label}. Confirm exact fitment.','brand':{'@type':'Brand','name':item['make']},'color':item['color'],'category':item['category'],'additionalProperty':[{'@type':'PropertyValue','name':label,'value':value} for label,value in product_properties(item)],'offers':{'@type':'Offer','url':ORIGIN+item['url'],'price':item['price'],'priceCurrency':item['currency'],'availability':'https://schema.org/'+availability,'seller':{'@id':ORIGIN+'#business'}}}
+    condition_schema={'New condition':'NewCondition','Used condition':'UsedCondition','Refurbished':'RefurbishedCondition'}.get(item['condition'])
+    if condition_schema: product['offers']['itemCondition']='https://schema.org/'+condition_schema
+    if kind=='Beds' and bed_spec(item): product['size']=bed_spec(item)
     if item.get('image'): product['image']=[ORIGIN+p['src'] for p in item['photos']] if item.get('photos') else ORIGIN+item['image']
-    breadcrumbs={'@context':'https://schema.org','@type':'BreadcrumbList','itemListElement':[{'@type':'ListItem','position':position,'name':name,'item':ORIGIN+url} for position,name,url in [(1,'Better Beds',''),(2,'Inventory','inventory.html'),(3,item['title'],item['url'])]]}
+    breadcrumbs={'@context':'https://schema.org','@type':'BreadcrumbList','itemListElement':[{'@type':'ListItem','position':position,'name':label,'item':ORIGIN+url} for position,label,url in [(1,'Better Beds',''),(2,kind,'inventory.html?type='+quote(kind)),(3,item['title'],item['url'])]]}
     seo_title=item['title']+(' for Sale' if item.get('status')=='available' else ' — '+availability_label.split(' — ')[0])
-    page(item['url'],seo_title,f'{item["title"]} in Dallas: {item["color"].lower()}, {item["condition"].lower()}, {item["includes"].lower()}. ${item["price"]:,.0f}. {availability_label}. New takeoff inventory.',body,'inventory.html',[product,breadcrumbs])
+    page(item['url'],seo_title,f'{item["title"]} in Dallas: {item["color"].lower()}, {item["condition"].lower()}, {item["includes"].lower()}. ${item["price"]:,.0f}.{feature_text} {availability_label}.',body,'inventory.html',[product,breadcrumbs])
 
 # BUYING & PICKUP
 body=hero('How to buy','Choose it. Check it.<br>Pick it up.','Buying from Better Beds starts with the inventory we have. Talk to us about a listed item, confirm the details, and arrange pickup in Dallas.')
@@ -174,7 +224,7 @@ page('faq.html','Takeoff Bed Buying & Pickup FAQs','Questions about new takeoff 
 # CONTACT & UPLOAD
 contact=f'''<div class="contact-details"><span class="eyebrow">Call or text</span><h2><a href="tel:2145248401">214-524-8401</a></h2><p>Ask about a listed bed, takeoff parts, or an older inventory bed prepared by arrangement.</p><div class="actions">{button('Text Better Beds',SMS)}</div><h3>Pickup in Dallas</h3><p><a class="text-link" href="{MAP}" target="_blank" rel="noopener">3123 Cartwright Street<br>Dallas, TX 75212 ↗</a></p><p>Monday–Saturday · 9 AM–5 PM Central<br>Call/text before traveling to confirm stock and pickup.</p><h3>Prefer email?</h3><p><a class="text-link" href="mailto:clint@betterbeds.pro">clint@betterbeds.pro</a></p><p class="payment-note">We accept cash, debit, credit, Zelle, PayPal, and Venmo. <a href="{esc(AFF)}" target="_blank" rel="noopener">Apply with American First Finance ↗</a><br>Approval and terms are handled by the finance company.</p></div>'''
 page('contact.html','Contact Us About Inventory','Call or text 214-524-8401 about takeoff beds and parts. Visit Better Beds at 3123 Cartwright Street, Dallas, TX, after confirming stock and pickup.',hero('Let’s talk inventory','The right bed starts<br>with a conversation.','Tell us which item you’re interested in and what you drive. We’ll confirm the fit, what’s included, and pickup arrangements.')+f'<section class="section"><div class="wrap two-col">{contact}{builder()}</div></section>'+cta(),'contact.html')
-upload='''<form class="quote-form" action="https://chat.betterbeds.pro/estimate-requests" method="POST" enctype="multipart/form-data" data-agent-upload="true"><h2>Send an inventory inquiry.</h2><p>Use this form if you prefer. Photos of your truck are optional.</p><input type="text" name="_honey" tabindex="-1" autocomplete="off" hidden aria-hidden="true"><div class="form-grid"><label>Your name *<input name="name" autocomplete="name" required maxlength="140"></label><label>Phone number *<input type="tel" name="phone" autocomplete="tel" required maxlength="60"></label><label>Email <span class="field-help">Optional</span><input type="email" name="email" autocomplete="email" maxlength="200"></label><label>City / state<input name="location" maxlength="160" autocomplete="address-level1"></label><label>Truck year / make / model<input name="truck" placeholder="e.g. 2024 Ford F-250" maxlength="200"></label><label>Bed length / wheel setup<input name="bed_length" placeholder="Short bed, single rear wheel, etc." maxlength="160"></label><label>Color / paint code<input name="paint_code" maxlength="100"></label><label>Pickup plan<select name="travel_plan"><option value="">Choose if known</option><option>Local Dallas pickup</option><option>Travel to Dallas for pickup</option><option>Customer-arranged freight</option><option>Not sure yet</option></select></label><label>Preferred contact<select name="preferred_contact[]"><option>Text</option><option>Call</option><option>Email</option></select></label><label>Interested in<select name="quote_type[]"><option>New takeoff bed</option><option>Takeoff parts</option><option>Older inventory bed with repair / paint</option></select></label></div><label>Item and questions *<textarea name="message" required rows="4" maxlength="5000" placeholder="Which listing or part? Tell us what you’d like to confirm."></textarea></label><label>Truck photos <span class="field-help">Optional · Up to 6 images, under 5 MB each and 15 MB total</span><input type="file" name="photos" accept="image/*" multiple></label><button class="button" type="submit">Send inventory inquiry <span aria-hidden="true">↗</span></button><p class="form-status" data-form-status role="status" aria-live="polite"></p><p class="form-note">Please don’t include card or bank details. Submitting an inquiry does not reserve a bed or confirm fitment.</p></form>'''
+upload='''<form class="quote-form" action="https://chat.betterbeds.pro/estimate-requests" method="POST" enctype="multipart/form-data" data-agent-upload="true"><h2>Send an inventory inquiry.</h2><p>Use this form if you prefer. Photos of your truck are optional.</p><input type="text" name="_honey" tabindex="-1" autocomplete="off" hidden aria-hidden="true"><div class="form-grid"><label>Your name *<input name="name" autocomplete="name" required maxlength="140"></label><label>Phone number *<input type="tel" name="phone" autocomplete="tel" required maxlength="60"></label><label>Email <span class="field-help">Optional</span><input type="email" name="email" autocomplete="email" maxlength="200"></label><label>City / state<input name="location" maxlength="160" autocomplete="address-level1"></label><label>Truck year / make / model<input name="truck" placeholder="e.g. 2024 Ford F-250" maxlength="200"></label><label>Bed length / wheel setup<input name="bed_length" placeholder="Short bed, single rear wheel, etc." maxlength="160"></label><label>Color / paint code<input name="paint_code" maxlength="100"></label><label>Pickup plan<select name="travel_plan"><option value="">Choose if known</option><option>Local Dallas pickup</option><option>Travel to Dallas for pickup</option><option>Customer-arranged freight</option><option>Not sure yet</option></select></label><label>Preferred contact<select name="preferred_contact[]"><option>Text</option><option>Call</option><option>Email</option></select></label><label>Interested in<select name="quote_type[]"><option>New takeoff bed</option><option>Takeoff lights</option><option>Takeoff tailgate</option><option>Takeoff bumper</option><option>Older inventory bed with repair / paint</option></select></label></div><label>Item and questions *<textarea name="message" required rows="4" maxlength="5000" placeholder="Which listing or part? Tell us what you’d like to confirm."></textarea></label><label>Truck photos <span class="field-help">Optional · Up to 6 images, under 5 MB each and 15 MB total</span><input type="file" name="photos" accept="image/*" multiple></label><button class="button" type="submit">Send inventory inquiry <span aria-hidden="true">↗</span></button><p class="form-status" data-form-status role="status" aria-live="polite"></p><p class="form-note">Please don’t include card or bank details. Submitting an inquiry does not reserve a bed or confirm fitment.</p></form>'''
 page('quote.html','Ask About a Bed or Part','Send Better Beds an inventory inquiry. Ask about takeoff beds, included parts, fitment, pricing, and pickup. Optional truck photo uploads.',hero('Ask about an item','Let’s check that bed.','Texting is the quickest way to start. Send the listing name and your truck details, or use the inquiry form below.')+f'<section class="section"><div class="wrap product-detail">{contact}{upload}</div></section>'+cta(),'contact.html')
 
 # SUPPORTING CONTENT
@@ -209,7 +259,7 @@ for path in PAGES:
         ET.SubElement(image,f'{{{IMAGE_NS}}}loc').text=ORIGIN+photo['src']
 ET.indent(sitemap,space='  ')
 ET.ElementTree(sitemap).write(ROOT/'sitemap.xml',encoding='utf-8',xml_declaration=True)
-inventory_links='\n'.join(f'- [{item["title"]}]({ORIGIN+item["url"]}): {item["color"]}, {item["condition"].lower()}, {item["includes"].lower()}, ${item["price"]:,.0f}.' for item in available)
+inventory_links='\n'.join(f'- [{item["title"]}]({ORIGIN+item["url"]}): {item["color"]}, {item["condition"].lower()}, {item["includes"].lower()}, ${item["price"]:,.0f}.'+(' '+feature_summary(item)+'.' if item.get('features') else '') for item in available)
 (ROOT/'llms.txt').write_text(f'''# Better Beds — New Takeoff Inventory, Dallas
 
 > Better Beds sells new takeoff truck beds and parts from current inventory. Select older inventory beds can be repaired and painted by arrangement. New takeoff inventory is the main business focus.
@@ -217,6 +267,8 @@ inventory_links='\n'.join(f'- [{item["title"]}]({ORIGIN+item["url"]}): {item["co
 Contact: 214-524-8401 (call/text), clint@betterbeds.pro.
 Pickup: 3123 Cartwright Street, Dallas, TX 75212. Monday–Saturday 9 AM–5 PM Central. Confirm stock and pickup before traveling.
 Installation and removal are not offered. Forklift loading is available for purchased beds, for transport only.
+
+Inventory categories: Beds, Lights, Tailgates and Bumpers. Takeoff beds focus on Ford F-250/F-350 and Ram, Chevy and GMC 2500/3500 series. Bed listings include the exact length and style name. Refer to current listings for confirmed stock.
 
 ## Current listings
 

@@ -75,3 +75,20 @@ for item in items:
     if item['status']=='available': assert item['url'] in catalog.links, item['id']+': missing crawlable catalog link'
     assert 'aggregateRating' not in product and 'review' not in product, 'Do not fabricate reviews'
 print(f'PASS: {len(items)} product page(s): indexability, canonical URLs, factual Product/Offer data, stock, image sitemap, social photo, breadcrumbs, internal links and crawler access.')
+
+# Bed measurements and slang must stay together; part pages must not inherit
+# irrelevant bed specifications or assume bed hardware is included.
+for item in items:
+    source=(ROOT/item['url']).read_text()
+    product=next(schema for schema in Page(source).schemas if schema['@type']=='Product')
+    properties={prop['name']:prop['value'] for prop in product['additionalProperty']}
+    if item.get('productType','Beds')=='Beds':
+        assert item['bedLength'] in item['title']
+        assert item['bedStyle'].lower() in item['title'].lower()
+        assert properties['Bed length']==item['bedLength']
+        assert properties['Bed style']==item['bedStyle']
+    else:
+        assert 'Bed length' not in properties and 'Bed style' not in properties
+    for feature in item.get('features',[]):
+        assert properties[feature['name']]==feature['value']
+print('PASS: exact bed length and style, part-specific features, and no bed-only fields on other parts.')
