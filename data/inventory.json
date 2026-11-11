@@ -275,6 +275,68 @@
         }
       ],
       "url": "ford-f350-eight-foot-dually-oxford-white.html"
+    },
+    {
+      "id": "ford-super-duty-short-bed-black-bedliner",
+      "title": "2023–2026 Ford F-250 / F-350 6'9\" black short bed with spray-in bedliner",
+      "make": "Ford",
+      "models": "F-250 / F-350",
+      "years": "2023–2026",
+      "productType": "Beds",
+      "bedLength": "6'9\"",
+      "bedStyle": "Short bed",
+      "color": "Black",
+      "condition": "Gently used",
+      "category": "Used truck beds",
+      "price": 2500,
+      "currency": "USD",
+      "includes": "Bed only",
+      "status": "available",
+      "features": [
+        {
+          "name": "Damage",
+          "value": "No damage"
+        },
+        {
+          "name": "Bedliner",
+          "value": "Spray-in bedliner"
+        }
+      ],
+      "image": "assets/images/inventory/ford-super-duty-black-short-bed-side.jpg",
+      "imageAlt": "Black Ford F-250 / F-350 short bed with spray-in bedliner, stored upside down above another bed",
+      "imageWidth": 1280,
+      "imageHeight": 960,
+      "photos": [
+        {
+          "src": "assets/images/inventory/ford-super-duty-black-short-bed-side.jpg",
+          "alt": "Black Ford F-250 / F-350 short bed with spray-in bedliner, stored upside down above another bed",
+          "caption": "Full side view of the black bed, shown stored upside down.",
+          "width": 1280,
+          "height": 960
+        },
+        {
+          "src": "assets/images/inventory/ford-super-duty-black-short-bed-quarter.jpg",
+          "alt": "Quarter view of the gently used black Ford short bed, shown stored upside down",
+          "caption": "Quarter view and front wall; bed stored upside down.",
+          "width": 1280,
+          "height": 960
+        },
+        {
+          "src": "assets/images/inventory/ford-super-duty-black-short-bed-fuel-side.jpg",
+          "alt": "Fuel-door side of the black Ford short bed, stored upside down",
+          "caption": "Fuel-door side; bed stored upside down.",
+          "width": 1280,
+          "height": 960
+        },
+        {
+          "src": "assets/images/inventory/ford-super-duty-black-short-bed-opposite.jpg",
+          "alt": "Opposite-side finish of the gently used black Ford short bed, stored upside down",
+          "caption": "Opposite-side finish; bed stored upside down.",
+          "width": 1280,
+          "height": 960
+        }
+      ],
+      "url": "ford-super-duty-short-bed-black-bedliner.html"
     }
   ]
 }
