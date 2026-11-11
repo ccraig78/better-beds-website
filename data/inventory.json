@@ -66,9 +66,11 @@
           "value": "Manual release"
         }
       ],
-      "image": null,
-      "imageAlt": null,
-      "url": "ford-super-duty-tailgate-white-manual.html"
+      "image": "assets/images/inventory/ford-super-duty-tailgate-white-manual.jpg",
+      "imageAlt": "White Ford Super Duty takeoff tailgate with Ford emblem and manual-release handle, photographed in a truck bed",
+      "url": "ford-super-duty-tailgate-white-manual.html",
+      "imageWidth": 960,
+      "imageHeight": 1280
     }
   ]
 }
