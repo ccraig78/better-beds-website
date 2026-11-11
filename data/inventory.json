@@ -744,6 +744,57 @@
         }
       ],
       "url": "gmc-sierra-3500-eight-foot-dually-white.html"
+    },
+    {
+      "id": "ford-f350-eight-foot-dually-carbonized-gray",
+      "title": "2023–2026 Ford F-350 8' dually bed — Carbonized Gray Metallic",
+      "make": "Ford",
+      "models": "F-350",
+      "years": "2023–2026",
+      "productType": "Beds",
+      "bedLength": "8'",
+      "bedStyle": "Dually",
+      "color": "Carbonized Gray Metallic",
+      "condition": "New condition",
+      "category": "New takeoff beds",
+      "price": 2500,
+      "currency": "USD",
+      "includes": "Bed only",
+      "status": "available_to_order",
+      "features": [
+        {
+          "name": "Rear wheel setup",
+          "value": "Dually (dual rear wheel / DRW)"
+        }
+      ],
+      "image": "assets/images/inventory/ford-f350-eight-foot-dually-carbonized-gray-fuel-side.jpg",
+      "imageAlt": "Carbonized Gray Metallic Ford F-350 8-foot dually bed available to order, fuel-door side and wide rear fender",
+      "imageWidth": 1280,
+      "imageHeight": 960,
+      "photos": [
+        {
+          "src": "assets/images/inventory/ford-f350-eight-foot-dually-carbonized-gray-fuel-side.jpg",
+          "alt": "Carbonized Gray Metallic Ford F-350 8-foot dually bed available to order, fuel-door side and wide rear fender",
+          "caption": "Fuel-door side and wide dually fender.",
+          "width": 1280,
+          "height": 960
+        },
+        {
+          "src": "assets/images/inventory/ford-f350-eight-foot-dually-carbonized-gray-opposite.jpg",
+          "alt": "Opposite-side view of the Carbonized Gray Metallic Ford F-350 8-foot dually bed available to order",
+          "caption": "Opposite-side view and bed interior.",
+          "width": 1280,
+          "height": 960
+        },
+        {
+          "src": "assets/images/inventory/ford-f350-eight-foot-dually-carbonized-gray-interior.jpg",
+          "alt": "Interior of the Carbonized Gray Metallic Ford F-350 8-foot dually bed with separate parts stored inside",
+          "caption": "Bed interior; separate parts pictured inside are not included.",
+          "width": 1280,
+          "height": 960
+        }
+      ],
+      "url": "ford-f350-eight-foot-dually-carbonized-gray.html"
     }
   ]
 }
