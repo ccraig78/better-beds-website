@@ -436,6 +436,50 @@
         }
       ],
       "url": "ford-super-duty-eight-foot-srw-white-bedliner.html"
+    },
+    {
+      "id": "ford-super-duty-eight-foot-srw-carbonized-gray",
+      "title": "2023–2026 Ford F-250 / F-350 8' single rear wheel long bed — Carbonized Gray Metallic",
+      "make": "Ford",
+      "models": "F-250 / F-350",
+      "years": "2023–2026",
+      "productType": "Beds",
+      "bedLength": "8'",
+      "bedStyle": "Long bed",
+      "color": "Carbonized Gray Metallic",
+      "condition": "New condition",
+      "category": "New takeoff beds",
+      "price": 1500,
+      "currency": "USD",
+      "includes": "Bed only",
+      "status": "available",
+      "features": [
+        {
+          "name": "Rear wheel setup",
+          "value": "Single rear wheel (SRW)"
+        }
+      ],
+      "image": "assets/images/inventory/ford-super-duty-eight-foot-srw-carbonized-gray-fuel-side.jpg",
+      "imageAlt": "Carbonized Gray Metallic Ford F-250 / F-350 8-foot single rear wheel long bed, fuel-door side, beneath a black bed on a trailer",
+      "imageWidth": 1280,
+      "imageHeight": 960,
+      "photos": [
+        {
+          "src": "assets/images/inventory/ford-super-duty-eight-foot-srw-carbonized-gray-fuel-side.jpg",
+          "alt": "Carbonized Gray Metallic Ford F-250 / F-350 8-foot single rear wheel long bed, fuel-door side, beneath a black bed on a trailer",
+          "caption": "Fuel-door side of the Carbonized Gray Metallic bed underneath the black bed.",
+          "width": 1280,
+          "height": 960
+        },
+        {
+          "src": "assets/images/inventory/ford-super-duty-eight-foot-srw-carbonized-gray-side.jpg",
+          "alt": "Side view of the Carbonized Gray Metallic Ford F-250 / F-350 8-foot single rear wheel long bed, beneath a black bed on a trailer",
+          "caption": "Opposite side of the Carbonized Gray Metallic bed underneath the black bed.",
+          "width": 1280,
+          "height": 960
+        }
+      ],
+      "url": "ford-super-duty-eight-foot-srw-carbonized-gray.html"
     }
   ]
 }
