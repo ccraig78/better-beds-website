@@ -44,6 +44,8 @@ Inventory categories: Beds, Lights, Tailgates and Bumpers. Takeoff beds focus on
 - [Inventory inquiry](https://betterbeds.pro/quote.html): Send an inquiry with optional truck photos. An inquiry does not reserve stock.
 - [FAQs](https://betterbeds.pro/faq.html): Takeoffs, fitment, included parts, pickup and payment.
 - [Contact](https://betterbeds.pro/contact.html): Phone/text, email and Dallas pickup details.
+- [Services](https://betterbeds.pro/services.html): Preparation of selected beds Better Beds owns and has in stock only. No customer-owned beds or trucks; scope, price and timing confirmed individually.
+- [Previous work gallery](https://betterbeds.pro/gallery.html): Historical examples, not current inventory. Past projects do not establish the current service scope.
 
 ## Assistants
 

@@ -1,0 +1,41 @@
+"""Own-stock preparation and the original photographic work archive.
+
+These shareable pages remain noindex; inventory remains the search focus.
+"""
+from html import escape
+from urllib.parse import quote
+
+
+def build_work_showcase(document, archive):
+    photos = archive['photos']
+    by_id = {photo['id']: photo for photo in photos}
+    featured = [by_id[key] for key in archive['featured']]
+    remaining = [photo for photo in photos if photo['id'] not in archive['featured']]
+    sms = 'sms:2145248401?body=' + quote('Hi Better Beds, I’m interested in preparation of a bed you own and have in stock. Please confirm the bed, work options, price and timing. My truck details are: ')
+
+    def image(photo, eager=False):
+        return f'<img src="{escape(photo["src"], quote=True)}" alt="{escape(photo["alt"], quote=True)}" width="{photo["width"]}" height="{photo["height"]}" loading="{"eager" if eager else "lazy"}" decoding="async">'
+
+    def tile(photo):
+        return f'<figure class="work-tile"><a href="{escape(photo["src"], quote=True)}" data-work-photo target="_blank" rel="noopener" aria-label="Open archive photo {photo["id"]}: {escape(photo["alt"], quote=True)}">{image(photo)}<span class="work-enlarge" aria-hidden="true">View photo +</span></a><figcaption>Archive photo {photo["id"]}</figcaption></figure>'
+
+    scope = '<aside class="work-scope"><strong>Only beds we own and have in stock.</strong><p>We are not accepting customer-owned beds or trucks for repair or paint. Work, price and timing are confirmed for each bed. Installation and removal are not offered.</p></aside>'
+    breadcrumbs = lambda label: f'<nav class="breadcrumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span aria-hidden="true">/</span><span>{label}</span></nav>'
+    contact = f'<div class="actions"><a class="button" href="{escape(sms, quote=True)}">Ask about an in-stock bed</a><a class="button secondary" href="tel:2145248401">Call 214-524-8401</a></div>'
+
+    services = f'''<section class="work-intro"><div class="wrap">{breadcrumbs('Services')}<div class="work-hero"><div><p class="eyebrow">Services · Our inventory</p><h1>Repair &amp; paint for<br>our in-stock beds.</h1><p class="work-lead">Giving the beds we own another useful life.</p><p>Alongside new takeoffs, we prepare selected older beds from our own stock for sale. Depending on the bed, that can include body repairs, surface preparation and paint.</p><div class="actions"><a class="button" href="gallery.html">See our previous work</a><a class="button secondary" href="used-beds.html">Shop used beds</a></div></div><figure class="work-hero-photo">{image(by_id['039'], True)}<figcaption>From our previous work archive · Not a current listing</figcaption></figure></div>{scope}</div></section>
+    <section class="work-section"><div class="wrap"><div class="section-heading"><div><p class="eyebrow">A bed-by-bed process</p><h2>From our stock to ready for pickup.</h2></div></div><ol class="work-process"><li><span>01</span><h3>Start with one of our beds</h3><p>Tell us about your truck and the bed you’re considering from our in-stock inventory. We’ll check fitment and discuss its condition.</p></li><li><span>02</span><h3>Agree on the work</h3><p>We assess what the bed needs and confirm the scope, finish, price and expected timing with you before work begins.</p></li><li><span>03</span><h3>Prepare, repair &amp; paint</h3><p>Work may include body repairs, sanding, priming and paint, as agreed for that bed. Finish and color options depend on the project.</p></li><li><span>04</span><h3>Review, then arrange pickup</h3><p>Confirm the finished condition, included parts and pickup details with us. Wait until we confirm the bed is ready before traveling.</p></li></ol><p class="work-timing"><strong>Timing is agreed individually.</strong> There is no standard turnaround promise. Ask us about current work availability for the specific bed before making plans.</p></div></section>
+    <section class="work-section work-soft"><div class="wrap"><div class="section-heading"><div><p class="eyebrow">From the archive</p><h2>A look at previous paint jobs.</h2></div><a class="text-link" href="gallery.html">View all {len(photos)} archive photos ›</a></div><div class="work-grid work-teaser">{''.join(f'<a href="gallery.html" aria-label="See previous work gallery">{image(photo)}</a>' for photo in [by_id['019'],by_id['043'],by_id['045']])}</div><p class="work-archive-note">Historical examples, including work from when our services were broader. These photos do not represent current inventory or an offer to work on customer-owned vehicles.</p></div></section>
+    <section class="work-section"><div class="wrap work-contact"><div><h2>Interested in one of our beds?</h2><p>Send the listing and your truck details. We’ll discuss the bed, preparation options and timing with you.</p></div>{contact}</div></section>'''
+    document('services.html', 'Services for our in-stock beds', services,
+             description='Learn how Better Beds prepares its own in-stock beds for sale. See previous work; scope, price and timing are confirmed for each bed. No customer-owned vehicles.',
+             indexable=False, share_image=by_id['039']['src'])
+
+    gallery = f'''<section class="work-intro"><div class="wrap">{breadcrumbs('Previous work gallery')}<p class="eyebrow">The Better Beds archive</p><h1>Previous work gallery.</h1><p class="work-lead">Paint jobs, finish details and work along the way.</p><p class="work-description">Real photos from our previous work. Some show finished paint, while others show preparation, bed interiors or past projects. This is a historical gallery, not current inventory.</p>{scope}<div class="actions"><a class="button secondary" href="services.html">Our current services</a><a class="text-link" href="inventory.html">Shop on-hand inventory ›</a></div></div></section>
+    <section class="work-section"><div class="wrap"><div class="section-heading"><div><p class="eyebrow">Paint &amp; finish details</p><h2>A few from our previous jobs.</h2></div><p class="work-count">{len(photos)} original archive photos · Tap a photo to enlarge</p></div><div class="work-grid">{''.join(tile(photo) for photo in featured)}</div><details class="work-archive"><summary>Show {len(remaining)} more archive photos</summary><p class="work-archive-note">The rest of the original gallery, including preparation and past projects. Older photos may show customer vehicles; we currently work only on beds we own and have in stock.</p><div class="work-grid">{''.join(tile(photo) for photo in remaining)}</div></details><p class="work-archive-note">Photos are examples of past work. Availability, condition and included components are stated only in current listings. Talk with us about the options for a specific bed we own.</p></div></section>
+    <section class="work-section work-soft"><div class="wrap work-contact"><div><h2>Let’s talk about a bed from our stock.</h2><p>Work, finish, price and timing are agreed for each bed. Please contact us before making a trip.</p></div>{contact}</div></section>
+    <dialog class="work-viewer" aria-labelledby="work-viewer-title" aria-describedby="work-viewer-caption"><div class="work-viewer-header"><h2 id="work-viewer-title">Previous work</h2><button type="button" data-work-close autofocus aria-label="Close photo viewer">Close ×</button></div><figure><img data-work-full src="{escape(featured[0]['src'], quote=True)}" alt="{escape(featured[0]['alt'], quote=True)}" loading="lazy"><figcaption id="work-viewer-caption" aria-live="polite"></figcaption></figure><div class="work-viewer-controls"><button type="button" data-work-prev aria-label="Previous archive photo">‹ Previous</button><a data-work-original target="_blank" rel="noopener">Open original</a><button type="button" data-work-next aria-label="Next archive photo">Next ›</button></div></dialog>'''
+    document('gallery.html', 'Previous paint jobs & work gallery', gallery,
+             description='Explore 71 original photos of previous Better Beds work, paint finishes and preparation. Historical examples, not current inventory. Current work is limited to our own in-stock beds.',
+             indexable=False, share_image=by_id['039']['src'], scripts=('work-gallery.js',))
+    return ['services.html', 'gallery.html']

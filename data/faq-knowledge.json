@@ -209,6 +209,17 @@
         "product sales"
       ],
       "answer": "Better Beds sells new takeoff truck beds and parts, plus individually listed used beds and parts. Browse used-beds.html for used bed listings, inventory.html for on-hand products and available-to-order.html for beds not yet collected. Confirm the listed condition, included parts, price, availability and pickup."
+    },
+    {
+      "id": "stock-preparation",
+      "question": "How are beds from your inventory prepared?",
+      "keywords": [
+        "preparation",
+        "previous work",
+        "gallery",
+        "services"
+      ],
+      "answer": "Preparation is available only for selected beds Better Beds owns and has in stock. We are not accepting customer-owned beds or trucks. Scope, finish, price and timing are confirmed individually for each bed; no standard turnaround is promised. See services.html for the process and gallery.html for historical examples, not current inventory. Browse used-beds.html for current used bed listings. Installation and removal are not offered."
     }
   ]
 }
