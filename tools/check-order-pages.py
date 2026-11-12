@@ -50,7 +50,7 @@ with TemporaryDirectory(prefix='betterbeds-order-check-') as folder:
     assert product(root,fixture['url'])['offers']['availability']=='https://schema.org/InStock'
     assert fixture['url'] not in (root/'available-to-order.html').read_text()
     assert fixture['url'] in (root/'inventory.html').read_text()
-    assert fixture['url'] in (root/'index.html').read_text()
+    # The homepage features a selection; the full catalog carries every on-hand item.
     assert 'not at our shop yet' not in (root/fixture['url']).read_text()
 
     for item in data['items']:

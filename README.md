@@ -15,6 +15,7 @@ The product templates support beds, lights, tailgates and bumpers. Bed-only meas
 ## Shared content and behavior
 
 - `tools/build-site.py`: shared layout, page content, product cards and metadata.
+- `tools/storefront.py` and `storefront.css`: approved compact homepage and inventory layout. The production generator calls this renderer, so inventory updates retain the design. Supporting pages continue using the existing layout and `styles.css`.
 - `styles.css`: responsive storefront styles.
 - `script.js`: mobile menu, inventory search, SMS/email message builder and existing multipart inquiry form integration.
 - `faq-widget.js`: Roadie quick answers from the published FAQ knowledge file. It does not call the old remote repair-oriented chatbot.
@@ -41,9 +42,12 @@ The hosting configuration excludes this README and `tools/` from the published w
 
 The verified pre-change website backup is at commit `45efac9bffaa1100b54cd896139851c083dbf9c1`. A full bundle and source archive were saved before this change. Production restoration should use a new commit that restores that source tree, preserving history.
 
+The verified restore point immediately before the approved storefront rollout is `812b707cf2189efbd20406684cda2b44c2cf0655`, tagged `backup/before-storefront-redesign-2026-11-12` in GitHub. A full source/image ZIP, history bundle and captured published pages were verified before implementation.
+
 ## Checks
 
 Run `python tools/build-site.py`, `node --check script.js`, `node --check faq-widget.js`, and `node tools/check-service-policy.cjs` before publication.
+Also run `python tools/check-storefront.py` to verify production indexing metadata, catalog data, featured stock and the storefront's empty/changed-inventory behavior.
 
 ## Product search visibility
 

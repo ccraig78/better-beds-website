@@ -9,6 +9,7 @@ import json
 import re
 from urllib.parse import quote
 from xml.etree import ElementTree as ET
+from storefront import build_storefront
 
 ROOT=Path(__file__).resolve().parents[1]
 VERSION='20261111-inventory-v7'
@@ -199,23 +200,9 @@ def page(path,title,description,body,active='',structured=None):
 <script src="script.js?v={VERSION}" defer></script><script src="faq-widget.js?v={VERSION}" defer></script></body></html>'''
     (ROOT/path).write_text(doc+'\n')
 
-# HOME
-featured=next((item for item in available if product_type(item)=='Beds'),next(iter(available),None))
-visual=(f'''<div class="hero-visual"><div class="visual-top">{condition_badge(featured)}<span class="tag">{esc(featured['includes'])}</span></div><a href="{esc(featured['url'])}" aria-label="View {esc(featured['title'])}">{photo(featured,'eager')}</a><div class="visual-caption"><div><strong>{esc(featured['title'])}</strong><span>{esc(featured['color'])} · {esc(featured['condition'])} · Dallas pickup</span></div><a class="price" href="{esc(featured['url'])}">${featured['price']:,.0f}</a></div></div>''' if featured else '<div class="hero-visual"><img src="'+PLACEHOLDER+'" alt="Inventory photos coming soon" width="1200" height="800"></div>')
-body=f'''<section class="hero"><div class="wrap hero-grid"><div class="hero-copy"><span class="eyebrow">New takeoff inventory · Dallas, TX</span><h1>New takeoff beds.<br><span>Better deals.</span></h1><p>Factory takeoff truck beds and parts at a better price. Shop the inventory we have on hand, confirm your fit, and pick up in Dallas.</p><div class="actions">{button('Shop inventory','inventory.html','light')}{button('Talk to us',SMS,'light outline')}</div><p class="subnote">New takeoff stock is our focus. Selected used beds and parts are also available.</p></div>{visual}</div></section>
-<div class="trust-strip"><div class="wrap trust-inner"><div><span class="trust-icon" aria-hidden="true">✓</span>New takeoff beds &amp; parts</div><div><span class="trust-icon" aria-hidden="true">↔</span>Confirm fitment before you buy</div><div><span class="trust-icon" aria-hidden="true">↗</span>Dallas pickup &amp; forklift loading</div></div></div>
-<section class="section"><div class="wrap"><div class="section-heading"><div><span class="eyebrow">On the lot</span><h2>Start with what’s here.</h2><p>See a bed that works for your truck? Call or text to confirm availability and arrange pickup.</p></div><a class="text-link" href="inventory.html">View all inventory →</a></div>{category_links()}<div class="inventory-grid home-products">{cards()}</div></div></section>
-<section class="section soft"><div class="wrap two-col"><div class="body-copy"><span class="eyebrow">Factory parts. A fresh opportunity.</span><h2>What’s a new takeoff?</h2><p>A factory bed removed from a new truck, often to make room for a flatbed or service body. A good takeoff can be a practical way to replace your bed while keeping the factory look.</p><p>We’ll confirm the condition and what’s included for the specific bed you choose.</p><a class="text-link" href="faq.html">Get the details →</a></div>{steps()}</div></section>
-{order_band()}{used_band()}{inquiry_section()}{cta()}'''
-page('index.html','New Takeoff Truck Beds & Parts for Sale','Shop new takeoff truck beds and parts for sale in Dallas. Browse current inventory, check fitment and pricing, and arrange pickup with forklift loading.',body)
-
-# INVENTORY
-body=hero('Shop current stock','Takeoff inventory.<br>Choose your part.','Browse new takeoff stock and selected used beds and parts by type, make, and color. Confirm availability, fitment, condition, and included parts before purchase.')
-type_buttons='<button class="inventory-type" type="button" data-filter-type="" aria-pressed="true">All items <span>'+str(len(available))+'</span></button>'+''.join(f'<button class="inventory-type" type="button" data-filter-type="{kind}" aria-pressed="false">{kind} <span>{sum(product_type(item)==kind for item in available)}</span></button>' for kind in PRODUCT_TYPES)
+# APPROVED STOREFRONT: homepage and on-hand catalog only.
+PAGES.extend(build_storefront(ROOT,items,schema_business()))
 make_options=''.join(f'<option value="{make}">{make}</option>' for make in MAKES)
-color_options=''.join(f'<option value="{esc(color)}">{esc(color)}</option>' for color in sorted({item['color'] for item in available if item.get('color')}))
-body+=f'''<section class="section"><div class="wrap"><div class="inventory-types" role="group" aria-label="Part type">{type_buttons}</div><div class="inventory-filters"><label>Search inventory<input type="search" data-inventory-search placeholder="Try 6'9&quot;, short bed, F-250, or tailgate" aria-label="Search inventory"></label><label>Make<select data-filter-make><option value="">All makes</option>{make_options}</select></label><label>Color<select data-filter-color><option value="">All colors</option>{color_options}</select></label></div><div class="search-summary"><span class="listing-count" data-inventory-count role="status" aria-live="polite">{len(available)} listings</span><button class="button outline" type="button" data-clear-search>Clear filters</button></div><div class="inventory-grid catalog-grid">{cards()}<div class="empty-state" data-inventory-empty hidden><h3>No listed items match those filters.</h3><p>Try another category or clear the filters. You can also call or text to ask about current inventory.</p>{button('Ask about inventory',SMS)}</div></div><p class="stock-note">Category counts show listings. Call or text to confirm available quantities and pickup.</p><div class="range-note"><h2>Takeoff beds for heavy-duty pickups.</h2><p>Our takeoff bed range focuses on Ford F-250 / F-350 and Ram, Chevy, and GMC 2500 / 3500 series. Each bed listing gives its actual length and familiar style name, such as short bed, long bed, or dually. Check the listings above for current stock.</p></div></div></section>{order_band()}{used_band()}{cta()}'''
-page('inventory.html','Truck Beds, Lights, Tailgates & Bumpers','Browse new takeoff and selected used beds, lights, tailgates and bumpers in Dallas. Filter Ford, Ram, Chevy and GMC listings by type and color. See actual bed lengths, photos and prices.',body,'inventory.html')
 
 # AVAILABLE TO ORDER: keep uncollected beds separate from on-hand inventory.
 body=hero('Beds we can collect','Available to order.','These beds have not been picked up by Better Beds and are not at our Dallas shop yet. Confirm availability, final pricing and expected arrival with us before ordering or planning your pickup.')
