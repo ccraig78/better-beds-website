@@ -1203,6 +1203,11 @@ figure {
     font-size:3.1rem
   }
 }
+@media(max-width:350px) {
+  .page-hero h1 {
+    font-size:2.9rem
+  }
+}
 @media(prefers-reduced-motion:reduce) {
   html {
     scroll-behavior:auto

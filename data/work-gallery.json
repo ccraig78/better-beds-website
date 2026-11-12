@@ -1,0 +1,515 @@
+{
+  "source": "Original Better Beds gallery",
+  "source_tag": "backup/before-edits-2026-11-11",
+  "historical": true,
+  "featured": [
+    "002",
+    "019",
+    "039",
+    "043",
+    "045",
+    "050",
+    "004",
+    "065",
+    "070"
+  ],
+  "photos": [
+    {
+      "id": "001",
+      "src": "assets/images/gallery/gallery-001.jpg",
+      "width": 1333,
+      "height": 1000,
+      "alt": "Previous Better Beds work, archive photo 001"
+    },
+    {
+      "id": "002",
+      "src": "assets/images/gallery/gallery-002.jpg",
+      "width": 1333,
+      "height": 1000,
+      "alt": "Light metallic truck bed with a glossy exterior in the workshop"
+    },
+    {
+      "id": "003",
+      "src": "assets/images/gallery/gallery-003.jpg",
+      "width": 1333,
+      "height": 1000,
+      "alt": "Previous Better Beds work, archive photo 003"
+    },
+    {
+      "id": "004",
+      "src": "assets/images/gallery/gallery-004.jpg",
+      "width": 1333,
+      "height": 1000,
+      "alt": "Dark red tailgate suspended in the workshop"
+    },
+    {
+      "id": "005",
+      "src": "assets/images/gallery/gallery-005.jpg",
+      "width": 750,
+      "height": 1000,
+      "alt": "Previous Better Beds work, archive photo 005"
+    },
+    {
+      "id": "006",
+      "src": "assets/images/gallery/gallery-006.jpg",
+      "width": 750,
+      "height": 1000,
+      "alt": "Previous Better Beds work, archive photo 006"
+    },
+    {
+      "id": "007",
+      "src": "assets/images/gallery/gallery-007.jpg",
+      "width": 750,
+      "height": 1000,
+      "alt": "Previous Better Beds work, archive photo 007"
+    },
+    {
+      "id": "008",
+      "src": "assets/images/gallery/gallery-008.jpg",
+      "width": 1333,
+      "height": 1000,
+      "alt": "Previous Better Beds work, archive photo 008"
+    },
+    {
+      "id": "009",
+      "src": "assets/images/gallery/gallery-009.jpg",
+      "width": 1333,
+      "height": 1000,
+      "alt": "Previous Better Beds work, archive photo 009"
+    },
+    {
+      "id": "010",
+      "src": "assets/images/gallery/gallery-010.jpg",
+      "width": 1333,
+      "height": 1000,
+      "alt": "Previous Better Beds work, archive photo 010"
+    },
+    {
+      "id": "011",
+      "src": "assets/images/gallery/gallery-011.jpg",
+      "width": 1333,
+      "height": 1000,
+      "alt": "Previous Better Beds work, archive photo 011"
+    },
+    {
+      "id": "012",
+      "src": "assets/images/gallery/gallery-012.jpg",
+      "width": 1333,
+      "height": 1000,
+      "alt": "Previous Better Beds work, archive photo 012"
+    },
+    {
+      "id": "013",
+      "src": "assets/images/gallery/gallery-013.jpg",
+      "width": 1333,
+      "height": 1000,
+      "alt": "Previous Better Beds work, archive photo 013"
+    },
+    {
+      "id": "014",
+      "src": "assets/images/gallery/gallery-014.jpg",
+      "width": 1333,
+      "height": 1000,
+      "alt": "Previous Better Beds work, archive photo 014"
+    },
+    {
+      "id": "015",
+      "src": "assets/images/gallery/gallery-015.jpg",
+      "width": 1333,
+      "height": 1000,
+      "alt": "Previous Better Beds work, archive photo 015"
+    },
+    {
+      "id": "016",
+      "src": "assets/images/gallery/gallery-016.jpg",
+      "width": 1333,
+      "height": 1000,
+      "alt": "Previous Better Beds work, archive photo 016"
+    },
+    {
+      "id": "017",
+      "src": "assets/images/gallery/gallery-017.jpg",
+      "width": 1333,
+      "height": 1000,
+      "alt": "Previous Better Beds work, archive photo 017"
+    },
+    {
+      "id": "018",
+      "src": "assets/images/gallery/gallery-018.jpg",
+      "width": 1333,
+      "height": 1000,
+      "alt": "Previous Better Beds work, archive photo 018"
+    },
+    {
+      "id": "019",
+      "src": "assets/images/gallery/gallery-019.jpg",
+      "width": 1333,
+      "height": 1000,
+      "alt": "Black truck bed showing the painted side and rear corner"
+    },
+    {
+      "id": "020",
+      "src": "assets/images/gallery/gallery-020.jpg",
+      "width": 1333,
+      "height": 1000,
+      "alt": "Previous Better Beds work, archive photo 020"
+    },
+    {
+      "id": "021",
+      "src": "assets/images/gallery/gallery-021.jpg",
+      "width": 1333,
+      "height": 1000,
+      "alt": "Previous Better Beds work, archive photo 021"
+    },
+    {
+      "id": "022",
+      "src": "assets/images/gallery/gallery-022.jpg",
+      "width": 750,
+      "height": 1000,
+      "alt": "Previous Better Beds work, archive photo 022"
+    },
+    {
+      "id": "023",
+      "src": "assets/images/gallery/gallery-023.jpg",
+      "width": 750,
+      "height": 1000,
+      "alt": "Previous Better Beds work, archive photo 023"
+    },
+    {
+      "id": "024",
+      "src": "assets/images/gallery/gallery-024.jpg",
+      "width": 750,
+      "height": 1000,
+      "alt": "Previous Better Beds work, archive photo 024"
+    },
+    {
+      "id": "025",
+      "src": "assets/images/gallery/gallery-025.jpg",
+      "width": 750,
+      "height": 1000,
+      "alt": "Previous Better Beds work, archive photo 025"
+    },
+    {
+      "id": "026",
+      "src": "assets/images/gallery/gallery-026.jpg",
+      "width": 1333,
+      "height": 1000,
+      "alt": "Previous Better Beds work, archive photo 026"
+    },
+    {
+      "id": "027",
+      "src": "assets/images/gallery/gallery-027.jpg",
+      "width": 1333,
+      "height": 1000,
+      "alt": "Previous Better Beds work, archive photo 027"
+    },
+    {
+      "id": "028",
+      "src": "assets/images/gallery/gallery-028.jpg",
+      "width": 1333,
+      "height": 1000,
+      "alt": "Previous Better Beds work, archive photo 028"
+    },
+    {
+      "id": "029",
+      "src": "assets/images/gallery/gallery-029.jpg",
+      "width": 1333,
+      "height": 1000,
+      "alt": "Previous Better Beds work, archive photo 029"
+    },
+    {
+      "id": "030",
+      "src": "assets/images/gallery/gallery-030.jpg",
+      "width": 1333,
+      "height": 1000,
+      "alt": "Previous Better Beds work, archive photo 030"
+    },
+    {
+      "id": "031",
+      "src": "assets/images/gallery/gallery-031.jpg",
+      "width": 1333,
+      "height": 1000,
+      "alt": "Previous Better Beds work, archive photo 031"
+    },
+    {
+      "id": "032",
+      "src": "assets/images/gallery/gallery-032.jpg",
+      "width": 1333,
+      "height": 1000,
+      "alt": "Previous Better Beds work, archive photo 032"
+    },
+    {
+      "id": "033",
+      "src": "assets/images/gallery/gallery-033.jpg",
+      "width": 1333,
+      "height": 1000,
+      "alt": "Previous Better Beds work, archive photo 033"
+    },
+    {
+      "id": "034",
+      "src": "assets/images/gallery/gallery-034.jpg",
+      "width": 1333,
+      "height": 1000,
+      "alt": "Previous Better Beds work, archive photo 034"
+    },
+    {
+      "id": "035",
+      "src": "assets/images/gallery/gallery-035.jpg",
+      "width": 1333,
+      "height": 1000,
+      "alt": "Previous Better Beds work, archive photo 035"
+    },
+    {
+      "id": "036",
+      "src": "assets/images/gallery/gallery-036.jpg",
+      "width": 1333,
+      "height": 1000,
+      "alt": "Previous Better Beds work, archive photo 036"
+    },
+    {
+      "id": "037",
+      "src": "assets/images/gallery/gallery-037.jpg",
+      "width": 1333,
+      "height": 1000,
+      "alt": "Previous Better Beds work, archive photo 037"
+    },
+    {
+      "id": "038",
+      "src": "assets/images/gallery/gallery-038.jpg",
+      "width": 1333,
+      "height": 1000,
+      "alt": "Previous Better Beds work, archive photo 038"
+    },
+    {
+      "id": "039",
+      "src": "assets/images/gallery/gallery-039.jpg",
+      "width": 1333,
+      "height": 1000,
+      "alt": "Red truck bed on workshop stands"
+    },
+    {
+      "id": "040",
+      "src": "assets/images/gallery/gallery-040.jpg",
+      "width": 1333,
+      "height": 1000,
+      "alt": "Previous Better Beds work, archive photo 040"
+    },
+    {
+      "id": "041",
+      "src": "assets/images/gallery/gallery-041.jpg",
+      "width": 1333,
+      "height": 1000,
+      "alt": "Previous Better Beds work, archive photo 041"
+    },
+    {
+      "id": "042",
+      "src": "assets/images/gallery/gallery-042.jpg",
+      "width": 1333,
+      "height": 1000,
+      "alt": "Previous Better Beds work, archive photo 042"
+    },
+    {
+      "id": "043",
+      "src": "assets/images/gallery/gallery-043.jpg",
+      "width": 1333,
+      "height": 1000,
+      "alt": "Silver truck bed showing its side and rear corner"
+    },
+    {
+      "id": "044",
+      "src": "assets/images/gallery/gallery-044.jpg",
+      "width": 1333,
+      "height": 1000,
+      "alt": "Previous Better Beds work, archive photo 044"
+    },
+    {
+      "id": "045",
+      "src": "assets/images/gallery/gallery-045.jpg",
+      "width": 1333,
+      "height": 1000,
+      "alt": "Light metallic truck bed side with a dark interior"
+    },
+    {
+      "id": "046",
+      "src": "assets/images/gallery/gallery-046.jpg",
+      "width": 1333,
+      "height": 1000,
+      "alt": "Previous Better Beds work, archive photo 046"
+    },
+    {
+      "id": "047",
+      "src": "assets/images/gallery/gallery-047.jpg",
+      "width": 1333,
+      "height": 1000,
+      "alt": "Previous Better Beds work, archive photo 047"
+    },
+    {
+      "id": "048",
+      "src": "assets/images/gallery/gallery-048.jpg",
+      "width": 1333,
+      "height": 1000,
+      "alt": "Previous Better Beds work, archive photo 048"
+    },
+    {
+      "id": "049",
+      "src": "assets/images/gallery/gallery-049.jpg",
+      "width": 1333,
+      "height": 1000,
+      "alt": "Previous Better Beds work, archive photo 049"
+    },
+    {
+      "id": "050",
+      "src": "assets/images/gallery/gallery-050.jpg",
+      "width": 1333,
+      "height": 1000,
+      "alt": "Black truck bed showing reflections in its painted side"
+    },
+    {
+      "id": "051",
+      "src": "assets/images/gallery/gallery-051.jpg",
+      "width": 750,
+      "height": 1000,
+      "alt": "Previous Better Beds work, archive photo 051"
+    },
+    {
+      "id": "052",
+      "src": "assets/images/gallery/gallery-052.jpg",
+      "width": 1333,
+      "height": 1000,
+      "alt": "Previous Better Beds work, archive photo 052"
+    },
+    {
+      "id": "053",
+      "src": "assets/images/gallery/gallery-053.jpg",
+      "width": 1333,
+      "height": 1000,
+      "alt": "Previous Better Beds work, archive photo 053"
+    },
+    {
+      "id": "054",
+      "src": "assets/images/gallery/gallery-054.jpg",
+      "width": 1333,
+      "height": 1000,
+      "alt": "Previous Better Beds work, archive photo 054"
+    },
+    {
+      "id": "055",
+      "src": "assets/images/gallery/gallery-055.jpg",
+      "width": 1333,
+      "height": 1000,
+      "alt": "Previous Better Beds work, archive photo 055"
+    },
+    {
+      "id": "056",
+      "src": "assets/images/gallery/gallery-056.jpg",
+      "width": 1333,
+      "height": 1000,
+      "alt": "Previous Better Beds work, archive photo 056"
+    },
+    {
+      "id": "057",
+      "src": "assets/images/gallery/gallery-057.jpg",
+      "width": 1400,
+      "height": 933,
+      "alt": "Previous Better Beds work, archive photo 057"
+    },
+    {
+      "id": "058",
+      "src": "assets/images/gallery/gallery-058.jpg",
+      "width": 1333,
+      "height": 1000,
+      "alt": "Previous Better Beds work, archive photo 058"
+    },
+    {
+      "id": "059",
+      "src": "assets/images/gallery/gallery-059.jpg",
+      "width": 1333,
+      "height": 1000,
+      "alt": "Previous Better Beds work, archive photo 059"
+    },
+    {
+      "id": "060",
+      "src": "assets/images/gallery/gallery-060.jpg",
+      "width": 1333,
+      "height": 1000,
+      "alt": "Previous Better Beds work, archive photo 060"
+    },
+    {
+      "id": "061",
+      "src": "assets/images/gallery/gallery-061.jpg",
+      "width": 1333,
+      "height": 1000,
+      "alt": "Previous Better Beds work, archive photo 061"
+    },
+    {
+      "id": "062",
+      "src": "assets/images/gallery/gallery-062.jpg",
+      "width": 1333,
+      "height": 1000,
+      "alt": "Previous Better Beds work, archive photo 062"
+    },
+    {
+      "id": "063",
+      "src": "assets/images/gallery/gallery-063.jpg",
+      "width": 1333,
+      "height": 1000,
+      "alt": "Previous Better Beds work, archive photo 063"
+    },
+    {
+      "id": "064",
+      "src": "assets/images/gallery/gallery-064.jpg",
+      "width": 1333,
+      "height": 1000,
+      "alt": "Previous Better Beds work, archive photo 064"
+    },
+    {
+      "id": "065",
+      "src": "assets/images/gallery/gallery-065.jpg",
+      "width": 1333,
+      "height": 1000,
+      "alt": "White truck bed on a workshop stand"
+    },
+    {
+      "id": "066",
+      "src": "assets/images/gallery/gallery-066.jpg",
+      "width": 1400,
+      "height": 788,
+      "alt": "Previous Better Beds work, archive photo 066"
+    },
+    {
+      "id": "067",
+      "src": "assets/images/gallery/gallery-067.jpg",
+      "width": 1400,
+      "height": 630,
+      "alt": "Previous Better Beds work, archive photo 067"
+    },
+    {
+      "id": "068",
+      "src": "assets/images/gallery/gallery-068.jpg",
+      "width": 1080,
+      "height": 810,
+      "alt": "Previous Better Beds work, archive photo 068"
+    },
+    {
+      "id": "069",
+      "src": "assets/images/gallery/gallery-069.jpg",
+      "width": 750,
+      "height": 1000,
+      "alt": "Previous Better Beds work, archive photo 069"
+    },
+    {
+      "id": "070",
+      "src": "assets/images/gallery/gallery-070.jpg",
+      "width": 1080,
+      "height": 810,
+      "alt": "Metallic truck bed side with fuel door and wheel opening"
+    },
+    {
+      "id": "071",
+      "src": "assets/images/gallery/gallery-071.jpg",
+      "width": 1080,
+      "height": 810,
+      "alt": "Previous Better Beds work, archive photo 071"
+    }
+  ]
+}

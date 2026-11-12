@@ -1,7 +1,7 @@
 {
   "schema_version": "0.1-experimental",
   "profile_type": "agent_ready_business_profile",
-  "last_updated": "2026-11-11",
+  "last_updated": "2026-11-12",
   "business": {
     "name": "Better Beds",
     "legal_or_trade_name": "Better Beds",
@@ -115,7 +115,7 @@
     "An inquiry is not a reservation, purchase, or confirmed fitment.",
     "Use the individual listing condition. Used beds and parts must not be described as new takeoffs or assigned NewCondition.",
     "Available-to-order beds are specific listed beds we can collect, not on-hand stock or ready for Dallas pickup. Confirm source availability, final pricing and expected arrival. Do not promise a collection date or infer a deposit policy.",
-    "Only advertise individually listed used beds for sale. Do not advertise workshop services or unpublished beds. Preserve accurate condition and feature details for each listing."
+    "Only advertise individually listed used beds for sale. Preparation is limited to selected beds Better Beds owns and has in stock; do not offer work on customer-owned beds or trucks. Confirm scope, price and timing per bed; never promise a turnaround time. Historical gallery photos are not inventory listings."
   ],
   "keywords_for_agent_matching": [
     "new takeoff truck bed Dallas",
@@ -213,5 +213,11 @@
     "available_to_order": "Not yet collected; not at our Dallas shop. Confirm source availability, final pricing and expected arrival. An inquiry does not place an order.",
     "sold": "Sold; not available."
   },
-  "used_beds_url": "https://betterbeds.pro/used-beds.html"
+  "used_beds_url": "https://betterbeds.pro/used-beds.html",
+  "stock_preparation": {
+    "scope": "Selected beds Better Beds owns and has in stock only. No customer-owned beds or trucks. Confirm work, finish, price and timing individually; no standard turnaround is promised.",
+    "url": "https://betterbeds.pro/services.html",
+    "previous_work_url": "https://betterbeds.pro/gallery.html",
+    "photo_policy": "Historical examples, not current inventory or evidence of the current service scope."
+  }
 }

@@ -8,6 +8,7 @@ import re
 
 ROOT=Path(__file__).resolve().parents[1]
 retired={'older-beds.html','before-after.html','repair-example.html','truck-bed-repair.html'}
+showcase={'services.html','gallery.html'}
 sitemap=(ROOT/'sitemap.xml').read_text()
 robots=RobotFileParser()
 robots.parse((ROOT/'robots.txt').read_text().splitlines())
@@ -29,6 +30,13 @@ for path in ROOT.glob('*.html'):
         assert 'used-beds.html' in Links(source).links,path.name+': no useful destination'
         for agent in ['Googlebot','Bingbot','OAI-SearchBot']:
             assert robots.can_fetch(agent,'https://betterbeds.pro/'+path.name), 'Allow crawling of noindex pages'
+    elif path.name in showcase:
+        assert '<meta name="robots" content="noindex, follow">' in source,path.name
+        assert 'http-equiv="refresh"' not in source,path.name
+        assert path.name not in sitemap,path.name+': showcase must stay out of search sitemap'
+        assert 'Only beds we own and have in stock.' in source,path.name
+        assert 'not accepting customer-owned beds or trucks' in source,path.name
+        assert not retired.intersection(Links(source).links),path.name
     else:
         assert not re.search(terms,source,re.I),path.name+': obsolete service promotion'
         assert not retired.intersection(Links(source).links),path.name+': retired service link'
@@ -48,4 +56,4 @@ profile=json.loads((ROOT/'.well-known/agent.json').read_text())
 assert profile['used_beds_url']=='https://betterbeds.pro/used-beds.html'
 assert any(service['name']=='Used truck bed sales' for service in profile['services'])
 assert (ROOT/'_config.yml').read_text().count('exclude:')==1
-print(f'PASS: product-only public content/metadata, {len(retired)} crawlable noindex service URLs, and {len(expected)} correctly filtered used-bed listing(s).')
+print(f'PASS: product-focused indexed content/metadata, {len(retired)} retired and {len(showcase)} own-stock showcase noindex URLs, and {len(expected)} correctly filtered used-bed listing(s).')
