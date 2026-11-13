@@ -39,12 +39,12 @@ for (const question of ['Can you load it onto my trailer?', 'Do you have a forkl
 const inventoryAnswer = betterBedsFaqAnswer('Do you have a Silverado bed in stock?', knowledge.entries);
 assert(inventoryAnswer.includes('confirm availability'), 'Stock must be confirmed');
 assert(!/yes.*silverado/i.test(inventoryAnswer), 'Do not invent unlisted stock');
-for (const question of ['Do you repair and paint older beds?', 'Can you repair my Ford bed?', 'Do you offer painting?', 'Can you paint a bed from your inventory?', 'Can I leave my truck for repair?']) {
+for (const question of ['Do you repair and paint older beds?', 'Can you repair my Ford bed?', 'Do you offer painting?', 'Can you paint a bed from your inventory?', 'Can I leave my truck for repair?', 'Can you repaint one of your beds?', 'Can you do bodywork on a bed I buy from you?', 'Do you offer custom work on inventory beds?']) {
   const answer = betterBedsFaqAnswer(question, knowledge.entries);
-  assert(answer.includes('only for selected beds Better Beds owns and has in stock'), question);
-  assert(answer.includes('not accepting customer-owned beds or trucks'), question);
-  assert(answer.includes('no standard turnaround is promised'), question);
-  assert(answer.includes('services.html') && answer.includes('gallery.html') && answer.includes('used-beds.html'), question);
+  assert(answer.includes('That service isn’t offered.'), question);
+  assert(answer.includes('We do not offer commissioned work on any bed or customer-owned vehicle'), question);
+  assert(answer.includes('used-beds.html') && answer.includes('inventory.html'), question);
+  assert(!answer.includes('services.html') && !answer.includes('gallery.html'), question);
 }
 assert(betterBedsFaqAnswer('Can you find me a bed?', knowledge.entries).includes('not advertising a bed-finding service'));
 assert(betterBedsFaqAnswer('Unrecognized question', []).includes('Call or text 214-524-8401'));
@@ -52,4 +52,4 @@ assert(betterBedsFaqAnswer('', knowledge.entries, 'photos').includes('not photog
 for (const question of ['What does available to order mean?', 'Can I pick up an available-to-order bed today?', 'What is the expected arrival for a preorder Ford bed?']) {
   assert(betterBedsFaqAnswer(question, knowledge.entries).includes('not at our Dallas shop'), question);
 }
-console.log(`PASS: ${schemaCount} structured-data blocks; own-stock preparation only, no customer vehicle or installation promises, confirmed-stock/order answers and FAQ fallback.`);
+console.log(`PASS: ${schemaCount} structured-data blocks; finished product sales only, no commissioned work or installation promises, confirmed-stock/order answers and FAQ fallback.`);

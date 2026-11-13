@@ -3,3 +3,5 @@ include:
 exclude:
   - README.md
   - tools
+  - assets/images/gallery
+  - assets/images/before-after
