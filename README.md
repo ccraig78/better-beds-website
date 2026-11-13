@@ -34,7 +34,7 @@ Legacy shopping URLs direct visitors to current inventory. Retired service URLs 
 
 `used-beds.html` lists on-hand beds whose condition maps to UsedCondition or RefurbishedCondition. It excludes parts, new beds, order beds and sold beds. List additional used beds when ready for sale, with accurate condition details, actual photos and a confirmed price. Keep each product's existing URL.
 
-Indexed content and business metadata keep product sales as the focus. The owner has authorized Services and Previous Work pages limited to preparation of Better Beds-owned, in-stock beds. Keep `services.html` and `gallery.html` at `noindex, follow` and out of the sitemap. Do not advertise work on customer-owned beds or trucks, installation/removal, or a standard turnaround time. Scope, price and timing must be agreed for each bed. Navigation may link to these two pages; do not reactivate the retired repair landing pages. `python tools/check-sales-focus.py` checks this policy and the retired URLs. Search engines control when cached results change; a site cannot exclude itself from a particular search query.
+Public content and business metadata promote product sales only. The owner has withdrawn all commissioned work, including work on beds from our inventory. List finished beds only once their actual condition, photos, included components and price are ready. Do not publish Services, Previous Work or repair/paint offers in navigation, forms, FAQs, metadata, structured data or assistant summaries. `services.html`, `gallery.html` and the four earlier retired URLs are crawlable noindex pages directing visitors to current inventory, with no service content or photos. Exclude them from the sitemap. `python tools/check-sales-focus.py` guards this policy. Search engines control how quickly cached results change.
 
 The hosting configuration excludes this README and `tools/` from the published website. Source and checks remain in GitHub.
 
@@ -77,8 +77,6 @@ When an inventory search includes a measurement, it compares the actual bed leng
 
 Condition labels also control badges and offer markup. `Gently used` maps to `UsedCondition` and gets a gently-used badge. Product descriptions use the stated category/condition instead of assuming every item is new. Use damage and bedliner features to record confirmed details; storage orientation in photo captions describes the photo, not damage.
 
-## Own-stock services and previous work
+## Archived work photos
 
-`tools/work_showcase.py` builds `services.html` and `gallery.html` inside the storefront shell. The gallery restores all 71 original photos from `backup/before-edits-2026-11-11`, recorded in `data/work-gallery.json`. Photos remain unchanged; featured selection affects display order only. Historical photos are not current stock, current availability, or evidence that customer-owned vehicles are accepted. Keep captions factual; some archive photos show preparation and past projects rather than finished paint.
-
-`work-gallery.js` progressively enhances original-image links with a keyboard-accessible photo viewer. Without JavaScript the photos still open and the native archive disclosure still works. Run `python tools/check-work-gallery.py`, `python tools/check-sales-focus.py` and `node tools/check-service-policy.cjs` along with the normal inventory checks after rebuilding. The gallery check compares original photo bytes against the backup tag, so fetch that tag if it is absent from a fresh clone.
+Previous work photos remain in Git history and source backups. `_config.yml` excludes `assets/images/gallery` and `assets/images/before-after` from the published site. Do not link to these photos or use them as current inventory. The site no longer publishes the work-gallery data or viewer.
